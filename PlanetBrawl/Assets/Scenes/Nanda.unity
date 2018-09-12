@@ -349,7 +349,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.21698111, g: 0.15454787, b: 0.2059196, a: 0}
+  m_BackGroundColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -374,7 +374,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -466,10 +466,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a567aa90d40035b45abd35aa16f97920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  punchSpeed: 1000
-  retractSpeed: 800
+  punchSpeed: 25
+  retractSpeed: 18
+  rotationSpeed: 0.1
   minDistance: 1
-  maxDistance: 5
+  maxDistance: 7
 --- !u!50 &744080153
 Rigidbody2D:
   serializedVersion: 4
@@ -539,7 +540,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 73a83f3a6bf290f4abd3773368062d2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -614,7 +615,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300004, guid: bd06f0397101d2f4abdebf060ae5566b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

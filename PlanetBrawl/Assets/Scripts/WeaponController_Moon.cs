@@ -6,14 +6,16 @@ public class WeaponController_Moon : MonoBehaviour
 {
     public float punchSpeed = 1;
     public float retractSpeed = 1;
+    public float rotationSpeed = 0.1f;
     public float minDistance = 1;
     public float maxDistance = 5;
 
-    private bool canShoot = true;
     private enum MoonState { orbit, shooting, retracting };
     private MoonState moonState = MoonState.orbit;
+    private bool triggerPressed = false;
 
-    private Vector2 myVector2;
+    private Vector2 direction;
+    private Quaternion targetRotation;
     private Transform moonPos;
     private Transform holderPos;
     private Rigidbody2D rb2d;
@@ -30,30 +32,38 @@ public class WeaponController_Moon : MonoBehaviour
     {
         if (Input.GetAxis("AimHor") != 0 || Input.GetAxis("AimVer") != 0)
         {
-            myVector2 = new Vector2(Input.GetAxis("AimHor"), Input.GetAxis("AimVer"));
+            direction = new Vector2(Input.GetAxis("AimHor"), Input.GetAxis("AimVer"));
 
             //Calculate an angle from the direction vector
-            float angle = Mathf.Atan2(myVector2.y, myVector2.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             //Apply the angle to the gun's rotation
-            holderPos.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        if (Input.GetButtonDown("Fire1") && canShoot)
+        holderPos.rotation = Quaternion.Lerp(holderPos.rotation, targetRotation, rotationSpeed);
+
+        if (!triggerPressed && Input.GetAxisRaw("Fire1") == -1 && moonState == MoonState.orbit)
         {
+            triggerPressed = true;
             moonState = MoonState.shooting;
-            canShoot = false;
             rb2d.isKinematic = false;
         }
-        else if (Input.GetButtonUp("Fire1"))
+
+        if (triggerPressed && Input.GetAxisRaw("Fire1") == 0)
         {
-            moonState = MoonState.retracting;
+            triggerPressed = false;
+
+            if (moonState == MoonState.shooting)
+            {
+                moonState = MoonState.retracting;
+            }
         }
 
         if (moonState == MoonState.shooting)
         {
             if ((holderPos.position - moonPos.position).magnitude < maxDistance)
             {
-                rb2d.velocity = -(holderPos.position - moonPos.position).normalized * retractSpeed * Time.deltaTime;
+                rb2d.velocity = -(holderPos.position - moonPos.position).normalized * retractSpeed;
             }
             else
             {
@@ -64,22 +74,15 @@ public class WeaponController_Moon : MonoBehaviour
         {
             if ((holderPos.position - moonPos.position).magnitude > minDistance)
             {
-                rb2d.velocity = (holderPos.position - moonPos.position).normalized * retractSpeed * Time.deltaTime;
+                rb2d.velocity = (holderPos.position - moonPos.position).normalized * retractSpeed;
             }
             else
             {
                 rb2d.velocity = Vector2.zero;
                 moonPos.position = holderPos.position + minDistance * moonPos.right;
                 moonState = MoonState.orbit;
-                canShoot = true;
                 rb2d.isKinematic = true;
             }
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(holderPos.position, minDistance);
     }
 }
