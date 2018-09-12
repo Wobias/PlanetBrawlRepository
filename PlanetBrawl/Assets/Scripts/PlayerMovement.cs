@@ -17,12 +17,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         direction.x = Input.GetAxis("Horizontal");
         direction.y = Input.GetAxis("Vertical");
-        myRigidbody.AddForce(direction * speed * Time.deltaTime);
-
-     
+        myRigidbody.AddForce(direction * speed * Time.fixedDeltaTime);
     }
 }
