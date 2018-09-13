@@ -133,6 +133,11 @@ public class WeaponController_Moon : MonoBehaviour
             canHit = false;
             StartCoroutine(EnableHit());
         }
+
+        if (moonState == MoonState.shooting)
+        {
+            moonState = MoonState.retracting;
+        }
     }
 
     IEnumerator EnableHit()
