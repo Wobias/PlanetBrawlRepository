@@ -4,36 +4,33 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
+    //Health Variables
+    #region
     public float health = 100f;
+    public float hpPercent = 100f;
+    private float maxHealth;
+    #endregion
 
-    public float testDamage = 10f;
+    public enum HealthState {full, average, low, critical};
+    public HealthState healthState = HealthState.full;
 
     Transform myTransform;
 
     Vector3 scaleVector;
     Vector3 minScale = new Vector3(0.6f, 0.6f, 0.6f);
-    Vector3 dmgVector;
 
-    // Use this for initialization
+    //Set max health
+    void Awake()
+    {
+        maxHealth = health;
+    }
+
     void OnEnable()
     {
         myTransform = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            health -= testDamage;
-            DownScaling(testDamage);
-
-        }
-
-
-    }
-
+    //IDamageable method
     public void Hit(float damage)
     {
         if (health >= 1)
@@ -48,23 +45,36 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
+    //Die method
     public void Die()
     {
         Debug.Log("player dead");
     }
 
-    void DownScaling(float scale)
+    void DownScaling(float hp)
     {
-        scaleVector = myTransform.localScale;
-        scale /= 100f;
+        //Get current health percentage
+        hpPercent = (hp * 100f) / maxHealth;
+        Debug.Log(hpPercent);
 
-        scaleVector *= scale;
-        myTransform.localScale = scaleVector;
-        
-        if (scaleVector.x < minScale.x)
+        //Set Healthstate, Scale, Speed
+        if (hpPercent <= 75f && hpPercent > 50f)
+        {
+            scaleVector = new Vector3(0.9f, 0.9f, 0.9f);
+            myTransform.localScale = scaleVector;
+            healthState = HealthState.average;
+        }
+        if (hpPercent <= 50f && hpPercent > 25f)
+        {
+            scaleVector = new Vector3(0.75f, 0.75f, 0.75f);
+            myTransform.localScale = scaleVector;
+            healthState = HealthState.low;
+        }
+        if (hpPercent <= 25f)
         {
             scaleVector = minScale;
             myTransform.localScale = scaleVector;
+            healthState = HealthState.critical;
         }
         Debug.Log(myTransform.localScale);
     }

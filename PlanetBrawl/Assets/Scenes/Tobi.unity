@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9219a6023c3c4f344bcefe9e49ec800c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  player: 1
 --- !u!50 &1386253740
 Rigidbody2D:
   serializedVersion: 4
@@ -466,7 +466,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  hpPercent: 100
   testDamage: 10
+  healthState: 0
 --- !u!1 &1708297942
 GameObject:
   m_ObjectHideFlags: 0
