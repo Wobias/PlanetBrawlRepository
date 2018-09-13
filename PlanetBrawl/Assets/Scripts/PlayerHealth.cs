@@ -2,29 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour,IDamageable
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public float health = 100f;
 
+    public float testDamage = 10f;
+
     Transform myTransform;
-    Vector3 myVector3;
+
+    Vector3 scaleVector;
+    Vector3 minScale = new Vector3(0.6f, 0.6f, 0.6f);
+    Vector3 dmgVector;
 
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         myTransform = GetComponent<Transform>();
-        myVector3 = myTransform.localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health < 1)
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            Die();
+            health -= testDamage;
+            DownScaling(testDamage);
+
         }
 
-        
 
     }
 
@@ -34,9 +40,11 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         {
             health -= damage;
 
-            DownScaling();
-
-            Debug.Log(health);
+            DownScaling(health);
+        }
+        else
+        {
+            Die();
         }
     }
 
@@ -45,10 +53,19 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         Debug.Log("player dead");
     }
 
-    void DownScaling()
+    void DownScaling(float scale)
     {
-        myVector3 *= 0.5f;
-        myTransform.localScale = myVector3;
-    }
+        scaleVector = myTransform.localScale;
+        scale /= 100f;
 
+        scaleVector *= scale;
+        myTransform.localScale = scaleVector;
+        
+        if (scaleVector.x < minScale.x)
+        {
+            scaleVector = minScale;
+            myTransform.localScale = scaleVector;
+        }
+        Debug.Log(myTransform.localScale);
+    }
 }
