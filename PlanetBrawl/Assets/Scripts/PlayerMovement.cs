@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int player = 1;
     public float speed = 500f;
 
     Vector2 direction;
@@ -13,14 +14,13 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        direction.x = Input.GetAxis("Horizontal");
-        direction.y = Input.GetAxis("Vertical");
+        direction.x = Input.GetAxis("Horizontal" + player);
+        direction.y = Input.GetAxis("Vertical" + player);
         myRigidbody.AddForce(direction * speed * Time.fixedDeltaTime);
     }
 }
