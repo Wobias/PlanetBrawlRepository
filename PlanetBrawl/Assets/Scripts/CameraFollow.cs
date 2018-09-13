@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public float followSpeed;
-    public float zoomSpeed;
+    public float maxZoom;
+    public float minZoom;
 
     private Transform[] players = new Transform[4];
-    private Transform cam;
-    private Vector3 target;
+    private Transform camTrans;
+    private Camera cam;
+    private Vector2 target;
 
-    private Vector3 minBounds;
-    private Vector3 maxBounds;
+    private Vector2 minBounds;
+    private Vector2 maxBounds;
 
 
     void Start()
     {
-        cam = transform;
-        target = cam.position;
+        camTrans = transform;
+        cam = Camera.main;
+        target = camTrans.position;
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
@@ -32,12 +34,10 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (players != null)
-        {
-            minBounds = players[0].position;
-            maxBounds = players[0].position;
+        minBounds = players[0].position;
+        maxBounds = players[0].position;
 
-            for (int i = 1; i < players.Length; i++)
+        for (int i = 1; i < players.Length; i++)
             {
                 if (players[i].position.x < minBounds.x)
                 {
@@ -58,9 +58,10 @@ public class CameraFollow : MonoBehaviour
                 }
             }
 
-            target = minBounds + (maxBounds - minBounds) / 2 + new Vector3(0,0,cam.position.z);
-        }
+        target = minBounds + (maxBounds - minBounds) / 2;
         
-        cam.position = target;
+        camTrans.position = new Vector3(target.x, target.y, camTrans.position.z);
+
+        cam.orthographicSize = Mathf.Clamp((maxBounds - minBounds).magnitude, maxZoom, minZoom);
     }
 }
