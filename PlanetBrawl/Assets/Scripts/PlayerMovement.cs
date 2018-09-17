@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
     public int player = 1;
 
     public float speed = 500f;
+    public float speedBonus = 50f;
 
     float baseSpeed;
     float averageHpSpeed;
@@ -22,9 +23,9 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
 
         //Set Speed Variables
         baseSpeed = speed;
-        averageHpSpeed = baseSpeed + 50f;
-        lowHpSpeed = baseSpeed + 100f;
-        criticalHpSpeed = baseSpeed + 150f;
+        averageHpSpeed = baseSpeed + speedBonus;
+        lowHpSpeed = baseSpeed + speedBonus * 2;
+        criticalHpSpeed = baseSpeed + speedBonus * 3;
     }
 
     void FixedUpdate()
