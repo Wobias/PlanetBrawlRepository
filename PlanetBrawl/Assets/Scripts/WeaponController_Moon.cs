@@ -9,6 +9,7 @@ public class WeaponController_Moon : MonoBehaviour
 
     public int player = 1;
     public float damage = 10;
+    public float knockback = 5;
     public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
     public float punchSpeed = 1;
     public float retractSpeed = 1; //Should (usually) be slower than punch speed
@@ -125,9 +126,24 @@ public class WeaponController_Moon : MonoBehaviour
     {
         //Make a reference to the target
         IDamageable target = other.GetComponent<IDamageable>();
+        Rigidbody2D targetRB = other.GetComponent<Rigidbody2D>();
 
         if (target != null && canHit)
         {
+            if (targetRB != null)
+            {
+                targetRB.AddForce((other.transform.position - moon.position).normalized * knockback);
+            }
+            else
+            {
+                targetRB = other.transform.parent.GetComponent<Rigidbody2D>();
+
+                if (targetRB != null)
+                {
+                    targetRB.AddForce((other.transform.position - moon.position).normalized * knockback);
+                }
+            }
+
             //Hit the target if it is damageable
             target.Hit(damage);
             canHit = false;
