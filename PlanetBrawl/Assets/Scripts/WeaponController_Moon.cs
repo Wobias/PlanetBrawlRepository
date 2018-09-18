@@ -9,7 +9,7 @@ public class WeaponController_Moon : MonoBehaviour
 
     public int player = 1;
     public float damage = 10;
-    public float knockback = 5;
+    public float knockback = 500;
     public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
     public float punchSpeed = 1;
     public float retractSpeed = 1; //Should (usually) be slower than punch speed
@@ -28,6 +28,7 @@ public class WeaponController_Moon : MonoBehaviour
     private Transform origin; //Transform of the PARENT that is responsible for rotating the moon
     private Rigidbody2D rb2d; //The moons Rigidbody
     private IDamageable target; //Used to create a reference of a target and hit it
+    private Rigidbody2D targetRB;
 
     #endregion
 
@@ -94,7 +95,7 @@ public class WeaponController_Moon : MonoBehaviour
             if ((origin.position - moon.position).magnitude < maxDistance)
             {
                 //If the moon is below maxDistance it gets shot further
-                rb2d.velocity = -(origin.position - moon.position).normalized * retractSpeed;
+                rb2d.velocity = -(origin.position - moon.position).normalized * punchSpeed;
             }
             else
             {
@@ -125,8 +126,8 @@ public class WeaponController_Moon : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Make a reference to the target
-        IDamageable target = other.GetComponent<IDamageable>();
-        Rigidbody2D targetRB = other.GetComponent<Rigidbody2D>();
+        target = other.GetComponent<IDamageable>();
+        targetRB = other.GetComponent<Rigidbody2D>();
 
         if (target != null && canHit)
         {
