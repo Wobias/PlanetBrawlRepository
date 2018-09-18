@@ -220,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 29657811}
   - component: {fileID: 29657812}
+  - component: {fileID: 29657813}
   m_Layer: 8
   m_Name: Planets_Earthlike_4
   m_TagString: Untagged
@@ -286,6 +287,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &29657813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 29657810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2e0bc61b9e1414198f48f5fe338fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 1
+  maxDistance: 0.1
+  lookSpeed: 0.25
 --- !u!1 &126686199
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +411,11 @@ Prefab:
     - target: {fileID: 4897387824311960, guid: fc2e275f9aab3cf459bc3d75c49d454b, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114310547458447198, guid: fc2e275f9aab3cf459bc3d75c49d454b,
+        type: 2}
+      propertyPath: knockback
+      value: 2000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc2e275f9aab3cf459bc3d75c49d454b, type: 2}
@@ -1039,7 +1059,7 @@ Transform:
   m_GameObject: {fileID: 678084266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 951393683}
   - {fileID: 1222219986}
