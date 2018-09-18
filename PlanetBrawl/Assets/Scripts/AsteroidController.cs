@@ -8,7 +8,8 @@ public class AsteroidController : MonoBehaviour, IDamageable
     private Transform myTransform;
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
-    public GameObject item;
+    public Transform itemSaturnRing;
+    private int whichItem;
 
     // Asteroid Health Variable
     public float health = 10f;
@@ -49,7 +50,12 @@ public class AsteroidController : MonoBehaviour, IDamageable
     public void Destroy()
     {
         Destroy(gameObject);
-        Instantiate(item, transform.position, Quaternion.identity);
+        whichItem = Random.Range(1, 3);
+        if (whichItem == 1)
+        {
+            Instantiate(itemSaturnRing, transform.position, itemSaturnRing.rotation);
+        }
+
     }
 
     void OnCollisionEnter2D(Collision2D other)
