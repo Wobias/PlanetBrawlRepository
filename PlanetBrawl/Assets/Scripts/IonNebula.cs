@@ -31,16 +31,13 @@ public class IonNebula : MonoBehaviour
         if (targets.Contains(oldTarget))
         {
             targets.Remove(oldTarget);
-
-            if (targets.Count == 0)
-            {
-                StopCoroutine(DamageTargets());
-            }
         }
     }
 
     IEnumerator DamageTargets()
     {
+        yield return new WaitForSeconds(1);
+
         for (int i = 0; i < targets.Count; i++)
         {
             if (targets[i] != null)
@@ -50,14 +47,10 @@ public class IonNebula : MonoBehaviour
             else
             {
                 targets.RemoveAt(i);
-
-                if (targets.Count == 0)
-                    StopCoroutine(DamageTargets());
             }
         }
 
-        yield return new WaitForSeconds(1);
-
-        StartCoroutine(DamageTargets());
+        if (targets.Count > 0)
+            StartCoroutine(DamageTargets());
     }
 }

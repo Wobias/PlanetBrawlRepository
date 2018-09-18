@@ -51,7 +51,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     //Die method
     public void Die()
     {
-        Debug.Log("player dead");
+        Destroy(gameObject);
     }
 
     void DownScaling(float hp)
