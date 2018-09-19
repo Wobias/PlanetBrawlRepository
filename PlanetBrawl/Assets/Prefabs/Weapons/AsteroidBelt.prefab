@@ -156,6 +156,7 @@ MonoBehaviour:
   fastRotSpeed: 15
   punchSpeed: 25
   escapeTime: 1
+  lifetime: 1
 --- !u!212 &212098770526242696
 SpriteRenderer:
   m_ObjectHideFlags: 1

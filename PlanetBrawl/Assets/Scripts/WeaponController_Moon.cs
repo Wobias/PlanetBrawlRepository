@@ -39,7 +39,7 @@ public class WeaponController_Moon : MonoBehaviour
         origin = moon.parent;
         rb2d = GetComponent<Rigidbody2D>();
 
-        minDistance = moon.position;
+        minDistance = moon.localPosition;
     }
 
     void Update()

@@ -153,6 +153,7 @@ MonoBehaviour:
   knockback: 500
   shotSpeed: 25
   rotationSpeed: 0.1
+  lifetime: 1
 --- !u!212 &212069386142314294
 SpriteRenderer:
   m_ObjectHideFlags: 1

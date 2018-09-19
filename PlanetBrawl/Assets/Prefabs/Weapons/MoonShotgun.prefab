@@ -480,7 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 1
   damage: 10
-  knockback: 200
+  knockback: 500
   hitTimeout: 0.15
   punchSpeed: 25
   retractSpeed: 18
