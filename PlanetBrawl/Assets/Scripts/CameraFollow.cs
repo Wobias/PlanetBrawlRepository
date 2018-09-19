@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    public float followSpeed;
+    public float zoomSpeed;
     public float maxZoom;
     public float minZoom;
 
-    private Transform[] players = new Transform[4];
+    private List<Transform> players = new List<Transform>();
     private Transform camTrans;
     private Camera cam;
     private Vector2 target;
@@ -24,20 +26,23 @@ public class CameraFollow : MonoBehaviour
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
-        players = new Transform[playerObjects.Length];
-
         for (int i = 0; i < playerObjects.Length; i++)
         {
-            players[i] = playerObjects[i].transform;
+            players.Add(playerObjects[i].transform);
         }
     }
 
     void FixedUpdate()
     {
-        minBounds = players[0].position;
-        maxBounds = players[0].position;
+        if (players[0] != null)
+        {
+            minBounds = players[0].position;
+            maxBounds = players[0].position;
+        }
 
-        for (int i = 1; i < players.Length; i++)
+        for (int i = 1; i < players.Count; i++)
+        {
+            if (players[i] != null)
             {
                 if (players[i].position.x < minBounds.x)
                 {
@@ -57,11 +62,16 @@ public class CameraFollow : MonoBehaviour
                     maxBounds.y = players[i].position.y;
                 }
             }
+            else
+            {
+                players.RemoveAt(i);
+            }
+        }
 
         target = minBounds + (maxBounds - minBounds) / 2;
         
-        camTrans.position = new Vector3(target.x, target.y, camTrans.position.z);
+        camTrans.position = Vector3.Lerp(camTrans.position, new Vector3(target.x, target.y, camTrans.position.z), followSpeed);
 
-        cam.orthographicSize = Mathf.Clamp((maxBounds - minBounds).magnitude, maxZoom, minZoom);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, Mathf.Clamp((maxBounds - minBounds).magnitude, maxZoom, minZoom), zoomSpeed);
     }
 }

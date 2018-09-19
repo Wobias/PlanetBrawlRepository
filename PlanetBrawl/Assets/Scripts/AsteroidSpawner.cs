@@ -5,18 +5,18 @@ using UnityEngine;
 public class AsteroidSpawner : MonoBehaviour
 {
 
-   
+
     private float spawnTimer = 5;
     public int spawnMin = 0;
     public int spawnMax = 1000;
     public GameObject asteroid;
-    
+
     public float minX = -3.7f;
     public float maxX = 3.7f;
     public float minY = -7.4f;
     public float maxY = 7.4f;
 
-   
+
     void Update()
     {
         /* Spawn asteroid with a random chance */
@@ -33,20 +33,17 @@ public class AsteroidSpawner : MonoBehaviour
         Debug.Log(spawnTimer);
         if (spawnTimer < 0)
         {
-            
+
             spawnTimer = 5;
         }
 
         if (spawnTimer == 5)
         {
-            Invoke("SpawnMeteor", 1);
-            
-
-
+            SpawnMeteor();
         }
-        
-        
-        
+
+
+
 
     }
     void SpawnMeteor()
@@ -55,7 +52,7 @@ public class AsteroidSpawner : MonoBehaviour
         float posY = Random.Range(minY, maxY);
         Vector2 spawnPosition = new Vector2(posX, posY);
         Instantiate(asteroid, spawnPosition, Quaternion.identity);
-        
+
     }
 }
 

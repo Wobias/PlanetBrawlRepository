@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController_Moon : MonoBehaviour
+public class WeaponController_SecondaryMoon : MonoBehaviour
 {
     //VARIABLES
     #region
@@ -13,7 +13,6 @@ public class WeaponController_Moon : MonoBehaviour
     public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
     public float punchSpeed = 1;
     public float retractSpeed = 1; //Should (usually) be slower than punch speed
-    public float rotationSpeed = 0.1f; //A value of 1 or higher will make the rotation instant
     public float maxDistance = 5; //Maximum Shot Reach
 
     private enum MoonState { orbit, shooting, retracting }; //Defines the movement states the moon can be in
@@ -21,8 +20,6 @@ public class WeaponController_Moon : MonoBehaviour
     private bool triggerPressed = false; //Helper Variable because Triggers are an Axis not a button
     private bool canHit = true; //Determines if the moon can do damage at the moment
 
-    private Vector2 direction; //Aiming Direction
-    private Quaternion targetRotation; //Quaternion of the Aiming Direction
     private Transform moon; //Transform of THIS game object
     private Transform origin; //Transform of the PARENT that is responsible for rotating the moon
     private Rigidbody2D rb2d; //The moons Rigidbody
@@ -44,26 +41,6 @@ public class WeaponController_Moon : MonoBehaviour
 
     void Update()
     {
-        //AIMING
-        #region
-
-        //Get the Aiming Direction
-        direction = new Vector2(Input.GetAxis("AimHor" + player), Input.GetAxis("AimVer" + player));
-
-        //Set the target rotation if the direction changed
-        if (direction.x != 0 || direction.y != 0)
-        {
-            //Calculate an angle from the direction vector
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            //Apply the angle to the target rotation
-            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-
-        //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed
-        origin.rotation = Quaternion.Lerp(origin.rotation, targetRotation, rotationSpeed);
-
-        #endregion
-
         //CHECKING FOR INPUT
         #region
 
