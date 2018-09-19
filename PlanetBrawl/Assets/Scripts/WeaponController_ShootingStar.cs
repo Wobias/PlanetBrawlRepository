@@ -67,6 +67,7 @@ public class WeaponController_ShootingStar : MonoBehaviour
             rb2d.velocity = -(origin.position - shootingStar.position).normalized * shotSpeed;
             rb2d.isKinematic = false; //Unlock the moons position
             shot = true;
+            shootingStar.SetParent(null);
             Destroy(gameObject, lifetime);
         }
 

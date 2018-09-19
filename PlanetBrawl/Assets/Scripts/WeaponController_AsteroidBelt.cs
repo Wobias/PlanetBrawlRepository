@@ -15,6 +15,7 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
     public float fastRotSpeed = 15;
     public float punchSpeed = 25;
     public float escapeTime = 2;
+    public float lifetime = 1;
 
     private bool canHit = true; //Determines if the moon can do damage at the moment
     private enum AsteroidState { orbit, speedOrbit, escaped }; //Defines the movement states the moon can be in
@@ -58,6 +59,8 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
                 rb2d.isKinematic = false;
                 rb2d.velocity = -asteroid.up * punchSpeed;
                 asteroidState = AsteroidState.escaped;
+                asteroid.SetParent(null);
+                Destroy(gameObject, lifetime);
             }
         }
         else
