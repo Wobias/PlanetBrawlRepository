@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public class ItemController : MonoBehaviour
 {
     public int player = 1;
     public GameObject baseWeapon;
     public GameObject bonusWeapon;
+
+    private GameObject item;
 
     private bool baseActive = true;
     private bool gotBonus = false;
@@ -47,6 +49,16 @@ public class WeaponController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ItemPickup(GameObject newItem)
+    {
+        if (item != null)
+        {
+            Destroy(item);
+        }
+
+        item = newItem;
     }
 
     public void WeaponPickUp(GameObject newWeapon)

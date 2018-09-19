@@ -8,7 +8,7 @@ public class AsteroidController : MonoBehaviour, IDamageable
     private Transform myTransform;
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
-    public Transform itemSaturnRing;
+    public GameObject itemSaturnRing;
     private int whichItem;
 
     // Asteroid Health Variable
@@ -53,12 +53,12 @@ public class AsteroidController : MonoBehaviour, IDamageable
         whichItem = Random.Range(1, 3);
         if (whichItem == 1)
         {
-            Instantiate(itemSaturnRing, transform.position, itemSaturnRing.rotation);
+            Instantiate(itemSaturnRing, transform.position, Quaternion.identity);
         }
 
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<IDamageable>() != null)
         {

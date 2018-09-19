@@ -12,16 +12,20 @@ public class ItemPickup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        WeaponController weaponController = other.GetComponent<WeaponController>();
+        ItemController itemController = other.GetComponent<ItemController>();
 
-        if (weaponController == null)
+        if (itemController == null)
             return;
 
         GameObject item = Instantiate(itemPrefab, other.transform.position, Quaternion.identity, other.transform);
 
         if (itemType == ItemType.weapon)
         {
-            weaponController.WeaponPickUp(item);
+            itemController.WeaponPickUp(item);
+        }
+        else
+        {
+            itemController.ItemPickup(item);
         }
 
         Destroy(gameObject);
