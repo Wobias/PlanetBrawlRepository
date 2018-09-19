@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212284239626540322}
   - component: {fileID: 58243999675024746}
   - component: {fileID: 114024332359999352}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: SaturnShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4574433540591306}
   - component: {fileID: 212381913682668018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Entity_Outlines_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: -2089687871
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300018, guid: bd06f0397101d2f4abdebf060ae5566b, type: 3}
+  m_Sprite: {fileID: 21300016, guid: bd06f0397101d2f4abdebf060ae5566b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
