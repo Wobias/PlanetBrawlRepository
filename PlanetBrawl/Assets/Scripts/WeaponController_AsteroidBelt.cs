@@ -60,7 +60,7 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
                 rb2d.velocity = -asteroid.up * punchSpeed;
                 asteroidState = AsteroidState.escaped;
                 asteroid.SetParent(null);
-                Destroy(gameObject, lifetime);
+                Destroy(origin.gameObject, lifetime);
             }
         }
         else
