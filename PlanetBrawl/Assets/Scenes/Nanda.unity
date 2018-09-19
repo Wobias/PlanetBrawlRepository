@@ -397,6 +397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
+  speed: 500
+  speedBonus: 50
 --- !u!212 &261009905
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -507,7 +509,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   hpPercent: 100
-  healthState: 0
 --- !u!1 &502164008
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,7 +542,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   hpPercent: 100
-  healthState: 0
 --- !u!114 &502164010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +554,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 2
+  speed: 500
+  speedBonus: 50
 --- !u!50 &502164011
 Rigidbody2D:
   serializedVersion: 4
@@ -642,7 +644,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 502164008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: -1, z: 0}
+  m_LocalPosition: {x: 3.43, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 661911710}
@@ -1135,7 +1137,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   hpPercent: 100
-  healthState: 0
 --- !u!50 &678084268
 Rigidbody2D:
   serializedVersion: 4
@@ -1246,6 +1247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 2
+  speed: 500
+  speedBonus: 50
 --- !u!1 &716704170
 GameObject:
   m_ObjectHideFlags: 0
