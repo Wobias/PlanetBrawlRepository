@@ -12,7 +12,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public float hpPercent = 100f;
     private float maxHealth;
     #endregion
-
     
     public static HealthState healthState = HealthState.full;
 
@@ -21,12 +20,26 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     Vector3 scaleVector;
     Vector3 minScale = new Vector3(0.6f, 0.6f, 0.6f);
 
-    
     void Awake()
     {
         //Set max health
         maxHealth = health;
     }
+
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.R))
+    //    {
+    //        health -= 10f;
+    //        StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
+    //        DownScaling(health);
+
+    //        if (health <= 0f)
+    //        {
+    //            Die();
+    //        }
+    //    }
+    //}
 
     void OnEnable()
     {
@@ -39,7 +52,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (health >= 1)
         {
             health -= damage;
-
+            StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
             DownScaling(health);
         }
         else
@@ -52,20 +65,23 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log("player dead");
+        Destroy(gameObject);
     }
+
 
     void DownScaling(float hp)
     {
         //Get current health in percent
         hpPercent = (hp * 100f) / maxHealth;
 
-        //Set Scale, Speed in relation to current health
+        //Set Scale, Speed, Sprite in relation to current health
         if (hpPercent <= 75f && hpPercent > 50f)
         {
             scaleVector = new Vector3(0.9f, 0.9f, 0.9f);
             myTransform.localScale = scaleVector;
             healthState = HealthState.average;
             GetComponent<ISpeedable>().SpeedToSize(healthState);
+            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
         }
         if (hpPercent <= 50f && hpPercent > 25f)
         {
@@ -73,6 +89,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             myTransform.localScale = scaleVector;
             healthState = HealthState.low;
             GetComponent<ISpeedable>().SpeedToSize(healthState);
+            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
         }
         if (hpPercent <= 25f)
         {
@@ -80,6 +97,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             myTransform.localScale = scaleVector;
             healthState = HealthState.critical;
             GetComponent<ISpeedable>().SpeedToSize(healthState);
+            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
         }
     }
 }
