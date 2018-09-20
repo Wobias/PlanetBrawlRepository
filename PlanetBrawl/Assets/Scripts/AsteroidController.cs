@@ -8,8 +8,12 @@ public class AsteroidController : MonoBehaviour, IDamageable
     private Transform myTransform;
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
-    public GameObject itemSaturnRing;
+    public GameObject item1;
+    public GameObject item2;
+    public GameObject item3;
+    public GameObject item4;
     private int whichItem;
+    private int whichDirection;
 
     // Asteroid Health Variable
     public float health = 10f;
@@ -20,12 +24,25 @@ public class AsteroidController : MonoBehaviour, IDamageable
     {
         myTransform = gameObject.transform;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(movementSpeed, movementSpeed));
+
+        whichDirection = Random.Range(1, 1);
+        switch(whichDirection)
+        {
+            case 1:
+                rb.AddForce(new Vector2(movementSpeed, movementSpeed));
+                break;
+            case 2:
+                rb.AddForce(transform.up * movementSpeed);
+                break;
+        }
+        
     }
 
     void Update()
     {
         myTransform.Rotate(Vector3.back * Time.deltaTime * rotateSpeed);
+        
+        
 
     }
 
@@ -35,7 +52,7 @@ public class AsteroidController : MonoBehaviour, IDamageable
         if (health >= 1)
         {
             health -= damage;
-            if(health <= 0)
+            if (health <= 0)
             {
                 Destroy();
             }
@@ -50,13 +67,26 @@ public class AsteroidController : MonoBehaviour, IDamageable
     public void Destroy()
     {
         Destroy(gameObject);
-        whichItem = Random.Range(1, 3);
-        if (whichItem == 1)
+        whichItem = Random.Range(1, 14);
+        switch (whichItem)
         {
-            Instantiate(itemSaturnRing, transform.position, Quaternion.identity);
+            case 1:
+                Instantiate(item1, transform.position, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(item2, transform.position, Quaternion.identity);
+                break;
+            case 3:
+                Instantiate(item3, transform.position, Quaternion.identity);
+                break;
+            case 4:
+                Instantiate(item4, transform.position, Quaternion.identity);
+                break;
         }
 
     }
+
+
 
     void OnTriggerEnter2D(Collider2D other)
     {

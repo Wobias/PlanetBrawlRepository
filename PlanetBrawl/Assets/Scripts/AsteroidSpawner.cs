@@ -7,8 +7,8 @@ public class AsteroidSpawner : MonoBehaviour
 
 
     private float spawnTimer = 5;
-    public int spawnMin = 0;
-    public int spawnMax = 1000;
+    //public int spawnMin = 0;
+    //public int spawnMax = 1000;
     public GameObject asteroid;
 
     public float minX = -3.7f;
@@ -28,9 +28,10 @@ public class AsteroidSpawner : MonoBehaviour
 
         //}
 
+
         /*Spawn asteroid after Time*/
         spawnTimer -= Time.deltaTime;
-        Debug.Log(spawnTimer);
+       // Debug.Log(spawnTimer);
         if (spawnTimer < 0)
         {
 
