@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: bd06f0397101d2f4abdebf060ae5566b
+guid: c8c0d24e3e0f83143ba13fca2aaa4fdc
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Entity_Outlines_0
-    21300002: Entity_Outlines_1
-    21300004: Entity_Outlines_2
-    21300006: Entity_Outlines_3
-    21300008: Entity_Outlines_4
-    21300010: Entity_Outlines_5
-    21300012: Entity_Outlines_6
-    21300014: Entity_Outlines_7
-    21300016: Entity_Outlines_8
-    21300018: Entity_Outlines_9
-    21300020: Entity_Outlines_10
-    21300022: Entity_Outlines_11
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -52,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -105,71 +93,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Entity_Outlines_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3bf96914958bee543b11a2ebc528f69c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Entity_Outlines_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 54958363eae1bb3408e88aab56b353a0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Entity_Outlines_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ace9b2ad2aa86cb488e45bfa46e39298
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a1c72e205e8d4d446bf24ae1f0319c05
+    spriteID: 5993c599ad8dbf4488622676d1d04127
     vertices: []
     indices: 
     edges: []

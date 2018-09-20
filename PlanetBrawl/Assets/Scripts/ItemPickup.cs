@@ -12,7 +12,7 @@ public class ItemPickup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        ItemController itemController = other.GetComponent<ItemController>();
+        PlayerController itemController = other.GetComponent<PlayerController>();
 
         if (itemController == null)
             return;

@@ -7,7 +7,6 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
     //VARIABLES
     #region
 
-    public int player = 1;
     public float damage = 10;
     public float knockback = 500;
     public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
@@ -21,6 +20,7 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
     private enum AsteroidState { orbit, speedOrbit, escaped }; //Defines the movement states the moon can be in
     private AsteroidState asteroidState = AsteroidState.orbit; //The actual variable for that
     private float escapeCounter = 0;
+    private int playerNr = 1;
 
     private Rigidbody2D rb2d; //The moons Rigidbody
     private Transform asteroid; //Transform of THIS game object
@@ -35,6 +35,8 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
         //Initializes everything
         asteroid = transform;
         origin = asteroid.parent;
+        playerNr = origin.GetComponentInParent<PlayerController>().playerNr;
+        gameObject.layer = origin.parent.gameObject.layer;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -47,7 +49,7 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
         #region
 
         //Check for a Punch
-        if (Input.GetAxisRaw("Fire" + player) == -1)
+        if (Input.GetAxisRaw("Fire" + playerNr) == -1)
         {
             asteroidState = AsteroidState.speedOrbit;
             //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed

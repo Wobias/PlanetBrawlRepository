@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class FaceController : MonoBehaviour
 {
-    public int player = 1;
     public float maxDistance = 0.1f;
     public float lookSpeed = 0.25f;
 
     private Vector2 direction;
     private Transform face;
+    private int playerNr = 1;
 
 
     void Start()
     {
         face = transform;
+
+        playerNr = face.GetComponentInParent<PlayerController>().playerNr;
     }
 
     void Update ()
@@ -23,11 +25,11 @@ public class FaceController : MonoBehaviour
         #region
 
         //Get the Aiming Direction
-        direction = new Vector2(Input.GetAxis("AimHor" + player), Input.GetAxis("AimVer" + player));
+        direction = new Vector2(Input.GetAxis("AimHor" + playerNr), Input.GetAxis("AimVer" + playerNr));
 
         if (direction == Vector2.zero)
         {
-            direction = new Vector2(Input.GetAxis("Horizontal" + player), Input.GetAxis("Vertical" + player));
+            direction = new Vector2(Input.GetAxis("Horizontal" + playerNr), Input.GetAxis("Vertical" + playerNr));
         }
 
         face.localPosition = Vector2.Lerp(face.localPosition, direction * maxDistance, lookSpeed);

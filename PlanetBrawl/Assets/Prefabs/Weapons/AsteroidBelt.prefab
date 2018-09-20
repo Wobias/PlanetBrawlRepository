@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 58827649335203014}
   - component: {fileID: 50909519788273120}
   - component: {fileID: 114320497801936382}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Weapons_Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4901412899889240}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AsteroidBelt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4187452365828400}
   - component: {fileID: 212098770526242696}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Entity_Outlines_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f68a37568a12b44b5c21d7cd64b604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 1
   damage: 10
   knockback: 500
   hitTimeout: 0.25

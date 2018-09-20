@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4310145588521632}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Shooting Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740103700127854}
   - component: {fileID: 212945743103843184}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Entity_Outlines_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 58846234349877488}
   - component: {fileID: 50553613968418340}
   - component: {fileID: 114419408506327900}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Weapons_ShootingStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d6d123d01c30a4eadb370a09430754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 1
   damage: 10
   knockback: 500
   shotSpeed: 25

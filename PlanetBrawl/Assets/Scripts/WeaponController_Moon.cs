@@ -7,7 +7,6 @@ public class WeaponController_Moon : MonoBehaviour
     //VARIABLES
     #region
 
-    public int player = 1;
     public float damage = 10;
     public float knockback = 500;
     public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
@@ -20,6 +19,7 @@ public class WeaponController_Moon : MonoBehaviour
     private MoonState moonState = MoonState.orbit; //The actual variable for that
     private bool triggerPressed = false; //Helper Variable because Triggers are an Axis not a button
     private bool canHit = true; //Determines if the moon can do damage at the moment
+    private int playerNr = 1;
 
     private Vector2 direction; //Aiming Direction
     private Quaternion targetRotation; //Quaternion of the Aiming Direction
@@ -37,6 +37,8 @@ public class WeaponController_Moon : MonoBehaviour
         //Initializes everything
         moon = transform;
         origin = moon.parent;
+        playerNr = origin.GetComponentInParent<PlayerController>().playerNr;
+        gameObject.layer = origin.parent.gameObject.layer;
         rb2d = GetComponent<Rigidbody2D>();
 
         minDistance = moon.localPosition;
@@ -48,7 +50,7 @@ public class WeaponController_Moon : MonoBehaviour
         #region
 
         //Get the Aiming Direction
-        direction = new Vector2(Input.GetAxis("AimHor" + player), Input.GetAxis("AimVer" + player));
+        direction = new Vector2(Input.GetAxis("AimHor" + playerNr), Input.GetAxis("AimVer" + playerNr));
 
         //Set the target rotation if the direction changed
         if (direction.x != 0 || direction.y != 0)
@@ -68,7 +70,7 @@ public class WeaponController_Moon : MonoBehaviour
         #region
 
         //Check for a Punch
-        if (!triggerPressed && Input.GetAxisRaw("Fire" + player) == -1 && moonState == MoonState.orbit)
+        if (!triggerPressed && Input.GetAxisRaw("Fire" + playerNr) == -1 && moonState == MoonState.orbit)
         {
             triggerPressed = true;
             moonState = MoonState.shooting;
@@ -76,7 +78,7 @@ public class WeaponController_Moon : MonoBehaviour
         }
 
         //Check for Trigger Release
-        if (triggerPressed && Input.GetAxisRaw("Fire" + player) == 0)
+        if (triggerPressed && Input.GetAxisRaw("Fire" + playerNr) == 0)
         {
             triggerPressed = false;
 

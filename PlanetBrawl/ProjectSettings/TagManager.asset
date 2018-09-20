@@ -18,7 +18,7 @@ TagManager:
   - Player3
   - Player4
   - Pickups
-  - 
+  - Nebula
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Weapons
     uniqueID: 1304321701
+    locked: 0
+  - name: Nebula
+    uniqueID: 1484977857
     locked: 0

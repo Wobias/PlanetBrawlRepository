@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour,ISpeedable
 {
-    public int player = 1;
-
     public float speed = 500f;
     public float speedBonus = 50f;
 
@@ -14,11 +12,15 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
     float lowHpSpeed;
     float criticalHpSpeed;
 
+    private int playerNr = 1;
+
     Vector2 direction;
     Rigidbody2D myRigidbody;
 
     void Start()
     {
+        playerNr = GetComponent<PlayerController>().playerNr;
+
         myRigidbody = GetComponent<Rigidbody2D>();
 
         //Set Speed Variables
@@ -30,8 +32,8 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
 
     void FixedUpdate()
     {
-        direction.x = Input.GetAxis("Horizontal" + player);
-        direction.y = Input.GetAxis("Vertical" + player);
+        direction.x = Input.GetAxis("Horizontal" + playerNr);
+        direction.y = Input.GetAxis("Vertical" + playerNr);
         myRigidbody.AddForce(direction * speed * Time.fixedDeltaTime);
     }
 
