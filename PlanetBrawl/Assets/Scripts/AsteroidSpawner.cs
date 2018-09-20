@@ -11,10 +11,11 @@ public class AsteroidSpawner : MonoBehaviour
     //public int spawnMax = 1000;
     public GameObject asteroid;
 
-    public float minX = -3.7f;
-    public float maxX = 3.7f;
-    public float minY = -7.4f;
-    public float maxY = 7.4f;
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+    public int whichBorder;
 
 
     void Update()
@@ -49,6 +50,39 @@ public class AsteroidSpawner : MonoBehaviour
     }
     void SpawnMeteor()
     {
+        whichBorder = Random.Range(1, 4);
+
+        if(whichBorder == 1) //Left
+        {
+            minX = -16.9f;
+            maxX = -16.9f;
+            minY = -8.9f;
+            maxY = -8.9f;
+        }
+        else if(whichBorder == 2) //Top
+        {
+            minX = -16.9f;
+            maxX = 16.9f;
+            minY = 8.9f;
+            maxY = 8.9f;
+        }
+        else if (whichBorder == 3) //Right
+        {
+            minX = 16.9f;
+            maxX = 16.9f;
+            minY = -8.9f;
+            maxY = 8.9f;
+
+        }
+        else if (whichBorder == 4) //Bottom
+        {
+            minX = -16.9f;
+            maxX = 16.9f;
+            minY = -8.9f;
+            maxY = -8.9f;
+        }
+
+
         float posX = Random.Range(minX, maxX);
         float posY = Random.Range(minY, maxY);
         Vector2 spawnPosition = new Vector2(posX, posY);

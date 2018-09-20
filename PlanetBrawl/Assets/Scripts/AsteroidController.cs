@@ -24,25 +24,15 @@ public class AsteroidController : MonoBehaviour, IDamageable
     {
         myTransform = gameObject.transform;
         rb = gameObject.GetComponent<Rigidbody2D>();
+        ChooseDirection();
 
-        whichDirection = Random.Range(1, 1);
-        switch(whichDirection)
-        {
-            case 1:
-                rb.AddForce(new Vector2(movementSpeed, movementSpeed));
-                break;
-            case 2:
-                rb.AddForce(transform.up * movementSpeed);
-                break;
-        }
-        
     }
 
     void Update()
     {
         myTransform.Rotate(Vector3.back * Time.deltaTime * rotateSpeed);
-        
-        
+
+
 
     }
 
@@ -84,6 +74,44 @@ public class AsteroidController : MonoBehaviour, IDamageable
                 break;
         }
 
+    }
+
+    public void ChooseDirection()
+    {
+        //whichDirection = Random.Range(1, 4);
+        //Debug.Log(whichDirection);
+        //switch (whichDirection)
+        //{
+        //    case 1:
+        //        rb.AddForce(new Vector2(movementSpeed, movementSpeed)); // Right UP
+        //        break;
+        //    case 2:
+        //        rb.AddForce(transform.up * movementSpeed); // Up
+        //        break;
+        //    case 3:
+        //        rb.AddForce(-transform.up * movementSpeed); // Down
+        //        break;
+        //    case 4:
+        //        rb.AddForce(new Vector2(-movementSpeed, -movementSpeed)); // Left down
+        //        break;
+        //}
+        int whichBorder = GameObject.Find("Spawner").GetComponent<AsteroidSpawner>().whichBorder;
+        if (whichBorder == 1)
+        {
+            rb.AddForce(new Vector2(movementSpeed, movementSpeed)); // Right UP
+        }
+        else if(whichBorder == 2)
+        {
+            rb.AddForce(-transform.up * movementSpeed); // Down
+        }
+        else if (whichBorder == 3)
+        {
+            rb.AddForce(new Vector2(-movementSpeed, movementSpeed)); // Left Up
+        }
+        else if (whichBorder == 4)
+        {
+            rb.AddForce(transform.up * movementSpeed); //UP
+        }
     }
 
 
