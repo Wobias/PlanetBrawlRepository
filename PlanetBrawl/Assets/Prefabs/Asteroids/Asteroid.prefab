@@ -91,8 +91,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 50
   movementSpeed: 20
-  itemSaturnRing: {fileID: 1005159989659692, guid: 6817cf2aa4c9225448d4f53d371f068d,
-    type: 2}
+  item1: {fileID: 1093277147016036, guid: b42dc0aadae48d14d9a3a83ef0ca50dd, type: 2}
+  item2: {fileID: 1526840704964988, guid: fe32b39e7fc3e00499d44e340e9f71d6, type: 2}
+  item3: {fileID: 1005159989659692, guid: 6817cf2aa4c9225448d4f53d371f068d, type: 2}
+  item4: {fileID: 1656723580749052, guid: 1cf634e194402d742b4c835ce0aaba68, type: 2}
   health: 10
   asteroidDamage: 10
 --- !u!212 &212605891521054226
