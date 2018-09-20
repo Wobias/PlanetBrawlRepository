@@ -7,7 +7,6 @@ public class WeaponController_ShootingStar : MonoBehaviour
     //VARIABLES
     #region
 
-    public int player = 1;
     public float damage = 10;
     public float knockback = 500;
     public float shotSpeed = 1;
@@ -22,6 +21,7 @@ public class WeaponController_ShootingStar : MonoBehaviour
     private IDamageable target; //Used to create a reference of a target and hit it
     private Rigidbody2D targetRB;
     private bool shot = false;
+    private int playerNr = 1;
 
     #endregion
 
@@ -30,6 +30,8 @@ public class WeaponController_ShootingStar : MonoBehaviour
         //Initializes everything
         shootingStar = transform;
         origin = shootingStar.parent;
+        playerNr = origin.GetComponentInParent<PlayerController>().playerNr;
+        gameObject.layer = origin.parent.gameObject.layer;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -42,7 +44,7 @@ public class WeaponController_ShootingStar : MonoBehaviour
         #region
 
         //Get the Aiming Direction
-        direction = new Vector2(Input.GetAxis("AimHor" + player), Input.GetAxis("AimVer" + player));
+        direction = new Vector2(Input.GetAxis("AimHor" + playerNr), Input.GetAxis("AimVer" + playerNr));
 
         //Set the target rotation if the direction changed
         if (direction.x != 0 || direction.y != 0)
@@ -62,7 +64,7 @@ public class WeaponController_ShootingStar : MonoBehaviour
         #region
 
         //Check for a Shot
-        if (Input.GetAxisRaw("Fire" + player) == -1)
+        if (Input.GetAxisRaw("Fire" + playerNr) == -1)
         {
             rb2d.velocity = -(origin.position - shootingStar.position).normalized * shotSpeed;
             rb2d.isKinematic = false; //Unlock the moons position

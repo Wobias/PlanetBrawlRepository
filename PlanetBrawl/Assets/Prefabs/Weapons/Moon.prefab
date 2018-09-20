@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4271629855482442}
   - component: {fileID: 212730931703544678}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Entity_Outlines_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4897387824311960}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 58451927418706772}
   - component: {fileID: 50520296263130866}
   - component: {fileID: 114310547458447198}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Weapons_Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a567aa90d40035b45abd35aa16f97920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 1
   damage: 10
   knockback: 500
   hitTimeout: 0.15

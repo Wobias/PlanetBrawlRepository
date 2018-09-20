@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    public int player = 1;
+    public int playerNr = 1;
     public GameObject baseWeapon;
     public GameObject bonusWeapon;
 
-    private GameObject item;
+    private GameObject currentItem;
 
     private bool baseActive = true;
     private bool gotBonus = false;
@@ -31,7 +31,7 @@ public class ItemController : MonoBehaviour
             baseWeapon.SetActive(true);
         }
 
-        if (Input.GetButtonDown("SwitchWeapon" + player))
+        if (Input.GetButtonDown("SwitchWeapon" + playerNr))
         {
             if (baseActive && gotBonus)
             {
@@ -53,12 +53,12 @@ public class ItemController : MonoBehaviour
 
     public void ItemPickup(GameObject newItem)
     {
-        if (item != null)
+        if (currentItem != null)
         {
-            Destroy(item);
+            Destroy(currentItem);
         }
 
-        item = newItem;
+        currentItem = newItem;
     }
 
     public void WeaponPickUp(GameObject newWeapon)
