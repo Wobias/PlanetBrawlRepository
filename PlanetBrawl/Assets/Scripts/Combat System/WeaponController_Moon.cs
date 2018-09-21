@@ -62,7 +62,7 @@ public class WeaponController_Moon : MonoBehaviour
         }
 
         //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed
-        origin.rotation = Quaternion.Lerp(origin.rotation, targetRotation, rotationSpeed);
+        origin.rotation = Quaternion.Lerp(origin.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         #endregion
 

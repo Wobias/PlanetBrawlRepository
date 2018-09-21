@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: bd06f0397101d2f4abdebf060ae5566b
+guid: 93c9d71f17feb5a4e8ede72f5efe823e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Entity_Outlines_0
-    21300002: Entity_Outlines_1
-    21300004: Entity_Outlines_2
-    21300006: Entity_Outlines_3
-    21300008: Entity_Outlines_4
-    21300010: Entity_Outlines_5
-    21300012: Entity_Outlines_6
-    21300014: Entity_Outlines_7
-    21300016: Entity_Outlines_8
-    21300018: Entity_Outlines_9
-    21300020: Entity_Outlines_10
-    21300022: Entity_Outlines_11
+    21300000: ToxicNebula_lighning_0
+    21300002: ToxicNebula_lighning_1
+    21300004: ToxicNebula_lighning_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -107,71 +98,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Entity_Outlines_0
+      name: ToxicNebula_lighning_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3bf96914958bee543b11a2ebc528f69c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Entity_Outlines_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 54958363eae1bb3408e88aab56b353a0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Entity_Outlines_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ace9b2ad2aa86cb488e45bfa46e39298
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Entity_Outlines_3
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 160
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -181,19 +112,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44bbd578461760b4896b43f40f343411
+      spriteID: d11838d0309dbb94ebdeebb14531a01c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Entity_Outlines_4
+      name: ToxicNebula_lighning_1
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 64
-        height: 64
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,7 +132,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc11f56118309894fad30c4e41ed3810
+      spriteID: 555d94dbae4d3c94db2c2e793c0dec1d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToxicNebula_lighning_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d9d9e6e126707848ba106e4776fa64d
       vertices: []
       indices: 
       edges: []
@@ -209,7 +160,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a1c72e205e8d4d446bf24ae1f0319c05
+    spriteID: 1d5b22ae2909fac4cae1941066e87195
     vertices: []
     indices: 
     edges: []

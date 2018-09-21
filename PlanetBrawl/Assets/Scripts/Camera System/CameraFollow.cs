@@ -34,13 +34,16 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (players.Count < 1)
+            return;
+
         if (players[0] != null)
         {
             minBounds = players[0].position;
             maxBounds = players[0].position;
         }
 
-        for (int i = 1; i < players.Count; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             if (players[i] != null)
             {

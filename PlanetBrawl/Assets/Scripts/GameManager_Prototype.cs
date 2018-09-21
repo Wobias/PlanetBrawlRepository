@@ -17,24 +17,13 @@ public class GameManager_Prototype : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            players[0].SetActive(true);
-            players[1].SetActive(true);
-            players[2].SetActive(false);
-            players[3].SetActive(false);
+            Destroy(players[2]);
+            if (players[3] != null)
+                Destroy(players[3]);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            players[0].SetActive(true);
-            players[1].SetActive(true);
-            players[2].SetActive(true);
-            players[3].SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            players[0].SetActive(true);
-            players[1].SetActive(true);
-            players[2].SetActive(true);
-            players[3].SetActive(true);
+            Destroy(players[3]);
         }
     }
 }

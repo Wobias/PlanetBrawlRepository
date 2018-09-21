@@ -53,7 +53,7 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
         {
             asteroidState = AsteroidState.speedOrbit;
             //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed
-            origin.Rotate(new Vector3(0, 0, -fastRotSpeed));
+            origin.Rotate(new Vector3(0, 0, -fastRotSpeed * Time.deltaTime));
             escapeCounter += Time.deltaTime;
 
             if (escapeCounter >= escapeTime)
@@ -73,7 +73,7 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
                 escapeCounter = 0;
             }
 
-            origin.Rotate(new Vector3(0, 0, -slowRotSpeed));
+            origin.Rotate(new Vector3(0, 0, -slowRotSpeed * Time.deltaTime));
         }
 
         #endregion

@@ -8,17 +8,18 @@ public class AsteroidController : MonoBehaviour, IDamageable
     private Transform myTransform;
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
-    public GameObject item1;
-    public GameObject item2;
-    public GameObject item3;
-    public GameObject item4;
+    public GameObject[] itemDrops;
     private int whichItem;
     private int whichDirection;
+    private IDamageable target;
+    private Rigidbody2D targetRB;
 
     // Asteroid Health Variable
     public float health = 10f;
 
     public float asteroidDamage = 10f;
+    public float selfDamage = 5;
+    public float knockback = 500;
 
     void Start()
     {
@@ -28,9 +29,9 @@ public class AsteroidController : MonoBehaviour, IDamageable
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        myTransform.Rotate(Vector3.back * Time.deltaTime * rotateSpeed);
+        myTransform.Rotate(Vector3.back * Time.fixedDeltaTime * rotateSpeed);
 
 
 
@@ -57,23 +58,8 @@ public class AsteroidController : MonoBehaviour, IDamageable
     public void Destroy()
     {
         Destroy(gameObject);
-        whichItem = Random.Range(1, 14);
-        switch (whichItem)
-        {
-            case 1:
-                Instantiate(item1, transform.position, Quaternion.identity);
-                break;
-            case 2:
-                Instantiate(item2, transform.position, Quaternion.identity);
-                break;
-            case 3:
-                Instantiate(item3, transform.position, Quaternion.identity);
-                break;
-            case 4:
-                Instantiate(item4, transform.position, Quaternion.identity);
-                break;
-        }
-
+        whichItem = Random.Range(0, itemDrops.Length);
+        Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
     }
 
     public void ChooseDirection()
@@ -118,10 +104,29 @@ public class AsteroidController : MonoBehaviour, IDamageable
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<IDamageable>() != null)
+        //Make a reference to the target
+        target = other.GetComponent<IDamageable>();
+        targetRB = other.GetComponent<Rigidbody2D>();
+
+        if (target != null)
         {
-            other.gameObject.GetComponent<IDamageable>().Hit(asteroidDamage);
-            Hit(asteroidDamage);
+            if (targetRB != null)
+            {
+                targetRB.AddForce((other.transform.position - myTransform.position).normalized * knockback);
+            }
+            else
+            {
+                targetRB = other.transform.parent.GetComponent<Rigidbody2D>();
+
+                if (targetRB != null)
+                {
+                    targetRB.AddForce((other.transform.position - myTransform.position).normalized * knockback);
+                }
+            }
+
+            //Hit the target if it is damageable
+            target.Hit(asteroidDamage);
+            Hit(selfDamage);
         }
     }
 
