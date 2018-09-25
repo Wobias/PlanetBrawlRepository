@@ -4,29 +4,86 @@ using UnityEngine;
 
 public class ItemController_SaturnShield : MonoBehaviour, IDamageable
 {
-    public float health;
+    public int shieldUses;
 
-    private PlayerHealth playerHealth;
+    private PlayerController controller;
+    private Rigidbody2D rb2d;
+    private bool canHit = false;
 
 
     void Start()
     {
-        playerHealth = GetComponentInParent<PlayerHealth>();
+        controller = GetComponentInParent<PlayerController>();
+        rb2d = transform.parent.GetComponent<Rigidbody2D>();
 
-        if (playerHealth != null)
-            playerHealth.enabled = false;
+        controller.StartPlayerProtection();
     }
 
-    public void Hit(float damage)
+    public void PhysicalHit(float damage, Vector2 knockbackForce, float stunTime)
     {
-        health -= damage;
+        if (!canHit)
+            return;
 
-        if (health <= 0)
+        if (knockbackForce != Vector2.zero)
+            rb2d.AddForce(knockbackForce);
+
+        shieldUses--;
+
+        if (shieldUses <= 0)
         {
-            if (playerHealth != null)
-                playerHealth.enabled = true;
-
+            controller.StopPlayerProtection(0);
             Destroy(gameObject);
         }
+
+        canHit = false;
+        StartCoroutine(AllowHit(stunTime));
+    }
+
+    public void Poison(float dps, float duration, Vector2 knockbackForce, float stunTime)
+    {
+        return;
+    }
+
+    public void Burn(float dps, float duration, Vector2 knockbackForce, float stunTime)
+    {
+        return;
+    }
+
+    public void Freeze(float damage, Vector2 knockbackForce, float stunTime, float thawTime)
+    {
+        if (!canHit)
+            return;
+
+        if (knockbackForce != Vector2.zero)
+            rb2d.AddForce(knockbackForce);
+
+        shieldUses--;
+
+        if (shieldUses <= 0)
+        {
+            controller.StopPlayerProtection(0);
+            Destroy(gameObject);
+        }
+
+        canHit = false;
+        StartCoroutine(AllowHit(stunTime));
+    }
+
+    public void IonDamage(float dps)
+    {
+        controller.StopPlayerProtection(dps);
+        Destroy(gameObject);
+    }
+
+    public void StopIon()
+    {
+        return;
+    }
+
+    IEnumerator AllowHit(float timeout)
+    {
+        yield return new WaitForSeconds(timeout);
+
+        canHit = true;
     }
 }

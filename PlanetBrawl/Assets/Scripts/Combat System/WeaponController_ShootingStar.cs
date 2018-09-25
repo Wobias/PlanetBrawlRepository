@@ -12,6 +12,7 @@ public class WeaponController_ShootingStar : MonoBehaviour
     public float shotSpeed = 1;
     public float rotationSpeed = 0.1f; //A value of 1 or higher will make the rotation instant
     public float lifetime = 1;
+    public float stunTime;
 
     private Vector2 direction; //Aiming Direction
     private Quaternion targetRotation; //Quaternion of the Aiming Direction
@@ -19,7 +20,6 @@ public class WeaponController_ShootingStar : MonoBehaviour
     private Transform origin; //Transform of the PARENT that is responsible for rotating the moon
     private Rigidbody2D rb2d; //The moons Rigidbody
     private IDamageable target; //Used to create a reference of a target and hit it
-    private Rigidbody2D targetRB;
     private bool shot = false;
     private int playerNr = 1;
 
@@ -79,26 +79,11 @@ public class WeaponController_ShootingStar : MonoBehaviour
     {
         //Make a reference to the target
         target = other.GetComponent<IDamageable>();
-        targetRB = other.GetComponent<Rigidbody2D>();
 
         if (target != null)
         {
-            if (targetRB != null)
-            {
-                targetRB.AddForce((other.transform.position - shootingStar.position).normalized * knockback);
-            }
-            else
-            {
-                targetRB = other.transform.parent.GetComponent<Rigidbody2D>();
-
-                if (targetRB != null)
-                {
-                    targetRB.AddForce((other.transform.position - shootingStar.position).normalized * knockback);
-                }
-            }
-
             //Hit the target if it is damageable
-            target.Hit(damage);
+            target.PhysicalHit(damage, (other.transform.position - shootingStar.position).normalized * knockback, stunTime);
             Destroy(gameObject);
         }
     }

@@ -9,14 +9,13 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
 
     public float damage = 10;
     public float knockback = 500;
-    public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
+    public float stunTime = 0.25f; //The amount of time the moon can't damage anything after a hit
     public float slowRotSpeed = 5; //A value of 1 or higher will make the rotation instant
     public float fastRotSpeed = 15;
     public float punchSpeed = 25;
     public float escapeTime = 2;
     public float lifetime = 1;
 
-    private bool canHit = true; //Determines if the moon can do damage at the moment
     private enum AsteroidState { orbit, speedOrbit, escaped }; //Defines the movement states the moon can be in
     private AsteroidState asteroidState = AsteroidState.orbit; //The actual variable for that
     private float escapeCounter = 0;
@@ -26,7 +25,6 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
     private Transform asteroid; //Transform of THIS game object
     private Transform origin; //Transform of the PARENT that is responsible for rotating the moon
     private IDamageable target; //Used to create a reference of a target and hit it
-    private Rigidbody2D targetRB;
 
     #endregion
 
@@ -82,35 +80,11 @@ public class WeaponController_AsteroidBelt : MonoBehaviour
     {
         //Make a reference to the target
         target = other.GetComponent<IDamageable>();
-        targetRB = other.GetComponent<Rigidbody2D>();
 
-        if (target != null && canHit)
+        if (target != null)
         {
-            if (targetRB != null)
-            {
-                targetRB.AddForce((other.transform.position - asteroid.position).normalized * knockback);
-            }
-            else
-            {
-                targetRB = other.transform.parent.GetComponent<Rigidbody2D>();
-
-                if (targetRB != null)
-                {
-                    targetRB.AddForce((other.transform.position - asteroid.position).normalized * knockback);
-                }
-            }
-
             //Hit the target if it is damageable
-            target.Hit(damage);
-            canHit = false;
-            StartCoroutine(EnableHit());
+            target.PhysicalHit(damage, (other.transform.position - asteroid.position).normalized * knockback, stunTime);
         }
-    }
-
-    IEnumerator EnableHit()
-    {
-        yield return new WaitForSeconds(hitTimeout);
-
-        canHit = true;
     }
 }

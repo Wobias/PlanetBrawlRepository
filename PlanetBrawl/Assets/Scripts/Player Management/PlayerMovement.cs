@@ -33,9 +33,8 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
     #region
     public float damage = 10;
     public float knockback = 500;
-    public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
+    public float stunTime = 0.25f; //The amount of time the moon can't damage anything after a hit
     private IDamageable target; //Used to create a reference of a target and hit it
-    private Rigidbody2D targetRB;
     #endregion
 
     void Start()
@@ -105,33 +104,11 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
     {
         //Make a reference to the target
         target = collision.gameObject.GetComponent<IDamageable>();
-        targetRB = collision.gameObject.GetComponent<Rigidbody2D>();
 
         if (target != null)
         {
-            if (targetRB != null)
-            {
-                targetRB.AddForce((collision.gameObject.transform.position - myTransform.position).normalized * knockback);
-            }
-            else
-            {
-                targetRB = collision.gameObject.transform.parent.GetComponent<Rigidbody2D>();
-
-                if (targetRB != null)
-                {
-                    targetRB.AddForce((collision.gameObject.transform.position - myTransform.position).normalized * knockback);
-                }
-            }
-
             //Hit the target if it is damageable
-            target.Hit(damage);
-            StartCoroutine(EnableHit());
+            target.PhysicalHit(damage, (collision.gameObject.transform.position - myTransform.position).normalized * knockback, stunTime);
         }
-    }
-
-    IEnumerator EnableHit()
-    {
-        yield return new WaitForSeconds(hitTimeout);
-
     }
 }
