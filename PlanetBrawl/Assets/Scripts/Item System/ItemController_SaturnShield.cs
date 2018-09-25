@@ -12,7 +12,6 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
     void Start()
     {
         playerHealth = GetComponentInParent<PlayerHealth>();
-        gameObject.layer = transform.parent.gameObject.layer;
 
         if (playerHealth != null)
             playerHealth.enabled = false;

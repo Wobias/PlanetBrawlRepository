@@ -9,16 +9,33 @@ public class PlayerController : MonoBehaviour
     public GameObject bonusWeapon;
 
     private GameObject currentItem;
+    private int weaponLayer;
+    private PlayerHealth health;
+    private PlayerMovement movement;
 
     private bool baseActive = true;
     private bool gotBonus = false;
 
 
+    void Awake()
+    {
+        health = GetComponent<PlayerHealth>();
+        movement = GetComponent<PlayerMovement>();
+    }
+
     void Start()
     {
+        weaponLayer = LayerMask.NameToLayer("WeaponP" + playerNr);
+
+        if (baseWeapon)
+        {
+            SetLayer(baseWeapon.transform, weaponLayer);
+        }
+
         if (bonusWeapon != null)
         {
             gotBonus = true;
+            SetLayer(bonusWeapon.transform, weaponLayer);
         }
     }
 
@@ -59,6 +76,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentItem = newItem;
+        SetLayer(currentItem.transform, gameObject.layer);
     }
 
     public void WeaponPickUp(GameObject newWeapon)
@@ -67,9 +85,28 @@ public class PlayerController : MonoBehaviour
             Destroy(bonusWeapon);
 
         bonusWeapon = newWeapon;
+        SetLayer(bonusWeapon.transform, weaponLayer);
         gotBonus = true;
         baseActive = false;
         baseWeapon.SetActive(false);
         bonusWeapon.SetActive(true);
+    }
+
+    private void SetLayer(Transform root, int layer)
+    {
+        root.gameObject.layer = layer;
+        foreach (Transform child in root)
+            SetLayer(child, layer);
+    }
+
+    public IEnumerator Stun(float timeout)
+    {
+        health.enabled = false;
+        movement.enabled = false;
+
+        yield return new WaitForSeconds(timeout);
+
+        health.enabled = true;
+        movement.enabled = true;
     }
 }
