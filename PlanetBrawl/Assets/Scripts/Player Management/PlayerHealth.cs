@@ -10,7 +10,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #region
     public float health = 100f;
     public float hpPercent = 100f;
+    public float hitTimeout;
     private float maxHealth;
+    private bool canHit = true;
+    private PlayerController controller;
     #endregion
     
     public static HealthState healthState = HealthState.full;
@@ -26,6 +29,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void Awake()
     {
         //Set max health
+        controller = GetComponent<PlayerController>();
         maxHealth = health;
         myTransform = GetComponent<Transform>();
         maxScale = myTransform.localScale;
@@ -40,9 +44,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             health -= damage;
             StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
             DownScaling(health);
+            //canHit = false;
+            //StartCoroutine(AllowHit());
+            StartCoroutine(controller.Stun(hitTimeout));
         }
         else
         {
+            //canHit = false;
             Die();
         }
     }
@@ -90,5 +98,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         averageHpScale = maxScale * 0.9f;
         lowHpScale = maxScale * 0.75f;
         criticalHpScale = maxScale * 0.6f;
+    }
+
+    IEnumerator AllowHit()
+    {
+        yield return new WaitForSeconds(hitTimeout);
+        canHit = true;
     }
 }

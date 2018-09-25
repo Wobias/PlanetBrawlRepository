@@ -35,7 +35,6 @@ public class WeaponController_SecondaryMoon : MonoBehaviour
         moon = transform;
         origin = moon.parent;
         playerNr = origin.GetComponentInParent<PlayerController>().playerNr;
-        gameObject.layer = origin.parent.gameObject.layer;
         rb2d = GetComponent<Rigidbody2D>();
 
         minDistance = moon.localPosition;

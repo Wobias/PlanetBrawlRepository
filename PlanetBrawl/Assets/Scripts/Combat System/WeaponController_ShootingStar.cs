@@ -31,7 +31,6 @@ public class WeaponController_ShootingStar : MonoBehaviour
         shootingStar = transform;
         origin = shootingStar.parent;
         playerNr = origin.GetComponentInParent<PlayerController>().playerNr;
-        gameObject.layer = origin.parent.gameObject.layer;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
