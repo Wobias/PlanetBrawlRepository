@@ -204,7 +204,8 @@ GameObject:
   - component: {fileID: 1386253741}
   - component: {fileID: 1386253742}
   - component: {fileID: 1386253743}
-  m_Layer: 0
+  - component: {fileID: 1386253744}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -265,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 1386253736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.010861602, y: -0.18384269, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.3418505, y: 3.3418505, z: 3.3418505}
   m_Children:
   - {fileID: 1708297943}
   m_Father: {fileID: 0}
@@ -282,9 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9219a6023c3c4f344bcefe9e49ec800c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 1
   speed: 500
   speedBonus: 100
+  sprintMultipier: 2
+  isSprinting: 0
 --- !u!50 &1386253740
 Rigidbody2D:
   serializedVersion: 4
@@ -348,6 +350,20 @@ MonoBehaviour:
   planetAverageHp: {fileID: 21300002, guid: 53f7117c53c3db34bb6ee7f7ed1cfebf, type: 3}
   planetLowHp: {fileID: 21300004, guid: 53f7117c53c3db34bb6ee7f7ed1cfebf, type: 3}
   planetCriticalHp: {fileID: 21300006, guid: 53f7117c53c3db34bb6ee7f7ed1cfebf, type: 3}
+--- !u!114 &1386253744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1386253736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0688c96b6cc17cd4a851f745862375c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNr: 1
+  baseWeapon: {fileID: 0}
+  bonusWeapon: {fileID: 0}
 --- !u!1 &1708297942
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +374,7 @@ GameObject:
   - component: {fileID: 1708297943}
   - component: {fileID: 1708297944}
   - component: {fileID: 1708297945}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
