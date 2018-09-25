@@ -32,21 +32,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         SetScaleStates();
     }
 
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    health -= 10f;
-        //    StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
-        //    DownScaling(health);
-
-        //    if (health <= 0f)
-        //    {
-        //        Die();
-        //    }
-        //}
-    }
-
     //IDamageable method
     public void Hit(float damage)
     {

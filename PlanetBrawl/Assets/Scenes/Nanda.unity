@@ -705,6 +705,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   speedBonus: 50
+  sprintMultipier: 2
+  isSprinting: 0
 --- !u!212 &261009905
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -975,6 +977,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   speedBonus: 50
+  sprintMultipier: 2
+  isSprinting: 0
 --- !u!50 &338704871
 Rigidbody2D:
   serializedVersion: 4
@@ -10791,6 +10795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   speedBonus: 50
+  sprintMultipier: 2
+  isSprinting: 0
 --- !u!50 &899679454
 Rigidbody2D:
   serializedVersion: 4
@@ -20370,6 +20376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   speedBonus: 50
+  sprintMultipier: 2
+  isSprinting: 0
 --- !u!50 &1252528719
 Rigidbody2D:
   serializedVersion: 4
