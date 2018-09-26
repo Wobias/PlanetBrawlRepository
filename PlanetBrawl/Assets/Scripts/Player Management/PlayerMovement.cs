@@ -5,11 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour,ISpeedable
 {
     private int playerNr = 1;
-    Transform myTransform;
-    
 
-    Vector2 direction;
+    Transform myTransform;
     Rigidbody2D myRigidbody;
+    Vector2 direction;
 
     //Speed Variables
     #region
@@ -26,8 +25,6 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
 
     public bool isSprinting = false;
     #endregion
-
-    
 
     // Ram Variables
     #region
