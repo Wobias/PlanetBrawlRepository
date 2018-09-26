@@ -6268,6 +6268,52 @@ MonoBehaviour:
   zoomSpeed: 0.2
   maxZoom: 3
   minZoom: 15
+--- !u!1001 &698797886
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -19.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359780370652822, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_Name
+      value: Pickup_SaturnShield_Strong (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09816cd55c31237478058c52d923b597, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &877730589
 GameObject:
   m_ObjectHideFlags: 0
@@ -20862,6 +20908,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1403809068
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359780370652822, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_Name
+      value: Pickup_SaturnShield_Strong (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09816cd55c31237478058c52d923b597, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1446561264
 GameObject:
   m_ObjectHideFlags: 0
@@ -48974,6 +49066,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &1675226819
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.0328727
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727256076760230, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359780370652822, guid: 09816cd55c31237478058c52d923b597, type: 2}
+      propertyPath: m_Name
+      value: Pickup_SaturnShield_Strong (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09816cd55c31237478058c52d923b597, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1710697577
 GameObject:
   m_ObjectHideFlags: 0
@@ -58578,7 +58716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1982065351
 Transform:
   m_ObjectHideFlags: 0

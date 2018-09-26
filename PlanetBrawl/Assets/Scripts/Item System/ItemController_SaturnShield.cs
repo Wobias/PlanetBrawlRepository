@@ -8,7 +8,7 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
 
     private PlayerController controller;
     private Rigidbody2D rb2d;
-    private bool canHit = false;
+    private bool canHit = true;
 
 
     void Start()
@@ -23,6 +23,8 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
     {
         if (!canHit)
             return;
+
+        Debug.Log("HIT!!!");
 
         if (knockbackForce != Vector2.zero)
             rb2d.AddForce(knockbackForce);

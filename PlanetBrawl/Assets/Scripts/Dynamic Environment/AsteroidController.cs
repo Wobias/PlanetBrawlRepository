@@ -157,7 +157,6 @@ public class AsteroidController : MonoBehaviour, IDamageable
 
         if (target != null)
         {
-            Debug.Log(target);
             //Hit the target if it is damageable
             target.PhysicalHit(asteroidDamage, (other.transform.position - myTransform.position).normalized * knockback, stunTime);
             PhysicalHit(asteroidDamage, -(other.transform.position - myTransform.position).normalized * knockback, stunTime);
