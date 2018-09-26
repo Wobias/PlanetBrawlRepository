@@ -2,49 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour, IDamageable
+public class AsteroidController : WeaponController, IDamageable
 {
-    private Rigidbody2D rb;
-    private Transform myTransform;
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
     public GameObject[] itemDrops;
     private int whichItem;
     private int whichDirection;
-    private IDamageable target;
     private bool canHit = true;
 
     // Asteroid Health Variable
     public float health = 10f;
-
-    public float asteroidDamage = 10f;
-    public float knockback = 500;
-    public float stunTime = 0.25f;
+    public float selfDamage = 1;
 
 
-    void Start()
+    protected override void Start()
     {
-        myTransform = gameObject.transform;
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        base.Start();
         ChooseDirection();
-
     }
 
     void FixedUpdate()
     {
-        myTransform.Rotate(Vector3.back * Time.fixedDeltaTime * rotateSpeed);
+        weapon.Rotate(Vector3.back * Time.fixedDeltaTime * rotateSpeed);
     }
 
     //IDamageable method
-    public void PhysicalHit(float damage, Vector2 knockbackForce, float stunTime)
+    public void PhysicalHit(float hitDamage, Vector2 knockbackForce, float stunTime)
     {
         if (!canHit)
             return;
 
         if (knockbackForce != Vector2.zero)
-            rb.AddForce(knockbackForce);
+            rb2d.AddForce(knockbackForce);
 
-        health -= damage;
+        health -= hitDamage;
 
         if (health <= 0)
         {
@@ -61,7 +53,7 @@ public class AsteroidController : MonoBehaviour, IDamageable
             return;
 
         if (knockbackForce != Vector2.zero)
-            rb.AddForce(knockbackForce);
+            rb2d.AddForce(knockbackForce);
     }
 
     public void Burn(float dps, float duration, Vector2 knockbackForce, float stunTime)
@@ -70,18 +62,18 @@ public class AsteroidController : MonoBehaviour, IDamageable
             return;
 
         if (knockbackForce != Vector2.zero)
-            rb.AddForce(knockbackForce);
+            rb2d.AddForce(knockbackForce);
     }
 
-    public void Freeze(float damage, Vector2 knockbackForce, float stunTime, float thawTime)
+    public void Freeze(float freezeDamage, Vector2 knockbackForce, float stunTime, float thawTime)
     {
         if (!canHit)
             return;
 
         if (knockbackForce != Vector2.zero)
-            rb.AddForce(knockbackForce);
+            rb2d.AddForce(knockbackForce);
 
-        health -= damage;
+        health -= freezeDamage;
 
         if (health <= 0)
         {
@@ -132,25 +124,25 @@ public class AsteroidController : MonoBehaviour, IDamageable
         int whichBorder = FindObjectOfType<AsteroidSpawner>().whichBorder;
         if (whichBorder == 1)
         {
-            rb.AddForce(new Vector2(movementSpeed, movementSpeed)); // Right UP
+            rb2d.AddForce(new Vector2(movementSpeed, movementSpeed)); // Right UP
         }
         else if(whichBorder == 2)
         {
-            rb.AddForce(-transform.up * movementSpeed); // Down
+            rb2d.AddForce(-transform.up * movementSpeed); // Down
         }
         else if (whichBorder == 3)
         {
-            rb.AddForce(new Vector2(-movementSpeed, movementSpeed)); // Left Up
+            rb2d.AddForce(new Vector2(-movementSpeed, movementSpeed)); // Left Up
         }
         else if (whichBorder == 4)
         {
-            rb.AddForce(transform.up * movementSpeed); //UP
+            rb2d.AddForce(transform.up * movementSpeed); //UP
         }
     }
 
 
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         //Make a reference to the target
         target = other.GetComponent<IDamageable>();
@@ -158,8 +150,8 @@ public class AsteroidController : MonoBehaviour, IDamageable
         if (target != null)
         {
             //Hit the target if it is damageable
-            target.PhysicalHit(asteroidDamage, (other.transform.position - myTransform.position).normalized * knockback, stunTime);
-            PhysicalHit(asteroidDamage, -(other.transform.position - myTransform.position).normalized * knockback, stunTime);
+            target.PhysicalHit(damage, (other.transform.position - weapon.position).normalized * knockback, stunTime);
+            PhysicalHit(selfDamage, -(other.transform.position - weapon.position).normalized * knockback, stunTime);
         }
     }
 

@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Make a reference to the target
-        target = collision.gameObject.GetComponent<IDamageable>();
+        target = collision.collider.GetComponent<IDamageable>();
 
         if (target != null)
         {
