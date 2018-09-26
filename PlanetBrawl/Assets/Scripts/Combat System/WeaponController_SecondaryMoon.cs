@@ -9,7 +9,7 @@ public class WeaponController_SecondaryMoon : MonoBehaviour
 
     public float damage = 10;
     public float knockback = 500;
-    public float hitTimeout = 0.25f; //The amount of time the moon can't damage anything after a hit
+    public float stunTime = 0.25f; //The amount of time the moon can't damage anything after a hit
     public float punchSpeed = 1;
     public float retractSpeed = 1; //Should (usually) be slower than punch speed
     public float maxDistance = 5; //Maximum Shot Reach
@@ -17,14 +17,12 @@ public class WeaponController_SecondaryMoon : MonoBehaviour
     private enum MoonState { orbit, shooting, retracting }; //Defines the movement states the moon can be in
     private MoonState moonState = MoonState.orbit; //The actual variable for that
     private bool triggerPressed = false; //Helper Variable because Triggers are an Axis not a button
-    private bool canHit = true; //Determines if the moon can do damage at the moment
     private int playerNr = 1;
 
     private Transform moon; //Transform of THIS game object
     private Transform origin; //Transform of the PARENT that is responsible for rotating the moon
     private Rigidbody2D rb2d; //The moons Rigidbody
     private IDamageable target; //Used to create a reference of a target and hit it
-    private Rigidbody2D targetRB;
     private Vector2 minDistance; //Basically the orbit
 
     #endregion
@@ -107,40 +105,16 @@ public class WeaponController_SecondaryMoon : MonoBehaviour
     {
         //Make a reference to the target
         target = other.GetComponent<IDamageable>();
-        targetRB = other.GetComponent<Rigidbody2D>();
 
-        if (target != null && canHit)
+        if (target != null)
         {
-            if (targetRB != null)
-            {
-                targetRB.AddForce((other.transform.position - moon.position).normalized * knockback);
-            }
-            else
-            {
-                targetRB = other.transform.parent.GetComponent<Rigidbody2D>();
-
-                if (targetRB != null)
-                {
-                    targetRB.AddForce((other.transform.position - moon.position).normalized * knockback);
-                }
-            }
-
             //Hit the target if it is damageable
-            target.Hit(damage);
-            canHit = false;
-            StartCoroutine(EnableHit());
+            target.PhysicalHit(damage, (other.transform.position - moon.position).normalized * knockback, stunTime);
         }
 
         if (moonState == MoonState.shooting)
         {
             moonState = MoonState.retracting;
         }
-    }
-
-    IEnumerator EnableHit()
-    {
-        yield return new WaitForSeconds(hitTimeout);
-
-        canHit = true;
     }
 }

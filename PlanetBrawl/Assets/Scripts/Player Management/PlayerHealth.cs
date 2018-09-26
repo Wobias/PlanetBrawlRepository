@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum HealthState {full, average, low, critical};
+public enum DamageType { none, physical, poison, fire, ice};
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     //Health Variables
     #region
     public float health = 100f;
-    public float hpPercent = 100f;
-    public float hitTimeout;
+    public DamageType imunity = DamageType.none;
+
+    [HideInInspector]
+    public bool stunned;
+    [HideInInspector]
+    public bool frozen = false;
+
     private float maxHealth;
-    private bool canHit = true;
+    private float hpPercent = 100f;
     private PlayerController controller;
+    private Rigidbody2D rb2d;
+    private float poisonDamage = 0;
+    private float fireDamage = 0;
+    private float ionDamage = 0;
+    private bool dpsApplied = false;
     #endregion
     
     public static HealthState healthState = HealthState.full;
@@ -30,38 +41,22 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         //Set max health
         controller = GetComponent<PlayerController>();
+        rb2d = GetComponent<Rigidbody2D>();
         maxHealth = health;
         myTransform = GetComponent<Transform>();
         maxScale = myTransform.localScale;
         SetScaleStates();
     }
 
-    //IDamageable method
-    public void Hit(float damage)
+    void OnEnable()
     {
-        if (health >= 1)
-        {
-            health -= damage;
-            StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
-            DownScaling(health);
-            //canHit = false;
-            //StartCoroutine(AllowHit());
-            StartCoroutine(controller.Stun(hitTimeout));
-        }
-        else
-        {
-            //canHit = false;
-            Die();
-        }
+        Debug.Log("Enabled");
     }
 
-    //Die method
-    public void Die()
+    void OnDisable()
     {
-        Debug.Log("player dead");
-        Destroy(gameObject);
+        Debug.Log("Disabled");
     }
-
 
     void DownScaling(float hp)
     {
@@ -100,9 +95,168 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         criticalHpScale = maxScale * 0.6f;
     }
 
-    IEnumerator AllowHit()
+    //IDamageable method
+    public void PhysicalHit(float damage, Vector2 knockbackForce, float stunTime)
     {
-        yield return new WaitForSeconds(hitTimeout);
-        canHit = true;
+        if (stunned)
+            return;
+
+        if (knockbackForce != Vector2.zero)
+            rb2d.AddForce(knockbackForce);
+
+        if (imunity != DamageType.physical)
+            health -= damage;
+        else
+            health -= damage * 0.5f;
+
+        if (health > 0)
+        {
+            StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
+            DownScaling(health);
+            StartCoroutine(controller.Stun(stunTime));
+        }
+        else
+        {
+            Die();
+        }
+    }
+
+    public void Poison(float dps, float duration, Vector2 knockbackForce, float stunTime)
+    {
+        if (stunned)
+            return;
+
+        if (knockbackForce != Vector2.zero)
+            rb2d.AddForce(knockbackForce);
+
+        StartCoroutine(controller.Stun(stunTime));
+
+        if (imunity != DamageType.poison)
+            poisonDamage = dps; 
+
+        if (!dpsApplied)
+        {
+            dpsApplied = true;
+            StartCoroutine(ApplyDamage());
+        }
+
+        StartCoroutine(StopPoison(duration));
+    }
+
+    public void Burn(float dps, float duration, Vector2 knockbackForce, float stunTime)
+    {
+        if (stunned)
+            return;
+
+        if (frozen)
+            controller.InstantThaw();
+
+        if (knockbackForce != Vector2.zero)
+            rb2d.AddForce(knockbackForce);
+
+        StartCoroutine(controller.Stun(stunTime));
+
+        if (imunity == DamageType.fire)
+            return;
+
+        fireDamage = dps;
+
+        if (!dpsApplied)
+        {
+            dpsApplied = true;
+            StartCoroutine(ApplyDamage());
+        }
+
+        StartCoroutine(StopFire(duration));
+    }
+
+    public void Freeze(float damage, Vector2 knockbackForce, float stunTime, float thawTime)
+    {
+        if (stunned)
+            return;
+
+        fireDamage = 0;
+
+        if (knockbackForce != Vector2.zero)
+            rb2d.AddForce(knockbackForce);
+
+        if (imunity == DamageType.ice)
+            return;
+
+        health -= damage;
+
+        if (health > 0)
+        {
+            StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
+            DownScaling(health);
+        }
+        else
+        {
+            Die();
+        }
+
+        StartCoroutine(controller.Stun(stunTime));
+        StartCoroutine(controller.Thaw(thawTime));
+    }
+
+    public void IonDamage(float dps)
+    {
+        ionDamage = dps;
+
+        if (!dpsApplied)
+        {
+            dpsApplied = true;
+            StartCoroutine(ApplyDamage());
+        }
+    }
+
+    public void StopIon()
+    {
+        ionDamage = 0;
+    }
+
+    IEnumerator ApplyDamage()
+    {
+        health -= (poisonDamage + fireDamage + ionDamage);
+
+        if (health > 0)
+        {
+            StartCoroutine(GetComponentInChildren<FaceSpriteSwitch>().FaceHit());
+            DownScaling(health);
+        }
+        else
+        {
+            Die();
+        }
+
+        yield return new WaitForSeconds(1);
+
+        if (poisonDamage > 0 || fireDamage > 0 || ionDamage > 0)
+        {
+            StartCoroutine(ApplyDamage());
+        }
+        else
+        {
+            dpsApplied = false;
+        }
+    }
+
+    IEnumerator StopPoison(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        poisonDamage = 0;
+    }
+
+    IEnumerator StopFire(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        fireDamage = 0;
+    }
+
+    //Die method
+    public void Die()
+    {
+        Debug.Log("player dead");
+        Destroy(gameObject);
     }
 }

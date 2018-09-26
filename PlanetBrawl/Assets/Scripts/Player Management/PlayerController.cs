@@ -101,12 +101,44 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Stun(float timeout)
     {
-        health.enabled = false;
+        health.stunned = true;
         movement.enabled = false;
 
         yield return new WaitForSeconds(timeout);
 
-        health.enabled = true;
+        health.stunned = false;
+
+        if (!health.frozen)
+            movement.enabled = true;
+    }
+
+    public IEnumerator Thaw(float timeout)
+    {
+        health.frozen = true;
+        movement.enabled = false;
+
+        yield return new WaitForSeconds(timeout);
+
+        health.frozen = false;
         movement.enabled = true;
+    }
+
+    public void InstantThaw()
+    {
+        health.frozen = false;
+        movement.enabled = true;
+    }
+
+    public void StartPlayerProtection()
+    {
+        StopAllCoroutines();
+        health.enabled = false;
+    }
+
+    public void StopPlayerProtection(float ionPassOnDmg)
+    {
+        health.enabled = true;
+        if (ionPassOnDmg > 0)
+            health.IonDamage(ionPassOnDmg);
     }
 }

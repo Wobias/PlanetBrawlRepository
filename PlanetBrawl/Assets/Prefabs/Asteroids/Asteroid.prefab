@@ -135,10 +135,10 @@ MonoBehaviour:
   - {fileID: 1565011699031776, guid: 8504851c8ebd3354d883be46809ebcc7, type: 2}
   - {fileID: 1643763656143936, guid: a3ec70bcb04b37041884a2bd09308427, type: 2}
   - {fileID: 1379909511908038, guid: 601be5d4cacfd0544ae69335e822dab9, type: 2}
-  health: 5
-  asteroidDamage: 10
-  selfDamage: 2.5
+  health: 10
+  asteroidDamage: 5
   knockback: 1000
+  stunTime: 0.25
 --- !u!212 &212382910995621436
 SpriteRenderer:
   m_ObjectHideFlags: 1

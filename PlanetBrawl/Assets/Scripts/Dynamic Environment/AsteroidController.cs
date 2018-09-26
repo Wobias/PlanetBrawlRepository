@@ -12,14 +12,15 @@ public class AsteroidController : MonoBehaviour, IDamageable
     private int whichItem;
     private int whichDirection;
     private IDamageable target;
-    private Rigidbody2D targetRB;
+    private bool canHit = true;
 
     // Asteroid Health Variable
     public float health = 10f;
 
     public float asteroidDamage = 10f;
-    public float selfDamage = 5;
     public float knockback = 500;
+    public float stunTime = 0.25f;
+
 
     void Start()
     {
@@ -32,34 +33,81 @@ public class AsteroidController : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         myTransform.Rotate(Vector3.back * Time.fixedDeltaTime * rotateSpeed);
-
-
-
     }
 
     //IDamageable method
-    public void Hit(float damage)
+    public void PhysicalHit(float damage, Vector2 knockbackForce, float stunTime)
     {
-        if (health >= 1)
-        {
-            health -= damage;
-            if (health <= 0)
-            {
-                Destroy();
-            }
-        }
-        else
+        if (!canHit)
+            return;
+
+        if (knockbackForce != Vector2.zero)
+            rb.AddForce(knockbackForce);
+
+        health -= damage;
+
+        if (health <= 0)
         {
             Destroy();
         }
+
+        canHit = false;
+        StartCoroutine(AllowHit(stunTime));
+    }
+
+    public void Poison(float dps, float duration, Vector2 knockbackForce, float stunTime)
+    {
+        if (!canHit)
+            return;
+
+        if (knockbackForce != Vector2.zero)
+            rb.AddForce(knockbackForce);
+    }
+
+    public void Burn(float dps, float duration, Vector2 knockbackForce, float stunTime)
+    {
+        if (!canHit)
+            return;
+
+        if (knockbackForce != Vector2.zero)
+            rb.AddForce(knockbackForce);
+    }
+
+    public void Freeze(float damage, Vector2 knockbackForce, float stunTime, float thawTime)
+    {
+        if (!canHit)
+            return;
+
+        if (knockbackForce != Vector2.zero)
+            rb.AddForce(knockbackForce);
+
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Destroy();
+        }
+
+        canHit = false;
+        StartCoroutine(AllowHit(stunTime));
+    }
+
+    public void IonDamage(float dps)
+    {
+        return;
+    }
+
+    public void StopIon()
+    {
+        throw new System.NotImplementedException();
     }
 
     //Destroy Method
     public void Destroy()
     {
-        Destroy(gameObject);
         whichItem = Random.Range(0, itemDrops.Length);
         Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public void ChooseDirection()
@@ -81,7 +129,7 @@ public class AsteroidController : MonoBehaviour, IDamageable
         //        rb.AddForce(new Vector2(-movementSpeed, -movementSpeed)); // Left down
         //        break;
         //}
-        int whichBorder = GameObject.Find("Spawner").GetComponent<AsteroidSpawner>().whichBorder;
+        int whichBorder = FindObjectOfType<AsteroidSpawner>().whichBorder;
         if (whichBorder == 1)
         {
             rb.AddForce(new Vector2(movementSpeed, movementSpeed)); // Right UP
@@ -106,28 +154,20 @@ public class AsteroidController : MonoBehaviour, IDamageable
     {
         //Make a reference to the target
         target = other.GetComponent<IDamageable>();
-        targetRB = other.GetComponent<Rigidbody2D>();
 
         if (target != null)
         {
-            if (targetRB != null)
-            {
-                targetRB.AddForce((other.transform.position - myTransform.position).normalized * knockback);
-            }
-            else
-            {
-                targetRB = other.transform.parent.GetComponent<Rigidbody2D>();
-
-                if (targetRB != null)
-                {
-                    targetRB.AddForce((other.transform.position - myTransform.position).normalized * knockback);
-                }
-            }
-
+            Debug.Log(target);
             //Hit the target if it is damageable
-            target.Hit(asteroidDamage);
-            Hit(selfDamage);
+            target.PhysicalHit(asteroidDamage, (other.transform.position - myTransform.position).normalized * knockback, stunTime);
+            PhysicalHit(asteroidDamage, -(other.transform.position - myTransform.position).normalized * knockback, stunTime);
         }
     }
 
+    IEnumerator AllowHit(float timeout)
+    {
+        yield return new WaitForSeconds(timeout);
+
+        canHit = true;
+    }
 }
