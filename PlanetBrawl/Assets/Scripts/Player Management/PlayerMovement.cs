@@ -29,7 +29,8 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
     // Ram Variables
     #region
     public float damage = 10;
-    public float knockback = 500;
+    public float sprintDmgMultiplier = 2;
+    public float knockback = 250;
     public float stunTime = 0.25f; //The amount of time the moon can't damage anything after a hit
     private IDamageable target; //Used to create a reference of a target and hit it
     #endregion
@@ -52,12 +53,14 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.T))
+        //Check for a Sprint
+        if (!isSprinting && Input.GetAxisRaw("Sprint" + playerNr) == 1)
         {
             speed = sprintSpeed;
             isSprinting = true;
         }
-        else
+        //Check for Trigger Release
+        if (isSprinting && Input.GetAxisRaw("Sprint" + playerNr) == 0)
         {
             speed = baseSpeed;
             isSprinting = false;
@@ -104,8 +107,18 @@ public class PlayerMovement : MonoBehaviour,ISpeedable
 
         if (target != null)
         {
-            //Hit the target if it is damageable
-            target.PhysicalHit(damage, (collision.gameObject.transform.position - myTransform.position).normalized * knockback, stunTime);
+        //Hit the target if it is damageable
+
+            if (isSprinting)
+            {
+                target.PhysicalHit(damage * sprintDmgMultiplier, (collision.gameObject.transform.position - myTransform.position).normalized * (knockback * sprintDmgMultiplier), stunTime);
+            }
+            else
+            {
+                
+                target.PhysicalHit(damage, (collision.gameObject.transform.position - myTransform.position).normalized * knockback, stunTime);
+            }
+
         }
     }
 }

@@ -474,8 +474,9 @@ MonoBehaviour:
   sprintMultipier: 2
   isSprinting: 0
   damage: 10
-  knockback: 500
-  hitTimeout: 0.25
+  sprintDmgMultiplier: 5
+  knockback: 250
+  stunTime: 0.25
 --- !u!50 &1386253740
 Rigidbody2D:
   serializedVersion: 4
@@ -523,8 +524,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  hpPercent: 100
-  hitTimeout: 0
+  imunity: 0
+  stunned: 0
+  frozen: 0
 --- !u!114 &1386253743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,8 +624,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  hpPercent: 100
-  hitTimeout: 0
+  imunity: 0
+  stunned: 0
+  frozen: 0
 --- !u!58 &1684173019
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -655,8 +658,9 @@ MonoBehaviour:
   sprintMultipier: 2
   isSprinting: 0
   damage: 10
+  sprintDmgMultiplier: 2
   knockback: 500
-  hitTimeout: 0.25
+  stunTime: 0.25
 --- !u!50 &1684173021
 Rigidbody2D:
   serializedVersion: 4

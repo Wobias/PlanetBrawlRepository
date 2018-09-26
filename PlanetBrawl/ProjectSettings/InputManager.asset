@@ -406,6 +406,70 @@ InputManager:
     axis: 4
     joyNum: 4
   - serializedVersion: 3
+    m_Name: Sprint1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 1
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 8
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: Sprint2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 1
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 8
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: Sprint3
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 1
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 8
+    joyNum: 3
+  - serializedVersion: 3
+    m_Name: Sprint4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 1
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 8
+    joyNum: 4
+  - serializedVersion: 3
     m_Name: Fire1
     descriptiveName: 
     descriptiveNegativeName: 
@@ -419,7 +483,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 1
   - serializedVersion: 3
     m_Name: Fire2
@@ -435,7 +499,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 2
   - serializedVersion: 3
     m_Name: Fire3
@@ -451,7 +515,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 3
   - serializedVersion: 3
     m_Name: Fire4
@@ -467,7 +531,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 2
+    axis: 9
     joyNum: 4
   - serializedVersion: 3
     m_Name: Submit
