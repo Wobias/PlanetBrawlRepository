@@ -24,8 +24,6 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
         if (!canHit)
             return;
 
-        Debug.Log("HIT!!!");
-
         if (knockbackForce != Vector2.zero)
             rb2d.AddForce(knockbackForce);
 

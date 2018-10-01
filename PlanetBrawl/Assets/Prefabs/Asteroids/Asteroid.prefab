@@ -119,6 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50393b524901c042acd640a64853311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  knockback: 1000
+  stunTime: 0.25
+  playerWeapon: 0
   rotateSpeed: 50
   movementSpeed: 75
   itemDrops:
@@ -135,10 +139,8 @@ MonoBehaviour:
   - {fileID: 1565011699031776, guid: 8504851c8ebd3354d883be46809ebcc7, type: 2}
   - {fileID: 1643763656143936, guid: a3ec70bcb04b37041884a2bd09308427, type: 2}
   - {fileID: 1379909511908038, guid: 601be5d4cacfd0544ae69335e822dab9, type: 2}
-  health: 10
-  asteroidDamage: 5
-  knockback: 1000
-  stunTime: 0.25
+  health: 2
+  selfDamage: 1
 --- !u!212 &212382910995621436
 SpriteRenderer:
   m_ObjectHideFlags: 1
