@@ -9,7 +9,7 @@ public class WeaponController : MonoBehaviour
 
     public float damage = 10;
     public float knockback = 500;
-    public float stunTime = 0.25f; //The amount of time the moon can't damage anything after a hit
+    public float stunTime = 0.25f;
     public bool playerWeapon = true;
 
     protected int playerNr = 1;
