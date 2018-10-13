@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212181696485744976}
   - component: {fileID: 58138567756664344}
   - component: {fileID: 50729325628479216}
-  - component: {fileID: 114363855293315686}
+  - component: {fileID: 114547528615545038}
   m_Layer: 0
   m_Name: Weapons_SecondaryMoon (1)
   m_TagString: Untagged
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 212563493258460542}
   - component: {fileID: 58565814702857206}
   - component: {fileID: 50063300442923194}
-  - component: {fileID: 114863730407715636}
+  - component: {fileID: 114083152275149798}
   m_Layer: 0
   m_Name: Weapons_SecondaryMoon
   m_TagString: Untagged
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 212975648412182032}
   - component: {fileID: 58741388974052320}
   - component: {fileID: 50818424227783784}
-  - component: {fileID: 114513770812522462}
+  - component: {fileID: 114187288487771132}
   m_Layer: 0
   m_Name: Weapons_Moon
   m_TagString: Untagged
@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4985611400393760}
+  - component: {fileID: 114806434493421186}
   m_Layer: 0
   m_Name: Moon_Shotgun
   m_TagString: Untagged
@@ -218,7 +219,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526840704964988}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -246,7 +247,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!50 &50729325628479216
 Rigidbody2D:
@@ -266,7 +267,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!50 &50818424227783784
 Rigidbody2D:
@@ -286,7 +287,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &58138567756664344
 CircleCollider2D:
@@ -294,7 +295,7 @@ CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082894461603882}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -309,7 +310,7 @@ CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226217612880450}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -324,7 +325,7 @@ CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343033916491924}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -333,42 +334,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &114363855293315686
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1082894461603882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ebf8c31796898419596600958d07a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  knockback: 200
-  hitTimeout: 0.15
-  punchSpeed: 30
-  retractSpeed: 25
-  maxDistance: 5
---- !u!114 &114513770812522462
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1343033916491924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a567aa90d40035b45abd35aa16f97920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  knockback: 200
-  hitTimeout: 0.15
-  punchSpeed: 30
-  retractSpeed: 25
-  rotationSpeed: 10
-  maxDistance: 5
---- !u!114 &114863730407715636
+--- !u!114 &114083152275149798
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,14 +342,63 @@ MonoBehaviour:
   m_GameObject: {fileID: 1226217612880450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ebf8c31796898419596600958d07a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  knockback: 200
-  hitTimeout: 0.15
-  punchSpeed: 30
-  retractSpeed: 25
+  damage: 10
+  knockback: 500
+  stunTime: 0.2
+--- !u!114 &114187288487771132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343033916491924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  knockback: 500
+  stunTime: 0.2
+--- !u!114 &114547528615545038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1082894461603882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  knockback: 500
+  stunTime: 0.2
+--- !u!114 &114806434493421186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526840704964988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a567aa90d40035b45abd35aa16f97920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  knockback: 500
+  stunTime: 0.25
+  playerWeapon: 1
+  canAttack: 1
+  rotationSpeed: 10
+  weaponParts:
+  - {fileID: 50818424227783784}
+  - {fileID: 50063300442923194}
+  - {fileID: 50729325628479216}
+  punchSpeed: 20
+  retractSpeed: 20
   maxDistance: 5
 --- !u!212 &212014299214845460
 SpriteRenderer:

@@ -23,8 +23,27 @@ GameObject:
   - component: {fileID: 50278772816412842}
   - component: {fileID: 58039336441952736}
   - component: {fileID: 114779258227962378}
+  - component: {fileID: 114763740151054866}
+  - component: {fileID: 114000509627797288}
   m_Layer: 0
   m_Name: Asteroid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1456043281774580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4764322927172654}
+  - component: {fileID: 58837761366565684}
+  - component: {fileID: 250186472178491798}
+  m_Layer: 1
+  m_Name: GravPull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +65,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4764322927172654
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1456043281774580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4998289234928010}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4951442333577472
 Transform:
   m_ObjectHideFlags: 1
@@ -66,10 +98,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1191274311233048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.136148, y: -4.28488, z: 0}
+  m_LocalPosition: {x: -18.539204, y: 6.230526, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4951442333577472}
+  - {fileID: 4764322927172654}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,12 +135,63 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!58 &58837761366565684
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1456043281774580}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
+--- !u!114 &114000509627797288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191274311233048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578db1146b3b1764aa5f95a34010bd65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicalDmg: 10
+  effectDps: 0
+  dmgType: 1
+  knockback: 500
+  stunTime: 0.2
+  effectTime: 0
+  selfDamage: 1
+  selfKnockback: 500
+  selfStunTime: 0.2
+--- !u!114 &114763740151054866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191274311233048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7886a76e6d50f49a25b9cf8826db1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 2
+  imunity: 0
+  weakness: 0
+  stunned: 0
+  frozen: 0
 --- !u!114 &114779258227962378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,28 +203,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50393b524901c042acd640a64853311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  knockback: 1000
-  stunTime: 0.25
-  playerWeapon: 0
   rotateSpeed: 50
   movementSpeed: 75
   itemDrops:
-  - {fileID: 1126867015398846, guid: dbf74469bedd63c438e5488bc5d819af, type: 2}
   - {fileID: 1475030756834200, guid: 2ab92c7354e99a8448500d626b216ac8, type: 2}
-  - {fileID: 1431329113501956, guid: ffcddbfae908f9d4db6816be132a6f17, type: 2}
   - {fileID: 1470418069018690, guid: 85ec53236b6e465478ded27674f8a7c1, type: 2}
-  - {fileID: 1823019514865730, guid: 0d55b5312580e6c4fbc7748d5c550b28, type: 2}
   - {fileID: 1133695859580398, guid: 05e6e8280ca5a7849b388a3ab53821ef, type: 2}
-  - {fileID: 1317748326253434, guid: d8ec11030964ff94e94272e401b63ef6, type: 2}
   - {fileID: 1359780370652822, guid: c87d45d15bcb90f419f2ea76a981fff2, type: 2}
   - {fileID: 1359780370652822, guid: 09816cd55c31237478058c52d923b597, type: 2}
   - {fileID: 1359780370652822, guid: 262fe9803492a844d97adee25386d652, type: 2}
-  - {fileID: 1565011699031776, guid: 8504851c8ebd3354d883be46809ebcc7, type: 2}
   - {fileID: 1643763656143936, guid: a3ec70bcb04b37041884a2bd09308427, type: 2}
-  - {fileID: 1379909511908038, guid: 601be5d4cacfd0544ae69335e822dab9, type: 2}
-  health: 2
-  selfDamage: 1
 --- !u!212 &212382910995621436
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -233,3 +305,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!250 &250186472178491798
+PointEffector2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1456043281774580}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 3841
+  m_ForceMagnitude: -20
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 2
+  m_Drag: 0
+  m_AngularDrag: 0

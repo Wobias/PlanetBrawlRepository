@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212591533931443426}
   - component: {fileID: 58827649335203014}
   - component: {fileID: 50909519788273120}
-  - component: {fileID: 114320497801936382}
+  - component: {fileID: 114244541212020334}
   m_Layer: 0
   m_Name: Weapons_Asteroid
   m_TagString: Untagged
@@ -38,6 +38,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4901412899889240}
+  - component: {fileID: 114808358362414156}
   m_Layer: 0
   m_Name: AsteroidBelt_Normal
   m_TagString: Untagged
@@ -95,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1093277147016036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 9.470451, y: -0.8952024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4592605206320302}
@@ -128,7 +129,7 @@ CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1081269423529486}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -137,7 +138,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &114320497801936382
+--- !u!114 &114244541212020334
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,17 +146,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1081269423529486}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  knockback: 500
+  stunTime: 0.2
+--- !u!114 &114808358362414156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1093277147016036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7f68a37568a12b44b5c21d7cd64b604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
-  knockback: 1000
-  hitTimeout: 0.25
-  slowRotSpeed: 100
-  fastRotSpeed: 700
-  punchSpeed: 25
-  escapeTime: 1
-  lifetime: 1
+  damage: 10
+  knockback: 500
+  stunTime: 0.25
+  playerWeapon: 1
+  canAttack: 1
+  rotationSpeed: 500
+  weaponParts:
+  - {fileID: 50909519788273120}
+  punchSpeed: 20
+  retractSpeed: 15
+  maxDistance: 5
+  spinRight: 1
 --- !u!212 &212098770526242696
 SpriteRenderer:
   m_ObjectHideFlags: 1
