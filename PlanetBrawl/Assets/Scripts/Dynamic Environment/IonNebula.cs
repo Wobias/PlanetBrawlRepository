@@ -6,10 +6,17 @@ public class IonNebula : MonoBehaviour
 {
     public float dps = 20;
 
+    private IDamageable target;
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        IDamageable target = other.GetComponent<IDamageable>();
+        target = other.GetComponent<IDamageable>();
+
+        if (target == null)
+        {
+            target = other.attachedRigidbody?.GetComponent<IDamageable>();
+        }
 
         if (target != null)
         {
@@ -19,7 +26,12 @@ public class IonNebula : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        IDamageable target = other.GetComponent<IDamageable>();
+        target = other.GetComponent<IDamageable>();
+
+        if (target == null)
+        {
+            target = other.attachedRigidbody?.GetComponent<IDamageable>();
+        }
 
         if (target != null)
         {

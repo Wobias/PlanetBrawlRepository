@@ -15,7 +15,7 @@ public class PlanetSpriteSwitch : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        planetSpriteRenderer = GetComponent<SpriteRenderer>();
+        planetSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         planetSpriteRenderer.sprite = planetFullHp;
     }
 

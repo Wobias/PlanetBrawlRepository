@@ -2,96 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidController : WeaponController, IDamageable
+public class AsteroidController : MonoBehaviour
 {
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
     public GameObject[] itemDrops;
     private int whichItem;
     private int whichDirection;
-    private bool canHit = true;
-
-    // Asteroid Health Variable
-    public float health = 10f;
-    public float selfDamage = 1;
+    private Rigidbody2D rb2d;
 
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+        rb2d = GetComponent<Rigidbody2D>();
         ChooseDirection();
     }
 
     void FixedUpdate()
     {
-        weapon.Rotate(Vector3.back * Time.fixedDeltaTime * rotateSpeed);
-    }
-
-    //IDamageable method
-    public void PhysicalHit(float hitDamage, Vector2 knockbackForce, float stunTime)
-    {
-        if (!canHit)
-            return;
-
-        if (knockbackForce != Vector2.zero)
-            rb2d.AddForce(knockbackForce);
-
-        health -= hitDamage;
-
-        if (health <= 0)
-        {
-            Destroy();
-        }
-
-        canHit = false;
-        StartCoroutine(AllowHit(stunTime));
-    }
-
-    public void Poison(float dps, float duration, Vector2 knockbackForce, float stunTime)
-    {
-        if (!canHit)
-            return;
-
-        if (knockbackForce != Vector2.zero)
-            rb2d.AddForce(knockbackForce);
-    }
-
-    public void Burn(float dps, float duration, Vector2 knockbackForce, float stunTime)
-    {
-        if (!canHit)
-            return;
-
-        if (knockbackForce != Vector2.zero)
-            rb2d.AddForce(knockbackForce);
-    }
-
-    public void Freeze(float freezeDamage, Vector2 knockbackForce, float stunTime, float thawTime)
-    {
-        if (!canHit)
-            return;
-
-        if (knockbackForce != Vector2.zero)
-            rb2d.AddForce(knockbackForce);
-
-        health -= freezeDamage;
-
-        if (health <= 0)
-        {
-            Destroy();
-        }
-
-        canHit = false;
-        StartCoroutine(AllowHit(stunTime));
-    }
-
-    public void IonDamage(float dps)
-    {
-        return;
-    }
-
-    public void StopIon()
-    {
-        throw new System.NotImplementedException();
+        transform.Rotate(Vector3.back * Time.fixedDeltaTime * rotateSpeed);
     }
 
     //Destroy Method
@@ -99,7 +28,6 @@ public class AsteroidController : WeaponController, IDamageable
     {
         whichItem = Random.Range(0, itemDrops.Length);
         Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
-        Destroy(gameObject);
     }
 
     public void ChooseDirection()
@@ -138,27 +66,5 @@ public class AsteroidController : WeaponController, IDamageable
         {
             rb2d.AddForce(transform.up * movementSpeed); //UP
         }
-    }
-
-
-
-    protected override void OnTriggerEnter2D(Collider2D other)
-    {
-        //Make a reference to the target
-        target = other.GetComponent<IDamageable>();
-
-        if (target != null)
-        {
-            //Hit the target if it is damageable
-            target.PhysicalHit(damage, (other.transform.position - weapon.position).normalized * knockback, stunTime);
-            PhysicalHit(selfDamage, -(other.transform.position - weapon.position).normalized * knockback, stunTime);
-        }
-    }
-
-    IEnumerator AllowHit(float timeout)
-    {
-        yield return new WaitForSeconds(timeout);
-
-        canHit = true;
     }
 }

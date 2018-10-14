@@ -12,19 +12,19 @@ public class ItemPickup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerController itemController = other.GetComponent<PlayerController>();
+        PlayerController itemController = other.transform.parent.GetComponent<PlayerController>();
 
         if (itemController == null)
             return;
 
-        GameObject item = Instantiate(itemPrefab, other.transform.position, Quaternion.identity, other.transform);
-
         if (itemType == ItemType.weapon)
         {
-            itemController.WeaponPickUp(item);
+            WeaponController weapon = Instantiate(itemPrefab, other.transform.position, other.transform.parent.Find("WeaponOrbit").rotation, other.transform.parent.Find("WeaponOrbit")).GetComponent<WeaponController>();
+            itemController.WeaponPickUp(weapon);
         }
         else
         {
+            GameObject item = Instantiate(itemPrefab, other.transform.position, Quaternion.identity, other.transform);
             itemController.ItemPickup(item);
         }
 
