@@ -10,7 +10,8 @@ public class CameraFollow : MonoBehaviour
     public float minZoom;
 
     private List<Transform> players = new List<Transform>();
-    private PerfectPixelWithZoom pixelPerfectZoom;
+    //private PerfectPixelWithZoom pixelPerfectZoom;
+    private Camera cam;
     private Transform camTrans;
     private Vector2 target;
 
@@ -20,8 +21,9 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        pixelPerfectZoom = GetComponent<PerfectPixelWithZoom>();
+        //pixelPerfectZoom = GetComponent<PerfectPixelWithZoom>();
         camTrans = transform;
+        cam = Camera.main;
         target = camTrans.position;
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
@@ -75,7 +77,7 @@ public class CameraFollow : MonoBehaviour
         
         camTrans.position = Vector3.Lerp(camTrans.position, new Vector3(target.x, target.y, camTrans.position.z), followSpeed);
 
-        //cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, Mathf.Clamp((maxBounds - minBounds).magnitude / maxZoom * 2, maxZoom, minZoom), zoomSpeed);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, Mathf.Clamp((maxBounds - minBounds).magnitude / maxZoom * 2, maxZoom, minZoom), zoomSpeed);
         //pixelPerfectZoom.SetZoom((maxBounds - minBounds).magnitude / maxZoom * 2);
     }
 }

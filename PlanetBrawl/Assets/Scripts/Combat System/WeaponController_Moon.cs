@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WeaponController_Moon : WeaponController
 {
     //VARIABLES
@@ -9,117 +10,115 @@ public class WeaponController_Moon : WeaponController
 
     public float punchSpeed = 1;
     public float retractSpeed = 1; //Should (usually) be slower than punch speed
-    public float rotationSpeed = 0.1f; //A value of 1 or higher will make the rotation instant
     public float maxDistance = 5; //Maximum Shot Reach
+    private OrbitState moonState = OrbitState.orbit; //The actual variable for that
+    private bool fireHeld = false; //Helper Variable because Triggers are an Axis not a button
 
-    private enum MoonState { orbit, shooting, retracting }; //Defines the movement states the moon can be in
-    private MoonState moonState = MoonState.orbit; //The actual variable for that
-    private bool triggerPressed = false; //Helper Variable because Triggers are an Axis not a button
-
-    private Vector2 direction; //Aiming Direction
-    private Quaternion targetRotation; //Quaternion of the Aiming Direction
-    private Vector2 minDistance; //Basically the orbit
+    private float startMaxDist;
 
     #endregion
 
     protected override void Start()
     {
+        startMaxDist = maxDistance;
         base.Start();
-
-        targetRotation = origin.rotation;
-        minDistance = weapon.localPosition;
     }
 
-    void Update()
+    public override bool Shoot (bool isFirePressed)
     {
-        //AIMING
-        #region
-
-        //Get the Aiming Direction
-        direction = new Vector2(Input.GetAxis("AimHor" + playerNr), Input.GetAxis("AimVer" + playerNr));
-
-        //Set the target rotation if the direction changed
-        if (direction.x != 0 || direction.y != 0)
+        if (isFirePressed && !fireHeld && canAttack && moonState == OrbitState.orbit)
         {
-            //Calculate an angle from the direction vector
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            //Apply the angle to the target rotation
-            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            fireHeld = true;
+            moonState = OrbitState.shooting;
+            for (int i = 0; i < weaponParts.Length; i++)
+            {
+                weaponParts[i].isKinematic = false; //Unlock the moons position
+                weaponColliders[i].enabled = true;
+            }
         }
-
-        //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed
-        origin.rotation = Quaternion.Lerp(origin.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        #endregion
-
-        //CHECKING FOR INPUT
-        #region
-
-        //Check for a Punch
-        if (!triggerPressed && Input.GetAxisRaw("Fire" + playerNr) == 1 && moonState == MoonState.orbit)
-        {
-            triggerPressed = true;
-            moonState = MoonState.shooting;
-            rb2d.isKinematic = false; //Unlock the moons position
-        }
-
         //Check for Trigger Release
-        if (triggerPressed && Input.GetAxisRaw("Fire" + playerNr) == 0)
+        else if (!isFirePressed && moonState == OrbitState.shooting)
         {
-            triggerPressed = false;
-
             //In case the moon is mid-punch, retract it
-            if (moonState == MoonState.shooting)
-            {
-                moonState = MoonState.retracting;
-            }
+            moonState = OrbitState.retracting;
         }
 
-        #endregion
-
-        //UPDATE MOON STATE & POSITION
-        #region
-
-        if (moonState == MoonState.shooting)
+        if (!isFirePressed && fireHeld)
         {
-            if ((origin.position - weapon.position).magnitude < maxDistance)
-            {
-                //If the moon is below maxDistance it gets shot further
-                rb2d.velocity = -(origin.position - weapon.position).normalized * punchSpeed;
-            }
-            else
-            {
-                //If the moon has reached maxDistance it starts retracting
-                moonState = MoonState.retracting;
-            }
-        }
-        else if (moonState == MoonState.retracting)
-        {
-            if ((origin.position - weapon.position).magnitude > Mathf.Abs(minDistance.magnitude))
-            {
-                //If the moon is above minDistance it keeps retracting
-                rb2d.velocity = (origin.position - weapon.position).normalized * retractSpeed;
-            }
-            else
-            {
-                //If the moon has reached minDistance stop it and set it to kinematic
-                rb2d.velocity = Vector2.zero;
-                weapon.position = origin.position + minDistance.y * weapon.up + minDistance.x * weapon.right; //Reset the position in case it overshot the minDistance
-                moonState = MoonState.orbit;
-                rb2d.isKinematic = true;
-            }
+            fireHeld = false;
         }
 
-        #endregion
+        for (int i = 0; i < weaponParts.Length; i++)
+        {
+            ShootFragment(weaponParts[i], weaponColliders[i], weaponMinPos[i]);
+        }
+
+        if (moonState == OrbitState.orbit)
+            return true;
+        else
+            return false;
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    private void ShootFragment(Rigidbody2D frag, Collider2D fragCollider, Vector2 startPos)
     {
-        base.OnTriggerEnter2D(other);
-
-        if (moonState == MoonState.shooting)
+        switch (moonState)
         {
-            moonState = MoonState.retracting;
+            case OrbitState.orbit:
+                {
+                    if (!frag.isKinematic)
+                    {
+                        frag.velocity = Vector2.zero;
+                        frag.transform.position = origin.position + startPos.y * frag.transform.up + startPos.x * frag.transform.right; //Reset the position in case it overshot the minDistance
+                        frag.isKinematic = true;
+                        fragCollider.enabled = false;
+                    }  
+                    break;
+                }
+            case OrbitState.shooting:
+                {
+                    if ((origin.position - frag.transform.position).magnitude < maxDistance)
+                    {
+                        //If the moon is below maxDistance it gets shot further
+                        frag.velocity = -(origin.position - frag.transform.position).normalized * punchSpeed;
+                    }
+                    else
+                    {
+                        //If the moon has reached maxDistance it starts retracting
+                        moonState = OrbitState.retracting;
+                    }
+                    break;
+                }
+            case OrbitState.retracting:
+                {
+                    if ((origin.position - frag.transform.position).magnitude > Mathf.Abs(startPos.magnitude))
+                    {
+                        //If the moon is above minDistance it keeps retracting
+                        frag.velocity = (origin.position - frag.transform.position).normalized * retractSpeed;
+                    }
+                    else
+                    {
+                        //If the moon has reached minDistance stop it and set it to kinematic
+                        frag.velocity = Vector2.zero;
+                        frag.transform.position = origin.position + startPos.y * frag.transform.up + startPos.x * frag.transform.right; //Reset the position in case it overshot the minDistance
+                        moonState = OrbitState.orbit;
+                        frag.isKinematic = true;
+                        fragCollider.enabled = false;
+                    }
+                    break;
+                }
         }
+    }
+
+    public override void OnHit()
+    {
+        if (moonState == OrbitState.shooting)
+        {
+            moonState = OrbitState.retracting;
+        }
+    }
+
+    protected override void OnDistanceReset()
+    {
+        maxDistance = startMaxDist * charTrans.localScale.x;
     }
 }

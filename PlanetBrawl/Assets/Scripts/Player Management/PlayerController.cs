@@ -5,21 +5,24 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int playerNr = 1;
-    public GameObject baseWeapon;
-    public GameObject bonusWeapon;
+    public WeaponController currentWeapon;
+    public WeaponController backupWeapon;
 
     private GameObject currentItem;
     private int weaponLayer;
-    private PlayerHealth health;
+    private Player_HealthController health;
     private PlayerMovement movement;
+    private WeaponController weaponCacher;
 
-    private bool baseActive = true;
-    private bool gotBonus = false;
+    private bool isBonus = false;
+    private bool isFirePressed;
+    private bool canSwitch = true;
+    private bool sprintActive = false;
 
 
     void Awake()
     {
-        health = GetComponent<PlayerHealth>();
+        health = GetComponentInChildren<Player_HealthController>();
         movement = GetComponent<PlayerMovement>();
     }
 
@@ -27,45 +30,67 @@ public class PlayerController : MonoBehaviour
     {
         weaponLayer = LayerMask.NameToLayer("WeaponP" + playerNr);
 
-        if (baseWeapon)
+        if (currentWeapon)
         {
-            SetLayer(baseWeapon.transform, weaponLayer);
+            SetLayer(currentWeapon.transform, weaponLayer);
         }
 
-        if (bonusWeapon != null)
+        if (backupWeapon != null)
         {
-            gotBonus = true;
-            SetLayer(bonusWeapon.transform, weaponLayer);
+            SetLayer(backupWeapon.transform, weaponLayer);
         }
     }
 
     void Update()
     {
-        if (gotBonus && bonusWeapon == null)
+        if (currentWeapon == null && isBonus)
         {
-            baseActive = true;
-            gotBonus = false;
-            baseWeapon.SetActive(true);
-        }
-
-        if (Input.GetButtonDown("SwitchWeapon" + playerNr))
-        {
-            if (baseActive && gotBonus)
+            canSwitch = true;
+            currentWeapon = backupWeapon;
+            backupWeapon = null;
+            currentWeapon.gameObject.SetActive(true);
+            isBonus = false;
+            
+            if (sprintActive)
             {
-                baseActive = false;
-                baseWeapon.SetActive(false);
-                bonusWeapon.SetActive(true);
+                currentWeapon.canAttack = false;
             }
             else
             {
-                baseActive = true;
-                baseWeapon.SetActive(true);
-                if (gotBonus)
-                {
-                    bonusWeapon.SetActive(false);
-                }
+                currentWeapon.canAttack = true;
             }
         }
+
+        //Check for a Sprint
+        if (!sprintActive && Input.GetAxisRaw("Sprint" + playerNr) == 1)
+        {
+            sprintActive = true;
+            movement.isSprinting = true;
+            currentWeapon.canAttack = false;
+        }
+        else if (sprintActive && Input.GetAxisRaw("Sprint" + playerNr) == 0)
+        {
+            sprintActive = false;
+            movement.isSprinting = false;
+            currentWeapon.canAttack = true;
+        }
+
+        Vector2 aimDir = new Vector2(Input.GetAxis("AimHor" + playerNr), Input.GetAxis("AimVer" + playerNr));
+
+        isFirePressed = Input.GetAxisRaw("Fire" + playerNr) == 1 ? true : false;
+
+        currentWeapon.Aim(aimDir);
+        canSwitch = currentWeapon.Shoot(isFirePressed);
+
+        if (Input.GetButtonDown("SwitchWeapon" + playerNr) && !sprintActive)
+        {
+            SwapWeapons();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        movement.direction = new Vector2(Input.GetAxis("Horizontal" + playerNr), Input.GetAxis("Vertical" + playerNr));
     }
 
     public void ItemPickup(GameObject newItem)
@@ -79,17 +104,46 @@ public class PlayerController : MonoBehaviour
         SetLayer(currentItem.transform, gameObject.layer);
     }
 
-    public void WeaponPickUp(GameObject newWeapon)
+    public void WeaponPickUp(WeaponController newWeapon)
     {
-        if (gotBonus)
-            Destroy(bonusWeapon);
+        if (!isBonus)
+        {
+            if (backupWeapon != null)
+            {
+                Destroy(backupWeapon.gameObject);
+            }
+            backupWeapon = newWeapon;
+            SetLayer(backupWeapon.transform, weaponLayer);
+            if (canSwitch)
+                SwapWeapons();
+            else
+                backupWeapon.gameObject.SetActive(false);
+        }
+        else if (isBonus)
+        {
+            Destroy(currentWeapon.gameObject);
+            currentWeapon = newWeapon;
+            SetLayer(currentWeapon.transform, weaponLayer);
+            currentWeapon.gameObject.SetActive(true);
+        }
 
-        bonusWeapon = newWeapon;
-        SetLayer(bonusWeapon.transform, weaponLayer);
-        gotBonus = true;
-        baseActive = false;
-        baseWeapon.SetActive(false);
-        bonusWeapon.SetActive(true);
+        if (sprintActive)
+        {
+            currentWeapon.canAttack = false;
+        }
+    }
+
+    void SwapWeapons()
+    {
+        if (!isBonus && backupWeapon == null || !canSwitch)
+            return;
+
+        weaponCacher = currentWeapon;
+        currentWeapon = backupWeapon;
+        backupWeapon = weaponCacher;
+        backupWeapon?.gameObject.SetActive(false);
+        currentWeapon?.gameObject.SetActive(true);
+        isBonus = !isBonus;
     }
 
     private void SetLayer(Transform root, int layer)
@@ -99,46 +153,35 @@ public class PlayerController : MonoBehaviour
             SetLayer(child, layer);
     }
 
-    public IEnumerator Stun(float timeout)
+    public void Stun(bool stunActive)
     {
-        health.stunned = true;
-        movement.enabled = false;
+        movement.enabled = !stunActive;
 
-        yield return new WaitForSeconds(timeout);
+        if (stunActive && sprintActive)
+            return;
 
-        health.stunned = false;
-
-        if (!health.frozen)
-            movement.enabled = true;
+        currentWeapon.enabled = !stunActive;
     }
 
-    public IEnumerator Thaw(float timeout)
+    public void SetPlayerProtection(bool isActive, float ionPassOnDmg=0)
     {
-        health.frozen = true;
-        movement.enabled = false;
-
-        yield return new WaitForSeconds(timeout);
-
-        health.frozen = false;
-        movement.enabled = true;
+        if (isActive)
+        {
+            health.StopAllCoroutines();
+            health.stunned = false;
+            health.frozen = false;
+            health.enabled = false;
+        }
+        else
+        {
+            health.enabled = true;
+            if (ionPassOnDmg > 0)
+                health.IonDamage(ionPassOnDmg);
+        }
     }
 
-    public void InstantThaw()
+    public void SetWeaponDistance()
     {
-        health.frozen = false;
-        movement.enabled = true;
-    }
-
-    public void StartPlayerProtection()
-    {
-        StopAllCoroutines();
-        health.enabled = false;
-    }
-
-    public void StopPlayerProtection(float ionPassOnDmg)
-    {
-        health.enabled = true;
-        if (ionPassOnDmg > 0)
-            health.IonDamage(ionPassOnDmg);
+        currentWeapon.ResetMinPos();
     }
 }

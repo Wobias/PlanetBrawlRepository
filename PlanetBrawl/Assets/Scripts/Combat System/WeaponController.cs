@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum OrbitState { orbit, shooting, retracting }; //Defines the movement states the moon can be in
+
 public class WeaponController : MonoBehaviour
 {
     //VARIABLES
@@ -10,38 +12,93 @@ public class WeaponController : MonoBehaviour
     public float damage = 10;
     public float knockback = 500;
     public float stunTime = 0.25f;
-    public bool playerWeapon = true;
+    public bool canAttack = true;
+    public float rotationSpeed = 0.1f; //A value of 1 or higher will make the rotation instant
 
-    protected int playerNr = 1;
-
-    protected Transform weapon; //Transform of THIS game object
     protected Transform origin; //Transform of the PARENT that is responsible for rotating the moon
-    protected Rigidbody2D rb2d; //The moons Rigidbody
     protected IDamageable target; //Used to create a reference of a target and hit it
+    protected Quaternion targetRotation; //Quaternion of the Aiming Direction
+    [SerializeField]
+    protected Rigidbody2D[] weaponParts;
+    protected Collider2D[] weaponColliders;
+    protected Vector2[] weaponMinPos;
+    protected Vector2[] weaponInitPos;
+    protected Transform charTrans;
+
+
+    protected Rigidbody2D rb2d; //dummy for no errors plz
 
     #endregion
 
     protected virtual void Start()
     {
         //Initializes everything
-        weapon = transform;
-        if (playerWeapon)
+        origin = transform.parent;
+        charTrans = origin.parent.GetComponentInChildren<Player_ContactDamage>().transform;
+        targetRotation = origin.rotation;
+        //playerNr = origin.GetComponentInParent<PlayerController>().playerNr;
+
+        weaponInitPos = new Vector2[weaponParts.Length];
+        weaponMinPos = new Vector2[weaponParts.Length];
+        weaponColliders = new Collider2D[weaponParts.Length];
+        for (int i = 0; i < weaponParts.Length; i++)
         {
-            origin = weapon.parent;
-            playerNr = origin.GetComponentInParent<PlayerController>().playerNr;
+            weaponInitPos[i] = weaponParts[i].transform.localPosition;
+            weaponColliders[i] = weaponParts[i].GetComponent<Collider2D>();
         }
-        rb2d = GetComponent<Rigidbody2D>();
+
+        ResetMinPos();
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnEnable()
     {
-        //Make a reference to the target
-        target = other.GetComponent<IDamageable>();
-
-        if (target != null)
+        if (origin)
         {
-            //Hit the target if it is damageable
-            target.PhysicalHit(damage, (other.transform.position - weapon.position).normalized * knockback, stunTime);
+            targetRotation = origin.rotation;
         }
+    }
+
+    public virtual void Aim(Vector2 direction)
+    {
+        if (direction.x != 0 || direction.y != 0)
+        {
+            //Calculate an angle from the direction vector
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            //Apply the angle to the target rotation
+            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+        //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed
+        origin.rotation = Quaternion.Slerp(origin.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    public virtual bool Shoot(bool isFirePressed)
+    {
+        return true;
+    }
+
+    public virtual void OnHit()
+    {
+        return;
+    }
+
+    public void ResetMinPos()
+    {
+        for (int i = 0; i < weaponMinPos.Length; i++)
+        {
+            weaponMinPos[i] = weaponInitPos[i] * charTrans.localScale.x;
+
+            if (weaponParts[i].isKinematic)
+            {
+                weaponParts[i].transform.localPosition = weaponMinPos[i];
+            }
+        }
+
+        OnDistanceReset();
+    }
+
+    protected virtual void OnDistanceReset()
+    {
+        return;
     }
 }
