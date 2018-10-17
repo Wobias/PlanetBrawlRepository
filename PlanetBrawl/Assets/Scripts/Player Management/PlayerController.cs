@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPlanet
 {
     public int playerNr = 1;
     public WeaponController currentWeapon;
@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
 
     private GameObject currentItem;
     private int weaponLayer;
-    private Player_HealthController health;
-    private PlayerMovement movement;
+    private Planet_HealthController health;
+    private PlanetMovement movement;
     private WeaponController weaponCacher;
 
     private bool isBonus = false;
@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        health = GetComponentInChildren<Player_HealthController>();
-        movement = GetComponent<PlayerMovement>();
+        health = GetComponentInChildren<Planet_HealthController>();
+        movement = GetComponent<PlanetMovement>();
     }
 
     void Start()
@@ -163,12 +163,13 @@ public class PlayerController : MonoBehaviour
         currentWeapon.enabled = !stunActive;
     }
 
-    public void SetPlayerProtection(bool isActive, float ionPassOnDmg=0)
+    public void SetPlanetProtection(bool isActive, float ionPassOnDmg=0)
     {
         if (isActive)
         {
             health.StopAllCoroutines();
             health.stunned = false;
+            Stun(false);
             health.frozen = false;
             health.enabled = false;
         }

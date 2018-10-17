@@ -45,6 +45,6 @@ public class FaceSpriteSwitch : MonoBehaviour
     {
         faceSpriteRenderer.sprite = faceHit;
         yield return new WaitForSeconds(0.2f);
-        SwitchFaceSprite(Player_HealthController.healthState);
+        SwitchFaceSprite(Planet_HealthController.healthState);
     }
 }

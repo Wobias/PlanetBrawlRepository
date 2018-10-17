@@ -13,7 +13,7 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
     void Start()
     {
         controller = GetComponentInParent<PlayerController>();
-        controller.SetPlayerProtection(true);
+        controller.SetPlanetProtection(true);
     }
 
     public void Hit(float physicalDmg, float effectDps, DamageType dmgType, Vector2 knockbackForce, float stunTime, float effectTime = 0)
@@ -40,7 +40,7 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
 
     void Kill()
     {
-        controller.SetPlayerProtection(false, ionDamage);
+        controller.SetPlanetProtection(false, ionDamage);
         Destroy(gameObject);
     }
 }
