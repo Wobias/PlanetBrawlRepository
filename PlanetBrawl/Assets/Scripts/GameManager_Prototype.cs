@@ -2,11 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager_Prototype : MonoBehaviour
 {
+    public static GameManager_Prototype gameManager;
     public GameObject[] players;
 
+    public TextMeshPro victoryText;
+
+    public bool teamMode;
+
+    private void Start()
+    {
+        gameManager = this;
+
+        if (teamMode == true)
+        {
+            players[0].layer = 8;
+            players[1].layer = 8;
+            players[2].layer = 9;
+            players[3].layer = 9;
+        }
+    }
 
     void Update()
     {
@@ -25,5 +44,27 @@ public class GameManager_Prototype : MonoBehaviour
         {
             Destroy(players[3]);
         }
+    }
+
+    private void SetLayer(Transform root, int layer)
+    {
+        root.gameObject.layer = layer;
+        foreach (Transform child in root)
+            SetLayer(child, layer);
+    }
+
+    public void CheckPlayersAlive()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i]
+        }
+
+    }
+
+    private void Victory()
+    {
+
+
     }
 }
