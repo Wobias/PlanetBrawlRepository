@@ -53,6 +53,7 @@ public class Weapon_ContactDamage : MonoBehaviour
 
     protected void GetTarget(Collider2D other)
     {
+        target = null;
         target = other.GetComponent<IDamageable>();
         if (target == null)
         {

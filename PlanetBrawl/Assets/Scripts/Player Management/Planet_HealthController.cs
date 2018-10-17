@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum HealthState {full, average, low, critical};
 
-public class Player_HealthController : HealthController
+public class Planet_HealthController : HealthController
 {
     //Health Variables
     #region
     private float hpPercent = 100f;
-    private PlayerController controller;
+    private IPlanet controller;
 
     public static HealthState healthState = HealthState.full;
 
@@ -28,7 +28,7 @@ public class Player_HealthController : HealthController
     {
         base.Start();
         //Set max health
-        controller = GetComponent<PlayerController>();
+        controller = GetComponent<IPlanet>();
         myTransform = transform;
         maxScale = myTransform.localScale;
         SetScaleStates();
