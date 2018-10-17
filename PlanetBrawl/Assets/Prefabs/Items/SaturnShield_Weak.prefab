@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4676814212396416}
   - component: {fileID: 212773712892886874}
+  - component: {fileID: 114096143058241102}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -87,6 +88,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &114096143058241102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1581535464876594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c60142a46082c4882bc980fccb40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114152233268797246
 MonoBehaviour:
   m_ObjectHideFlags: 1

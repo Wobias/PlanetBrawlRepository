@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4271629855482442}
   - component: {fileID: 212730931703544678}
+  - component: {fileID: 114926499426289286}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -96,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1513670235489580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 16.09742, y: -6.245387, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4218090257934598}
@@ -152,7 +153,6 @@ MonoBehaviour:
   damage: 10
   knockback: 500
   stunTime: 0.25
-  playerWeapon: 1
   canAttack: 1
   rotationSpeed: 10
   weaponParts:
@@ -171,9 +171,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  physicalDmg: 0
+  effectDps: 0
+  dmgType: 1
   knockback: 500
   stunTime: 0.2
+  effectTime: 0
+--- !u!114 &114926499426289286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005309512867626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c60142a46082c4882bc980fccb40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212338180980155268
 SpriteRenderer:
   m_ObjectHideFlags: 1
