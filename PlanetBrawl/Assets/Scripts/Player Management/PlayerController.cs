@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IPlanet
 {
     public int playerNr = 1;
+    public Color playerColor;
     public WeaponController currentWeapon;
     public WeaponController backupWeapon;
 

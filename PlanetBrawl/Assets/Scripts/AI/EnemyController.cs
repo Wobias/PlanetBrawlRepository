@@ -42,20 +42,6 @@ public class EnemyController : MonoBehaviour, IPlanet
 
     void Update()
     {
-        ////Check for a Sprint
-        //if (!sprintActive && Input.GetAxisRaw("Sprint") == 1)
-        //{
-        //    sprintActive = true;
-        //    movement.isSprinting = true;
-        //    currentWeapon.canAttack = false;
-        //}
-        //else if (sprintActive && Input.GetAxisRaw("Sprint") == 0)
-        //{
-        //    sprintActive = false;
-        //    movement.isSprinting = false;
-        //    currentWeapon.canAttack = true;
-        //}
-
         if (target != null)
         {
             aimDir = (target.position - transform.position).normalized;

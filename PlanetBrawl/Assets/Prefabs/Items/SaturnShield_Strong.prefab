@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4574433540591306}
   - component: {fileID: 212381913682668018}
+  - component: {fileID: 114963789613660592}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -99,6 +100,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBlocks: 3
+--- !u!114 &114963789613660592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1861436565285788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c60142a46082c4882bc980fccb40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212284239626540322
 SpriteRenderer:
   m_ObjectHideFlags: 1

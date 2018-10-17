@@ -58,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4195499621566836}
   - component: {fileID: 212014299214845460}
+  - component: {fileID: 114345594304592712}
   m_Layer: 0
   m_Name: Entity_Outlines_2
   m_TagString: Untagged
@@ -109,6 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4358528638410388}
   - component: {fileID: 212797263395002042}
+  - component: {fileID: 114050575749414538}
   m_Layer: 0
   m_Name: Entity_Outlines_2
   m_TagString: Untagged
@@ -125,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4946039980593206}
   - component: {fileID: 212781608757048974}
+  - component: {fileID: 114005553180062218}
   m_Layer: 0
   m_Name: Entity_Outlines_2
   m_TagString: Untagged
@@ -334,6 +337,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &114005553180062218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984668848893544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c60142a46082c4882bc980fccb40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114050575749414538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1715307251991438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c60142a46082c4882bc980fccb40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114083152275149798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,9 +370,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  physicalDmg: 10
+  effectDps: 10
+  dmgType: 1
   knockback: 500
   stunTime: 0.2
+  effectTime: 5
 --- !u!114 &114187288487771132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,9 +387,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  physicalDmg: 10
+  effectDps: 10
+  dmgType: 1
   knockback: 500
   stunTime: 0.2
+  effectTime: 5
+--- !u!114 &114345594304592712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325696697078344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c60142a46082c4882bc980fccb40af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114547528615545038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,9 +415,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  physicalDmg: 10
+  effectDps: 10
+  dmgType: 1
   knockback: 500
   stunTime: 0.2
+  effectTime: 5
 --- !u!114 &114806434493421186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,7 +435,6 @@ MonoBehaviour:
   damage: 10
   knockback: 500
   stunTime: 0.25
-  playerWeapon: 1
   canAttack: 1
   rotationSpeed: 10
   weaponParts:
