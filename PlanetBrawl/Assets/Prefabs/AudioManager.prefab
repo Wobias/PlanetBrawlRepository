@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1794276868773024}
+  m_IsPrefabAsset: 1
+--- !u!1 &1794276868773024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4226521963498216}
+  - component: {fileID: 114404434704045928}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4226521963498216
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1794276868773024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7146416, y: -0.10893874, z: -0.26687443}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114404434704045928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1794276868773024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f0ec6c85a989d4390eaa25c43e9bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: battlemusic
+    clip: {fileID: 8300000, guid: 590a3a269f743704fa051eb7db16a860, type: 3}
+    volume: 1
+    pitch: 0.1
+    loop: 1
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: punch
+    clip: {fileID: 8300000, guid: 071b270ed4393fd4aba959be78ec874b, type: 3}
+    volume: 1
+    pitch: 0.1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: laser
+    clip: {fileID: 8300000, guid: a056a751ad1774c4084a02c8a435a9a3, type: 3}
+    volume: 1
+    pitch: 0.1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  playOnce: 0

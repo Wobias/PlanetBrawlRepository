@@ -10,6 +10,10 @@ public class HealthController : MonoBehaviour, IDamageable
     public DamageType imunity = DamageType.none;
     public DamageType weakness = DamageType.none;
 
+    public GameObject fireParticles;
+    public GameObject iceParticles;
+    public GameObject poisonParticles;
+
     public bool stunned = false;
     public bool frozen = false;
 
@@ -116,6 +120,7 @@ public class HealthController : MonoBehaviour, IDamageable
         StopCoroutine("StopPoison");
 
         poisonDamage = dps;
+        poisonParticles.SetActive(true);
 
         if (!dpsApplied)
         {
@@ -145,6 +150,7 @@ public class HealthController : MonoBehaviour, IDamageable
         StopCoroutine("StopFire");
 
         fireDamage = dps;
+        fireParticles.SetActive(true);
 
         if (!dpsApplied)
         {
@@ -157,8 +163,9 @@ public class HealthController : MonoBehaviour, IDamageable
     protected void Freeze(float effectTime)
     {
         fireDamage = 0;
+        fireParticles.SetActive(false);
 
-        if (imunity == DamageType.ice)
+        if (imunity == DamageType.ice || frozen)
         {
             return;
         }
@@ -168,9 +175,10 @@ public class HealthController : MonoBehaviour, IDamageable
         }
 
         frozen = true;
+        iceParticles.SetActive(true);
 
         if (!stunned)
-            StunObject(false);
+            StunObject(true);
 
         StartCoroutine(Thaw(effectTime));
     }
@@ -215,6 +223,7 @@ public class HealthController : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(duration);
         poisonDamage = 0;
+        poisonParticles.SetActive(false);
 
         if (fireDamage == 0 && ionDamage == 0)
         {
@@ -226,6 +235,7 @@ public class HealthController : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(duration);
         fireDamage = 0;
+        fireParticles.SetActive(false);
 
         if (poisonDamage == 0 && ionDamage == 0)
         {
@@ -250,6 +260,7 @@ public class HealthController : MonoBehaviour, IDamageable
     protected void InstantThaw()
     {
         frozen = false;
+        iceParticles.SetActive(false);
         if (!stunned)
             StunObject(false);
     }

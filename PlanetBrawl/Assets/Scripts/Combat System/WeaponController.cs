@@ -9,9 +9,6 @@ public class WeaponController : MonoBehaviour
     //VARIABLES
     #region
 
-    public float damage = 10;
-    public float knockback = 500;
-    public float stunTime = 0.25f;
     public bool canAttack = true;
     public float rotationSpeed = 0.1f; //A value of 1 or higher will make the rotation instant
 

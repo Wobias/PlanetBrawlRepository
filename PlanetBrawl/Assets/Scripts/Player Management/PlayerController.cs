@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour, IPlanet
             {
                 currentWeapon.canAttack = false;
             }
-            else
+            else if (!health.stunned && !health.frozen)
             {
                 currentWeapon.canAttack = true;
             }
@@ -158,10 +158,10 @@ public class PlayerController : MonoBehaviour, IPlanet
     {
         movement.enabled = !stunActive;
 
-        if (stunActive && sprintActive)
-            return;
+        if (sprintActive)
+            stunActive = true;
 
-        currentWeapon.enabled = !stunActive;
+        currentWeapon.canAttack = !stunActive;
     }
 
     public void SetPlanetProtection(bool isActive, float ionPassOnDmg=0)
