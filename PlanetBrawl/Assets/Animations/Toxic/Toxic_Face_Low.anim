@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Body_Critical
+  m_Name: Toxic_Face_Low
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,9 +19,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300006, guid: f8b00dd05939e92459c71aaee8d34d96, type: 3}
+      value: {fileID: 21300012, guid: 3408609b2052bda4c8543e688bc7cdf7, type: 3}
     attribute: m_Sprite
-    path: Planet
+    path: Planet/Face
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -32,14 +32,14 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1874816915
+      path: 3629461597
       attribute: 0
       script: {fileID: 0}
       typeID: 212
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300006, guid: f8b00dd05939e92459c71aaee8d34d96, type: 3}
+    - {fileID: 21300012, guid: 3408609b2052bda4c8543e688bc7cdf7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

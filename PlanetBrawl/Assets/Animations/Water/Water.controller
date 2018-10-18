@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert
+  m_Name: Water
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: HealthPercent
@@ -501,7 +501,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Face_Full
+  m_Name: Water_Face_Full
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -515,7 +515,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ea7ef92a9e3ad4544b2a15209de492b9, type: 2}
+  m_Motion: {fileID: 7400000, guid: f5e765d9e4a63424c9520dc85f76e94a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -527,7 +527,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Face_Low
+  m_Name: Water_Face_Low
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -542,7 +542,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4a09aec2aa94a734dbc27a47de8ae470, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4c4128a062867b34cbd412882a6fbdd9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -554,7 +554,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Face_Average
+  m_Name: Water_Face_Average
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -569,7 +569,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 97c649e51172d914b8b0e89652976714, type: 2}
+  m_Motion: {fileID: 7400000, guid: 68cf980f86458394e8429856add0bbe5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -581,7 +581,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Body_Average
+  m_Name: Water_Body_Average
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -596,7 +596,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d1b4c3cda680b534cad7f9e4577a0f4a, type: 2}
+  m_Motion: {fileID: 7400000, guid: cc6e39c89e9e7f4459f1a8964c27f236, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -608,7 +608,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Body_Critical
+  m_Name: Water_Body_Critical
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -622,7 +622,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a03a836155e15b444be98c4496c36851, type: 2}
+  m_Motion: {fileID: 7400000, guid: 51a2d1d4fb6664249a6d8b3312cdd226, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -634,7 +634,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Face_Hit
+  m_Name: Water_Face_Hit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -651,7 +651,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d1dc80b0b16de2b4091ea635083b5935, type: 2}
+  m_Motion: {fileID: 7400000, guid: 72a0701f69ae7a7409133f9bdde2f34b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -663,7 +663,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Hit
+  m_Name: Water_Hit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -676,7 +676,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b9dce13a07d8dd649939426a0db903de, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1d673534b0c20044ca9dcfbd6e31cca0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -688,7 +688,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Body_Full
+  m_Name: Water_Body_Full
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -702,7 +702,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c9335178d5e6b1c4d95f5ae3f6aacaba, type: 2}
+  m_Motion: {fileID: 7400000, guid: 17bf790e19d1f3744b689c12b597c71e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -714,7 +714,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Body_Low
+  m_Name: Water_Body_Low
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -729,7 +729,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ec829e188d71e4d46b7defd93f078805, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2c3b2f11b1ca4824ab6552ae762708d4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -741,7 +741,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Desert_Face_Critical
+  m_Name: Water_Face_Critical
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -755,7 +755,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 82640541b3163e74280593897ad6ec7d, type: 2}
+  m_Motion: {fileID: 7400000, guid: a49f35285a574c945913706fa5383d02, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
