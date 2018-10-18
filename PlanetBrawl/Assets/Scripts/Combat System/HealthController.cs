@@ -24,8 +24,10 @@ public class HealthController : MonoBehaviour, IDamageable
     protected float maxHealth;
 
     protected bool dpsApplied = false;
+    protected bool dpsAnim = true;
 
     protected Rigidbody2D rb2d;
+    protected float dpsAnimTimeout = 0.75f;
     #endregion
 
 
@@ -44,7 +46,12 @@ public class HealthController : MonoBehaviour, IDamageable
 
             if (health > 0)
             {
-                OnDamage();
+                if (dpsAnim)
+                {
+                    OnDamage();
+                    dpsAnim = false;
+                    StartCoroutine(AllowDpsAnim());
+                }
             }
             else
             {
@@ -255,6 +262,13 @@ public class HealthController : MonoBehaviour, IDamageable
         stunned = false;
         if (!frozen)
             StunObject(false);
+    }
+
+    protected IEnumerator AllowDpsAnim()
+    {
+        yield return new WaitForSeconds(dpsAnimTimeout);
+
+        dpsAnim = true;
     }
 
     protected void InstantThaw()
