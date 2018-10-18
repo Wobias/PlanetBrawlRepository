@@ -5215,6 +5215,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300008, guid: 53f7117c53c3db34bb6ee7f7ed1cfebf,
         type: 3}
+    - target: {fileID: 114790721851163244, guid: 9fa6ff4122caa52479306fe975b49be7,
+        type: 2}
+      propertyPath: dpsAnimTimeout
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fa6ff4122caa52479306fe975b49be7, type: 2}
   m_IsPrefabAsset: 0
@@ -5419,6 +5424,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300008, guid: 3408609b2052bda4c8543e688bc7cdf7,
         type: 3}
+    - target: {fileID: 114162425715907102, guid: 65b52924245a1cc4f809453433240a29,
+        type: 2}
+      propertyPath: dpsAnimTimeout
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65b52924245a1cc4f809453433240a29, type: 2}
   m_IsPrefabAsset: 0
@@ -10137,6 +10147,15 @@ Prefab:
     - target: {fileID: 4206590763040610, guid: 47a91094b99bb3a42ac9e86ce0228dba, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008146210390042, guid: 47a91094b99bb3a42ac9e86ce0228dba, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114539909939184422, guid: 47a91094b99bb3a42ac9e86ce0228dba,
+        type: 2}
+      propertyPath: dpsAnimTimeout
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47a91094b99bb3a42ac9e86ce0228dba, type: 2}
@@ -24114,8 +24133,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  victoryText: {fileID: 0}
+  teamOne: []
+  teamTwo: []
+  victoryScreen: {fileID: 0}
   teamMode: 0
+  gameOver: 0
 --- !u!1 &1492458735
 GameObject:
   m_ObjectHideFlags: 0
@@ -38100,6 +38122,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114261242837328080, guid: ea2dd60704ac63a408659de3cb5d95e9,
+        type: 2}
+      propertyPath: dpsAnimTimeout
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea2dd60704ac63a408659de3cb5d95e9, type: 2}
   m_IsPrefabAsset: 0
@@ -52062,6 +52089,11 @@ Prefab:
     - target: {fileID: 4121650431742076, guid: d4f48bf1ef0754a41bca47f6fb45844a, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114146406540154516, guid: d4f48bf1ef0754a41bca47f6fb45844a,
+        type: 2}
+      propertyPath: dpsAnimTimeout
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4f48bf1ef0754a41bca47f6fb45844a, type: 2}

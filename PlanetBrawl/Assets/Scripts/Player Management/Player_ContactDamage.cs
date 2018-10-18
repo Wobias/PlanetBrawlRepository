@@ -11,7 +11,13 @@ public class Player_ContactDamage : Weapon_ContactDamage
 
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        GetTarget(collision.collider);
+        Collider2D other = collision.collider;
+
+        if (other.gameObject.layer == gameObject.layer)
+            return;
+
+        GetTarget(other);
+        
 
         //Hit the target if it is damageable
         target?.Hit(physicalDmg, effectDps, dmgType, (collision.collider.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
