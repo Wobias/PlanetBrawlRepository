@@ -11,6 +11,8 @@ public class Planet_HealthController : HealthController
     private float hpPercent = 100f;
     private IPlanet controller;
 
+    
+
     public static HealthState healthState = HealthState.full;
 
     Transform myTransform;
@@ -29,19 +31,25 @@ public class Planet_HealthController : HealthController
         base.Start();
         //Set max health
         controller = GetComponent<IPlanet>();
-        myTransform = transform;
+        myTransform = GetComponentInChildren<SpriteRenderer>().transform;
         maxScale = myTransform.localScale;
         SetScaleStates();
     }
 
-    void DownScaling(float hp)
+    void ScalePlanet()
     {
         //Get current health in percent
-        hpPercent = (hp * 100f) / maxHealth;
-
+        hpPercent = (health * 100f) / maxHealth;
 
         //Set Scale, Speed, Sprite in relation to current health
-        if (hpPercent <= 75f && hpPercent > 50f)
+        if (hpPercent > 75f)
+        {
+            myTransform.localScale = maxScale;
+            healthState = HealthState.full;
+            GetComponent<ISpeedable>().SpeedToSize(healthState);
+            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
+        }
+        else if (hpPercent <= 75f && hpPercent > 50f)
         {
             myTransform.localScale = averageHpScale;
             healthState = HealthState.average;
@@ -73,13 +81,23 @@ public class Planet_HealthController : HealthController
 
     protected override void OnDamage()
     {
-        DownScaling(health);
+        ScalePlanet();
         controller.SetWeaponDistance();
     }
 
     protected override void StunObject(bool stunActive)
     {
         controller.Stun(stunActive);
+    }
+
+    public void Heal(float bonusHealth)
+    {
+        health += bonusHealth;
+        if (health > maxHealth)
+            health = maxHealth;
+
+        ScalePlanet();
+        controller.SetWeaponDistance();
     }
 
     //protected override void Kill()
