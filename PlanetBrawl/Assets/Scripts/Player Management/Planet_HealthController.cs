@@ -10,6 +10,7 @@ public class Planet_HealthController : HealthController
     #region
     private float hpPercent = 100f;
     private IPlanet controller;
+    private Animator animator;
 
     
 
@@ -30,6 +31,7 @@ public class Planet_HealthController : HealthController
     {
         base.Start();
         //Set max health
+        animator = GetComponent<Animator>();
         controller = GetComponent<IPlanet>();
         myTransform = GetComponentInChildren<SpriteRenderer>().transform;
         maxScale = myTransform.localScale;
@@ -47,28 +49,24 @@ public class Planet_HealthController : HealthController
             myTransform.localScale = maxScale;
             healthState = HealthState.full;
             GetComponent<ISpeedable>().SpeedToSize(healthState);
-            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
         }
         else if (hpPercent <= 75f && hpPercent > 50f)
         {
             myTransform.localScale = averageHpScale;
             healthState = HealthState.average;
             GetComponent<ISpeedable>().SpeedToSize(healthState);
-            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
         }
         else if (hpPercent <= 50f && hpPercent > 25f)
         {
             myTransform.localScale = lowHpScale;
             healthState = HealthState.low;
             GetComponent<ISpeedable>().SpeedToSize(healthState);
-            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
         }
         else if(hpPercent <= 25f)
         {
             myTransform.localScale = criticalHpScale;
             healthState = HealthState.critical;
             GetComponent<ISpeedable>().SpeedToSize(healthState);
-            GetComponent<PlanetSpriteSwitch>().SwitchPlanetSprite(healthState);
         }
     }
 
@@ -82,6 +80,8 @@ public class Planet_HealthController : HealthController
     protected override void OnDamage()
     {
         ScalePlanet();
+        animator.SetFloat("HealthPercent", hpPercent);
+        animator.SetTrigger("Hit");
         controller.SetWeaponDistance();
     }
 
