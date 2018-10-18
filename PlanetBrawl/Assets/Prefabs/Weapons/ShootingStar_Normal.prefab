@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 212069386142314294}
   - component: {fileID: 58846234349877488}
   - component: {fileID: 50553613968418340}
+  - component: {fileID: 114207497595133224}
   m_Layer: 0
   m_Name: Weapons_ShootingStar
   m_TagString: Untagged
@@ -138,6 +139,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!114 &114207497595133224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841117200876464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicalDmg: 10
+  effectDps: 0
+  dmgType: 1
+  knockback: 0
+  stunTime: 0.2
+  effectTime: 0
 --- !u!114 &114827037722022764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,10 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d6d123d01c30a4eadb370a09430754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  knockback: 500
-  stunTime: 0.25
-  playerWeapon: 1
+  canAttack: 1
   rotationSpeed: 10
   weaponParts:
   - {fileID: 50553613968418340}
