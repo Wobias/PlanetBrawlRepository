@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  punchsound: laser
   physicalDmg: 0
   effectDps: 0
   dmgType: 1

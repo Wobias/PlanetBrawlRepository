@@ -53,14 +53,14 @@ public class GameManager_Prototype : MonoBehaviour
             SetLayer(child, layer);
     }
 
-    public void CheckPlayersAlive()
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i]
-        }
+    //public void CheckPlayersAlive()
+    //{
+    //    for (int i = 0; i < players.Length; i++)
+    //    {
+    //        players[i];
+    //    }
 
-    }
+    //}
 
     private void Victory()
     {

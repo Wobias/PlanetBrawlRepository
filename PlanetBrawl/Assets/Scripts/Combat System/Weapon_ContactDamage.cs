@@ -6,6 +6,8 @@ public class Weapon_ContactDamage : MonoBehaviour
 {
     //public bool useWeaponStats = true;
 
+    public string hitsound = "punch";
+
     [SerializeField]
     public float physicalDmg;
     [SerializeField]
@@ -48,6 +50,7 @@ public class Weapon_ContactDamage : MonoBehaviour
             {
                 target.Hit(physicalDmg, effectDps, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
             }
+            FindObjectOfType<AudioManager1>().Play(hitsound);
         }
     }
 
