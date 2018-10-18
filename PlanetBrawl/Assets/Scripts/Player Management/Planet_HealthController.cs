@@ -82,9 +82,10 @@ public class Planet_HealthController : HealthController
         controller.Stun(stunActive);
     }
 
-    //protected override void Kill()
-    //{
-    //    GameManager_Prototype.gameManager.
-    //    base.Kill();
-    //}
+    protected override void Kill()
+    {
+        GameManager_Prototype.gameManager.RemoveFromLists(gameObject);
+        GameManager_Prototype.gameManager.VictoryConditions();
+        base.Kill();
+    }
 }
