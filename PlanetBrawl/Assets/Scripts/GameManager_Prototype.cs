@@ -37,10 +37,10 @@ public class GameManager_Prototype : MonoBehaviour
 
         if (teamMode == true)
         {
-            players[0].layer = 8;
-            players[1].layer = 8;
-            players[2].layer = 9;
-            players[3].layer = 9;
+            //players[0].layer = 8;
+            //players[1].layer = 8;
+            //players[2].layer = 9;
+            //players[3].layer = 9;
 
             foreach (var player in players)
             {
@@ -57,18 +57,18 @@ public class GameManager_Prototype : MonoBehaviour
                 }
             }
         }
-        else if (teamMode == false)
-        {
-            players[0].layer = 8;
-            players[1].layer = 9;
-            players[2].layer = 10;
-            players[3].layer = 11;
+        //else if (teamMode == false)
+        //{
+        //    players[0].layer = 8;
+        //    players[1].layer = 9;
+        //    players[2].layer = 10;
+        //    players[3].layer = 11;
 
-            for (int i = 0; i < players.Count; i++)
-            {
-                SetLayer(players[i].transform, players[i].layer);
-            }
-        }
+        //    for (int i = 0; i < players.Count; i++)
+        //    {
+        //        SetLayer(players[i].transform, players[i].layer);
+        //    }
+        //}
     }
 
     void Update()
@@ -99,7 +99,6 @@ public class GameManager_Prototype : MonoBehaviour
             SetLayer(child, layer);
     }
 
-<<<<<<< HEAD
     public void RemoveFromLists(GameObject deadPlayer)
     {
         if (deadPlayer != null)
@@ -119,16 +118,6 @@ public class GameManager_Prototype : MonoBehaviour
             }
         }
     }
-=======
-    //public void CheckPlayersAlive()
-    //{
-    //    for (int i = 0; i < players.Length; i++)
-    //    {
-    //        players[i]
-    //    }
-
-    //}
->>>>>>> b3146f6b22228f143d5db20874e629c54215072d
 
     public void VictoryConditions()
     {

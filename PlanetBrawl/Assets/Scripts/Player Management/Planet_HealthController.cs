@@ -90,14 +90,13 @@ public class Planet_HealthController : HealthController
         controller.Stun(stunActive);
     }
 
-<<<<<<< HEAD
     protected override void Kill()
     {
         GameManager_Prototype.gameManager.RemoveFromLists(gameObject);
         GameManager_Prototype.gameManager.VictoryConditions();
         base.Kill();
     }
-=======
+
     public void Heal(float bonusHealth)
     {
         health += bonusHealth;
@@ -107,11 +106,4 @@ public class Planet_HealthController : HealthController
         ScalePlanet();
         controller.SetWeaponDistance();
     }
-
-    //protected override void Kill()
-    //{
-    //    GameManager_Prototype.gameManager.
-    //    base.Kill();
-    //}
->>>>>>> b3146f6b22228f143d5db20874e629c54215072d
 }
