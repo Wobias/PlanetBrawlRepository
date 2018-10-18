@@ -99,6 +99,7 @@ public class GameManager_Prototype : MonoBehaviour
             SetLayer(child, layer);
     }
 
+<<<<<<< HEAD
     public void RemoveFromLists(GameObject deadPlayer)
     {
         if (deadPlayer != null)
@@ -118,6 +119,16 @@ public class GameManager_Prototype : MonoBehaviour
             }
         }
     }
+=======
+    //public void CheckPlayersAlive()
+    //{
+    //    for (int i = 0; i < players.Length; i++)
+    //    {
+    //        players[i]
+    //    }
+
+    //}
+>>>>>>> b3146f6b22228f143d5db20874e629c54215072d
 
     public void VictoryConditions()
     {
