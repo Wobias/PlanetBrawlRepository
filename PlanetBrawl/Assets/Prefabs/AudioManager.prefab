@@ -54,8 +54,8 @@ MonoBehaviour:
   sounds:
   - name: battlemusic
     clip: {fileID: 8300000, guid: 590a3a269f743704fa051eb7db16a860, type: 3}
-    volume: 1
-    pitch: 0.1
+    volume: 0.5
+    pitch: 1
     loop: 1
     spatialBlend: 0
     maxDistance: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   - name: punch
     clip: {fileID: 8300000, guid: 071b270ed4393fd4aba959be78ec874b, type: 3}
     volume: 1
-    pitch: 0.1
+    pitch: 1
     loop: 0
     spatialBlend: 0
     maxDistance: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
   - name: laser
     clip: {fileID: 8300000, guid: a056a751ad1774c4084a02c8a435a9a3, type: 3}
     volume: 1
-    pitch: 0.1
+    pitch: 1
     loop: 0
     spatialBlend: 0
     maxDistance: 0

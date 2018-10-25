@@ -27,20 +27,20 @@ public class PlayerController : MonoBehaviour, IPlanet
         movement = GetComponent<PlanetMovement>();
     }
 
-    //void Start()
-    //{
-    //    weaponLayer = LayerMask.NameToLayer("WeaponP" + playerNr);
+    void Start()
+    {
+        weaponLayer = LayerMask.NameToLayer("Weapon" + LayerMask.LayerToName(gameObject.layer));
 
-    //    if (currentWeapon)
-    //    {
-    //        SetLayer(currentWeapon.transform, weaponLayer);
-    //    }
+        if (currentWeapon)
+        {
+            SetLayer(currentWeapon.transform, weaponLayer);
+        }
 
-    //    if (backupWeapon != null)
-    //    {
-    //        SetLayer(backupWeapon.transform, weaponLayer);
-    //    }
-    //}
+        if (backupWeapon != null)
+        {
+            SetLayer(backupWeapon.transform, weaponLayer);
+        }
+    }
 
     void Update()
     {

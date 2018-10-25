@@ -5,7 +5,7 @@ using UnityEngine;
 public class AsteroidSpawner : MonoBehaviour
 {
 
-
+    public float spawnTimeout = 5;
     private float spawnTimer = 5;
     //public int spawnMin = 0;
     //public int spawnMax = 1000;
@@ -36,10 +36,10 @@ public class AsteroidSpawner : MonoBehaviour
         if (spawnTimer < 0)
         {
 
-            spawnTimer = 5;
+            spawnTimer = spawnTimeout;
         }
 
-        if (spawnTimer == 5)
+        if (spawnTimer == spawnTimeout)
         {
             SpawnMeteor();
         }
@@ -48,6 +48,7 @@ public class AsteroidSpawner : MonoBehaviour
 
 
     }
+
     void SpawnMeteor()
     {
         whichBorder = Random.Range(1, 4);

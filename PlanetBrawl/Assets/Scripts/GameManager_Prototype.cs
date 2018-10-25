@@ -129,11 +129,23 @@ public class GameManager_Prototype : MonoBehaviour
             {
                 Debug.Log("Team Two is victorious");
                 victoryScreen.SetActive(true);
+
+                foreach (var player in players)
+                {
+                    player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    player.GetComponent<PlayerController>().enabled = false;
+                }
             }
             else if (teamTwo.Count <= 0)
             {
                 Debug.Log("Team One is victorious");
                 victoryScreen.SetActive(true);
+
+                foreach (var player in players)
+                {
+                    player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    player.GetComponent<PlayerController>().enabled = false;
+                }
             }
         }
         else if (!teamMode)
@@ -144,6 +156,12 @@ public class GameManager_Prototype : MonoBehaviour
                 {
                     Debug.Log(players[0] + " " + " is victorious");
                     victoryScreen.SetActive(true);
+
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        player.GetComponent<PlayerController>().enabled = false;
+                    }
                 }
             }
         }

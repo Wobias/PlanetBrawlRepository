@@ -370,12 +370,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicalDmg: 10
-  effectDps: 10
+  hitsound: punch
+  physicalDmg: 5
+  effectDps: 0
   dmgType: 1
-  knockback: 500
+  knockback: 250
   stunTime: 0.2
-  effectTime: 5
+  effectTime: 0
 --- !u!114 &114187288487771132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,12 +388,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicalDmg: 10
-  effectDps: 10
+  hitsound: punch
+  physicalDmg: 5
+  effectDps: 0
   dmgType: 1
-  knockback: 500
+  knockback: 250
   stunTime: 0.2
-  effectTime: 5
+  effectTime: 0
 --- !u!114 &114345594304592712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,12 +417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicalDmg: 10
-  effectDps: 10
+  hitsound: punch
+  physicalDmg: 5
+  effectDps: 0
   dmgType: 1
-  knockback: 500
+  knockback: 250
   stunTime: 0.2
-  effectTime: 5
+  effectTime: 0
 --- !u!114 &114806434493421186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,18 +435,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a567aa90d40035b45abd35aa16f97920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  knockback: 500
-  stunTime: 0.25
   canAttack: 1
-  rotationSpeed: 10
+  rotationSpeed: 8
   weaponParts:
   - {fileID: 50818424227783784}
   - {fileID: 50063300442923194}
   - {fileID: 50729325628479216}
   punchSpeed: 20
-  retractSpeed: 20
-  maxDistance: 5
+  retractSpeed: 15
+  maxDistance: 3
 --- !u!212 &212014299214845460
 SpriteRenderer:
   m_ObjectHideFlags: 1

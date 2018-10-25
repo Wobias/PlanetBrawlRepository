@@ -161,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d72fd10d910ea458df35ccb8e09f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicalDmg: 0
+  hitsound: punch
+  physicalDmg: 15
   effectDps: 0
   dmgType: 1
   knockback: 500
@@ -178,16 +179,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f68a37568a12b44b5c21d7cd64b604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  knockback: 500
-  stunTime: 0.25
   canAttack: 1
   rotationSpeed: 500
   weaponParts:
   - {fileID: 50909519788273120}
   punchSpeed: 20
   retractSpeed: 15
-  maxDistance: 5
+  maxDistance: 8
   spinRight: 1
 --- !u!212 &212098770526242696
 SpriteRenderer:
