@@ -24490,8 +24490,15 @@ MonoBehaviour:
   teamOne: []
   teamTwo: []
   victoryScreen: {fileID: 1766938930}
+  victoryText: {fileID: 1483765126}
   teamMode: 0
   gameOver: 0
+--- !u!114 &1483765126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114441527169416560, guid: ab26df5f718b6ff44b47f4a463436311,
+    type: 2}
+  m_PrefabInternal: {fileID: 1243381026}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 --- !u!1 &1492458735
 GameObject:
   m_ObjectHideFlags: 0
