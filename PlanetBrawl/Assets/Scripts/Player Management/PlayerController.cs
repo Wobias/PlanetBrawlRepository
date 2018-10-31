@@ -14,17 +14,20 @@ public class PlayerController : MonoBehaviour, IPlanet
     private Planet_HealthController health;
     private PlanetMovement movement;
     private WeaponController weaponCacher;
+    private ISpecialAbility ability;
 
     private bool isBonus = false;
     private bool isFirePressed;
     private bool canSwitch = true;
     private bool sprintActive = false;
+    private bool specialAvailable = true;
 
 
     void Awake()
     {
         health = GetComponentInChildren<Planet_HealthController>();
         movement = GetComponent<PlanetMovement>();
+        ability = GetComponent<ISpecialAbility>();
     }
 
     void Start()
@@ -86,6 +89,15 @@ public class PlayerController : MonoBehaviour, IPlanet
         if (Input.GetButtonDown("SwitchWeapon" + playerNr) && !sprintActive)
         {
             SwapWeapons();
+        }
+
+        if (Input.GetButtonUp("Special" + playerNr) && ability != null)
+        {
+            ability.StopUse();
+        }
+        else if (Input.GetButton("Special" + playerNr) && specialAvailable && ability != null)
+        {
+            ability.Use();
         }
     }
 
@@ -155,6 +167,21 @@ public class PlayerController : MonoBehaviour, IPlanet
     }
 
     public void Stun(bool stunActive)
+    {
+        if (ability != null)
+            ability.StopUse();
+
+        specialAvailable = !stunActive;
+
+        movement.enabled = !stunActive;
+
+        if (sprintActive)
+            stunActive = true;
+
+        currentWeapon.canAttack = !stunActive;
+    }
+
+    public void AbilityStun(bool stunActive)
     {
         movement.enabled = !stunActive;
 

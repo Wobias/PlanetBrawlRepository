@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISpecialAbitities
+public interface ISpecialAbility
 {
     void Use();
+    void StopUse();
 }
