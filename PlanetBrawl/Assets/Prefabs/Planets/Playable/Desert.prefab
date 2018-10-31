@@ -155,6 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4121650431742076}
   - component: {fileID: 50911185517650338}
+  - component: {fileID: 114889119323707236}
   - component: {fileID: 114166140722166508}
   - component: {fileID: 114338323651572526}
   - component: {fileID: 114146406540154516}
@@ -672,6 +673,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0.1
   lookSpeed: 0.25
+--- !u!114 &114889119323707236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1582240147827684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99c9100eea40a94cb389ead47c33d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Earth: {fileID: 1734875635455440, guid: 9fa6ff4122caa52479306fe975b49be7, type: 2}
+  Desert: {fileID: 1582240147827684}
+  Water: {fileID: 1404772579806080, guid: 65b52924245a1cc4f809453433240a29, type: 2}
+  Toxic: {fileID: 1315575399049300, guid: ea2dd60704ac63a408659de3cb5d95e9, type: 2}
+  playerNumber: 0
 --- !u!114 &114949424671743042
 MonoBehaviour:
   m_ObjectHideFlags: 1

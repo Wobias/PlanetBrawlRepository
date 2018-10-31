@@ -129,6 +129,10 @@ public class GameManager_Prototype : MonoBehaviour
                 victoryText.SetText("Team Two Victory!");
                 victoryScreen.SetActive(true);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
                 if (teamTwo.Count > 1)
                 {
                     teamTwo[0].transform.position = new Vector3(-1.5f, 0f, 0f);
@@ -140,8 +144,13 @@ public class GameManager_Prototype : MonoBehaviour
                     {
                         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                         player.GetComponent<PlayerController>().enabled = false;
+<<<<<<< HEAD
                     }
 
+=======
+
+                    }
+>>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
                 }
                 if (teamTwo.Count <= 0)
                 {
@@ -161,8 +170,13 @@ public class GameManager_Prototype : MonoBehaviour
                         {
                             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                             player.GetComponent<PlayerController>().enabled = false;
+<<<<<<< HEAD
                         }
 
+=======
+
+                        }
+>>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
                     }
                 }
                 else if (!teamMode)
@@ -184,8 +198,13 @@ public class GameManager_Prototype : MonoBehaviour
                                 player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                                 player.GetComponent<PlayerController>().enabled = false;
                             }
+<<<<<<< HEAD
                         }
 
+=======
+
+                        }
+>>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
                     }
                 }
             }
