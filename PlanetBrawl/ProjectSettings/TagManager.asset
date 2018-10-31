@@ -21,10 +21,10 @@ TagManager:
   - Player4
   - Pickups
   - Nebula
-  - WeaponP1
-  - WeaponP2
-  - WeaponP3
-  - WeaponP4
+  - WeaponPlayer1
+  - WeaponPlayer2
+  - WeaponPlayer3
+  - WeaponPlayer4
   - WeaponEnemy
   - Enemy
   - 

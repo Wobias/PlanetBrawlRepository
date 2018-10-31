@@ -77,7 +77,7 @@ public class CameraFollow : MonoBehaviour
         
         camTrans.position = Vector3.Lerp(camTrans.position, new Vector3(target.x, target.y, camTrans.position.z), followSpeed);
 
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, Mathf.Clamp((maxBounds - minBounds).magnitude / maxZoom * 2, maxZoom, minZoom), zoomSpeed);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, Mathf.Clamp((maxBounds - minBounds).magnitude, maxZoom, minZoom), zoomSpeed);
         //pixelPerfectZoom.SetZoom((maxBounds - minBounds).magnitude / maxZoom * 2);
     }
 }
