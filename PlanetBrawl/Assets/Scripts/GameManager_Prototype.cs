@@ -28,7 +28,7 @@ public class GameManager_Prototype : MonoBehaviour
         {
             victoryScreen.SetActive(false);
         }
-        
+
 
         foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
         {
@@ -126,66 +126,68 @@ public class GameManager_Prototype : MonoBehaviour
             if (teamOne.Count <= 0)
             {
                 Debug.Log("Team Two is victorious");
-                victoryText.SetText ("Team Two Victory!");
+                victoryText.SetText("Team Two Victory!");
                 victoryScreen.SetActive(true);
 
-<<<<<<< HEAD
+
                 if (teamTwo.Count > 1)
                 {
                     teamTwo[0].transform.position = new Vector3(-1.5f, 0f, 0f);
                     teamTwo[1].transform.position = new Vector3(1.5f, 0f, 0f);
                     teamTwo[0].isStatic = true;
                     teamTwo[1].isStatic = true;
-=======
-                foreach (var player in players)
-                {
-                    player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    player.GetComponent<PlayerController>().enabled = false;
->>>>>>> edeea6a50f90df1d79c0ee5d277e2de7ce0bacf4
-                }
-            }
-            if (teamTwo.Count <= 0)
-            {
-                Debug.Log("Team One is victorious");
-                victoryText.SetText("Team One Victory!");
-                victoryScreen.SetActive(true);
-
-<<<<<<< HEAD
-                if (teamOne.Count > 1)
-                {
-                    teamOne[0].transform.position = new Vector3(-1f, 0f, 0f);
-                    teamOne[1].transform.position = new Vector3(1f, 0f, 0f);
-                    teamOne[0].isStatic = true;
-                    teamOne[1].isStatic = true;
-=======
-                foreach (var player in players)
-                {
-                    player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    player.GetComponent<PlayerController>().enabled = false;
->>>>>>> edeea6a50f90df1d79c0ee5d277e2de7ce0bacf4
-                }
-            }
-        }
-        else if (!teamMode)
-        {
-            if (players != null)
-            {
-                if (players.Count == 1)
-                {
-                    Debug.Log(players[0].name + " is victorious");
-                    victoryText.SetText(players[0].name + " Victory!");
-                    victoryScreen.SetActive(true);
-<<<<<<< HEAD
-                    players[0].transform.position = new Vector3(0f, 0f, 0f);
-                    players[0].isStatic = true;
-=======
 
                     foreach (var player in players)
                     {
                         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                         player.GetComponent<PlayerController>().enabled = false;
+
                     }
->>>>>>> edeea6a50f90df1d79c0ee5d277e2de7ce0bacf4
+                }
+                if (teamTwo.Count <= 0)
+                {
+                    Debug.Log("Team One is victorious");
+                    victoryText.SetText("Team One Victory!");
+                    victoryScreen.SetActive(true);
+
+
+                    if (teamOne.Count > 1)
+                    {
+                        teamOne[0].transform.position = new Vector3(-1f, 0f, 0f);
+                        teamOne[1].transform.position = new Vector3(1f, 0f, 0f);
+                        teamOne[0].isStatic = true;
+                        teamOne[1].isStatic = true;
+
+                        foreach (var player in players)
+                        {
+                            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                            player.GetComponent<PlayerController>().enabled = false;
+
+                        }
+                    }
+                }
+                else if (!teamMode)
+                {
+                    if (players != null)
+                    {
+                        if (players.Count == 1)
+                        {
+                            Debug.Log(players[0].name + " is victorious");
+                            victoryText.SetText(players[0].name + " Victory!");
+                            victoryScreen.SetActive(true);
+
+                            players[0].transform.position = new Vector3(0f, 0f, 0f);
+                            players[0].isStatic = true;
+
+
+                            foreach (var player in players)
+                            {
+                                player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                                player.GetComponent<PlayerController>().enabled = false;
+                            }
+
+                        }
+                    }
                 }
             }
         }
