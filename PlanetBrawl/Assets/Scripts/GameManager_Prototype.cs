@@ -129,10 +129,7 @@ public class GameManager_Prototype : MonoBehaviour
                 victoryText.SetText("Team Two Victory!");
                 victoryScreen.SetActive(true);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
                 if (teamTwo.Count > 1)
                 {
                     teamTwo[0].transform.position = new Vector3(-1.5f, 0f, 0f);
@@ -144,67 +141,53 @@ public class GameManager_Prototype : MonoBehaviour
                     {
                         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                         player.GetComponent<PlayerController>().enabled = false;
-<<<<<<< HEAD
                     }
 
-=======
 
-                    }
->>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
                 }
-                if (teamTwo.Count <= 0)
+            }
+            if (teamTwo.Count <= 0)
+            {
+                Debug.Log("Team One is victorious");
+                victoryText.SetText("Team One Victory!");
+                victoryScreen.SetActive(true);
+
+
+                if (teamOne.Count > 1)
                 {
-                    Debug.Log("Team One is victorious");
-                    victoryText.SetText("Team One Victory!");
+                    teamOne[0].transform.position = new Vector3(-1f, 0f, 0f);
+                    teamOne[1].transform.position = new Vector3(1f, 0f, 0f);
+                    teamOne[0].isStatic = true;
+                    teamOne[1].isStatic = true;
+
+                    foreach (var player in players)
+                    {
+                        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        player.GetComponent<PlayerController>().enabled = false;
+                    }
+
+
+                }
+            }
+        }
+        else if (!teamMode)
+        {
+            if (players != null)
+            {
+                if (players.Count == 1)
+                {
+                    Debug.Log(players[0].name + " is victorious");
+                    victoryText.SetText(players[0].name + " Victory!");
                     victoryScreen.SetActive(true);
 
+                    players[0].transform.position = new Vector3(0f, 0f, 0f);
+                    players[0].isStatic = true;
 
-                    if (teamOne.Count > 1)
+
+                    foreach (var player in players)
                     {
-                        teamOne[0].transform.position = new Vector3(-1f, 0f, 0f);
-                        teamOne[1].transform.position = new Vector3(1f, 0f, 0f);
-                        teamOne[0].isStatic = true;
-                        teamOne[1].isStatic = true;
-
-                        foreach (var player in players)
-                        {
-                            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                            player.GetComponent<PlayerController>().enabled = false;
-<<<<<<< HEAD
-                        }
-
-=======
-
-                        }
->>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
-                    }
-                }
-                else if (!teamMode)
-                {
-                    if (players != null)
-                    {
-                        if (players.Count == 1)
-                        {
-                            Debug.Log(players[0].name + " is victorious");
-                            victoryText.SetText(players[0].name + " Victory!");
-                            victoryScreen.SetActive(true);
-
-                            players[0].transform.position = new Vector3(0f, 0f, 0f);
-                            players[0].isStatic = true;
-
-
-                            foreach (var player in players)
-                            {
-                                player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                                player.GetComponent<PlayerController>().enabled = false;
-                            }
-<<<<<<< HEAD
-                        }
-
-=======
-
-                        }
->>>>>>> f3a38f2a2a5493406232665e32c8861f7d8778f7
+                        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        player.GetComponent<PlayerController>().enabled = false;
                     }
                 }
             }
