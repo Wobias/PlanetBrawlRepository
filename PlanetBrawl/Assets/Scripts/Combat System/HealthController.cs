@@ -20,6 +20,7 @@ public class HealthController : MonoBehaviour, IDamageable
     protected float poisonDamage;
     protected float fireDamage;
     protected float ionDamage;
+    protected float specialDamage;
 
     protected float maxHealth;
 
@@ -68,7 +69,8 @@ public class HealthController : MonoBehaviour, IDamageable
 
         if (dmgType != DamageType.ion)
         {
-            Stun(stunTime);
+            if (stunTime > 0)
+                Stun(stunTime);
 
             if (knockbackForce != Vector2.zero)
                 rb2d.AddForce(knockbackForce);

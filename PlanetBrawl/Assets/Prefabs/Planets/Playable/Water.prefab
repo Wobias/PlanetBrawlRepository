@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 114072562153671680}
   - component: {fileID: 114036081789346512}
   - component: {fileID: 114162425715907102}
+  - component: {fileID: 114683928712305072}
   - component: {fileID: 95379661018962866}
   m_Layer: 10
   m_Name: Water
@@ -604,7 +605,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404772579806080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.267292, y: -5.432945, z: 0}
+  m_LocalPosition: {x: 9.44, y: 3.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4852080690376248}
@@ -987,6 +988,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c60142a46082c4882bc980fccb40af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114683928712305072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404772579806080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc0b48d52dcf34479d9347b934afe07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitsound: punch
+  radius: 0
+  cooldown: 0
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
+  physicalDmg: 0
+  effectDps: 0
+  dmgType: 1
+  knockback: 0
+  stunTime: 0
+  effectTime: 0
 --- !u!114 &114763098911651186
 MonoBehaviour:
   m_ObjectHideFlags: 1

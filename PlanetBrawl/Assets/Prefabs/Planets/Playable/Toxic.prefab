@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 114776493536227230}
   - component: {fileID: 114502521122508310}
   - component: {fileID: 114261242837328080}
+  - component: {fileID: 114686235671890770}
   - component: {fileID: 95055967761312162}
   m_Layer: 11
   m_Name: Toxic
@@ -430,7 +431,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315575399049300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.447838, y: 3.6065392, z: 0}
+  m_LocalPosition: {x: -4.84, y: 1.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4067073431661942}
@@ -691,6 +692,19 @@ MonoBehaviour:
   knockback: 200
   stunTime: 0.2
   effectTime: 2
+--- !u!114 &114686235671890770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1315575399049300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ec7b4738d450247a60e1121d856d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  minePrefab: {fileID: 0}
 --- !u!114 &114776493536227230
 MonoBehaviour:
   m_ObjectHideFlags: 1

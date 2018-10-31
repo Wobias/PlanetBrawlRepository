@@ -38,11 +38,6 @@ public class PlayerController : MonoBehaviour, IPlanet
         {
             SetLayer(currentWeapon.transform, weaponLayer);
         }
-
-        if (backupWeapon != null)
-        {
-            SetLayer(backupWeapon.transform, weaponLayer);
-        }
     }
 
     void Update()
@@ -86,16 +81,11 @@ public class PlayerController : MonoBehaviour, IPlanet
         currentWeapon.Aim(aimDir);
         canSwitch = currentWeapon.Shoot(isFirePressed);
 
-        if (Input.GetButtonDown("SwitchWeapon" + playerNr) && !sprintActive)
-        {
-            SwapWeapons();
-        }
-
         if (Input.GetButtonUp("Special" + playerNr) && ability != null)
         {
             ability.StopUse();
         }
-        else if (Input.GetButton("Special" + playerNr) && specialAvailable && ability != null)
+        else if (Input.GetButton("Special" + playerNr) && specialAvailable && !sprintActive && ability != null)
         {
             ability.Use();
         }
