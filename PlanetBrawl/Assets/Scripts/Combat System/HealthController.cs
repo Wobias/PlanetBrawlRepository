@@ -48,7 +48,7 @@ public class HealthController : MonoBehaviour, IDamageable
             {
                 if (dpsAnim)
                 {
-                    OnDamage();
+                    OnHealthChange();
                     dpsAnim = false;
                     StartCoroutine(AllowDpsAnim());
                 }
@@ -105,7 +105,7 @@ public class HealthController : MonoBehaviour, IDamageable
 
         if (health > 0)
         {
-            OnDamage();
+            OnHealthChange();
         }
         else
         {
@@ -284,7 +284,7 @@ public class HealthController : MonoBehaviour, IDamageable
         return;
     }
 
-    protected virtual void OnDamage()
+    protected virtual void OnHealthChange(bool damage = true)
     {
         return;
     }

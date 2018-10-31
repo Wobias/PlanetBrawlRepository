@@ -13,7 +13,7 @@ public class Asteroid_HealthController : HealthController
         controller = GetComponent<AsteroidController>();
     }
 
-    protected override void OnDamage()
+    protected override void OnHealthChange(bool damage=true)
     {
         return;
     }

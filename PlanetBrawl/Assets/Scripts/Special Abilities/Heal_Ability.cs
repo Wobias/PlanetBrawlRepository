@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Heal_Ability : MonoBehaviour, ISpecialAbitities
+public class Heal_Ability : MonoBehaviour, ISpecialAbility
 {
     public float healthPerSec = 10;
 
@@ -10,6 +10,7 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbitities
     private bool healing = false;
     private Planet_HealthController healthController;
     private PlayerController controller;
+
 
     void Start()
     {
@@ -21,16 +22,26 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbitities
     {
         if (!healing)
         {
+            controller.AbilityStun(true);
             StartCoroutine(HealOverTime());
             healing = true;
         }
+    }
+
+    public void StopUse()
+    {
+        healing = false;
+        controller.AbilityStun(false);
     }
 
     IEnumerator HealOverTime()
     {
         yield return new WaitForSeconds(1);
 
-        healthController.Heal(healthPerSec);
-        healing = false;
+        if (healing)
+        {
+            healthController.Heal(healthPerSec);
+            healing = false;
+        }
     }
 }

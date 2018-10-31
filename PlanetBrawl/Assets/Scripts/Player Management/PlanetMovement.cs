@@ -15,6 +15,7 @@ public class PlanetMovement : MonoBehaviour, ISpeedable
     public float sprintMultipier = 2f;
 
     float baseSpeed;
+    float fullHpSpeed;
     float averageHpSpeed;
     float lowHpSpeed;
     float criticalHpSpeed;
@@ -31,6 +32,7 @@ public class PlanetMovement : MonoBehaviour, ISpeedable
 
         //Set Speed Variables
         baseSpeed = speed;
+        fullHpSpeed = speed;
         sprintSpeed = baseSpeed * sprintMultipier;
         averageHpSpeed = baseSpeed + speedBonus;
         lowHpSpeed = baseSpeed + speedBonus * 2;
@@ -58,19 +60,25 @@ public class PlanetMovement : MonoBehaviour, ISpeedable
     //ISpeedable Method
     public void SpeedToSize(HealthState currentHealthState)
     {
-        if (currentHealthState == HealthState.average)
+        if (currentHealthState == HealthState.full)
+        {
+            speed = fullHpSpeed;
+            baseSpeed = fullHpSpeed;
+            sprintSpeed = fullHpSpeed * sprintMultipier;
+        }
+        else if (currentHealthState == HealthState.average)
         {
             speed = averageHpSpeed;
             baseSpeed = averageHpSpeed;
             sprintSpeed = averageHpSpeed * sprintMultipier;
         }
-        if (currentHealthState == HealthState.low)
+        else if(currentHealthState == HealthState.low)
         {
             speed = lowHpSpeed;
             baseSpeed = lowHpSpeed;
             sprintSpeed = lowHpSpeed * sprintMultipier;
         }
-        if (currentHealthState == HealthState.critical)
+        else if(currentHealthState == HealthState.critical)
         {
             speed = criticalHpSpeed;
             baseSpeed = criticalHpSpeed;

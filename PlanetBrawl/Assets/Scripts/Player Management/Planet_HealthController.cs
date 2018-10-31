@@ -77,11 +77,14 @@ public class Planet_HealthController : HealthController
         criticalHpScale = maxScale * 0.6f;
     }
 
-    protected override void OnDamage()
+    protected override void OnHealthChange(bool damage=true)
     {
         ScalePlanet();
         animator.SetFloat("HealthPercent", hpPercent);
-        animator.SetTrigger("Hit");
+        if (damage)
+        {
+            animator.SetTrigger("Hit");
+        } 
         controller.SetWeaponDistance();
     }
 
@@ -103,7 +106,6 @@ public class Planet_HealthController : HealthController
         if (health > maxHealth)
             health = maxHealth;
 
-        ScalePlanet();
-        controller.SetWeaponDistance();
+        OnHealthChange(false);
     }
 }
