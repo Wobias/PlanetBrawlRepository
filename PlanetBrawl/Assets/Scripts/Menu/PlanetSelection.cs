@@ -4,55 +4,78 @@ using UnityEngine;
 
 public class PlanetSelection : MonoBehaviour
 {
-
-    public GameObject Earth;
-    public GameObject Desert;
-    public GameObject Water;
-    public GameObject Toxic;
+    public GameObject playerEarth;
+    public GameObject playerDesert;
+    public GameObject playerWater;
+    public GameObject playerToxic;
     PlayerController playerController;
     public int playerNumber;
+    public float cooldown = 0;
+
 
     private void Start()
     {
-        playerController = gameObject.GetComponent<PlayerController>();
-        playerNumber = playerController.playerNr;
+        cooldown = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (other.gameObject.tag == "Earth")
+        if(cooldown > 0.0f)
+        {
+            cooldown -= Time.deltaTime;
+            if(cooldown < 0.0f)
+            {
+                cooldown = 0;
+            }
+
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
         {
             
-            GameObject newEarth = Instantiate(Earth, transform.position, Quaternion.identity);
-            newEarth.layer = gameObject.layer;
-            newEarth.GetComponent<PlayerController>().playerNr = playerNumber;
-            Destroy(gameObject);
-        }
+            
+            playerController = other.gameObject.GetComponent<PlayerController>();
+            playerNumber = playerController.playerNr;
 
-        else if (other.gameObject.tag == "Desert")
-        {
-            GameObject newDesert = Instantiate(Desert, transform.position, Quaternion.identity);
-            newDesert.layer = gameObject.layer;
-            newDesert.GetComponent<PlayerController>().playerNr = playerNumber;
-            Destroy(gameObject);
-        }
+            if (transform.gameObject.tag == "Earth" && cooldown == 0)
+            {
+                GameObject newEarth = Instantiate(playerEarth, other.transform.position, Quaternion.identity);
+                newEarth.layer = other.gameObject.layer;
+                newEarth.GetComponent<PlayerController>().playerNr = playerNumber;
+                Destroy(other.gameObject);
+                cooldown += 5;
+            }
+            else if (transform.gameObject.tag == "Desert" && cooldown == 0)
+            {
+                GameObject newDesert = Instantiate(playerDesert, other.transform.position, Quaternion.identity);
+                newDesert.layer = other.gameObject.layer;
+                newDesert.GetComponent<PlayerController>().playerNr = playerNumber;
+                Destroy(other.gameObject);
+                cooldown += 5;
 
-        else if (other.gameObject.tag == "Water")
-        {
-            GameObject newWater = Instantiate(Water, transform.position, Quaternion.identity);
-            newWater.layer = gameObject.layer;
-            newWater.GetComponent<PlayerController>().playerNr = playerNumber;
-            Destroy(gameObject);
-        }
+            }
+            else if (transform.gameObject.tag == "Water" && cooldown == 0)
+            {
+                GameObject newWater = Instantiate(playerWater, other.transform.position, Quaternion.identity);
+                newWater.layer = other.gameObject.layer;
+                newWater.GetComponent<PlayerController>().playerNr = playerNumber;
+                Destroy(other.gameObject);
+                cooldown += 5;
 
-        else if (other.gameObject.tag == "Toxic")
-        {
-            GameObject newToxic = Instantiate(Toxic, transform.position, Quaternion.identity);
-            newToxic.layer = gameObject.layer;
-            newToxic.GetComponent<PlayerController>().playerNr = playerNumber;
-            Destroy(gameObject);
+            }
+            else if (transform.gameObject.tag == "Toxic" && cooldown == 0)
+            {
+                GameObject newToxic = Instantiate(playerToxic, other.transform.position, Quaternion.identity);
+                newToxic.layer = other.gameObject.layer;
+                newToxic.GetComponent<PlayerController>().playerNr = playerNumber;
+                Destroy(other.gameObject);
+                cooldown += 5;
+
+            }
         }
 
     }
-
 }
