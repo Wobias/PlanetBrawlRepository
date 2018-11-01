@@ -3,7 +3,15 @@ guid: a99c9100eea40a94cb389ead47c33d89
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerEarth: {fileID: 1734875635455440, guid: 9fa6ff4122caa52479306fe975b49be7,
+      type: 2}
+  - playerDesert: {fileID: 1582240147827684, guid: d4f48bf1ef0754a41bca47f6fb45844a,
+      type: 2}
+  - playerWater: {fileID: 1404772579806080, guid: 65b52924245a1cc4f809453433240a29,
+      type: 2}
+  - playerToxic: {fileID: 1315575399049300, guid: ea2dd60704ac63a408659de3cb5d95e9,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
