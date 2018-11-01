@@ -22,19 +22,12 @@ public class PlanetSelection : MonoBehaviour
     {
         if(cooldown > 0.0f)
         {
-<<<<<<< HEAD
             cooldown -= Time.deltaTime;
             if(cooldown < 0.0f)
             {
                 cooldown = 0;
             }
-=======
-            
-            GameObject newEarth = Instantiate(Earth, transform.position, Quaternion.identity);
-            newEarth.layer = gameObject.layer;
-            newEarth.GetComponent<PlayerController>().playerNr = playerNumber;
-            Destroy(gameObject);
->>>>>>> ab5252eca33acacaa94520b570e255ef07e6f31a
+
         }
     }
 
