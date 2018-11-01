@@ -52,6 +52,10 @@ public class Weapon_ContactDamage : MonoBehaviour
             }
             AudioManager1.instance.Play(hitsound);
         }
+        else if(isWeapon)
+        {
+            weapon.OnHit();
+        }
     }
 
     protected void GetTarget(Collider2D other)

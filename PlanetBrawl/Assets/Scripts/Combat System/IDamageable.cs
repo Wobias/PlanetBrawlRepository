@@ -10,4 +10,3 @@ public interface IDamageable
     void IonDamage(float dps);
     void StopIon();
 }
-
