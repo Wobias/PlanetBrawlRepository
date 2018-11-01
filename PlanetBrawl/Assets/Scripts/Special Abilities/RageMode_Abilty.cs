@@ -36,6 +36,7 @@ public class RageMode_Abilty : MonoBehaviour, ISpecialAbility
     {
         flameThrower.SetActive(false);
         rageMode = false;
+        StopAllCoroutines();
     }
 
     IEnumerator DamageSelf()

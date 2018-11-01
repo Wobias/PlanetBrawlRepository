@@ -203,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1705818001863872
 GameObject:
   m_ObjectHideFlags: 1
@@ -689,8 +689,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flameThrower: {fileID: 1634122732121330}
   knockbackForce: 10
-  selfDamage: 5
-  dmgRate: 0.5
+  selfDamage: 2
+  dmgRate: 1
 --- !u!114 &114337018336297550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,7 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  physicalDmg: 0
+  physicalDmg: 10
   effectDps: 1
   dmgType: 3
   knockback: 0
@@ -722,8 +722,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNr: 2
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  currentWeapon: {fileID: 114960621826607936}
-  backupWeapon: {fileID: 0}
+  mainWeapon: {fileID: 114960621826607936}
+  bonusWeapon: {fileID: 0}
 --- !u!114 &114418352268567578
 MonoBehaviour:
   m_ObjectHideFlags: 1

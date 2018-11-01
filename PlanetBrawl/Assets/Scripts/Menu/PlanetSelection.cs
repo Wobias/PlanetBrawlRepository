@@ -23,7 +23,7 @@ public class PlanetSelection : MonoBehaviour
         if (other.gameObject.tag == "Earth")
         {
             
-           GameObject newEarth = Instantiate(Earth, transform.position, Quaternion.identity);
+            GameObject newEarth = Instantiate(Earth, transform.position, Quaternion.identity);
             newEarth.layer = gameObject.layer;
             newEarth.GetComponent<PlayerController>().playerNr = playerNumber;
             Destroy(gameObject);

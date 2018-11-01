@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Green
   - Enemy
+  - Toxic
+  - Desert
+  - Water
+  - Earth
   layers:
   - Default
   - TransparentFX
@@ -27,7 +31,7 @@ TagManager:
   - WeaponPlayer4
   - WeaponEnemy
   - Enemy
-  - 
+  - PlayerSelection
   - 
   - 
   - 

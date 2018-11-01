@@ -6,19 +6,19 @@ public class PlayerController : MonoBehaviour, IPlanet
 {
     public int playerNr = 1;
     public Color playerColor;
-    public WeaponController currentWeapon;
-    public WeaponController backupWeapon;
+    public WeaponController mainWeapon;
+    public WeaponController bonusWeapon;
 
     private GameObject currentItem;
     private int weaponLayer;
     private Planet_HealthController health;
     private PlanetMovement movement;
-    private WeaponController weaponCacher;
+    //private WeaponController weaponCacher;
     private ISpecialAbility ability;
 
-    private bool isBonus = false;
-    private bool isFirePressed;
-    private bool canSwitch = true;
+    //private bool isBonus = false;
+    //private bool isFirePressed;
+    //private bool canSwitch = true;
     private bool sprintActive = false;
     private bool specialAvailable = true;
 
@@ -34,52 +34,56 @@ public class PlayerController : MonoBehaviour, IPlanet
     {
         weaponLayer = LayerMask.NameToLayer("Weapon" + LayerMask.LayerToName(gameObject.layer));
 
-        if (currentWeapon)
+        if (mainWeapon)
         {
-            SetLayer(currentWeapon.transform, weaponLayer);
+            SetLayer(mainWeapon.transform, weaponLayer);
         }
     }
 
     void Update()
     {
-        if (currentWeapon == null && isBonus)
-        {
-            canSwitch = true;
-            currentWeapon = backupWeapon;
-            backupWeapon = null;
-            currentWeapon.gameObject.SetActive(true);
-            isBonus = false;
+        //if (currentWeapon == null && isBonus)
+        //{
+        //    canSwitch = true;
+        //    currentWeapon = bonusWeapon;
+        //    bonusWeapon = null;
+        //    currentWeapon.gameObject.SetActive(true);
+        //    isBonus = false;
             
-            if (sprintActive)
-            {
-                currentWeapon.canAttack = false;
-            }
-            else if (!health.stunned && !health.frozen)
-            {
-                currentWeapon.canAttack = true;
-            }
-        }
+        //    if (sprintActive)
+        //    {
+        //        currentWeapon.canAttack = false;
+        //    }
+        //    else if (!health.stunned && !health.frozen)
+        //    {
+        //        currentWeapon.canAttack = true;
+        //    }
+        //}
 
         //Check for a Sprint
         if (!sprintActive && Input.GetAxisRaw("Sprint" + playerNr) == 1)
         {
             sprintActive = true;
             movement.isSprinting = true;
-            currentWeapon.canAttack = false;
+            mainWeapon.canAttack = false;
+            if (bonusWeapon)
+                bonusWeapon.canAttack = false;
         }
         else if (sprintActive && Input.GetAxisRaw("Sprint" + playerNr) == 0)
         {
             sprintActive = false;
             movement.isSprinting = false;
-            currentWeapon.canAttack = true;
+            mainWeapon.canAttack = true;
+            if (bonusWeapon)
+                bonusWeapon.canAttack = true;
         }
 
         Vector2 aimDir = new Vector2(Input.GetAxis("AimHor" + playerNr), Input.GetAxis("AimVer" + playerNr));
 
-        isFirePressed = Input.GetAxisRaw("Fire" + playerNr) == 1 ? true : false;
-
-        currentWeapon.Aim(aimDir);
-        canSwitch = currentWeapon.Shoot(isFirePressed);
+        mainWeapon.Aim(aimDir);
+        mainWeapon.Shoot(Input.GetAxisRaw("Fire" + playerNr) == 1);
+        if (bonusWeapon)
+            bonusWeapon.Shoot(Input.GetButtonDown("BonusFire" + playerNr));
 
         if (Input.GetButtonUp("Special" + playerNr) && ability != null)
         {
@@ -109,45 +113,26 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     public void WeaponPickUp(WeaponController newWeapon)
     {
-        if (!isBonus)
+        if (bonusWeapon)
         {
-            if (backupWeapon != null)
-            {
-                Destroy(backupWeapon.gameObject);
-            }
-            backupWeapon = newWeapon;
-            SetLayer(backupWeapon.transform, weaponLayer);
-            if (canSwitch)
-                SwapWeapons();
-            else
-                backupWeapon.gameObject.SetActive(false);
+            Destroy(bonusWeapon.gameObject);
         }
-        else if (isBonus)
-        {
-            Destroy(currentWeapon.gameObject);
-            currentWeapon = newWeapon;
-            SetLayer(currentWeapon.transform, weaponLayer);
-            currentWeapon.gameObject.SetActive(true);
-        }
-
-        if (sprintActive)
-        {
-            currentWeapon.canAttack = false;
-        }
+        bonusWeapon = newWeapon;
+        SetLayer(bonusWeapon.transform, weaponLayer);
     }
 
-    void SwapWeapons()
-    {
-        if (!isBonus && backupWeapon == null || !canSwitch)
-            return;
+    //void SwapWeapons()
+    //{
+    //    if (!isBonus && bonusWeapon == null || !canSwitch)
+    //        return;
 
-        weaponCacher = currentWeapon;
-        currentWeapon = backupWeapon;
-        backupWeapon = weaponCacher;
-        backupWeapon?.gameObject.SetActive(false);
-        currentWeapon?.gameObject.SetActive(true);
-        isBonus = !isBonus;
-    }
+    //    weaponCacher = currentWeapon;
+    //    currentWeapon = bonusWeapon;
+    //    bonusWeapon = weaponCacher;
+    //    bonusWeapon?.gameObject.SetActive(false);
+    //    currentWeapon?.gameObject.SetActive(true);
+    //    isBonus = !isBonus;
+    //}
 
     private void SetLayer(Transform root, int layer)
     {
@@ -168,7 +153,9 @@ public class PlayerController : MonoBehaviour, IPlanet
         if (sprintActive)
             stunActive = true;
 
-        currentWeapon.canAttack = !stunActive;
+        mainWeapon.canAttack = !stunActive;
+        if (bonusWeapon)
+            bonusWeapon.canAttack = !stunActive;
     }
 
     public void AbilityStun(bool stunActive)
@@ -178,7 +165,9 @@ public class PlayerController : MonoBehaviour, IPlanet
         if (sprintActive)
             stunActive = true;
 
-        currentWeapon.canAttack = !stunActive;
+        mainWeapon.canAttack = !stunActive;
+        if (bonusWeapon)
+            bonusWeapon.canAttack = !stunActive;
     }
 
     public void SetPlanetProtection(bool isActive, float ionPassOnDmg=0)
@@ -201,6 +190,8 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     public void SetWeaponDistance()
     {
-        currentWeapon.ResetMinPos();
+        mainWeapon.ResetMinPos();
+        if (bonusWeapon)
+            bonusWeapon.ResetMinPos();
     }
 }

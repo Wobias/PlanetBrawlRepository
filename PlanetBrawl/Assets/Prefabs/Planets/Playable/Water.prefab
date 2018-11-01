@@ -841,8 +841,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNr: 3
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  currentWeapon: {fileID: 114911619057824068}
-  backupWeapon: {fileID: 0}
+  mainWeapon: {fileID: 114911619057824068}
+  bonusWeapon: {fileID: 0}
 --- !u!114 &114064128575723538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1001,17 +1001,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  radius: 0
-  cooldown: 0
+  radius: 3
+  cooldown: 2
   hitMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 528129
   physicalDmg: 0
   effectDps: 0
-  dmgType: 1
-  knockback: 0
-  stunTime: 0
-  effectTime: 0
+  dmgType: 4
+  knockback: 50
+  stunTime: 0.2
+  effectTime: 2
 --- !u!114 &114763098911651186
 MonoBehaviour:
   m_ObjectHideFlags: 1
