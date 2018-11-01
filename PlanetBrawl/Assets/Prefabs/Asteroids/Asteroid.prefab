@@ -365,12 +365,6 @@ MonoBehaviour:
   rotateSpeed: 50
   movementSpeed: 75
   itemDrops:
-  - {fileID: 1475030756834200, guid: 2ab92c7354e99a8448500d626b216ac8, type: 2}
-  - {fileID: 1470418069018690, guid: 85ec53236b6e465478ded27674f8a7c1, type: 2}
-  - {fileID: 1133695859580398, guid: 05e6e8280ca5a7849b388a3ab53821ef, type: 2}
-  - {fileID: 1359780370652822, guid: c87d45d15bcb90f419f2ea76a981fff2, type: 2}
-  - {fileID: 1803943861299072, guid: 8fe9b34e386886742afa3add265b1985, type: 2}
-  - {fileID: 1470418069018690, guid: b613733c61032184c8c6636db88ad1a4, type: 2}
   - {fileID: 1643763656143936, guid: a3ec70bcb04b37041884a2bd09308427, type: 2}
 --- !u!198 &198248826323685114
 ParticleSystem:

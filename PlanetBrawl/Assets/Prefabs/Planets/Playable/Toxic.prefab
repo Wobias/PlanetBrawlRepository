@@ -672,8 +672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNr: 4
   playerColor: {r: 0.07629752, g: 1, b: 0, a: 1}
-  currentWeapon: {fileID: 114211308912255308}
-  backupWeapon: {fileID: 0}
+  mainWeapon: {fileID: 114211308912255308}
+  bonusWeapon: {fileID: 0}
 --- !u!114 &114555019833506620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,8 +703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ec7b4738d450247a60e1121d856d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
-  minePrefab: {fileID: 0}
+  cooldown: 2
+  minePrefab: {fileID: 1028146333755204, guid: 6c7592f16f688f24baa69ad5c27ad3b7, type: 2}
 --- !u!114 &114776493536227230
 MonoBehaviour:
   m_ObjectHideFlags: 1
