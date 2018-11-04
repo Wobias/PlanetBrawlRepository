@@ -9,12 +9,17 @@ public class HealthController : MonoBehaviour, IDamageable
     public float health = 100f;
     public DamageType imunity = DamageType.none;
     public DamageType weakness = DamageType.none;
+    public float burnSpeedBonus = 0.5f;
 
     public GameObject fireParticles;
     public GameObject iceParticles;
     public GameObject poisonParticles;
 
+    public bool invincible = false;
+
+    [HideInInspector]
     public bool stunned = false;
+    [HideInInspector]
     public bool frozen = false;
 
     protected float poisonDamage;
@@ -29,6 +34,7 @@ public class HealthController : MonoBehaviour, IDamageable
 
     protected Rigidbody2D rb2d;
     protected float dpsAnimTimeout = 0.75f;
+    protected ISpeedable movement;
     #endregion
 
 
@@ -37,13 +43,15 @@ public class HealthController : MonoBehaviour, IDamageable
         //Set max health
         maxHealth = health;
         rb2d = GetComponent<Rigidbody2D>();
+        movement = GetComponent<ISpeedable>();
     }
 
     protected virtual void FixedUpdate()
     {
         if (dpsApplied)
         {
-            health -= (poisonDamage + fireDamage + ionDamage) * Time.fixedDeltaTime;
+            if (!invincible)
+                health -= (poisonDamage + fireDamage + ionDamage) * Time.fixedDeltaTime;
 
             if (health > 0)
             {
@@ -103,7 +111,8 @@ public class HealthController : MonoBehaviour, IDamageable
         if (weakness == DamageType.physical)
             damage *= 2;
 
-        health -= damage;
+        if (!invincible)
+            health -= damage;
 
         if (health > 0)
         {
@@ -157,6 +166,9 @@ public class HealthController : MonoBehaviour, IDamageable
         }
 
         StopCoroutine("StopFire");
+
+        if (movement != null && fireDamage == 0)
+            movement.SpeedEffect(burnSpeedBonus);
 
         fireDamage = dps;
         fireParticles.SetActive(true);
@@ -250,6 +262,9 @@ public class HealthController : MonoBehaviour, IDamageable
         {
             dpsApplied = false;
         }
+
+        if (movement != null)
+            movement.SpeedEffect(-burnSpeedBonus);
     }
 
     protected IEnumerator Thaw(float duration)

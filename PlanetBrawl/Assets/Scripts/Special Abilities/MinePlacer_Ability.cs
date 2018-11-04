@@ -6,7 +6,9 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
 {
     public float cooldown;
     public GameObject minePrefab;
+    public ParticleSystem specialParticles;
 
+    private PlayerController controller;
     private int mineLayer;
     private bool canAttack = true;
     private bool pressed = false;
@@ -14,7 +16,8 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
 
     void Start()
     {
-        mineLayer = LayerMask.NameToLayer("WeaponPlayer" + GetComponent<PlayerController>().playerNr);
+        mineLayer = LayerMask.NameToLayer("Weapon" + LayerMask.LayerToName(gameObject.layer));
+        controller = GetComponent<PlayerController>();
     }
 
     public void Use()
@@ -23,9 +26,11 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
         {
             pressed = true;
             canAttack = false;
+            specialParticles.Stop();
 
             GameObject mine = Instantiate(minePrefab, transform.position, Quaternion.identity);
             mine.layer = mineLayer;
+            mine.transform.Find("Outline").GetComponent<SpriteRenderer>().color = controller.playerColor;
             StartCoroutine(Cooldown());
         }
     }
@@ -38,6 +43,7 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
     IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(cooldown);
+        specialParticles.Play();
         canAttack = true;
     }
 }

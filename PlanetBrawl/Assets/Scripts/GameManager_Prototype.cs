@@ -12,6 +12,7 @@ public class GameManager_Prototype : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> teamOne = new List<GameObject>();
     public List<GameObject> teamTwo = new List<GameObject>();
+    public Transform[] playerSpawns;
 
     public GameObject victoryScreen;
 
@@ -19,6 +20,11 @@ public class GameManager_Prototype : MonoBehaviour
 
     public bool teamMode;
     public bool gameOver;
+
+    public Color[] teamColors;
+
+    private MenuManager menuManager;
+
 
     private void Awake()
     {
@@ -30,65 +36,70 @@ public class GameManager_Prototype : MonoBehaviour
         }
 
 
-        foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
+        menuManager = FindObjectOfType<MenuManager>();
+        teamMode = menuManager.teamMode;
+
+        for (int i = 0; i < 4; i++)
         {
-            players.Add(player);
+            if (menuManager.playerNumbers[i] != 0)
+            {
+                GameObject newPlayer = Instantiate(menuManager.playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
+                newPlayer.GetComponent<PlayerController>().playerNr = menuManager.playerNumbers[i];
+                players.Add(newPlayer);
+            }
         }
+
+        Destroy(menuManager.gameObject);
 
         if (teamMode == true)
         {
-            //players[0].layer = 8;
-            //players[1].layer = 8;
-            //players[2].layer = 9;
-            //players[3].layer = 9;
+            if (players.Count < 3)
+            {
+                SetLayer(players[0].transform, LayerMask.NameToLayer("Player1"));
+                if (players.Count == 2)
+                    SetLayer(players[1].transform, LayerMask.NameToLayer("Player2"));
+            }
+            else
+            {
+                SetLayer(players[0].transform, LayerMask.NameToLayer("Player1"));
+                SetLayer(players[1].transform, LayerMask.NameToLayer("Player2"));
+                SetLayer(players[2].transform, LayerMask.NameToLayer("Player3"));
+                if (players.Count == 4)
+                    SetLayer(players[3].transform, LayerMask.NameToLayer("Player4"));
+            }
 
             foreach (var player in players)
             {
                 if (player != null)
                 {
-                    if (player.layer == 8)
+                    if (player.layer == LayerMask.NameToLayer("Player1"))
                     {
                         teamOne.Add(player);
+                        player.GetComponent<PlayerController>().playerColor = teamColors[0];
                     }
-                    else if (player.layer == 9)
+                    else if (player.layer == LayerMask.NameToLayer("Player2"))
                     {
                         teamTwo.Add(player);
+                        player.GetComponent<PlayerController>().playerColor = teamColors[1];
                     }
                 }
             }
         }
-        //else if (teamMode == false)
-        //{
-        //    players[0].layer = 8;
-        //    players[1].layer = 9;
-        //    players[2].layer = 10;
-        //    players[3].layer = 11;
-
-        //    for (int i = 0; i < players.Count; i++)
-        //    {
-        //        SetLayer(players[i].transform, players[i].layer);
-        //    }
-        //}
+        else if (teamMode == false)
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (players[i] != null)
+                {
+                    players[i].GetComponent<PlayerController>().playerColor = teamColors[i];
+                    SetLayer(players[i].transform, LayerMask.NameToLayer("Player" + (i+1).ToString()));
+                }
+            }
+        }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Destroy(players[2]);
-            if (players[3] != null)
-                Destroy(players[3]);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Destroy(players[3]);
-        }
-
         VictoryConditions();
     }
 
@@ -126,7 +137,7 @@ public class GameManager_Prototype : MonoBehaviour
             if (teamOne.Count <= 0)
             {
                 Debug.Log("Team Two is victorious");
-                victoryText.SetText("Team Two Victory!");
+                victoryText.SetText("Team 2 won!");
                 victoryScreen.SetActive(true);
 
 
@@ -149,7 +160,7 @@ public class GameManager_Prototype : MonoBehaviour
             if (teamTwo.Count <= 0)
             {
                 Debug.Log("Team One is victorious");
-                victoryText.SetText("Team One Victory!");
+                victoryText.SetText("Team 1 won!");
                 victoryScreen.SetActive(true);
 
 
@@ -177,7 +188,7 @@ public class GameManager_Prototype : MonoBehaviour
                 if (players.Count == 1)
                 {
                     Debug.Log(players[0].name + " is victorious");
-                    victoryText.SetText(players[0].name + " Victory!");
+                    victoryText.SetText("Player " + players[0].GetComponent<PlayerController>().playerNr + " won!");
                     victoryScreen.SetActive(true);
 
                     players[0].transform.position = new Vector3(0f, 0f, 0f);

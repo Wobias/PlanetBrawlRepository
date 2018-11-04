@@ -12,6 +12,7 @@ public class PlanetMovement : MonoBehaviour, ISpeedable
     #region
     public float speed = 250f;
     public float speedBonus = 100f;
+    public float effectMultiplier = 1;
     public float sprintMultipier = 2f;
 
     float baseSpeed;
@@ -54,7 +55,7 @@ public class PlanetMovement : MonoBehaviour, ISpeedable
 
     void FixedUpdate()
     {
-        myRigidbody.AddForce(direction * speed * Time.fixedDeltaTime);
+        myRigidbody.AddForce(direction * speed * effectMultiplier * Time.fixedDeltaTime);
     }
 
     //ISpeedable Method
@@ -84,5 +85,10 @@ public class PlanetMovement : MonoBehaviour, ISpeedable
             baseSpeed = criticalHpSpeed;
             sprintSpeed = criticalHpSpeed * sprintMultipier;
         }
+    }
+
+    public void SpeedEffect(float speedMultiplier)
+    {
+        effectMultiplier += speedMultiplier;
     }
 }

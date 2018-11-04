@@ -4,12 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Green
   - Enemy
-  - Toxic
-  - Desert
-  - Water
-  - Earth
   layers:
   - Default
   - TransparentFX
@@ -32,8 +27,8 @@ TagManager:
   - WeaponEnemy
   - Enemy
   - PlayerSelection
-  - 
-  - 
+  - Walls
+  - LevelGate
   - 
   - 
   - 

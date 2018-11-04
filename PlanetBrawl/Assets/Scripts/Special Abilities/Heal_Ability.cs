@@ -5,6 +5,8 @@ using UnityEngine;
 public class Heal_Ability : MonoBehaviour, ISpecialAbility
 {
     public float healthPerSec = 10;
+    public ParticleSystem specialParticles;
+    public ParticleSystem healParticles;
 
 
     private bool healing = false;
@@ -22,6 +24,8 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
     {
         if (!healing)
         {
+            specialParticles.Stop();
+            healParticles.Play();
             controller.AbilityStun(true);
             StartCoroutine(HealOverTime());
             healing = true;
@@ -30,6 +34,8 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
 
     public void StopUse()
     {
+        healParticles.Stop();
+        specialParticles.Play();
         healing = false;
         controller.AbilityStun(false);
     }

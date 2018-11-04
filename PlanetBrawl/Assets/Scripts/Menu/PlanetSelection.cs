@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class PlanetSelection : MonoBehaviour
 {
-    public GameObject playerEarth;
-    public GameObject playerDesert;
-    public GameObject playerWater;
-    public GameObject playerToxic;
+    public GameObject characterPrefab;
+    public Color[] playerColors;
+
+    private float cooldown = 0;
+
+    int playerNumber;
+
     PlayerController playerController;
-    public int playerNumber;
-    public float cooldown = 0;
+    MenuManager menuManager;
 
 
     private void Start()
     {
         cooldown = 0;
+        menuManager = FindObjectOfType<MenuManager>();
     }
 
     private void Update()
@@ -31,51 +34,33 @@ public class PlanetSelection : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (cooldown == 0)
         {
-            
-            
-            playerController = other.gameObject.GetComponent<PlayerController>();
+            playerController = other.transform.root.GetComponent<PlayerController>();
+
+            if (playerController == null)
+                return;
+
             playerNumber = playerController.playerNr;
 
-            if (transform.gameObject.tag == "Earth" && cooldown == 0)
-            {
-                GameObject newEarth = Instantiate(playerEarth, other.transform.position, Quaternion.identity);
-                newEarth.layer = other.gameObject.layer;
-                newEarth.GetComponent<PlayerController>().playerNr = playerNumber;
-                Destroy(other.gameObject);
-                cooldown += 5;
-            }
-            else if (transform.gameObject.tag == "Desert" && cooldown == 0)
-            {
-                GameObject newDesert = Instantiate(playerDesert, other.transform.position, Quaternion.identity);
-                newDesert.layer = other.gameObject.layer;
-                newDesert.GetComponent<PlayerController>().playerNr = playerNumber;
-                Destroy(other.gameObject);
-                cooldown += 5;
+            GameObject newPlanet = Instantiate(characterPrefab, other.transform.root.position, Quaternion.identity);
+            SetLayer(newPlanet.transform, other.transform.root.gameObject.layer);
+            newPlanet.GetComponent<PlayerController>().playerNr = playerNumber;
+            newPlanet.GetComponent<PlayerController>().playerColor = playerColors[playerNumber-1];
+            newPlanet.GetComponent<HealthController>().invincible = true;
+            Destroy(other.transform.root.gameObject);
+            cooldown += 1;
 
-            }
-            else if (transform.gameObject.tag == "Water" && cooldown == 0)
-            {
-                GameObject newWater = Instantiate(playerWater, other.transform.position, Quaternion.identity);
-                newWater.layer = other.gameObject.layer;
-                newWater.GetComponent<PlayerController>().playerNr = playerNumber;
-                Destroy(other.gameObject);
-                cooldown += 5;
-
-            }
-            else if (transform.gameObject.tag == "Toxic" && cooldown == 0)
-            {
-                GameObject newToxic = Instantiate(playerToxic, other.transform.position, Quaternion.identity);
-                newToxic.layer = other.gameObject.layer;
-                newToxic.GetComponent<PlayerController>().playerNr = playerNumber;
-                Destroy(other.gameObject);
-                cooldown += 5;
-
-            }
+            menuManager.playerPrefabs[playerNumber-1] = characterPrefab;
         }
+    }
 
+    private void SetLayer(Transform root, int layer)
+    {
+        root.gameObject.layer = layer;
+        foreach (Transform child in root)
+            SetLayer(child, layer);
     }
 }

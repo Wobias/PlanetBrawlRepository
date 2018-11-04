@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class PortalController : MonoBehaviour
 {
-    public GameObject otherPortal;
+    public float timeout;
+    public PortalController[] otherPortals;
+
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        other.transform.root.position = otherPortal.transform.position;
+        int portalSelection = Random.Range(0, otherPortals.Length - 1);
 
-        PortalSpawner.portalSpawner.portalIsOpen = false;
-        PortalSpawner.portalSpawner.portalTimer = Random.Range(2f, 8f);
+        other.transform.root.position = otherPortals[portalSelection].transform.position;
 
-        otherPortal.SetActive(false);
-        gameObject.SetActive(false);
+        //PortalSpawner.portalSpawner.portalIsOpen = false;
+        //PortalSpawner.portalSpawner.portalTimer = Random.Range(2f, 8f);
+
+        otherPortals[portalSelection].gameObject.SetActive(false);
+        StartCoroutine(otherPortals[portalSelection].EnablePortal());
     }
 
+    public IEnumerator EnablePortal()
+    {
+        yield return new WaitForSeconds(timeout);
+
+        gameObject.SetActive(true);
+    }
 }

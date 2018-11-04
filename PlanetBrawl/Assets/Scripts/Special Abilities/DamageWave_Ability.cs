@@ -9,6 +9,8 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     public float radius;
     public float cooldown;
     public LayerMask hitMask;
+    public ParticleSystem specialParticles;
+    public ParticleSystem waveParticles;
 
     [SerializeField]
     public float physicalDmg;
@@ -64,6 +66,9 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     {
         if (canAttack && !pressed)
         {
+            specialParticles.Stop();
+            waveParticles.Play();
+
             canAttack = false;
             pressed = true;
 
@@ -87,6 +92,7 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     {
         yield return new WaitForSeconds(cooldown);
         canAttack = true;
+        specialParticles.Play();
     }
 
     void OnDrawGizmos()

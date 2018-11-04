@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IPlanet
     public WeaponController mainWeapon;
     public WeaponController bonusWeapon;
 
+
     private GameObject currentItem;
     private int weaponLayer;
     private Planet_HealthController health;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour, IPlanet
         health = GetComponentInChildren<Planet_HealthController>();
         movement = GetComponent<PlanetMovement>();
         ability = GetComponent<ISpecialAbility>();
+        Camera.main.GetComponent<CameraFollow>().AddPlayers(gameObject.transform);
     }
 
     void Start()

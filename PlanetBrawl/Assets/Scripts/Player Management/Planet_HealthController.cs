@@ -12,8 +12,6 @@ public class Planet_HealthController : HealthController
     private IPlanet controller;
     private Animator animator;
 
-    
-
     public static HealthState healthState = HealthState.full;
 
     Transform myTransform;
@@ -84,7 +82,11 @@ public class Planet_HealthController : HealthController
         if (damage)
         {
             animator.SetTrigger("Hit");
-        } 
+        }
+        else
+        {
+            animator.SetTrigger("Heal");
+        }
         controller.SetWeaponDistance();
     }
 

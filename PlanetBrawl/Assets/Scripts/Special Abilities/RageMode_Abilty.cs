@@ -8,6 +8,8 @@ public class RageMode_Abilty : MonoBehaviour, ISpecialAbility
     public float knockbackForce;
     public float selfDamage;
     public float dmgRate = 0.5f;
+    public ParticleSystem specialSystem;
+    public GameObject weapon;
 
     private bool rageMode = false;
     private Rigidbody2D rb2d;
@@ -24,6 +26,8 @@ public class RageMode_Abilty : MonoBehaviour, ISpecialAbility
     {
         if (!rageMode)
         {
+            specialSystem.Stop();
+            weapon.SetActive(false);
             flameThrower.SetActive(true);
             rageMode = true;
             StartCoroutine(DamageSelf());
@@ -34,9 +38,10 @@ public class RageMode_Abilty : MonoBehaviour, ISpecialAbility
 
     public void StopUse()
     {
+        specialSystem.Play();
+        weapon.SetActive(true);
         flameThrower.SetActive(false);
         rageMode = false;
-        StopAllCoroutines();
     }
 
     IEnumerator DamageSelf()

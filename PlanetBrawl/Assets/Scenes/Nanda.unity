@@ -340,6 +340,10 @@ Prefab:
       propertyPath: otherPortal
       value: 
       objectReference: {fileID: 1939130437}
+    - target: {fileID: 1268767065895854, guid: e29f9f00f11c63a4ca3b490f7398deaf, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 70102913742269194, guid: e29f9f00f11c63a4ca3b490f7398deaf, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: e29f9f00f11c63a4ca3b490f7398deaf, type: 2}
@@ -5124,7 +5128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &459546389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5255,6 +5259,10 @@ Prefab:
       propertyPath: otherPortal
       value: 
       objectReference: {fileID: 480005523}
+    - target: {fileID: 1208401265855908, guid: 6e10b70eccd3e4548bce0a80e98af947, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 70297690309176456, guid: 6e10b70eccd3e4548bce0a80e98af947, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 6e10b70eccd3e4548bce0a80e98af947, type: 2}

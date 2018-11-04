@@ -80,4 +80,9 @@ public class CameraFollow : MonoBehaviour
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, Mathf.Clamp((maxBounds - minBounds).magnitude, maxZoom, minZoom), zoomSpeed);
         //pixelPerfectZoom.SetZoom((maxBounds - minBounds).magnitude / maxZoom * 2);
     }
+
+    public void AddPlayers(Transform newPlayer)
+    {
+        players.Add(newPlayer);
+    }
 }

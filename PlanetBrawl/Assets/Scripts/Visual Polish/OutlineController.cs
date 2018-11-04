@@ -4,14 +4,29 @@ using UnityEngine;
 
 public class OutlineController : MonoBehaviour
 {
+    public bool isParticle = false;
+
 	void Start ()
     {
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         PlayerController controller = transform.root.GetComponent<PlayerController>();
 
-        if (renderer != null && controller != null)
+        if (!isParticle)
         {
-            renderer.color = controller.playerColor;
+            SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+            if (renderer != null && controller != null)
+            {
+                renderer.color = controller.playerColor;
+            }
+        }
+        else
+        {
+            ParticleSystem particleSystem = GetComponent<ParticleSystem>();
+
+            if (particleSystem != null && controller != null)
+            {
+                particleSystem.startColor = controller.playerColor;
+            }
         }
 	}
 }
