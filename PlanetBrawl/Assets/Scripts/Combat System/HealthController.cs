@@ -27,12 +27,17 @@ public class HealthController : MonoBehaviour, IDamageable
     protected float ionDamage;
     protected float specialDamage;
 
+    protected Coroutine poisonRoutine;
+    protected Coroutine fireRoutine;
+    protected Coroutine iceRoutine;
+    protected Coroutine stunRoutine;
+
     protected float maxHealth;
 
     protected bool dpsApplied = false;
     protected bool dpsAnim = true;
 
-    protected Rigidbody2D rb2d;
+    protected IMovable movable;
     protected float dpsAnimTimeout = 0.75f;
     protected ISpeedable movement;
     #endregion
@@ -42,7 +47,7 @@ public class HealthController : MonoBehaviour, IDamageable
     {
         //Set max health
         maxHealth = health;
-        rb2d = GetComponent<Rigidbody2D>();
+        movable = GetComponent<IMovable>();
         movement = GetComponent<ISpeedable>();
     }
 
@@ -81,7 +86,7 @@ public class HealthController : MonoBehaviour, IDamageable
                 Stun(stunTime);
 
             if (knockbackForce != Vector2.zero)
-                rb2d.AddForce(knockbackForce);
+                movable.ApplyTempExForce(knockbackForce, stunTime);
         }
 
         PhysicalHit(physicalDmg);
@@ -135,7 +140,8 @@ public class HealthController : MonoBehaviour, IDamageable
             dps *= 2;
         }
 
-        StopCoroutine("StopPoison");
+        if (poisonRoutine != null)
+            StopCoroutine(poisonRoutine);
 
         poisonDamage = dps;
         poisonParticles.SetActive(true);
@@ -145,14 +151,15 @@ public class HealthController : MonoBehaviour, IDamageable
             dpsApplied = true;
         }
 
-        StartCoroutine(StopPoison(effectTime));
+        poisonRoutine = StartCoroutine(StopPoison(effectTime));
     }
 
     protected void Burn(float dps, float effectTime)
     {
         if (frozen)
         {
-            StopCoroutine("Thaw");
+            StopCoroutine(iceRoutine);
+            iceRoutine = null;
             InstantThaw();
         }
 
@@ -165,10 +172,14 @@ public class HealthController : MonoBehaviour, IDamageable
             dps *= 2;
         }
 
-        StopCoroutine("StopFire");
-
-        if (movement != null && fireDamage == 0)
+        if (fireRoutine != null)
+        {
+            StopCoroutine(fireRoutine);
+        }
+        else if (movement != null && fireDamage == 0)
+        {
             movement.SpeedEffect(burnSpeedBonus);
+        }   
 
         fireDamage = dps;
         fireParticles.SetActive(true);
@@ -178,7 +189,7 @@ public class HealthController : MonoBehaviour, IDamageable
             dpsApplied = true;
         }
 
-        StartCoroutine(StopFire(effectTime));
+        fireRoutine = StartCoroutine(StopFire(effectTime));
     }
 
     protected void Freeze(float effectTime)
@@ -201,7 +212,7 @@ public class HealthController : MonoBehaviour, IDamageable
         if (!stunned)
             StunObject(true);
 
-        StartCoroutine(Thaw(effectTime));
+        iceRoutine = StartCoroutine(Thaw(effectTime));
     }
 
     public void IonDamage(float dps)
@@ -234,10 +245,12 @@ public class HealthController : MonoBehaviour, IDamageable
 
     protected void Stun(float stunTime)
     {
-        StopCoroutine("StopStun");
+        if (stunRoutine != null)
+            StopCoroutine(stunRoutine);
+
         stunned = true;
         StunObject(true);
-        StartCoroutine(StopStun(stunTime));
+        stunRoutine = StartCoroutine(StopStun(stunTime));
     }
 
     protected IEnumerator StopPoison(float duration)
@@ -250,6 +263,8 @@ public class HealthController : MonoBehaviour, IDamageable
         {
             dpsApplied = false;
         }
+
+        poisonRoutine = null;
     }
 
     protected IEnumerator StopFire(float duration)
@@ -265,12 +280,16 @@ public class HealthController : MonoBehaviour, IDamageable
 
         if (movement != null)
             movement.SpeedEffect(-burnSpeedBonus);
+
+        fireRoutine = null;
     }
 
     protected IEnumerator Thaw(float duration)
     {
         yield return new WaitForSeconds(duration);
         InstantThaw();
+
+        iceRoutine = null;
     }
 
     protected IEnumerator StopStun(float duration)
@@ -279,6 +298,8 @@ public class HealthController : MonoBehaviour, IDamageable
         stunned = false;
         if (!frozen)
             StunObject(false);
+
+        stunRoutine = null;
     }
 
     protected IEnumerator AllowDpsAnim()

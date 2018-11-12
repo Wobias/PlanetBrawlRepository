@@ -26,7 +26,7 @@ public class WeaponController_Moon : WeaponController
 
     public override bool Shoot (bool isFirePressed)
     {
-        if (isFirePressed && !fireHeld && canAttack && moonState == OrbitState.orbit)
+        if (isFirePressed && canAttack && moonState == OrbitState.orbit && !fireHeld)
         {
             fireHeld = true;
             moonState = OrbitState.shooting;
@@ -37,11 +37,11 @@ public class WeaponController_Moon : WeaponController
             }
         }
         //Check for Trigger Release
-        else if (!isFirePressed && moonState == OrbitState.shooting)
-        {
-            //In case the moon is mid-punch, retract it
-            moonState = OrbitState.retracting;
-        }
+        //else if (!isFirePressed && moonState == OrbitState.shooting)
+        //{
+        //    //In case the moon is mid-punch, retract it
+        //    moonState = OrbitState.retracting;
+        //}
 
         if (!isFirePressed && fireHeld)
         {
@@ -115,6 +115,12 @@ public class WeaponController_Moon : WeaponController
         {
             moonState = OrbitState.retracting;
         }
+    }
+
+    public override void Aim(Vector2 direction)
+    {
+        if (moonState == OrbitState.orbit)
+            base.Aim(direction);
     }
 
     protected override void OnDistanceReset()

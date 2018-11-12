@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour, IPlanet
     //private bool isBonus = false;
     //private bool isFirePressed;
     //private bool canSwitch = true;
-    private bool sprintActive = false;
+    //private bool sprintActive = false;
     private bool specialAvailable = true;
 
 
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour, IPlanet
         //    bonusWeapon = null;
         //    currentWeapon.gameObject.SetActive(true);
         //    isBonus = false;
-            
+
         //    if (sprintActive)
         //    {
         //        currentWeapon.canAttack = false;
@@ -63,43 +63,50 @@ public class PlayerController : MonoBehaviour, IPlanet
         //}
 
         //Check for a Sprint
-        if (!sprintActive && Input.GetAxisRaw("Sprint" + playerNr) == 1)
-        {
-            sprintActive = true;
-            movement.isSprinting = true;
-            mainWeapon.canAttack = false;
-            if (bonusWeapon)
-                bonusWeapon.canAttack = false;
-        }
-        else if (sprintActive && Input.GetAxisRaw("Sprint" + playerNr) == 0)
-        {
-            sprintActive = false;
-            movement.isSprinting = false;
-            mainWeapon.canAttack = true;
-            if (bonusWeapon)
-                bonusWeapon.canAttack = true;
-        }
+        //if (!sprintActive && InputSystem.TriggerPressed(Trigger.Left, playerNr-1))
+        //{
+        //    sprintActive = true;
+        //    movement.isSprinting = true;
+        //    mainWeapon.canAttack = false;
+        //    if (bonusWeapon)
+        //        bonusWeapon.canAttack = false;
+        //}
+        //else if (sprintActive && InputSystem.TriggerUp(Trigger.Left, playerNr-1))
+        //{
+        //    sprintActive = false;
+        //    movement.isSprinting = false;
+        //    mainWeapon.canAttack = true;
+        //    if (bonusWeapon)
+        //        bonusWeapon.canAttack = true;
+        //}
 
-        Vector2 aimDir = new Vector2(Input.GetAxis("AimHor" + playerNr), Input.GetAxis("AimVer" + playerNr));
+        Vector2 aimDir = new Vector2(InputSystem.ThumbstickInput(ThumbStick.RightX, playerNr-1), InputSystem.ThumbstickInput(ThumbStick.RightY, playerNr-1));
 
         mainWeapon.Aim(aimDir);
-        mainWeapon.Shoot(Input.GetAxisRaw("Fire" + playerNr) == 1);
+        mainWeapon.Shoot(InputSystem.TriggerPressed(Trigger.Right, playerNr-1));
         if (bonusWeapon)
-            bonusWeapon.Shoot(Input.GetButtonDown("BonusFire" + playerNr));
+            bonusWeapon.Shoot(InputSystem.ButtonDown(Button.RightShoulder, playerNr-1));
 
-        if (Input.GetButtonUp("Special" + playerNr) && ability != null)
+        if (ability != null)
         {
-            ability.StopUse();
-        }
-        else if (Input.GetButton("Special" + playerNr) && specialAvailable && !sprintActive && ability != null)
-        {
-            ability.Use();
+            if (InputSystem.TriggerUp(Trigger.Left, playerNr - 1))
+            {
+                ability.StopUse();
+            }
+            else if (InputSystem.TriggerPressed(Trigger.Left, playerNr - 1) && specialAvailable)// && !sprintActive)
+            {
+                ability.Use();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        movement.direction = new Vector2(Input.GetAxis("Horizontal" + playerNr), Input.GetAxis("Vertical" + playerNr));
+        if (!movement.stunned)
+        {
+            movement.direction = Vector2.Lerp(movement.direction, new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1)), movement.inputRolloff);
+            //movement.direction = new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1));
+        }
     }
 
     public void ItemPickup(GameObject newItem)
@@ -145,15 +152,20 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     public void Stun(bool stunActive)
     {
-        if (ability != null)
-            ability.StopUse();
+        if (stunActive)
+        {
+            InputSystem.Rumble(new Vector2(0.5f, 0.5f), 0.25f, playerNr-1);
+
+            if (ability != null)
+                ability.StopUse();
+        }
 
         specialAvailable = !stunActive;
 
-        movement.enabled = !stunActive;
+        movement.stunned = stunActive;
 
-        if (sprintActive)
-            stunActive = true;
+        //if (sprintActive)
+        //    stunActive = true;
 
         mainWeapon.canAttack = !stunActive;
         if (bonusWeapon)
@@ -162,10 +174,10 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     public void AbilityStun(bool stunActive)
     {
-        movement.enabled = !stunActive;
+        movement.stunned = stunActive;
 
-        if (sprintActive)
-            stunActive = true;
+        //if (sprintActive)
+        //    stunActive = true;
 
         mainWeapon.canAttack = !stunActive;
         if (bonusWeapon)

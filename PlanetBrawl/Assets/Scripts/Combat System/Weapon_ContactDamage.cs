@@ -34,21 +34,24 @@ public class Weapon_ContactDamage : MonoBehaviour
             isWeapon = true;
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnCollisionEnter2D(Collision2D col)
     {
-        GetTarget(other);
+        if (!this.enabled)
+            return;
+
+        GetTarget(col.collider);
         
         //Hit the target if it is damageable
         if (target != null)
         {
             if (isWeapon)
             {
-                target.Hit(physicalDmg, effectDps, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, effectDps, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
                 weapon.OnHit();
             }
             else
             {
-                target.Hit(physicalDmg, effectDps, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, effectDps, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
             }
             AudioManager1.instance.Play(hitsound);
         }

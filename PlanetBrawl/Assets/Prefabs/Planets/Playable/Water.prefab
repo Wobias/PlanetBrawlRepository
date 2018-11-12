@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 114072562153671680}
   - component: {fileID: 114036081789346512}
   - component: {fileID: 114162425715907102}
-  - component: {fileID: 114683928712305072}
+  - component: {fileID: 114782513362397478}
   - component: {fileID: 95379661018962866}
   m_Layer: 10
   m_Name: Water
@@ -112,8 +112,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4441012043005576}
   - component: {fileID: 58832249368040684}
-  - component: {fileID: 250490101945499754}
-  m_Layer: 10
+  - component: {fileID: 114936328501316660}
+  m_Layer: 23
   m_Name: GravPull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +523,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404772579806080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2746935, y: 3.2826953, z: 0}
+  m_LocalPosition: {x: 0.6891632, y: -3.5845802, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4852080690376248}
@@ -592,8 +592,8 @@ CircleCollider2D:
   m_GameObject: {fileID: 1875731761250182}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Material: {fileID: 6200000, guid: 727940f3864f73345b72db5669fc2d16, type: 2}
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -624,11 +624,11 @@ CircleCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 4
 --- !u!95 &95379661018962866
 Animator:
   serializedVersion: 3
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNr: 3
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  playerColor: {r: 1, g: 1, b: 1, a: 1}
   mainWeapon: {fileID: 114911619057824068}
   bonusWeapon: {fileID: 0}
 --- !u!114 &114064128575723538
@@ -891,8 +891,9 @@ MonoBehaviour:
   speed: 600
   speedBonus: 50
   effectMultiplier: 1
-  sprintMultipier: 2
-  isSprinting: 0
+  inputRolloff: 0.1
+  forceRolloff: 0.1
+  stunned: 0
 --- !u!114 &114162425715907102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -904,7 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43118a3bfbf8754da6fc2f3a5223e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 80
+  health: 3
   imunity: 4
   weakness: 3
   burnSpeedBonus: 1
@@ -951,11 +952,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  physicalDmg: 10
+  physicalDmg: 1
   effectDps: 0
   dmgType: 1
-  knockback: 200
-  stunTime: 0.2
+  knockback: 10
+  stunTime: 0.25
   effectTime: 0
 --- !u!114 &114479378931733880
 MonoBehaviour:
@@ -969,10 +970,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  physicalDmg: 5
+  physicalDmg: 1
   effectDps: 0
   dmgType: 1
-  knockback: 250
+  knockback: 15
   stunTime: 0.2
   effectTime: 0
 --- !u!114 &114616154287006456
@@ -987,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isParticle: 0
---- !u!114 &114683928712305072
+--- !u!114 &114782513362397478
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -995,23 +996,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1404772579806080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc0b48d52dcf34479d9347b934afe07, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d08367e4eac81d44999c069e61582ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitsound: punch
-  radius: 4
-  cooldown: 5
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 528129
+  speed: 20
+  duration: 0.2
   specialParticles: {fileID: 198979664625962518}
-  waveParticles: {fileID: 198298849316803226}
-  physicalDmg: 2
-  effectDps: 0
-  dmgType: 4
-  knockback: 50
-  stunTime: 0.2
-  effectTime: 2
+  planetCollider: {fileID: 58580348574965608}
 --- !u!114 &114911619057824068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1027,9 +1018,22 @@ MonoBehaviour:
   rotationSpeed: 10
   weaponParts:
   - {fileID: 50736742930729808}
-  punchSpeed: 25
-  retractSpeed: 20
-  maxDistance: 15
+  punchSpeed: 20
+  retractSpeed: 25
+  maxDistance: 3
+--- !u!114 &114936328501316660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418323433115914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b5e5f71eba5044eb91188a1a9cae8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: 1.5
+  gravLayer: GravEffector
 --- !u!198 &198263793672524942
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -38094,22 +38098,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!250 &250490101945499754
-PointEffector2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1418323433115914}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 528129
-  m_ForceMagnitude: -20
-  m_ForceVariation: 0
-  m_DistanceScale: 1
-  m_ForceSource: 0
-  m_ForceTarget: 0
-  m_ForceMode: 2
-  m_Drag: 0
-  m_AngularDrag: 0

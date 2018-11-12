@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour
+public class AsteroidController : MonoBehaviour, IMovable
 {
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
@@ -27,7 +27,8 @@ public class AsteroidController : MonoBehaviour
     public void Destroy()
     {
         whichItem = Random.Range(0, itemDrops.Length);
-        Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
+        if (itemDrops[whichItem] != null)
+            Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
     }
 
     public void ChooseDirection()
@@ -66,5 +67,20 @@ public class AsteroidController : MonoBehaviour
         {
             rb2d.AddForce(transform.up * movementSpeed); //UP
         }
+    }
+
+    public void ApplyGravForce(Vector2 force)
+    {
+        return;
+    }
+
+    public void ApplyTempExForce(Vector2 force, float time)
+    {
+        return;
+    }
+
+    public void FlushGravForce()
+    {
+        return;
     }
 }
