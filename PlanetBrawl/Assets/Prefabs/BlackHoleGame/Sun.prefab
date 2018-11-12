@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114165417821047104}
   - component: {fileID: 96995978428761058}
   - component: {fileID: 58264133278161320}
+  - component: {fileID: 114797119236885138}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
@@ -63,7 +64,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58264133278161320
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -193,6 +194,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputRolloff: 0.1
   forceRolloff: 0.1
+--- !u!114 &114797119236885138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1959580432486706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32b736e2bc9acc4b84d88a2154d3254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  imunity: 0
+  weakness: 0
+  burnSpeedBonus: 0.5
+  fireParticles: {fileID: 0}
+  iceParticles: {fileID: 0}
+  poisonParticles: {fileID: 0}
+  invincible: 1
+  stunned: 0
+  frozen: 0
 --- !u!212 &212324097940899616
 SpriteRenderer:
   m_ObjectHideFlags: 1
