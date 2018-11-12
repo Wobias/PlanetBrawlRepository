@@ -11,7 +11,7 @@ public class GravityPull : MonoBehaviour
     private List<Transform> targetTrans = new List<Transform>();
 
 
-    private void Awake()
+    private void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(gravLayer);
     }
@@ -20,10 +20,14 @@ public class GravityPull : MonoBehaviour
     {
         for (int i = 0; i < targets.Count; i++)
         {
-            if (targets[i] != null)
-                targets[i].ApplyGravForce((transform.position - targetTrans[i].position).normalized * gravity * Time.fixedDeltaTime);
-            else
+            if (targetTrans[i] == null)
+            {
                 targets.RemoveAt(i);
+                targetTrans.RemoveAt(i);
+                continue;
+            }
+
+            targets[i].ApplyGravForce((transform.position - targetTrans[i].position).normalized * gravity * Time.fixedDeltaTime);
         }
     }
 
