@@ -11,7 +11,6 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
     private PlayerController controller;
     private GameObject placedMine;
     private int mineLayer;
-    private bool canAttack = true;
     private bool pressed = false;
     private bool placed = false;
 
@@ -26,11 +25,10 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
 
     public void Use()
     {
-        if (canAttack && !pressed)
+        if (!pressed)
         {
             AudioManager1.instance.Play(toxicMineSound);
             pressed = true;
-            canAttack = false;
             //specialParticles.Stop();
 
             if (!placed)
@@ -39,6 +37,7 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
                 placedMine.layer = mineLayer;
                 placedMine.transform.Find("Outline").GetComponent<SpriteRenderer>().color = controller.playerColor;
                 //StartCoroutine(Cooldown());
+                placed = true;
             }
             else
             {

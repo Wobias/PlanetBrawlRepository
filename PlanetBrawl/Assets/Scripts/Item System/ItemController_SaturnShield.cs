@@ -8,17 +8,21 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
 
     private float ionDamage = 0;
     private PlayerController controller;
+    private PlanetMovement movement;
 
 
     void Start()
     {
         controller = GetComponentInParent<PlayerController>();
+        movement = GetComponentInParent<PlanetMovement>();
         controller.SetPlanetProtection(true);
     }
 
     public void Hit(float physicalDmg, float effectDps, DamageType dmgType, Vector2 knockbackForce, float stunTime, float effectTime = 0)
     {
         hitBlocks--;
+
+        movement.ApplyTempExForce(knockbackForce, stunTime);
 
         if (hitBlocks < 1)
         {
@@ -41,6 +45,7 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
     void Kill()
     {
         controller.SetPlanetProtection(false, ionDamage);
+        movement.FlushGravForce();
         Destroy(gameObject);
     }
 }

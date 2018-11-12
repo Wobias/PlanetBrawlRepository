@@ -28,6 +28,10 @@ public class Dash_Ability : MonoBehaviour, ISpecialAbility
             canDash = false;
             specialParticles.Stop();
         }
+        else if (!canDash)
+        {
+            controller.AbilityStun(false);
+        }
     }
 
     public void StopUse()

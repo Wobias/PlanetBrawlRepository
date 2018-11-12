@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212284239626540322}
   - component: {fileID: 58243999675024746}
   - component: {fileID: 114024332359999352}
+  - component: {fileID: 114647510247216620}
   m_Layer: 0
   m_Name: SaturnShield_Strong
   m_TagString: Untagged
@@ -100,6 +101,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBlocks: 2
+--- !u!114 &114647510247216620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1237217291760860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927e31b3ac1684c48afe61d670508d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitsound: punch
+  physicalDmg: 1
+  effectDps: 0
+  dmgType: 1
+  knockback: 10
+  stunTime: 0.25
+  effectTime: 0
 --- !u!114 &114681334059964982
 MonoBehaviour:
   m_ObjectHideFlags: 1
