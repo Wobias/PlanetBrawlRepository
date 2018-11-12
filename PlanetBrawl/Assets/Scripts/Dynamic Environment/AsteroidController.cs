@@ -11,6 +11,8 @@ public class AsteroidController : MonoBehaviour
     private int whichDirection;
     private Rigidbody2D rb2d;
 
+    public string asteroidSound = "asteroidDestruction";
+
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class AsteroidController : MonoBehaviour
     public void Destroy()
     {
         whichItem = Random.Range(0, itemDrops.Length);
+        AudioManager1.instance.Play(asteroidSound);
         Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
     }
 

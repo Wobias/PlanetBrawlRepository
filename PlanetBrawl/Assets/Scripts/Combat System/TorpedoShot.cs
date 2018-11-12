@@ -10,6 +10,9 @@ public class TorpedoShot : MonoBehaviour
     public float speed = 5f;
     public float rotateSpeed;
 
+    public string explosion = "hortExplosion";
+    public string cometSound = "cometSound";
+
     public GameObject explosionEffect;
 
 	void Start ()
@@ -25,11 +28,13 @@ public class TorpedoShot : MonoBehaviour
         float rotateAmount = Vector3.Cross(direction, transform.up).z;
         rb.angularVelocity = -rotateAmount * rotateSpeed;
         rb.velocity = transform.up * speed;
+        AudioManager1.instance.Play(cometSound);
 
 	}
     void OnTriggerEnter2D(Collider2D collision)
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
+        AudioManager1.instance.Play(explosion);
         Destroy(gameObject);
     }
 }

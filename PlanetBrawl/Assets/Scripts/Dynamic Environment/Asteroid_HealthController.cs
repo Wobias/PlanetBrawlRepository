@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Asteroid_HealthController : HealthController
 {
-    protected AsteroidController controller;
+    protected AsteroidController controller;    
 
 
     protected override void Start()
@@ -20,7 +20,7 @@ public class Asteroid_HealthController : HealthController
 
     protected override void Kill()
     {
-        controller.Destroy();
+        controller.Destroy();  
         base.Kill();
     }
 }
