@@ -323,14 +323,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  physicalDmg: 10
+  physicalDmg: 1
   effectDps: 0
   dmgType: 1
-  knockback: 500
+  knockback: 20
   stunTime: 0.2
   effectTime: 0
   selfDamage: 1
-  selfKnockback: 500
+  selfKnockback: 20
   selfStunTime: 0.2
 --- !u!114 &114763740151054866
 MonoBehaviour:
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7886a76e6d50f49a25b9cf8826db1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 1
   imunity: 5
   weakness: 0
   burnSpeedBonus: 0.5
@@ -367,16 +367,6 @@ MonoBehaviour:
   rotateSpeed: 50
   movementSpeed: 100
   itemDrops:
-  - {fileID: 1941771394216504, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
-  - {fileID: 1941771394216504, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
-  - {fileID: 1359780370652822, guid: c87d45d15bcb90f419f2ea76a981fff2, type: 2}
-  - {fileID: 1359780370652822, guid: eb053d39a23868049bec33b4e25fe3ba, type: 2}
-  - {fileID: 1643763656143936, guid: de8b838c1cd750447947879cc7a77eeb, type: 2}
-  - {fileID: 1643763656143936, guid: 0f2ebdaf0dd11aa4d97510c9c47c2945, type: 2}
-  - {fileID: 1643763656143936, guid: 5c7ccc49ad806e342ad398126cab76df, type: 2}
-  - {fileID: 1643763656143936, guid: a3ec70bcb04b37041884a2bd09308427, type: 2}
-  - {fileID: 1643763656143936, guid: 57f4d5e4ce214324a994a2273389875b, type: 2}
-  - {fileID: 1643763656143936, guid: 4b207b041170262439e97cd8c870f9c4, type: 2}
   - {fileID: 0}
 --- !u!198 &198248826323685114
 ParticleSystem:

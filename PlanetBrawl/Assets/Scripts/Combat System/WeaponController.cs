@@ -27,6 +27,7 @@ public class WeaponController : MonoBehaviour
 
     #endregion
 
+
     protected virtual void Start()
     {
         //Initializes everything

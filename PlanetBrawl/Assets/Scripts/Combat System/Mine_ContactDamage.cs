@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Mine_ContactDamage : Weapon_ContactDamage
 {
-    protected override void OnTriggerEnter2D(Collider2D other)
+    protected override void OnCollisionEnter2D(Collision2D col)
     {
-        base.OnTriggerEnter2D(other);
+        base.OnCollisionEnter2D(col);
         Destroy(gameObject);
     }
 }

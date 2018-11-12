@@ -15,9 +15,9 @@ public class Zoom : MonoBehaviour
 
     void Update()
     {
-        if (Input.mouseScrollDelta.y != 0)
+        if (UnityEngine.Input.mouseScrollDelta.y != 0)
         {
-            if (Input.mouseScrollDelta.y > 0)
+            if (UnityEngine.Input.mouseScrollDelta.y > 0)
             {
                 ppwz.ZoomIn();
             }
