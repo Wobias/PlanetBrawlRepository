@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour, IMovable
+public class AsteroidController : MonoBehaviour
 {
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
@@ -10,6 +10,8 @@ public class AsteroidController : MonoBehaviour, IMovable
     private int whichItem;
     private int whichDirection;
     private Rigidbody2D rb2d;
+
+    public string asteroidSound = "asteroidDestruction";
 
 
     void Start()
@@ -27,8 +29,8 @@ public class AsteroidController : MonoBehaviour, IMovable
     public void Destroy()
     {
         whichItem = Random.Range(0, itemDrops.Length);
-        if (itemDrops[whichItem] != null)
-            Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
+        AudioManager1.instance.Play(asteroidSound);
+        Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
     }
 
     public void ChooseDirection()
@@ -67,20 +69,5 @@ public class AsteroidController : MonoBehaviour, IMovable
         {
             rb2d.AddForce(transform.up * movementSpeed); //UP
         }
-    }
-
-    public void ApplyGravForce(Vector2 force)
-    {
-        return;
-    }
-
-    public void ApplyTempExForce(Vector2 force, float time)
-    {
-        return;
-    }
-
-    public void FlushGravForce()
-    {
-        return;
     }
 }

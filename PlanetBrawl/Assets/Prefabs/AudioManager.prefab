@@ -76,4 +76,68 @@ MonoBehaviour:
     spatialBlend: 0
     maxDistance: 0
     source: {fileID: 0}
+  - name: healing
+    clip: {fileID: 8300000, guid: 25e24ab5dd5a1284594b6de9cbb6946f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: iceFreeze
+    clip: {fileID: 8300000, guid: 87ec657cc7a0820489737edf63081c70, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: toxicMine
+    clip: {fileID: 8300000, guid: 710659647b5bb064db4f620f20849cd7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: shortExplosion
+    clip: {fileID: 8300000, guid: e317b8c621c6850488faea88c4c56733, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: cometSound
+    clip: {fileID: 8300000, guid: 92a7a49d77df6064e94ac07a0cb9a2d1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: shootingstar
+    clip: {fileID: 8300000, guid: fb4a6ed45f835dc49b3d64be85ac6c31, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: asteroidDestruction
+    clip: {fileID: 8300000, guid: 6da0f5db71255d94ca0aa01aba4d7e97, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
+  - name: asteroidSpawn
+    clip: {fileID: 8300000, guid: 83529ff8401222141b51e92c4a5419a2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    maxDistance: 0
+    source: {fileID: 0}
   playOnce: 0

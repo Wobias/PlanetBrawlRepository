@@ -14,6 +14,8 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
     private bool pressed = false;
     private bool placed = false;
 
+    public string toxicMineSound = "toxicMine";
+
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
     {
         if (!pressed)
         {
+            AudioManager1.instance.Play(toxicMineSound);
             pressed = true;
             //specialParticles.Stop();
 
