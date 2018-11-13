@@ -9,20 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1449874485411006}
+  m_RootGameObject: {fileID: 1659798047665134}
   m_IsPrefabAsset: 1
---- !u!1 &1449874485411006
+--- !u!1 &1659798047665134
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4770841456037600}
-  - component: {fileID: 212267192302163152}
-  - component: {fileID: 50123054021366202}
-  - component: {fileID: 114798493332449908}
-  - component: {fileID: 58002198738530794}
+  - component: {fileID: 4724535825627650}
+  - component: {fileID: 212960499968374640}
+  - component: {fileID: 50584079326741618}
+  - component: {fileID: 114682237303587270}
+  - component: {fileID: 58301495310998130}
   m_Layer: 0
   m_Name: Komet
   m_TagString: Untagged
@@ -30,12 +30,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4770841456037600
+--- !u!4 &4724535825627650
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1449874485411006}
+  m_GameObject: {fileID: 1659798047665134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.96, y: -1.03, z: 0}
   m_LocalScale: {x: 4.542884, y: 4.1142287, z: 3.5334222}
@@ -43,13 +43,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50123054021366202
+--- !u!50 &50584079326741618
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1449874485411006}
+  m_GameObject: {fileID: 1659798047665134}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -63,12 +63,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58002198738530794
+--- !u!58 &58301495310998130
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1449874485411006}
+  m_GameObject: {fileID: 1659798047665134}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -78,12 +78,12 @@ CircleCollider2D:
   m_Offset: {x: 0.020205704, y: -0.009760971}
   serializedVersion: 2
   m_Radius: 0.21030553
---- !u!114 &114798493332449908
+--- !u!114 &114682237303587270
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1449874485411006}
+  m_GameObject: {fileID: 1659798047665134}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4af204cebd529b54c8c9b165f27eac0f, type: 3}
@@ -92,13 +92,15 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 5
   rotateSpeed: 200
+  explosion: hortExplosion
+  cometSound: cometSound
   explosionEffect: {fileID: 0}
---- !u!212 &212267192302163152
+--- !u!212 &212960499968374640
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1449874485411006}
+  m_GameObject: {fileID: 1659798047665134}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -128,7 +130,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 73e57377fc73bd346832b8cc1ca976e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f25470dda56ea994394610074e35ffdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,6 +138,6 @@ SpriteRenderer:
   m_Size: {x: 0.6, y: 0.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
