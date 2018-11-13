@@ -17,6 +17,8 @@ public class AsteroidSpawner : MonoBehaviour
     public float maxY;
     public int whichBorder;
 
+    public string asteroidSpawnSound = "asteroidSpawn";
+
 
     void Update()
     {
@@ -88,6 +90,7 @@ public class AsteroidSpawner : MonoBehaviour
         float posY = Random.Range(minY, maxY);
         Vector2 spawnPosition = new Vector2(posX, posY);
         Instantiate(asteroid, spawnPosition, Quaternion.identity);
+        AudioManager1.instance.Play(asteroidSpawnSound);
 
     }
 }

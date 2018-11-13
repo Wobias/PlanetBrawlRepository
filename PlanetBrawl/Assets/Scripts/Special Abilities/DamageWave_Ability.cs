@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
 {
     public string hitsound = "punch";
+    public string iceSound = "iceFreeze";
 
     public float radius;
     public float cooldown;
@@ -66,6 +67,7 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     {
         if (canAttack && !pressed)
         {
+            AudioManager1.instance.Play(iceSound);
             specialParticles.Stop();
             waveParticles.Play();
 

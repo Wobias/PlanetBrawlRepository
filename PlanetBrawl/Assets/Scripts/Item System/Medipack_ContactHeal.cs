@@ -7,6 +7,7 @@ public class Medipack_ContactHeal : MonoBehaviour
     //public bool useWeaponStats = true;
 
     public float healthBonus;
+    public string healSound = "healing";
 
     protected Planet_HealthController target;
 
@@ -19,6 +20,7 @@ public class Medipack_ContactHeal : MonoBehaviour
         if (target != null)
         {
             target.Heal(healthBonus);
+            AudioManager1.instance.Play(healSound);
             Destroy(gameObject);
         }
     }

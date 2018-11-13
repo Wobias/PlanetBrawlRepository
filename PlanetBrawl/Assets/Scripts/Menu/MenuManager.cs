@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("PlayerStart1") && playerNumbers[0] == 0)
+        if (InputSystem.ButtonDown(Button.A, 0) && playerNumbers[0] == 0)
         {
             playerNumbers[0] = 1;
             PlayerController player = Instantiate(playerPrefabs[0], playerSpawns[0].position, Quaternion.identity).GetComponent<PlayerController>();
@@ -32,7 +32,7 @@ public class MenuManager : MonoBehaviour
             startPrompts[0].SetActive(false);
         }
 
-        if (Input.GetButtonDown("PlayerStart2") && playerNumbers[1] == 0)
+        if (InputSystem.ButtonDown(Button.A, 1) && playerNumbers[1] == 0)
         {
             playerNumbers[1] = 2;
             PlayerController player = Instantiate(playerPrefabs[1], playerSpawns[1].position, Quaternion.identity).GetComponent<PlayerController>();
@@ -42,7 +42,7 @@ public class MenuManager : MonoBehaviour
             startPrompts[1].SetActive(false);
         }
 
-        if (Input.GetButtonDown("PlayerStart3") && playerNumbers[2] == 0)
+        if (InputSystem.ButtonDown(Button.A, 2) && playerNumbers[2] == 0)
         {
             playerNumbers[2] = 3;
             PlayerController player = Instantiate(playerPrefabs[2], playerSpawns[2].position, Quaternion.identity).GetComponent<PlayerController>();
@@ -52,7 +52,7 @@ public class MenuManager : MonoBehaviour
             startPrompts[2].SetActive(false);
         }
 
-        if (Input.GetButtonDown("PlayerStart4") && playerNumbers[3] == 0)
+        if (InputSystem.ButtonDown(Button.A, 3) && playerNumbers[3] == 0)
         {
             playerNumbers[3] = 4;
             PlayerController player = Instantiate(playerPrefabs[3], playerSpawns[3].position, Quaternion.identity).GetComponent<PlayerController>();

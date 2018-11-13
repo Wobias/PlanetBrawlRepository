@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class Mine_ContactDamage : Weapon_ContactDamage
 {
-    protected override void OnTriggerEnter2D(Collider2D other)
+    protected void OnTriggerEnter2D(Collider2D other)
     {
-        base.OnTriggerEnter2D(other);
+        if (!this.enabled)
+            return;
+
+        GetTarget(other);
+
+        //Hit the target if it is damageable
+        if (target != null)
+        {
+            target.Hit(physicalDmg, effectDps, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+            AudioManager1.instance.Play(hitsound);
+        }
+
         Destroy(gameObject);
     }
 }

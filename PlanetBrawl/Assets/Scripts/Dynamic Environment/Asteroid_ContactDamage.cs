@@ -16,17 +16,12 @@ public class Asteroid_ContactDamage : Weapon_ContactDamage
         healthController = GetComponent<IDamageable>();
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    protected override void OnCollisionEnter2D(Collision2D col)
     {
-        return;
-    }
-
-    protected void OnCollisionEnter2D(Collision2D collision)
-    {
-        GetTarget(collision.collider);
+        GetTarget(col.collider);
 
         //Hit the target if it is damageable
-        target?.Hit(physicalDmg, effectDps, dmgType, (collision.collider.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
-        healthController.Hit(selfDamage, 0, DamageType.physical, (collision.collider.transform.position - transform.position).normalized * -selfKnockback, selfStunTime);
+        target?.Hit(physicalDmg, effectDps, dmgType, (col.collider.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+        healthController.Hit(selfDamage, 0, DamageType.physical, (col.collider.transform.position - transform.position).normalized * -selfKnockback, selfStunTime);
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PreBetaPlanetSelection : MonoBehaviour
 {
-    public Button firstButton;
-    public Button secondButton;
+    public UnityEngine.UI.Button firstButton;
+    public UnityEngine.UI.Button secondButton;
     public int currentPlanet = 0;
     public GameObject[] planets;
     private GameObject clone;

@@ -5361,6 +5361,48 @@ MonoBehaviour:
   zoomSpeed: 0.2
   maxZoom: 5
   minZoom: 15
+--- !u!1001 &790606397
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &877730589
 GameObject:
   m_ObjectHideFlags: 0
@@ -19532,7 +19574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccbee88c2fdb78541a9b845a908de431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dps: 20
+  dps: 1
 --- !u!50 &1286821286
 Rigidbody2D:
   serializedVersion: 4

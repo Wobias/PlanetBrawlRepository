@@ -89,9 +89,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4858362941411828}
-  - component: {fileID: 58807946386778378}
-  - component: {fileID: 250129422606031250}
-  m_Layer: 8
+  - component: {fileID: 58042794864029384}
+  - component: {fileID: 114081631619534548}
+  m_Layer: 23
   m_Name: GravPull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1734875635455440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.8061185, y: 2.9418266, z: 0}
+  m_LocalPosition: {x: 7.609175, y: -3.810936, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4662515072657672}
@@ -561,13 +561,28 @@ CircleCollider2D:
   m_GameObject: {fileID: 1282815315587848}
   m_Enabled: 0
   m_Density: 1
+  m_Material: {fileID: 6200000, guid: 727940f3864f73345b72db5669fc2d16, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25
+--- !u!58 &58042794864029384
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381587530460964}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 4
 --- !u!58 &58190555085193562
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -583,21 +598,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!58 &58807946386778378
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1381587530460964}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2
 --- !u!95 &95331093267521764
 Animator:
   serializedVersion: 3
@@ -830,12 +830,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  physicalDmg: 7
+  physicalDmg: 1
   effectDps: 0
   dmgType: 1
-  knockback: 250
+  knockback: 15
   stunTime: 0.2
   effectTime: 0
+--- !u!114 &114081631619534548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381587530460964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b5e5f71eba5044eb91188a1a9cae8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: 1.5
+  gravLayer: GravEffector
 --- !u!114 &114184751497643410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -848,11 +861,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  physicalDmg: 10
+  physicalDmg: 1
   effectDps: 0
   dmgType: 1
-  knockback: 300
-  stunTime: 0.2
+  knockback: 10
+  stunTime: 0.25
   effectTime: 0
 --- !u!114 &114264592402718238
 MonoBehaviour:
@@ -892,7 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9ad4e1b6ec8ee468c19e1f8a3d41d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPerSec: 5
+  healthBonus: 2
   specialParticles: {fileID: 198979533501204660}
   healParticles: {fileID: 198174415780783076}
 --- !u!114 &114344056404913850
@@ -936,8 +949,8 @@ MonoBehaviour:
   weaponParts:
   - {fileID: 50123070172715818}
   punchSpeed: 20
-  retractSpeed: 15
-  maxDistance: 7
+  retractSpeed: 25
+  maxDistance: 3
 --- !u!114 &114450334589885652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -961,7 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43118a3bfbf8754da6fc2f3a5223e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 4
   imunity: 0
   weakness: 0
   burnSpeedBonus: 1
@@ -987,7 +1000,9 @@ MonoBehaviour:
   speedBonus: 50
   effectMultiplier: 1
   sprintMultipier: 2
-  isSprinting: 0
+  inputRolloff: 0.1
+  forceRolloff: 0.1
+  stunned: 0
 --- !u!198 &198009131196472136
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -10061,10 +10076,10 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1447352142091710}
   serializedVersion: 5
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -10133,7 +10148,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.25
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -10185,9 +10200,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.2
-      minScalar: 5
+      minMaxState: 3
+      scalar: 2
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10302,7 +10317,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10827,7 +10842,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10930,8 +10945,65 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_BurstCount: 0
-    m_Bursts: []
+    m_BurstCount: 1
+    m_Bursts:
+    - serializedVersion: 2
+      time: 0
+      countCurve:
+        serializedVersion: 2
+        minMaxState: 0
+        scalar: 10
+        minScalar: 0
+        maxCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        minCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      cycleCount: 1
+      repeatInterval: 0.01
   SizeModule:
     enabled: 1
     curve:
@@ -33348,22 +33420,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!250 &250129422606031250
-PointEffector2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1381587530460964}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 528129
-  m_ForceMagnitude: -20
-  m_ForceVariation: 0
-  m_DistanceScale: 1
-  m_ForceSource: 0
-  m_ForceTarget: 0
-  m_ForceMode: 2
-  m_Drag: 0
-  m_AngularDrag: 0

@@ -10,6 +10,7 @@ public class WeaponController_ShootingStar : WeaponController
     public float shotSpeed = 1;
     public float lifetime = 1;
 
+    public string shootingstarSound = "shootingstar";
     private bool fired = false;
 
     #endregion
@@ -30,6 +31,7 @@ public class WeaponController_ShootingStar : WeaponController
             for (int i = 0; i < weaponParts.Length; i++)
             {
                 ShootFragment(weaponParts[i], weaponColliders[i]);
+                AudioManager1.instance.Play(shootingstarSound);
             }
             Destroy(gameObject, lifetime);
             fired = true;
