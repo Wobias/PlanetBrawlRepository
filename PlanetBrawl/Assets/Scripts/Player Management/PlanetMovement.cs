@@ -102,12 +102,19 @@ public class PlanetMovement : MonoBehaviour, ISpeedable, IMovable
         }
     }
 
-    public void SpeedEffect(float speedMultiplier)
+    public void SpeedEffect(float speedMultiplier, float timeout=0)
     {
         float newMultiplier = effectMultiplier + speedMultiplier;
 
         if (newMultiplier > 0)
+        {
             effectMultiplier = newMultiplier;
+
+            if (timeout > 0)
+            {
+                StartCoroutine(StopSpeedEffect(timeout, speedMultiplier));
+            }
+        }
     }
 
     public void ApplyGravForce(Vector2 force)
@@ -131,6 +138,12 @@ public class PlanetMovement : MonoBehaviour, ISpeedable, IMovable
         externalForce = targetExForce;
         yield return new WaitForSeconds(time);
         targetExForce -= force;
+    }
+
+    IEnumerator StopSpeedEffect(float timeout, float bonusSpeed)
+    {
+        yield return new WaitForSeconds(timeout);
+        effectMultiplier -= bonusSpeed;
     }
 
     public void FlushGravForce()

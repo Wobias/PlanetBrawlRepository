@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, IPlanet
     //private WeaponController weaponCacher;
     private ISpecialAbility ability;
 
-    //private bool isBonus = false;
+    private bool bonusActive = false;
     //private bool isFirePressed;
     //private bool canSwitch = true;
     //private bool sprintActive = false;
@@ -44,13 +44,13 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     void Update()
     {
-        //if (currentWeapon == null && isBonus)
-        //{
-        //    canSwitch = true;
-        //    currentWeapon = bonusWeapon;
-        //    bonusWeapon = null;
-        //    currentWeapon.gameObject.SetActive(true);
-        //    isBonus = false;
+        if (mainWeapon == null && bonusActive)
+        {
+            bonusActive = false;
+            mainWeapon = bonusWeapon;
+            mainWeapon.gameObject.SetActive(true);
+            bonusWeapon = null;
+        }
 
         //    if (sprintActive)
         //    {
@@ -84,8 +84,6 @@ public class PlayerController : MonoBehaviour, IPlanet
 
         mainWeapon.Aim(aimDir);
         mainWeapon.Shoot(InputSystem.TriggerPressed(Trigger.Right, playerNr-1));
-        if (bonusWeapon)
-            bonusWeapon.Shoot(InputSystem.ButtonDown(Button.RightShoulder, playerNr-1));
 
         if (ability != null)
         {
@@ -122,12 +120,21 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     public void WeaponPickUp(WeaponController newWeapon)
     {
-        if (bonusWeapon)
+        if (bonusActive)
         {
-            Destroy(bonusWeapon.gameObject);
+            Destroy(mainWeapon.gameObject);
+            mainWeapon = newWeapon;
         }
-        bonusWeapon = newWeapon;
-        SetLayer(bonusWeapon.transform, weaponLayer);
+        else
+        {
+            bonusWeapon = mainWeapon;
+            mainWeapon = newWeapon;
+        }
+
+        bonusActive = true;
+        SetLayer(mainWeapon.transform, weaponLayer);
+        bonusWeapon.gameObject.SetActive(false);
+        mainWeapon.gameObject.SetActive(true);
     }
 
     //void SwapWeapons()

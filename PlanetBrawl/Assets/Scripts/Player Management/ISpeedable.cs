@@ -6,7 +6,7 @@ public interface ISpeedable
 {
     //slow method
     void SpeedToSize(HealthState currentHealthState);
-    void SpeedEffect(float speedMultiplier);
+    void SpeedEffect(float speedMultiplier, float timeout=0);
 }
 
 

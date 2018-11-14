@@ -20,7 +20,7 @@ public class GravityPull : MonoBehaviour
     {
         for (int i = 0; i < targets.Count; i++)
         {
-            if (targetTrans[i] == null)
+            if (targetTrans[i] == null || targets[i] == null)
             {
                 targets.RemoveAt(i);
                 targetTrans.RemoveAt(i);
@@ -35,7 +35,7 @@ public class GravityPull : MonoBehaviour
     {
         IMovable newTarget = other.transform.root.GetComponent<IMovable>();
 
-        if (newTarget != null)
+        if (newTarget != null && !targets.Contains(newTarget))
         {
             targets.Add(newTarget);
             targetTrans.Add(other.transform.root);

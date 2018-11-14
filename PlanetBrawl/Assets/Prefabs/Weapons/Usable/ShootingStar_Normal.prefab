@@ -133,7 +133,7 @@ CircleCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 50119854617897032}
   shotSpeed: 25
   lifetime: 1
+  shootingstarSound: shootingstar
 --- !u!114 &114830910131133280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,12 +169,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
-  physicalDmg: 10
+  physicalDmg: 1
   effectDps: 0
   dmgType: 1
-  knockback: 300
-  stunTime: 0.2
+  knockback: 15
+  stunTime: 0.25
   effectTime: 0
+  destroyOnHit: 1
 --- !u!198 &198156145915960412
 ParticleSystem:
   m_ObjectHideFlags: 1

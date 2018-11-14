@@ -68,7 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba45e9504af3a748bc17b1c8d854949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBonus: 15
+  healthBonus: 2
+  healSound: healing
 --- !u!212 &212929102757458272
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -31,6 +31,11 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
             pressed = true;
             //specialParticles.Stop();
 
+            if (placed && placedMine == null)
+            {
+                placed = false;
+            }
+
             if (!placed)
             {
                 placedMine = Instantiate(minePrefab, transform.position, Quaternion.identity);

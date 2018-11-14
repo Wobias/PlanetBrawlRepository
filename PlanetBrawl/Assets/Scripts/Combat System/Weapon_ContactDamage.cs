@@ -21,6 +21,8 @@ public class Weapon_ContactDamage : MonoBehaviour
     [SerializeField]
     public float effectTime;
 
+    public bool destroyOnHit = false;
+
     protected IDamageable target;
     protected WeaponController weapon;
     protected bool isWeapon = false;
@@ -59,6 +61,9 @@ public class Weapon_ContactDamage : MonoBehaviour
         {
             weapon.OnHit();
         }
+
+        if (destroyOnHit)
+            Destroy(gameObject);
     }
 
     protected void GetTarget(Collider2D other)
