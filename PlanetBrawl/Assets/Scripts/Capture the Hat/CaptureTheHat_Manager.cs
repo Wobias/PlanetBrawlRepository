@@ -6,10 +6,11 @@ using TMPro;
 
 public class CaptureTheHat_Manager : MonoBehaviour
 {
+    public Camera camera;
     public GameObject hat;
     public GameObject victoryScreen;
     private GameObject[] gameObjects;
-    private GameObject[] players;
+    private List <GameObject> players = new List<GameObject>();
     private float timer = 30f;
     public TextMeshProUGUI countdown;
     public TextMeshProUGUI victoryText;
@@ -18,7 +19,7 @@ public class CaptureTheHat_Manager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         gameObjects = FindObjectsOfType<GameObject>();
         for (int i = 0; i < gameObjects.Length; i++)
         {
@@ -35,23 +36,25 @@ public class CaptureTheHat_Manager : MonoBehaviour
     {
         timer -= Time.deltaTime;
         countdown.SetText(Mathf.RoundToInt(timer).ToString());
-        if (timer <= 0f)
+        if (timer <= 0f && hat.layer != 0)
         {
             countdown.SetText("");
-            VictoryConditions(hat.layer);
+            VictoryConditions(players);
         }
-
     }
 
-    private void VictoryConditions(int hatLayerNumber)
+    private void VictoryConditions(List <GameObject> _players)
     {
-        foreach (GameObject player in players)
+        for (int i = 0; i < players.Count; i++)
         {
-            if (player.layer == hatLayerNumber)
+            if (_players[i].layer != hat.layer)
             {
-                victoryScreen.SetActive(true);
-                victoryText.SetText(player.tag + " wears the hat!");
+                _players[i].SetActive(false);
+                _players.Remove(_players[i]);
             }
         }
+        _players[0].transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, 0f);
+        victoryText.SetText(LayerMask.LayerToName(players[0].layer) + " wears the hat!");
+        victoryScreen.SetActive(true);
     }
 }
