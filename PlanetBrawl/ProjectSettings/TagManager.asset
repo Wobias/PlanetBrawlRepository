@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -30,8 +31,8 @@ TagManager:
   - Walls
   - LevelGate
   - GravEffector
-  - 
-  - 
+  - Goal
+  - Ball
   - 
   - 
   - 

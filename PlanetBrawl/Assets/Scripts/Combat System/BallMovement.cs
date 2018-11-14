@@ -14,6 +14,18 @@ public class BallMovement : MonoBehaviour, IMovable
     private Vector2 gravForce = Vector2.zero;
     private Vector2 targetGravForce = Vector2.zero;
 
+    public void ResetSpeed()
+    {
+        externalForce = Vector2.zero;
+        targetExForce = Vector2.zero;
+        gravForce = Vector2.zero;
+        targetGravForce = Vector2.zero;
+
+        rb2d.velocity = Vector2.zero;
+        StopAllCoroutines();
+
+    }
+
     void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -25,6 +37,8 @@ public class BallMovement : MonoBehaviour, IMovable
         gravForce = Vector2.Lerp(gravForce, targetGravForce, forceRolloff);
 
         rb2d.velocity = externalForce + gravForce;
+
+        Debug.Log(rb2d.velocity);
     }  
     
     IEnumerator AddExForce(Vector2 force, float time)
@@ -48,4 +62,6 @@ public class BallMovement : MonoBehaviour, IMovable
     {
         StartCoroutine(AddExForce(force, time));
     }
+
+
 }

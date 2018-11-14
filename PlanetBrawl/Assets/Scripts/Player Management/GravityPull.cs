@@ -7,6 +7,7 @@ public class GravityPull : MonoBehaviour
     public float gravity;
     public string gravLayer = "GravEffector";
 
+
     private List<IMovable> targets = new List<IMovable>();
     private List<Transform> targetTrans = new List<Transform>();
 
@@ -52,5 +53,5 @@ public class GravityPull : MonoBehaviour
             targets.Remove(oldTarget);
             targetTrans.Remove(other.transform.root);
         }
-    }
+    }    
 }
