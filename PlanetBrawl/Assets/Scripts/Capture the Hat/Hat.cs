@@ -9,9 +9,9 @@ public class Hat : MonoBehaviour
     private Vector3 hatOnPlayerPosition;
     private Vector3 newHatPosition;
     private bool isOnPlayer = false;
-
-    private LayerMask weaponLayer;
-    private int layerInt;
+    private bool isLerping = false;
+    private float distance;
+    
 
     // Use this for initialization
     void Start()
@@ -19,54 +19,49 @@ public class Hat : MonoBehaviour
         hatTransform = GetComponent<Transform>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        CheckWeaponLayer(collision.gameObject.layer);
-
-        if (isOnPlayer == false && collision.gameObject.tag == "Player")
+        if (isLerping == true)
         {
-            player = collision.gameObject;
-            hatOnPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y + 1.5f, 0f);
-            hatTransform.position = hatOnPlayerPosition;
-            gameObject.transform.parent = player.transform;
-            gameObject.layer = player.layer;
-            isOnPlayer = true;
-        }
-        else if (isOnPlayer == true && player.layer != layerInt && player.layer != collision.gameObject.layer)
-        {
-            newHatPosition = new Vector3(Random.Range(-20, 20), Random.Range(-9, 9), 0);
-            gameObject.transform.parent = null;
-            hatTransform.position = Vector3.Lerp(hatTransform.position, newHatPosition, 0.5f);
-            gameObject.layer = 0;
-            StartCoroutine(SwitchBoolAfterSeconds());
+            StartCoroutine(HatPositionLerp());
         }
     }
 
-    void CheckWeaponLayer(LayerMask layer)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (layer == 14)
-        {
-            layerInt = 8;
-        }
-        if (layer == 15)
-        {
-            layerInt = 11;
-        }
-        if (layer == 16)
-        {
-            layerInt = 12;
-        }
-        if (layer == 17)
-        {
-            layerInt = 13;
-        }
+        GameObject rootObject = collision.transform.root.gameObject;
 
+        if (isOnPlayer == false && rootObject.tag == "Player")
+        {
+            player = collision.gameObject;
+            gameObject.transform.parent = player.transform;
+            hatOnPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y + 0.8f, 0f);
+            hatTransform.position = hatOnPlayerPosition;
+            gameObject.layer = player.layer;
+            isOnPlayer = true;
+        }
+        else if (isOnPlayer == true && player.layer != rootObject.layer)
+        {
+            gameObject.layer = 0;
+            gameObject.transform.parent = null;
+            newHatPosition = new Vector3(Random.Range(-20f, 20f), Random.Range(-9f, 9f), 0f);
+            isLerping = true;
+            StartCoroutine(SwitchBoolAfterSeconds());
+        }
     }
 
     IEnumerator SwitchBoolAfterSeconds()
     {
         yield return new WaitForSeconds(0.5f);
         isOnPlayer = false;
+        yield return null;
+    }
+
+    IEnumerator HatPositionLerp()
+    {
+        hatTransform.position = Vector3.Lerp(hatTransform.position, newHatPosition, 10f * Time.deltaTime);
+        yield return new WaitForSeconds(1f);
+        isLerping = false;
         yield return null;
     }
 }
