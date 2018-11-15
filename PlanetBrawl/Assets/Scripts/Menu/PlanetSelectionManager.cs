@@ -106,22 +106,22 @@ public class PlanetSelectionManager : MonoBehaviour
         if(countConnectedPlayers == 1 && isReadyP1 == true)
         {
             //Loadscene
-            SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene("BetaLobby");
         }
         else if(countConnectedPlayers == 2 && isReadyP1 == true && isReadyP2 == true)
         {
             //LoadScene
-            SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene("BetaLobby");
         }
         else if(countConnectedPlayers == 3 && isReadyP1 == true && isReadyP2 == true && isReadyP3 == true)
         {
             //LoadScene
-            SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene("BetaLobby");
         }
         else if(countConnectedPlayers == 4 && isReadyP1 == true && isReadyP2 == true && isReadyP3 == true && isReadyP4 == true)
         {
             //LoadScene
-            SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene("BetaLobby");
         }
 
 

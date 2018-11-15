@@ -179,8 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99c9100eea40a94cb389ead47c33d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 1582240147827684, guid: d4f48bf1ef0754a41bca47f6fb45844a,
-    type: 2}
+  characterPrefab: {fileID: 1781693482213504}
   playerColors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
