@@ -22,7 +22,7 @@ GameObject:
   m_Layer: 0
   m_Name: CheckStart
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799320343853256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.30232, y: -2.3966782, z: 0}
+  m_LocalPosition: {x: 5.6504993, y: -3.727633, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4733587448016084}
@@ -159,16 +159,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicalDmg: 1
-  effectDps: 0
   dmgType: 1
   knockback: 20
   stunTime: 0.25
   effectTime: 0
   checkStart: {fileID: 4576915332283436}
-  checkLength: 0.1
+  checkLength: 0.15
   hitMask:
     serializedVersion: 2
-    m_Bits: 3840
+    m_Bits: 1036033
 --- !u!114 &114619357662940204
 MonoBehaviour:
   m_ObjectHideFlags: 1

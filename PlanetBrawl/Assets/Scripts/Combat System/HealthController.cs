@@ -8,8 +8,7 @@ public class HealthController : MonoBehaviour, IDamageable
     #region
     public float health = 100f;
     public DamageType imunity = DamageType.none;
-    public DamageType weakness = DamageType.none;
-    public float burnSpeedBonus = 0.5f;
+    private static float iceSlowMultiplier = 0.5f;
 
     public GameObject fireParticles;
     public GameObject iceParticles;
@@ -19,13 +18,12 @@ public class HealthController : MonoBehaviour, IDamageable
 
     [HideInInspector]
     public bool stunned = false;
-    [HideInInspector]
-    public bool frozen = false;
+    
+    private bool frozen = false;
+    private bool burning = false;
+    private bool poisoned = false;
 
-    protected float poisonDamage;
-    protected float fireDamage;
     protected float ionDamage;
-    protected float specialDamage;
 
     protected Coroutine poisonRoutine;
     protected Coroutine fireRoutine;
@@ -56,7 +54,7 @@ public class HealthController : MonoBehaviour, IDamageable
         if (dpsApplied)
         {
             if (!invincible)
-                health -= (poisonDamage + fireDamage + ionDamage) * Time.fixedDeltaTime;
+                health -= ionDamage * Time.fixedDeltaTime;
 
             if (health > 0)
             {
@@ -75,12 +73,12 @@ public class HealthController : MonoBehaviour, IDamageable
     }
 
     //IDamageable method
-    public void Hit(float physicalDmg, float effectDps, DamageType dmgType, Vector2 knockbackForce, float stunTime, float effectTime = 0)
+    public void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, float effectTime = 0)
     {
         if (stunned)
             return;
 
-        if (dmgType != DamageType.ion)
+        if (dmgType != DamageType.none)
         {
             if (stunTime > 0)
                 Stun(stunTime);
@@ -96,10 +94,10 @@ public class HealthController : MonoBehaviour, IDamageable
             case DamageType.physical:
                 break;
             case DamageType.poison:
-                Poison(effectDps, effectTime);
+                Poison(effectTime);
                 break;
             case DamageType.fire:
-                Burn(effectDps, effectTime);
+                Burn(effectTime);
                 break;
             case DamageType.ice:
                 Freeze(effectTime);
@@ -113,8 +111,6 @@ public class HealthController : MonoBehaviour, IDamageable
     {
         if (imunity == DamageType.physical)
             damage *= 0.5f;
-        if (weakness == DamageType.physical)
-            damage *= 2;
 
         if (!invincible)
             health -= damage;
@@ -129,97 +125,96 @@ public class HealthController : MonoBehaviour, IDamageable
         }
     }
 
-    protected void Poison(float dps,  float effectTime)
+    protected void Poison(float effectTime)
     {
         if (imunity == DamageType.poison)
         {
             return;
         }
-        else if (weakness == DamageType.poison)
+
+        if (frozen)
         {
-            dps *= 2;
+            StopCoroutine(iceRoutine);
+            iceRoutine = null;
+            SetIce(false);
+        }
+        else if (burning)
+        {
+            StopCoroutine(fireRoutine);
+            fireRoutine = null;
+            SetFire(false);
         }
 
         if (poisonRoutine != null)
             StopCoroutine(poisonRoutine);
 
-        poisonDamage = dps;
-        poisonParticles.SetActive(true);
-
-        if (!dpsApplied)
-        {
-            dpsApplied = true;
-        }
+        SetPoison(true);
 
         poisonRoutine = StartCoroutine(StopPoison(effectTime));
     }
 
-    protected void Burn(float dps, float effectTime)
+    protected void Burn(float effectTime)
     {
+        if (imunity == DamageType.fire)
+        {
+            return;
+        }
+
         if (frozen)
         {
             StopCoroutine(iceRoutine);
             iceRoutine = null;
-            InstantThaw();
+            SetIce(false);
         }
-
-        if (imunity == DamageType.fire)
+        else if (poisoned)
         {
-            return;
-        }  
-        else if (weakness == DamageType.fire)
-        {
-            dps *= 2;
+            StopCoroutine(poisonRoutine);
+            poisonRoutine = null;
+            SetPoison(false);
         }
 
         if (fireRoutine != null)
         {
             StopCoroutine(fireRoutine);
         }
-        else if (movement != null && fireDamage == 0)
-        {
-            movement.SpeedEffect(burnSpeedBonus);
-        }   
 
-        fireDamage = dps;
-        fireParticles.SetActive(true);
-
-        if (!dpsApplied)
-        {
-            dpsApplied = true;
-        }
+        SetFire(true);
 
         fireRoutine = StartCoroutine(StopFire(effectTime));
     }
 
     protected void Freeze(float effectTime)
     {
-        fireDamage = 0;
-        fireParticles.SetActive(false);
-
-        if (imunity == DamageType.ice || frozen)
+        if (imunity == DamageType.ice)
         {
             return;
         }
-        else if (weakness == DamageType.ice)
+
+        if (burning)
         {
-            effectTime *= 2;
+            StopCoroutine(fireRoutine);
+            fireRoutine = null;
+            SetFire(false);
+        }
+        else if (poisoned)
+        {
+            StopCoroutine(poisonRoutine);
+            poisonRoutine = null;
+            SetPoison(false);
         }
 
-        frozen = true;
-        iceParticles.SetActive(true);
+        if (iceRoutine != null)
+        {
+            StopCoroutine(iceRoutine);
+        }
 
-        if (!stunned)
-            StunObject(true);
+        SetIce(true, effectTime);
 
-        iceRoutine = StartCoroutine(Thaw(effectTime));
+        iceRoutine = StartCoroutine(StopIce(effectTime));
     }
 
     public void IonDamage(float dps)
     {
-        if (imunity == DamageType.ion)
-            return;
-
         ionDamage = dps;
 
         if (!dpsApplied)
@@ -232,10 +227,7 @@ public class HealthController : MonoBehaviour, IDamageable
     {
         ionDamage = 0;
 
-        if (poisonDamage == 0 && fireDamage == 0)
-        {
-            dpsApplied = false;
-        }
+        dpsApplied = false;
     }
 
     protected virtual void Kill()
@@ -243,26 +235,23 @@ public class HealthController : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    protected void Stun(float stunTime)
+    public void Stun(float stunTime, bool stunMovement=true)
     {
         if (stunRoutine != null)
             StopCoroutine(stunRoutine);
 
         stunned = true;
-        StunObject(true);
+
+        if (stunMovement)
+            StunObject(true);
+
         stunRoutine = StartCoroutine(StopStun(stunTime));
     }
 
     protected IEnumerator StopPoison(float duration)
     {
         yield return new WaitForSeconds(duration);
-        poisonDamage = 0;
-        poisonParticles.SetActive(false);
-
-        if (fireDamage == 0 && ionDamage == 0)
-        {
-            dpsApplied = false;
-        }
+        SetPoison(false);
 
         poisonRoutine = null;
     }
@@ -270,24 +259,15 @@ public class HealthController : MonoBehaviour, IDamageable
     protected IEnumerator StopFire(float duration)
     {
         yield return new WaitForSeconds(duration);
-        fireDamage = 0;
-        fireParticles.SetActive(false);
-
-        if (poisonDamage == 0 && ionDamage == 0)
-        {
-            dpsApplied = false;
-        }
-
-        if (movement != null)
-            movement.SpeedEffect(-burnSpeedBonus);
+        SetFire(false);
 
         fireRoutine = null;
     }
 
-    protected IEnumerator Thaw(float duration)
+    protected IEnumerator StopIce(float duration)
     {
         yield return new WaitForSeconds(duration);
-        InstantThaw();
+        SetIce(false);
 
         iceRoutine = null;
     }
@@ -296,8 +276,7 @@ public class HealthController : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(duration);
         stunned = false;
-        if (!frozen)
-            StunObject(false);
+        StunObject(false);
 
         stunRoutine = null;
     }
@@ -309,14 +288,6 @@ public class HealthController : MonoBehaviour, IDamageable
         dpsAnim = true;
     }
 
-    protected void InstantThaw()
-    {
-        frozen = false;
-        iceParticles.SetActive(false);
-        if (!stunned)
-            StunObject(false);
-    }
-
     protected virtual void StunObject(bool stunActive)
     {
         return;
@@ -325,5 +296,26 @@ public class HealthController : MonoBehaviour, IDamageable
     protected virtual void OnHealthChange(bool damage = true)
     {
         return;
+    }
+
+    protected virtual void SetPoison(bool active)
+    {
+        poisoned = active;
+        poisonParticles.SetActive(active);
+    }
+
+    protected virtual void SetFire(bool active)
+    {
+        burning = active;
+        fireParticles.SetActive(active);
+    }
+
+    protected virtual void SetIce(bool active, float length=0)
+    {
+        frozen = active;
+        iceParticles.SetActive(active);
+
+        if (active)
+            movement.SpeedEffect(-iceSlowMultiplier, length);
     }
 }

@@ -329,6 +329,7 @@ MonoBehaviour:
   knockback: 20
   stunTime: 0.2
   effectTime: 0
+  destroyOnHit: 0
   selfDamage: 1
   selfKnockback: 20
   selfStunTime: 0.2
@@ -365,9 +366,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 50
-  movementSpeed: 100
+  movementSpeed: 10
   itemDrops:
   - {fileID: 0}
+  inputRolloff: 0.1
+  forceRolloff: 0.1
+  asteroidSound: asteroidDestruction
 --- !u!198 &198248826323685114
 ParticleSystem:
   m_ObjectHideFlags: 1

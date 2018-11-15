@@ -11,8 +11,6 @@ public class Weapon_ContactDamage : MonoBehaviour
     [SerializeField]
     public float physicalDmg;
     [SerializeField]
-    public float effectDps;
-    [SerializeField]
     public DamageType dmgType = DamageType.physical;
     [SerializeField]
     public float knockback;
@@ -26,6 +24,10 @@ public class Weapon_ContactDamage : MonoBehaviour
     protected IDamageable target;
     protected WeaponController weapon;
     protected bool isWeapon = false;
+
+    protected DamageType buffType = DamageType.none;
+    protected float buffTime = 0;
+    protected bool gotBuff = false;
 
 
     protected virtual void Start()
@@ -46,16 +48,37 @@ public class Weapon_ContactDamage : MonoBehaviour
         //Hit the target if it is damageable
         if (target != null)
         {
+            if (gotBuff)
+            {
+                if (buffType == DamageType.physical)
+                {
+                    physicalDmg *= 2;
+                    knockback *= 2;
+                }
+                else
+                {
+                    target.Hit(0, buffType, Vector2.zero, 0, buffTime);
+                    weapon.RemoveElement();
+                }
+            }
+
             if (isWeapon)
             {
-                target.Hit(physicalDmg, effectDps, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
                 weapon.OnHit();
             }
             else
             {
-                target.Hit(physicalDmg, effectDps, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
             }
             AudioManager1.instance.Play(hitsound);
+
+            if (gotBuff && buffType == DamageType.physical)
+            {
+                physicalDmg /= 2;
+                knockback /= 2;
+                weapon.RemoveElement();
+            }
         }
         else if(isWeapon)
         {
@@ -64,6 +87,18 @@ public class Weapon_ContactDamage : MonoBehaviour
 
         if (destroyOnHit)
             Destroy(gameObject);
+    }
+
+    public void AddBuff(DamageType buffType, float buffTime)
+    {
+        this.buffType = buffType;
+        this.buffTime = buffTime;
+        gotBuff = true;
+    }
+
+    public void RemoveBuff()
+    {
+        gotBuff = false;
     }
 
     protected void GetTarget(Collider2D other)

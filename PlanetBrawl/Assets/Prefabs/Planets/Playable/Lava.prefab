@@ -361,7 +361,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1582240147827684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4052844, y: 1.2806606, z: 0}
+  m_LocalPosition: {x: -4.9136477, y: -2.815238, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648729373540270}
@@ -924,14 +924,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   imunity: 0
-  weakness: 0
-  burnSpeedBonus: 1
   fireParticles: {fileID: 1536346949849856}
   iceParticles: {fileID: 1804190365027786}
   poisonParticles: {fileID: 1747188336292896}
   invincible: 0
   stunned: 0
-  frozen: 0
 --- !u!114 &114166140722166508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -950,6 +947,7 @@ MonoBehaviour:
   inputRolloff: 0.1
   forceRolloff: 0.1
   stunned: 0
+  invertedMove: 0
 --- !u!114 &114176573244363000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -970,12 +968,11 @@ MonoBehaviour:
     m_Bits: 528129
   specialParticles: {fileID: 198061541998416756}
   waveParticles: {fileID: 198490833271036392}
-  physicalDmg: 10
-  effectDps: 0
-  dmgType: 1
+  physicalDmg: 1
+  dmgType: 3
   knockback: 5
   stunTime: 0.25
-  effectTime: 0
+  effectTime: 5
 --- !u!114 &114338323651572526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -989,8 +986,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNr: 2
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  mainWeapon: {fileID: 114960621826607936}
+  currentWeapon: {fileID: 114960621826607936}
   bonusWeapon: {fileID: 0}
+  controlsInverted: 0
 --- !u!114 &114418352268567578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1041,11 +1039,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 1
-  effectDps: 0
   dmgType: 1
   knockback: 15
   stunTime: 0.25
   effectTime: 0
+  destroyOnHit: 0
 --- !u!114 &114687415123347828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1084,11 +1082,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 1
-  effectDps: 0
-  dmgType: 0
+  dmgType: 1
   knockback: 10
   stunTime: 0.25
   effectTime: 0
+  destroyOnHit: 0
 --- !u!114 &114960621826607936
 MonoBehaviour:
   m_ObjectHideFlags: 1

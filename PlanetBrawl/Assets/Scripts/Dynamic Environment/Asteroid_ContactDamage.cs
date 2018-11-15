@@ -21,7 +21,7 @@ public class Asteroid_ContactDamage : Weapon_ContactDamage
         GetTarget(col.collider);
 
         //Hit the target if it is damageable
-        target?.Hit(physicalDmg, effectDps, dmgType, (col.collider.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
-        healthController.Hit(selfDamage, 0, DamageType.physical, (col.collider.transform.position - transform.position).normalized * -selfKnockback, selfStunTime);
+        target?.Hit(physicalDmg, dmgType, (col.collider.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+        healthController.Hit(selfDamage, DamageType.physical, (col.collider.transform.position - transform.position).normalized * -selfKnockback, selfStunTime);
     }
 }

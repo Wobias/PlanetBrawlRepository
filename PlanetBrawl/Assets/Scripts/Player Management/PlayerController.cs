@@ -6,8 +6,9 @@ public class PlayerController : MonoBehaviour, IPlanet
 {
     public int playerNr = 1;
     public Color playerColor;
-    public WeaponController mainWeapon;
+    public WeaponController currentWeapon;
     public WeaponController bonusWeapon;
+    public bool controlsInverted = false;
 
 
     private GameObject currentItem;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour, IPlanet
     private ISpecialAbility ability;
 
     private bool bonusActive = false;
+    private bool stunned = false;
     //private bool isFirePressed;
     //private bool canSwitch = true;
     //private bool sprintActive = false;
@@ -36,19 +38,22 @@ public class PlayerController : MonoBehaviour, IPlanet
     {
         weaponLayer = LayerMask.NameToLayer("Weapon" + LayerMask.LayerToName(gameObject.layer));
 
-        if (mainWeapon)
+        if (currentWeapon)
         {
-            SetLayer(mainWeapon.transform, weaponLayer);
+            SetLayer(currentWeapon.transform, weaponLayer);
         }
+
+        if (controlsInverted)
+            movement.invertedMove = true;
     }
 
     void Update()
     {
-        if (mainWeapon == null && bonusActive)
+        if (currentWeapon == null && bonusActive)
         {
             bonusActive = false;
-            mainWeapon = bonusWeapon;
-            mainWeapon.gameObject.SetActive(true);
+            currentWeapon = bonusWeapon;
+            currentWeapon.gameObject.SetActive(true);
             bonusWeapon = null;
         }
 
@@ -80,10 +85,17 @@ public class PlayerController : MonoBehaviour, IPlanet
         //        bonusWeapon.canAttack = true;
         //}
 
-        Vector2 aimDir = new Vector2(InputSystem.ThumbstickInput(ThumbStick.RightX, playerNr-1), InputSystem.ThumbstickInput(ThumbStick.RightY, playerNr-1));
+        if (!stunned)
+        {
+            Vector2 aimDir = new Vector2(InputSystem.ThumbstickInput(ThumbStick.RightX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.RightY, playerNr - 1));
 
-        mainWeapon.Aim(aimDir);
-        mainWeapon.Shoot(InputSystem.TriggerPressed(Trigger.Right, playerNr-1));
+            if (controlsInverted)
+                aimDir *= -1;
+
+            currentWeapon.Aim(aimDir);
+        }
+        
+        currentWeapon.Shoot(InputSystem.TriggerPressed(Trigger.Right, playerNr-1));
 
         if (ability != null)
         {
@@ -102,7 +114,9 @@ public class PlayerController : MonoBehaviour, IPlanet
     {
         if (!movement.stunned)
         {
-            movement.direction = Vector2.Lerp(movement.direction, new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1)), movement.inputRolloff);
+            Vector2 dir = Vector2.Lerp(movement.direction, new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1)), movement.inputRolloff);
+            movement.direction = dir;
+
             //movement.direction = new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1));
         }
     }
@@ -122,19 +136,19 @@ public class PlayerController : MonoBehaviour, IPlanet
     {
         if (bonusActive)
         {
-            Destroy(mainWeapon.gameObject);
-            mainWeapon = newWeapon;
+            Destroy(currentWeapon.gameObject);
+            currentWeapon = newWeapon;
         }
         else
         {
-            bonusWeapon = mainWeapon;
-            mainWeapon = newWeapon;
+            bonusWeapon = currentWeapon;
+            currentWeapon = newWeapon;
         }
 
         bonusActive = true;
-        SetLayer(mainWeapon.transform, weaponLayer);
+        SetLayer(currentWeapon.transform, weaponLayer);
         bonusWeapon.gameObject.SetActive(false);
-        mainWeapon.gameObject.SetActive(true);
+        currentWeapon.gameObject.SetActive(true);
     }
 
     //void SwapWeapons()
@@ -167,6 +181,8 @@ public class PlayerController : MonoBehaviour, IPlanet
                 ability.StopUse();
         }
 
+        stunned = stunActive;
+
         specialAvailable = !stunActive;
 
         movement.stunned = stunActive;
@@ -174,19 +190,24 @@ public class PlayerController : MonoBehaviour, IPlanet
         //if (sprintActive)
         //    stunActive = true;
 
-        mainWeapon.canAttack = !stunActive;
+        currentWeapon.canAttack = !stunActive;
         if (bonusWeapon)
             bonusWeapon.canAttack = !stunActive;
     }
 
-    public void AbilityStun(bool stunActive)
+    public void AbilityStun(bool stunActive, bool flushMovement=false)
     {
+        stunned = stunActive;
+
         movement.stunned = stunActive;
+
+        if (flushMovement && stunActive)
+            movement.FlushVelocity();
 
         //if (sprintActive)
         //    stunActive = true;
 
-        mainWeapon.canAttack = !stunActive;
+        currentWeapon.canAttack = !stunActive;
         if (bonusWeapon)
             bonusWeapon.canAttack = !stunActive;
     }
@@ -198,7 +219,6 @@ public class PlayerController : MonoBehaviour, IPlanet
             health.StopAllCoroutines();
             health.stunned = false;
             Stun(false);
-            health.frozen = false;
             health.enabled = false;
         }
         else
@@ -211,8 +231,18 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     public void SetWeaponDistance()
     {
-        mainWeapon.ResetMinPos();
+        currentWeapon.ResetMinPos();
         if (bonusWeapon)
             bonusWeapon.ResetMinPos();
+    }
+
+    public void InvertAim(bool active)
+    {
+        controlsInverted = active;
+    }
+
+    public void BoostWeapon(DamageType type, float effectTime)
+    {
+        currentWeapon.ApplyElement(type, effectTime);
     }
 }

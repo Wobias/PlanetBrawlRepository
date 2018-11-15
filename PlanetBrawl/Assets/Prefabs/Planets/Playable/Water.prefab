@@ -461,7 +461,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404772579806080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.498089, y: 1.4097774, z: 0}
+  m_LocalPosition: {x: 6.580195, y: 2.2931366, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4852080690376248}
@@ -800,8 +800,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNr: 3
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  mainWeapon: {fileID: 114911619057824068}
+  currentWeapon: {fileID: 114911619057824068}
   bonusWeapon: {fileID: 0}
+  controlsInverted: 0
 --- !u!114 &114064128575723538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -832,6 +833,7 @@ MonoBehaviour:
   inputRolloff: 0.1
   forceRolloff: 0.1
   stunned: 0
+  invertedMove: 0
 --- !u!114 &114162425715907102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -845,14 +847,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   imunity: 4
-  weakness: 3
-  burnSpeedBonus: 1
   fireParticles: {fileID: 1507289927614756}
   iceParticles: {fileID: 1662291986876082}
   poisonParticles: {fileID: 1572257590694050}
   invincible: 0
   stunned: 0
-  frozen: 0
 --- !u!114 &114371742628997364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -891,11 +890,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 1
-  effectDps: 0
   dmgType: 1
   knockback: 10
   stunTime: 0.25
   effectTime: 0
+  destroyOnHit: 0
 --- !u!114 &114479378931733880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -909,11 +908,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 1
-  effectDps: 0
   dmgType: 1
   knockback: 15
   stunTime: 0.2
   effectTime: 0
+  destroyOnHit: 0
 --- !u!114 &114616154287006456
 MonoBehaviour:
   m_ObjectHideFlags: 1

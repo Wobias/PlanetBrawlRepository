@@ -14,6 +14,6 @@ public class Player_ContactDamage : Weapon_ContactDamage
         GetTarget(other);
 
         //Hit the target if it is damageable
-        target?.Hit(physicalDmg, effectDps, dmgType, (collision.collider.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+        target?.Hit(physicalDmg, dmgType, (collision.collider.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
     }
 }

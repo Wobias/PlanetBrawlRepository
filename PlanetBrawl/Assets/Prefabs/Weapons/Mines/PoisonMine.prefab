@@ -152,11 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 1
-  effectDps: 2
   dmgType: 2
-  knockback: 100
+  knockback: 5
   stunTime: 0.2
-  effectTime: 2
+  effectTime: 5
+  destroyOnHit: 0
 --- !u!198 &198550518379717284
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -16,8 +16,6 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     [SerializeField]
     public float physicalDmg;
     [SerializeField]
-    public float effectDps;
-    [SerializeField]
     public DamageType dmgType = DamageType.physical;
     [SerializeField]
     public float knockback;
@@ -44,7 +42,7 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
         //Hit the target if it is damageable
         if (target != null)
         {
-            target.Hit(physicalDmg, effectDps, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+            target.Hit(physicalDmg, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
             AudioManager1.instance.Play(hitsound);
         }
     }

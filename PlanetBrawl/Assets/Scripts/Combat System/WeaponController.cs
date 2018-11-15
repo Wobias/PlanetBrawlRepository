@@ -99,4 +99,22 @@ public class WeaponController : MonoBehaviour
     {
         return;
     }
+
+    public virtual void ApplyElement(DamageType type, float effectTime)
+    {
+        RemoveElement();
+
+        for (int i = 0; i < weaponParts.Length; i++)
+        {
+            weaponParts[i].gameObject.GetComponent<Weapon_ContactDamage>()?.AddBuff(type, effectTime);
+        }
+    }
+
+    public virtual void RemoveElement()
+    {
+        for (int i = 0; i < weaponParts.Length; i++)
+        {
+            weaponParts[i].gameObject.GetComponent<Weapon_ContactDamage>()?.RemoveBuff();
+        }
+    }
 }

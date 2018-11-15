@@ -7,8 +7,6 @@ public class Spike_ContactDamage : MonoBehaviour
     [SerializeField]
     public float physicalDmg;
     [SerializeField]
-    public float effectDps;
-    [SerializeField]
     public DamageType dmgType = DamageType.physical;
     [SerializeField]
     public float knockback;
@@ -22,6 +20,12 @@ public class Spike_ContactDamage : MonoBehaviour
     public Transform checkStart;
     public float checkLength;
     public LayerMask hitMask;
+
+
+    private void Start()
+    {
+        hitMask = hitMask & ~(1 << transform.root.gameObject.layer);
+    }
 
     private void Update()
     {
@@ -40,7 +44,7 @@ public class Spike_ContactDamage : MonoBehaviour
             //Hit the target if it is damageable
             if (target != null)
             {
-                target.Hit(physicalDmg, effectDps, dmgType, (hit.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, dmgType, (hit.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
             }
 
             Destroy(transform.parent.gameObject);

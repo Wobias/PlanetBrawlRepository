@@ -14,7 +14,7 @@ public class Mine_ContactDamage : Weapon_ContactDamage
         //Hit the target if it is damageable
         if (target != null)
         {
-            target.Hit(physicalDmg, effectDps, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+            target.Hit(physicalDmg, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
             AudioManager1.instance.Play(hitsound);
         }
 

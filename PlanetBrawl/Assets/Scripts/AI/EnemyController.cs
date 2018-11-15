@@ -103,7 +103,6 @@ public class EnemyController : MonoBehaviour, IPlanet
             health.StopAllCoroutines();
             health.stunned = false;
             Stun(false);
-            health.frozen = false;
             health.enabled = false;
         }
         else
@@ -156,5 +155,15 @@ public class EnemyController : MonoBehaviour, IPlanet
             StartCoroutine(FindTarget());
         else
             searching = false;
+    }
+
+    public void InvertAim(bool active)
+    {
+        
+    }
+
+    public void BoostWeapon(DamageType type, float effectTime)
+    {
+        currentWeapon.ApplyElement(type, effectTime);
     }
 }

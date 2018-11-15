@@ -25,11 +25,17 @@ public class PlanetMovement : MonoBehaviour, ISpeedable, IMovable
     float lowHpSpeed;
     float criticalHpSpeed;
 
+    public bool invertedMove = false;
+
     //private float sprintSpeed;
     private Vector2 externalForce = Vector2.zero;
     private Vector2 targetExForce = Vector2.zero;
     private Vector2 gravForce = Vector2.zero;
     private Vector2 targetGravForce = Vector2.zero;
+
+    private Vector2 oldDir;
+
+    private bool canStop = true;
 
     //[HideInInspector]
     //public bool isSprinting = false;
@@ -64,13 +70,26 @@ public class PlanetMovement : MonoBehaviour, ISpeedable, IMovable
     void FixedUpdate()
     {
         //myRigidbody.AddForce(direction * speed * effectMultiplier * Time.fixedDeltaTime);
-
         externalForce = Vector2.Lerp(externalForce, targetExForce, forceRolloff);
         gravForce = Vector2.Lerp(gravForce, targetGravForce, forceRolloff);
 
-        myRigidbody.velocity = direction * speed * effectMultiplier * Time.fixedDeltaTime + externalForce + gravForce;
+        if (!invertedMove)
+            myRigidbody.velocity = direction * speed * effectMultiplier * Time.fixedDeltaTime + externalForce + gravForce;
+        else
+            myRigidbody.velocity = -direction * speed * effectMultiplier * Time.fixedDeltaTime + externalForce + gravForce;
 
-        //Debug.Log(myRigidbody.velocity);
+        if (!canStop)
+        {
+            if (Mathf.Abs(direction.magnitude) < 0.5f)
+            {
+                myRigidbody.velocity += oldDir * speed * effectMultiplier * Time.deltaTime;
+            }
+
+            if (Mathf.Abs(direction.magnitude) >= 0.5f)
+            {
+                oldDir = direction * 2;
+            }
+        }
     }
 
     //ISpeedable Method
@@ -149,5 +168,15 @@ public class PlanetMovement : MonoBehaviour, ISpeedable, IMovable
     public void FlushGravForce()
     {
         targetGravForce = Vector2.zero;
+    }
+
+    public void FlushVelocity()
+    {
+        direction = Vector2.zero;
+    }
+
+    public void SetBrakes(bool active)
+    {
+        canStop = active;
     }
 }

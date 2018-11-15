@@ -26,7 +26,7 @@ public class RiskHealth_Pickup : MonoBehaviour
             }
             else
             {
-                target.Hit(damage, 0, DamageType.physical, Vector2.zero, dmgStunTime);
+                target.Hit(damage, DamageType.physical, Vector2.zero, dmgStunTime);
             }
             
             Destroy(gameObject);

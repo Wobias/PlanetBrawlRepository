@@ -22,6 +22,8 @@ public class Planet_HealthController : HealthController
     Vector3 lowHpScale;
     Vector3 criticalHpScale;
 
+    PlanetMovement planetMovement;
+
     #endregion
 
 
@@ -31,6 +33,7 @@ public class Planet_HealthController : HealthController
         //Set max health
         animator = GetComponent<Animator>();
         controller = GetComponent<IPlanet>();
+        planetMovement = GetComponent<PlanetMovement>();
         myTransform = GetComponentInChildren<SpriteRenderer>().transform;
         maxScale = myTransform.localScale;
         SetScaleStates();
@@ -109,5 +112,18 @@ public class Planet_HealthController : HealthController
             health = maxHealth;
 
         OnHealthChange(false);
+    }
+
+    protected override void SetPoison(bool active)
+    {
+        base.SetPoison(active);
+        planetMovement.invertedMove = active;
+        controller.InvertAim(active);
+    }
+
+    protected override void SetFire(bool active)
+    {
+        base.SetFire(active);
+        planetMovement.SetBrakes(!active);
     }
 }
