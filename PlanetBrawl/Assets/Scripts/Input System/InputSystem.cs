@@ -51,7 +51,8 @@ public class InputSystem : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
 
         for (int i = 0; i < currentStates.Length; i++)
         {
@@ -72,6 +73,11 @@ public class InputSystem : MonoBehaviour
             prevStates[i] = currentStates[i];
             currentStates[i] = GamePad.GetState((PlayerIndex)i);
         }
+    }
+
+    public static bool PadConnected(int playerNr)
+    {
+        return currentStates[playerNr].IsConnected;
     }
 
     public static void Rumble(Vector2 strength, float time, int playerNr)

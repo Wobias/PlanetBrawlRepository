@@ -19,9 +19,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4845974931731802}
+  - component: {fileID: 114095285439030176}
   - component: {fileID: 114364797051152336}
   m_Layer: 0
-  m_Name: InputSystem
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,6 +41,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114095285439030176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032461635475366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0fb2dd7779c814fb886d0071f3894d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  playerPrefabs:
+  - {fileID: 1734875635455440, guid: 9fa6ff4122caa52479306fe975b49be7, type: 2}
+  - {fileID: 1404772579806080, guid: 65b52924245a1cc4f809453433240a29, type: 2}
+  - {fileID: 1315575399049300, guid: c1f6b622241eaad48aec146fbe8b2da4, type: 2}
+  - {fileID: 1582240147827684, guid: a47902273dd3df74ea72eb1023545bc7, type: 2}
+  - {fileID: 1582240147827684, guid: d4f48bf1ef0754a41bca47f6fb45844a, type: 2}
+  - {fileID: 1315575399049300, guid: ea2dd60704ac63a408659de3cb5d95e9, type: 2}
+  - {fileID: 1404772579806080, guid: e9f0126d0003cff418d2209b6ad263eb, type: 2}
+  - {fileID: 1734875635455440, guid: 771a1f5301b882c479421fd865b62aac, type: 2}
 --- !u!114 &114364797051152336
 MonoBehaviour:
   m_ObjectHideFlags: 1

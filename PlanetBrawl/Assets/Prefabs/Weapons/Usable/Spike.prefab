@@ -158,13 +158,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab2f00daf814eb41ad746bf0f7880db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitsound: punch
   physicalDmg: 1
   dmgType: 1
   knockback: 20
   stunTime: 0.25
   effectTime: 0
+  destroyOnHit: 0
   checkStart: {fileID: 4576915332283436}
-  checkLength: 0.15
+  checkLength: 0.2
   hitMask:
     serializedVersion: 2
     m_Bits: 1036033

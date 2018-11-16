@@ -2,28 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spike_ContactDamage : MonoBehaviour
+public class Spike_ContactDamage : Weapon_ContactDamage
 {
-    [SerializeField]
-    public float physicalDmg;
-    [SerializeField]
-    public DamageType dmgType = DamageType.physical;
-    [SerializeField]
-    public float knockback;
-    [SerializeField]
-    public float stunTime;
-    [SerializeField]
-    public float effectTime;
-
-    protected IDamageable target;
-
     public Transform checkStart;
     public float checkLength;
     public LayerMask hitMask;
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         hitMask = hitMask & ~(1 << transform.root.gameObject.layer);
     }
 
@@ -44,21 +32,37 @@ public class Spike_ContactDamage : MonoBehaviour
             //Hit the target if it is damageable
             if (target != null)
             {
-                target.Hit(physicalDmg, dmgType, (hit.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
-            }
+                if (gotBuff)
+                {
+                    if (buffType == DamageType.physical)
+                    {
+                        physicalDmg *= 2;
+                        knockback *= 2;
+                    }
+                    else
+                    {
+                        target.Hit(0, buffType, Vector2.zero, 0, buffTime);
+                        weapon.RemoveElement();
+                    }
+                }
 
-            Destroy(transform.parent.gameObject);
+                target.Hit(physicalDmg, dmgType, (hit.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+
+                if (gotBuff && buffType == DamageType.physical)
+                {
+                    physicalDmg /= 2;
+                    knockback /= 2;
+                    weapon.RemoveElement();
+                }
+
+                Destroy(transform.parent.gameObject);
+            }
         }
     }
 
-    protected void GetTarget(Collider2D other)
+    protected override void OnCollisionEnter2D(Collision2D col)
     {
-        target = null;
-        target = other.GetComponent<IDamageable>();
-        if (target == null)
-        {
-            target = other.attachedRigidbody?.GetComponent<IDamageable>();
-        }
+        return;
     }
 
     private void OnDrawGizmos()

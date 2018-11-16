@@ -324,7 +324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 1
-  effectDps: 0
   dmgType: 1
   knockback: 20
   stunTime: 0.2
@@ -345,15 +344,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  imunity: 5
-  weakness: 0
-  burnSpeedBonus: 0.5
+  imunity: 0
   fireParticles: {fileID: 1460869818649556}
   iceParticles: {fileID: 1378841371257886}
   poisonParticles: {fileID: 1702422138432794}
   invincible: 0
   stunned: 0
-  frozen: 0
 --- !u!114 &114779258227962378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,7 +364,20 @@ MonoBehaviour:
   rotateSpeed: 50
   movementSpeed: 10
   itemDrops:
-  - {fileID: 0}
+  - {fileID: 1941771394216504, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
+  - {fileID: 1941771394216504, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
+  - {fileID: 1941771394216504, guid: 760e1394a0dacc14cb8c03402163bf15, type: 2}
+  - {fileID: 1359780370652822, guid: c87d45d15bcb90f419f2ea76a981fff2, type: 2}
+  - {fileID: 1359780370652822, guid: eb053d39a23868049bec33b4e25fe3ba, type: 2}
+  - {fileID: 1643763656143936, guid: de8b838c1cd750447947879cc7a77eeb, type: 2}
+  - {fileID: 1643763656143936, guid: a3ec70bcb04b37041884a2bd09308427, type: 2}
+  - {fileID: 1643763656143936, guid: 4b207b041170262439e97cd8c870f9c4, type: 2}
+  - {fileID: 1941771394216504, guid: 3c1a3577d373d7b42bf03ee8afc0cd88, type: 2}
+  - {fileID: 1417105464993276, guid: 210de3401885f224e82d3988bfd3e9e9, type: 2}
+  - {fileID: 1801884229421134, guid: 9fbaae4dd58414d44b14a2720ec357d4, type: 2}
+  - {fileID: 1794704960988728, guid: 4f4d37c0efaa1764b9755cd954b70bdc, type: 2}
+  - {fileID: 1662186782763984, guid: a6d48cd6f23eb204ca1fbcfa97a0e9de, type: 2}
+  - {fileID: 1289222345641602, guid: 3cd8b8469d0848943894409242a2837d, type: 2}
   inputRolloff: 0.1
   forceRolloff: 0.1
   asteroidSound: asteroidDestruction

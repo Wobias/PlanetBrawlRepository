@@ -1,35 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameModeSelection : MonoBehaviour
 {
-    public Sprite ffaSprite;
-    public Sprite teamSprite;
+    public string[] modeNames;
+    public Sprite[] modeSprites;
+    public Door[] lobbyDoors;
+    public TextMeshProUGUI gmText;
 
-    private MenuManager manager;
     private SpriteRenderer spriteRenderer;
-    private bool teamMode = false;
+    private int selection = 0;
 
 
     private void Start()
     {
-        manager = FindObjectOfType<MenuManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        teamMode = !teamMode;
-        manager.SwitchTeamMode(teamMode);
+        selection++;
 
-        if (teamMode)
+        if (selection >= modeSprites.Length)
+            selection = 0;
+
+        spriteRenderer.sprite = modeSprites[selection];
+        GameManager.instance.gameMode = (GameModes)selection;
+        gmText.text = modeNames[selection];
+
+        for (int i = 0; i < lobbyDoors.Length; i++)
         {
-            spriteRenderer.sprite = teamSprite;
-        }
-        else
-        {
-            spriteRenderer.sprite = ffaSprite;
+            lobbyDoors[i].SetState((GameModes)selection);
         }
     }
 }

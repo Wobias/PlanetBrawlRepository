@@ -1419,6 +1419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 459546390}
   - component: {fileID: 459546389}
+  - component: {fileID: 459546391}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -1458,6 +1459,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &459546391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 459546388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73ec55a0e2e46a469eb5b137e8a3653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawns:
+  - {fileID: 1101263105}
+  - {fileID: 911830567}
+  - {fileID: 387667910}
+  - {fileID: 117834945}
 --- !u!1001 &597357042
 Prefab:
   m_ObjectHideFlags: 0
@@ -1638,6 +1655,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1941771394216504, guid: 760e1394a0dacc14cb8c03402163bf15, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760e1394a0dacc14cb8c03402163bf15, type: 2}
   m_IsPrefabAsset: 0
@@ -1688,6 +1709,10 @@ Prefab:
     - target: {fileID: 1941771394216504, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
       propertyPath: m_Name
       value: Pickup_Health_Small (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941771394216504, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
@@ -1758,6 +1783,10 @@ Prefab:
     - target: {fileID: 4296786161163614, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941771394216504, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}
@@ -2025,20 +2054,17 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1316369906858202, guid: ab26df5f718b6ff44b47f4a463436311, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826333657915292, guid: ab26df5f718b6ff44b47f4a463436311, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab26df5f718b6ff44b47f4a463436311, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1224022619 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1316369906858202, guid: ab26df5f718b6ff44b47f4a463436311,
-    type: 2}
-  m_PrefabInternal: {fileID: 1224022618}
---- !u!114 &1224022620 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114441527169416560, guid: ab26df5f718b6ff44b47f4a463436311,
-    type: 2}
-  m_PrefabInternal: {fileID: 1224022618}
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 --- !u!1001 &1283846180
 Prefab:
   m_ObjectHideFlags: 0
@@ -2082,6 +2108,10 @@ Prefab:
       propertyPath: m_Name
       value: Pickup_RiskHealth (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1941771394216504, guid: 760e1394a0dacc14cb8c03402163bf15, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760e1394a0dacc14cb8c03402163bf15, type: 2}
   m_IsPrefabAsset: 0
@@ -2100,7 +2130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1461178524
 Transform:
   m_ObjectHideFlags: 0
@@ -2125,23 +2155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33f202d3afb3b648b23a6fd34a55009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  teamOne: []
-  teamTwo: []
-  playerSpawns:
-  - {fileID: 1101263105}
-  - {fileID: 911830567}
-  - {fileID: 387667910}
-  - {fileID: 117834945}
-  victoryScreen: {fileID: 1224022619}
-  victoryText: {fileID: 1224022620}
-  teamMode: 0
-  gameOver: 0
-  teamColors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &1512803431
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2278,10 @@ Prefab:
     - target: {fileID: 4296786161163614, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941771394216504, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
@@ -2470,6 +2487,10 @@ Prefab:
     - target: {fileID: 1941771394216504, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
       propertyPath: m_Name
       value: Pickup_Health_Big (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941771394216504, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}

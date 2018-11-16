@@ -100,8 +100,8 @@ public class Planet_HealthController : HealthController
 
     protected override void Kill()
     {
-        GameManager_Prototype.gameManager.RemoveFromLists(gameObject);
-        GameManager_Prototype.gameManager.VictoryConditions();
+        //GameManager_Prototype.gameManager.RemoveFromLists(gameObject);
+        //GameManager_Prototype.gameManager.VictoryConditions();
         base.Kill();
     }
 

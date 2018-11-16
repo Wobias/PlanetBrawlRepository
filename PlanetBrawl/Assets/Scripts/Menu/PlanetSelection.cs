@@ -4,63 +4,94 @@ using UnityEngine;
 
 public class PlanetSelection : MonoBehaviour
 {
-    public GameObject characterPrefab;
-    public Color[] playerColors;
+    public int playerNr = 1;
+    public GameObject[] characters;
 
-    private float cooldown = 0;
-
-    int playerNumber;
-
-    PlayerController playerController;
-    MenuManager menuManager;
+    private Color playerColor;
+    private int index = 0;
+    private bool pressed = false;
+    private bool joined = false;
+    private bool ready = false;
 
 
     private void Start()
     {
-        cooldown = 0;
-        menuManager = FindObjectOfType<MenuManager>();
+        playerColor = GameManager.instance.GetColor(playerNr);
+
+        for (int i = 0; i < characters.Length; i++)
+        {
+            characters[i].transform.Find("Outline").GetComponent<SpriteRenderer>().color = playerColor;
+        }
     }
 
     private void Update()
     {
-        if(cooldown > 0.0f)
+        if (ready)
         {
-            cooldown -= Time.deltaTime;
-            if(cooldown < 0.0f)
+            if (InputSystem.ButtonDown(Button.B, playerNr-1) ||
+                !InputSystem.PadConnected(playerNr-1))
             {
-                cooldown = 0;
+                ready = false;
+                GameManager.instance.RemovePlayer(playerNr);
+                PlanetSelectionManager.instance.Unready();
             }
 
+            return;
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (cooldown == 0)
+        if (!joined && InputSystem.ButtonDown(Button.A, playerNr-1))
         {
-            playerController = other.transform.root.GetComponent<PlayerController>();
-
-            if (playerController == null)
-                return;
-
-            playerNumber = playerController.playerNr;
-
-            GameObject newPlanet = Instantiate(characterPrefab, other.transform.root.position, Quaternion.identity);
-            SetLayer(newPlanet.transform, other.transform.root.gameObject.layer);
-            newPlanet.GetComponent<PlayerController>().playerNr = playerNumber;
-            newPlanet.GetComponent<PlayerController>().playerColor = playerColors[playerNumber-1];
-            newPlanet.GetComponent<HealthController>().invincible = true;
-            Destroy(other.transform.root.gameObject);
-            cooldown += 1;
-
-            menuManager.playerPrefabs[playerNumber-1] = characterPrefab;
+            joined = true;
+            characters[index].SetActive(true);
+            PlanetSelectionManager.instance.JoinGame();
         }
-    }
+        else if (joined)
+        {
+            if (InputSystem.ButtonDown(Button.A, playerNr - 1))
+            {
+                ready = true;
+                GameManager.instance.SetPlayer(index, playerNr);
+                PlanetSelectionManager.instance.Ready();
+                return;
+            }
+            else if (InputSystem.ButtonDown(Button.B, playerNr - 1) ||
+                !InputSystem.PadConnected(playerNr - 1))
+            {
+                joined = false;
+                PlanetSelectionManager.instance.LeaveGame();
+                characters[index].SetActive(false);
+                return;
+            }
 
-    private void SetLayer(Transform root, int layer)
-    {
-        root.gameObject.layer = layer;
-        foreach (Transform child in root)
-            SetLayer(child, layer);
+            if (InputSystem.DPadDown(DPad.Right, playerNr - 1) ||
+            InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1) > 0 && !pressed)
+            {
+                pressed = true;
+                characters[index].SetActive(false);
+                index++;
+
+                if (index >= characters.Length)
+                    index = 0;
+
+                characters[index].SetActive(true);
+            }
+            else if (InputSystem.DPadDown(DPad.Left, playerNr - 1) ||
+                InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1) < 0 && !pressed)
+            {
+                pressed = true;
+                characters[index].SetActive(false);
+                index--;
+
+                if (index <= 0)
+                    index = characters.Length - 1;
+
+                characters[index].SetActive(true);
+            }
+
+            if (InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1) == 0 && pressed)
+            {
+                pressed = false;
+            }
+        } 
     }
 }
