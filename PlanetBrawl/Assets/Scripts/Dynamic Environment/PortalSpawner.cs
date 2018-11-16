@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PortalSpawner : MonoBehaviour
 {
+    public float maxPosX = 18;
+    public float maxPosY = 8;
+
     public static PortalSpawner portalSpawner;
 
     public GameObject portalOne;
@@ -51,6 +54,25 @@ public class PortalSpawner : MonoBehaviour
     {
         portalOnePosition.x = Random.Range(-18f, 19f);
         portalOnePosition.y = Random.Range(-8f, 9f);
+
+        if (portalOnePosition.x >= maxPosX)
+        {
+            portalOnePosition.x = maxPosX;
+        }
+        if (portalOnePosition.x <= -maxPosX)
+        {
+            portalOnePosition.x = -maxPosX;
+        }
+
+        if (portalOnePosition.y >= maxPosY)
+        {
+            portalOnePosition.y = maxPosY;
+        }
+        if (portalOnePosition.y <= -maxPosY)
+        {
+            portalOnePosition.y = -maxPosY;
+        }
+
 
         portalOne.transform.position = portalOnePosition;
         portalTwo.transform.position = portalOnePosition * -1;

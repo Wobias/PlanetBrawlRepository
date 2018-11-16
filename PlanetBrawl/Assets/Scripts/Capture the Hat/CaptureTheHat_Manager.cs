@@ -21,6 +21,8 @@ public class CaptureTheHat_Manager : MonoBehaviour
     {
         players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         gameObjects = FindObjectsOfType<GameObject>();
+        countdown.gameObject.SetActive(true);
+
         for (int i = 0; i < gameObjects.Length; i++)
         {
             if (gameObjects[i].layer == 23)
@@ -28,18 +30,26 @@ public class CaptureTheHat_Manager : MonoBehaviour
                 gameObjects[i].SetActive(false);
             }
         }
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<Planet_HealthController>().invincible = true;
+        }
+
         timer = 10f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         timer -= Time.deltaTime;
         countdown.SetText(Mathf.RoundToInt(timer).ToString());
         if (timer <= 0f && hat.layer != 0)
         {
             countdown.SetText("");
             VictoryConditions(players);
+            countdown.gameObject.SetActive(false);
         }
     }
 

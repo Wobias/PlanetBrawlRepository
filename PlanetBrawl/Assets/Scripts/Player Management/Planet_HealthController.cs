@@ -37,6 +37,7 @@ public class Planet_HealthController : HealthController
         myTransform = GetComponentInChildren<SpriteRenderer>().transform;
         maxScale = myTransform.localScale;
         SetScaleStates();
+        
     }
 
     void ScalePlanet()
