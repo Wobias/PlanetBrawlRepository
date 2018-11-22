@@ -5,7 +5,7 @@ using XInputDotNetPure; // Required in C#
 
 #region InputEnums
 
-public enum Button
+public enum Buttons
 {
     A,
     B,
@@ -17,13 +17,13 @@ public enum Button
     RightShoulder
 };
 
-public enum Trigger
+public enum Triggers
 {
     Left,
     Right
 };
 
-public enum ThumbStick
+public enum ThumbSticks
 {
     LeftX,
     LeftY,
@@ -87,60 +87,60 @@ public class InputSystem : MonoBehaviour
 
     #region ButtonChecks
 
-    public static bool ButtonDown(Button button, int playerNr)
+    public static bool ButtonDown(Buttons button, int playerNr)
     {
         switch (button)
         {
-            case Button.A:
+            case Buttons.A:
                 if (currentStates[playerNr].Buttons.A == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.A == ButtonState.Released)
                 {
                     return true;
                 }
                 break;
-            case Button.B:
+            case Buttons.B:
                 if (currentStates[playerNr].Buttons.B == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.B == ButtonState.Released)
                 {
                     return true;
                 }
                 break;
-            case Button.X:
+            case Buttons.X:
                 if (currentStates[playerNr].Buttons.X == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.X == ButtonState.Released)
                 {
                     return true;
                 }
                 break;
-            case Button.Y:
+            case Buttons.Y:
                 if (currentStates[playerNr].Buttons.Y == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.Y == ButtonState.Released)
                 {
                     return true;
                 }
                 break;
-            case Button.Start:
+            case Buttons.Start:
                 if (currentStates[playerNr].Buttons.Start == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.Start == ButtonState.Released)
                 {
                     return true;
                 }
                 break;
-            case Button.Back:
+            case Buttons.Back:
                 if (currentStates[playerNr].Buttons.Back == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.Back == ButtonState.Released)
                 {
                     return true;
                 }
                 break;
-            case Button.LeftShoulder:
+            case Buttons.LeftShoulder:
                 if (currentStates[playerNr].Buttons.LeftShoulder == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.LeftShoulder == ButtonState.Released)
                 {
                     return true;
                 }
                 break;
-            case Button.RightShoulder:
+            case Buttons.RightShoulder:
                 if (currentStates[playerNr].Buttons.RightShoulder == ButtonState.Pressed &&
                     prevStates[playerNr].Buttons.RightShoulder == ButtonState.Released)
                 {
@@ -154,53 +154,53 @@ public class InputSystem : MonoBehaviour
         return false;
     }
 
-    public static bool ButtonPressed(Button button, int playerNr)
+    public static bool ButtonPressed(Buttons button, int playerNr)
     {
         switch (button)
         {
-            case Button.A:
+            case Buttons.A:
                 if (currentStates[playerNr].Buttons.A == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.B:
+            case Buttons.B:
                 if (currentStates[playerNr].Buttons.B == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.X:
+            case Buttons.X:
                 if (currentStates[playerNr].Buttons.X == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.Y:
+            case Buttons.Y:
                 if (currentStates[playerNr].Buttons.Y == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.Start:
+            case Buttons.Start:
                 if (currentStates[playerNr].Buttons.Start == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.Back:
+            case Buttons.Back:
                 if (currentStates[playerNr].Buttons.Back == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.LeftShoulder:
+            case Buttons.LeftShoulder:
                 if (currentStates[playerNr].Buttons.LeftShoulder == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.RightShoulder:
+            case Buttons.RightShoulder:
                 if (currentStates[playerNr].Buttons.RightShoulder == ButtonState.Pressed)
                 {
                     return true;
@@ -213,60 +213,60 @@ public class InputSystem : MonoBehaviour
         return false;
     }
 
-    public static bool ButtonUp(Button button, int playerNr)
+    public static bool ButtonUp(Buttons button, int playerNr)
     {
         switch (button)
         {
-            case Button.A:
+            case Buttons.A:
                 if (currentStates[playerNr].Buttons.A == ButtonState.Released &&
                     prevStates[playerNr].Buttons.A == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.B:
+            case Buttons.B:
                 if (currentStates[playerNr].Buttons.B == ButtonState.Released &&
                     prevStates[playerNr].Buttons.B == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.X:
+            case Buttons.X:
                 if (currentStates[playerNr].Buttons.X == ButtonState.Released &&
                     prevStates[playerNr].Buttons.X == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.Y:
+            case Buttons.Y:
                 if (currentStates[playerNr].Buttons.Y == ButtonState.Released &&
                     prevStates[playerNr].Buttons.Y == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.Start:
+            case Buttons.Start:
                 if (currentStates[playerNr].Buttons.Start == ButtonState.Released &&
                     prevStates[playerNr].Buttons.Start == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.Back:
+            case Buttons.Back:
                 if (currentStates[playerNr].Buttons.Back == ButtonState.Released &&
                     prevStates[playerNr].Buttons.Back == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.LeftShoulder:
+            case Buttons.LeftShoulder:
                 if (currentStates[playerNr].Buttons.LeftShoulder == ButtonState.Released &&
                     prevStates[playerNr].Buttons.LeftShoulder == ButtonState.Pressed)
                 {
                     return true;
                 }
                 break;
-            case Button.RightShoulder:
+            case Buttons.RightShoulder:
                 if (currentStates[playerNr].Buttons.RightShoulder == ButtonState.Released &&
                     prevStates[playerNr].Buttons.RightShoulder == ButtonState.Pressed)
                 {
@@ -401,18 +401,18 @@ public class InputSystem : MonoBehaviour
 
     #region TriggerChecks
 
-    public static bool TriggerDown(Trigger trigger, int playerNr)
+    public static bool TriggerDown(Triggers trigger, int playerNr)
     {
         switch (trigger)
         {
-            case Trigger.Left:
+            case Triggers.Left:
                 if (currentStates[playerNr].Triggers.Left > 0 &&
                     prevStates[playerNr].Triggers.Left == 0)
                 {
                     return true;
                 }
                 break;
-            case Trigger.Right:
+            case Triggers.Right:
                 if (currentStates[playerNr].Triggers.Right > 0 &&
                     prevStates[playerNr].Triggers.Right == 0)
                 {
@@ -426,17 +426,17 @@ public class InputSystem : MonoBehaviour
         return false;
     }
 
-    public static bool TriggerPressed(Trigger trigger, int playerNr)
+    public static bool TriggerPressed(Triggers trigger, int playerNr)
     {
         switch (trigger)
         {
-            case Trigger.Left:
+            case Triggers.Left:
                 if (currentStates[playerNr].Triggers.Left > 0)
                 {
                     return true;
                 }
                 break;
-            case Trigger.Right:
+            case Triggers.Right:
                 if (currentStates[playerNr].Triggers.Right > 0)
                 {
                     return true;
@@ -449,18 +449,18 @@ public class InputSystem : MonoBehaviour
         return false;
     }
 
-    public static bool TriggerUp(Trigger trigger, int playerNr)
+    public static bool TriggerUp(Triggers trigger, int playerNr)
     {
         switch (trigger)
         {
-            case Trigger.Left:
+            case Triggers.Left:
                 if (currentStates[playerNr].Triggers.Left == 0 &&
                     prevStates[playerNr].Triggers.Left > 0)
                 {
                     return true;
                 }
                 break;
-            case Trigger.Right:
+            case Triggers.Right:
                 if (currentStates[playerNr].Triggers.Right == 0 &&
                     prevStates[playerNr].Triggers.Right > 0)
                 {
@@ -478,17 +478,17 @@ public class InputSystem : MonoBehaviour
 
     #region ThumbStickChecks
 
-    public static float ThumbstickInput(ThumbStick thumbStick, int playerNr)
+    public static float ThumbstickInput(ThumbSticks thumbStick, int playerNr)
     {
         switch (thumbStick)
         {
-            case ThumbStick.LeftX:
+            case ThumbSticks.LeftX:
                 return currentStates[playerNr].ThumbSticks.Left.X;
-            case ThumbStick.LeftY:
+            case ThumbSticks.LeftY:
                 return currentStates[playerNr].ThumbSticks.Left.Y;
-            case ThumbStick.RightX:
+            case ThumbSticks.RightX:
                 return currentStates[playerNr].ThumbSticks.Right.X;
-            case ThumbStick.RightY:
+            case ThumbSticks.RightY:
                 return currentStates[playerNr].ThumbSticks.Right.Y;
             default:
                 return 0;

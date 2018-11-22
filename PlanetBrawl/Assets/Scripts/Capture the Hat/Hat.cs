@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class Hat : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     private Transform hatTransform;
     private Vector3 hatOnPlayerPosition;
     private Vector3 newHatPosition;
     private bool isOnPlayer = false;
     private bool isLerping = false;
     private float distance;
+    private Coroutine scoreRoutine;
     
 
     // Use this for initialization
     void Start()
     {
-        hatTransform = GetComponent<Transform>();
+        hatTransform = transform;
     }
 
     private void Update()
@@ -27,25 +28,34 @@ public class Hat : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        GameObject rootObject = collision.transform.root.gameObject;
+        GameObject rootObject = other.transform.root.gameObject;
 
         if (isOnPlayer == false && rootObject.tag == "Player")
         {
-            player = collision.gameObject;
+            player = rootObject;
             gameObject.transform.parent = player.transform;
             hatOnPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y + 0.8f, 0f);
             hatTransform.position = hatOnPlayerPosition;
-            gameObject.layer = player.layer;
             isOnPlayer = true;
+
+            scoreRoutine = StartCoroutine(ScorePerSecond(player.GetComponent<PlayerController>().playerNr));
         }
-        else if (isOnPlayer == true && player.layer != rootObject.layer)
+    }
+
+    public void ThrowHat()
+    {
+        if (isOnPlayer)
         {
-            gameObject.layer = 0;
             gameObject.transform.parent = null;
             newHatPosition = new Vector3(Random.Range(-20f, 20f), Random.Range(-9f, 9f), 0f);
             isLerping = true;
+            if (scoreRoutine != null)
+            {
+                StopCoroutine(scoreRoutine);
+                scoreRoutine = null;
+            }
             StartCoroutine(SwitchBoolAfterSeconds());
         }
     }
@@ -63,5 +73,20 @@ public class Hat : MonoBehaviour
         yield return new WaitForSeconds(1f);
         isLerping = false;
         yield return null;
+    }
+
+    IEnumerator ScorePerSecond(int playerNr)
+    {
+        yield return new WaitForSeconds(1);
+        GameManager.instance.AddScore(playerNr);
+
+        if (isOnPlayer)
+        {
+            scoreRoutine = StartCoroutine(ScorePerSecond(playerNr));
+        }    
+        else
+        {
+            scoreRoutine = null;
+        }
     }
 }

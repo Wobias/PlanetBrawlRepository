@@ -4,57 +4,105 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CaptureTheHat_Manager : MonoBehaviour
+public class CaptureTheHat_Manager : MonoBehaviour, IModeController
 {
-    public Camera camera;
-    public GameObject hat;
-    public GameObject victoryScreen;
-    private GameObject[] gameObjects;
+    public GameObject hatPrefab;
+    public GameObject countdownPrefab;
+    public int winScore = 20;
+    public float timer;
+
+    private Transform[] playerSpawns;
     private List <GameObject> players = new List<GameObject>();
-    private float timer = 30f;
-    public TextMeshProUGUI countdown;
-    public TextMeshProUGUI victoryText;
+    private int[] scores = new int[4];
+    private TextMeshProUGUI countdown;
+    private TextMeshProUGUI victoryText;
+    private bool gameOver = false;
 
 
-    // Use this for initialization
-    void Start()
+    public void InitMode(Transform[] spawns, GameObject[] playerPrefabs)
     {
-        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        gameObjects = FindObjectsOfType<GameObject>();
-        for (int i = 0; i < gameObjects.Length; i++)
+        Instantiate(hatPrefab, Vector3.zero, Quaternion.identity);
+
+        playerSpawns = spawns;
+
+        for (int i = 0; i < playerPrefabs.Length; i++)
         {
-            if (gameObjects[i].layer == 23)
-            {
-                gameObjects[i].SetActive(false);
-            }
+            GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
+            newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
+            players.Add(newPlayer);
         }
-        timer = 10f;
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerController>().playerColor = GameManager.instance.GetColor(i + 1);
+            GameManager.SetLayer(players[i].transform, LayerMask.NameToLayer("Player" + (i + 1)));
+        }
+
+        victoryText = GameObject.FindGameObjectWithTag("VictoryScreen").transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
+
+        if (victoryText != null)
+        {
+            victoryText.transform.parent.gameObject.SetActive(false);
+        }
+
+        countdown = Instantiate(countdownPrefab, FindObjectOfType<Canvas>().transform).GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        timer -= Time.deltaTime;
+        if (gameOver)
+            return;
+
+        timer -= Time.fixedDeltaTime;
         countdown.SetText(Mathf.RoundToInt(timer).ToString());
-        if (timer <= 0f && hat.layer != 0)
+
+        if (timer <= 0f)
         {
+            int bestScore = 0;
+            int winner = 0;
             countdown.SetText("");
-            VictoryConditions(players);
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (scores[i] > bestScore)
+                {
+                    bestScore = scores[i];
+                    winner = i;
+                }
+                else if (scores[i] == bestScore)
+                {
+                    winner = 4;
+                }
+            }
+
+            if (bestScore == 0)
+            {
+                victoryText.SetText("Nobody wears the hat!");
+            }
+            else if (winner < 4)
+            {
+                victoryText.SetText(LayerMask.LayerToName(players[winner].layer) + " wears the hat!");
+            }
+            else
+            {
+                victoryText.SetText("DRAW!");
+            }
+
+            victoryText.transform.parent.gameObject.SetActive(true);
+            countdown.gameObject.SetActive(false);
+
+            gameOver = true;
         }
     }
 
-    private void VictoryConditions(List <GameObject> _players)
+    public void AddScore(int playerNr)
     {
-        for (int i = 0; i < players.Count; i++)
+        scores[playerNr - 1]++;
+
+        if (scores[playerNr-1] >= winScore)
         {
-            if (_players[i].layer != hat.layer)
-            {
-                _players[i].SetActive(false);
-                _players.Remove(_players[i]);
-            }
+            victoryText.SetText(LayerMask.LayerToName(players[playerNr-1].layer) + " wears the hat!");
+            victoryText.transform.parent.gameObject.SetActive(true);
         }
-        _players[0].transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, 0f);
-        victoryText.SetText(LayerMask.LayerToName(players[0].layer) + " wears the hat!");
-        victoryScreen.SetActive(true);
     }
 }

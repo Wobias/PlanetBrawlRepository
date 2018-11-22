@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IPlanet
 
         if (!stunned)
         {
-            Vector2 aimDir = new Vector2(InputSystem.ThumbstickInput(ThumbStick.RightX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.RightY, playerNr - 1));
+            Vector2 aimDir = new Vector2(InputSystem.ThumbstickInput(ThumbSticks.RightX, playerNr - 1), InputSystem.ThumbstickInput(ThumbSticks.RightY, playerNr - 1));
 
             if (controlsInverted)
                 aimDir *= -1;
@@ -95,15 +95,15 @@ public class PlayerController : MonoBehaviour, IPlanet
             currentWeapon.Aim(aimDir);
         }
         
-        currentWeapon.Shoot(InputSystem.TriggerPressed(Trigger.Right, playerNr-1));
+        currentWeapon.Shoot(InputSystem.TriggerPressed(Triggers.Right, playerNr-1));
 
         if (ability != null)
         {
-            if (InputSystem.TriggerUp(Trigger.Left, playerNr - 1))
+            if (InputSystem.TriggerUp(Triggers.Left, playerNr - 1))
             {
                 ability.StopUse();
             }
-            else if (InputSystem.TriggerPressed(Trigger.Left, playerNr - 1) && specialAvailable)// && !sprintActive)
+            else if (InputSystem.TriggerPressed(Triggers.Left, playerNr - 1) && specialAvailable)// && !sprintActive)
             {
                 ability.Use();
             }
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour, IPlanet
     {
         if (!movement.stunned)
         {
-            Vector2 dir = Vector2.Lerp(movement.direction, new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1)), movement.inputRolloff);
+            Vector2 dir = Vector2.Lerp(movement.direction, new Vector2(InputSystem.ThumbstickInput(ThumbSticks.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbSticks.LeftY, playerNr - 1)), movement.inputRolloff);
             movement.direction = dir;
 
             //movement.direction = new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1));

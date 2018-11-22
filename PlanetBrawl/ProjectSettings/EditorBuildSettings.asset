@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/PreBetaPlanetSelection.unity
     guid: 7602859b7b304b24384b23f7e6496767
   - enabled: 1
-    path: Assets/Scenes/InGame/Maps/CelestialBoxingRing.unity
-    guid: 3e9468cd41578224fa97ad801fb399e8
-  - enabled: 1
     path: Assets/Scenes/InGame/BetaLobby.unity
     guid: 0d70cb40ec7d08c49b86889d934a29d2
+  - enabled: 1
+    path: Assets/Scenes/InGame/Maps/CelestialBoxingRing.unity
+    guid: 3e9468cd41578224fa97ad801fb399e8
   - enabled: 1
     path: Assets/Scenes/InGame/Maps/IonNebula.unity
     guid: 2d6c7e07280511b459575f45c91b05ca
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InGame/Maps/TheBarrier.unity
     guid: 29d65b39d5f7c534398f8d46813257a4
+  - enabled: 1
+    path: Assets/Scenes/InGame/Maps/BlackholeFootball.unity
+    guid: 1decfa54c0dff3649a636f6edb4ce848
   m_configObjects: {}

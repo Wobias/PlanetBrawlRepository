@@ -27,11 +27,15 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     private bool canAttack = true;
     private bool pressed = false;
 
+    private int playerNr = 0;
+
     private IDamageable target;
 
 
     void Start()
     {
+        playerNr = GetComponent<PlayerController>().playerNr;
+
         hitMask = hitMask & ~(1 << gameObject.layer);
     }
 
@@ -42,7 +46,7 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
         //Hit the target if it is damageable
         if (target != null)
         {
-            target.Hit(physicalDmg, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+            target.Hit(physicalDmg, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
             AudioManager1.instance.Play(hitsound);
         }
     }

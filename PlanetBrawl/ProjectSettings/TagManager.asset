@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Ball
+  - VictoryScreen
   layers:
   - Default
   - TransparentFX
@@ -34,8 +35,8 @@ TagManager:
   - Goal
   - Ball
   - ShadowClone
-  - 
-  - 
+  - Hat
+  - Hill
   - 
   - 
   - 

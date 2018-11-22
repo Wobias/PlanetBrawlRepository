@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 50
-  movementSpeed: 10
+  movementSpeed: 3
   itemDrops:
   - {fileID: 1941771394216504, guid: 94c60f059a332284e9324a243cf0b1ef, type: 2}
   - {fileID: 1941771394216504, guid: 0f36e1e619c6f024f93a259ac848142d, type: 2}

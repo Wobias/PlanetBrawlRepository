@@ -41,12 +41,12 @@ public class Spike_ContactDamage : Weapon_ContactDamage
                     }
                     else
                     {
-                        target.Hit(0, buffType, Vector2.zero, 0, buffTime);
+                        target.Hit(0, buffType, Vector2.zero, 0, playerNr, buffTime);
                         weapon.RemoveElement();
                     }
                 }
 
-                target.Hit(physicalDmg, dmgType, (hit.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, dmgType, (hit.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
 
                 if (gotBuff && buffType == DamageType.physical)
                 {

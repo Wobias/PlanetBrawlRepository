@@ -845,7 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43118a3bfbf8754da6fc2f3a5223e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 5
   imunity: 4
   fireParticles: {fileID: 1507289927614756}
   iceParticles: {fileID: 1662291986876082}

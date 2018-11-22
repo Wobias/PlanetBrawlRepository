@@ -4,35 +4,27 @@ using UnityEngine;
 
 public class HillTrigger : MonoBehaviour
 {
-    KotH_ManagerScript koth_manager;
-    public static HillTrigger hillTrigger;
-
-    public GameObject hill;
-
     public float hillTimer = 8f;
     private float hillResetTimer = 10f;
-
-    public bool hillIsOpen = false;
+    public float minSize;
 
     Vector3 startSize;
     Vector3 minSizeVector;
-    public float minSize;
-
     Vector2 hillPosition;
-
     SpriteRenderer rend;
+
+    Coroutine scoreRoutine;
+
+    List<int> insidePlayers = new List<int>();
+
 
     void Start()
     {
-        koth_manager = FindObjectOfType<KotH_ManagerScript>();
-        hillTrigger = this;
         minSizeVector = new Vector3(minSize, minSize, minSize);
-
-        hill.transform.position = new Vector2(0, 0);
-
+        transform.position = new Vector2(0, 0);
         startSize = transform.localScale;
         rend = GetComponent<SpriteRenderer>();
-        //rend.color = Color.green;        
+        //rend.color = Color.green; 
     }
 
     // Update is called once per frame
@@ -45,7 +37,6 @@ public class HillTrigger : MonoBehaviour
 
         if (hillTimer <= 0f)
         {
-            hillIsOpen = false;
             hillResetTimer = Random.Range(5f, 15f);
             hillTimer = hillResetTimer;
             SetPortal();
@@ -58,18 +49,47 @@ public class HillTrigger : MonoBehaviour
         hillPosition.x = Random.Range(-18f, 19f);
         hillPosition.y = Random.Range(-8f, 9f);
 
-        hill.transform.position = hillPosition;
-        hill.transform.localScale = startSize;
-        hill.SetActive(true);
-
-        hillIsOpen = true;
+        transform.position = hillPosition;
+        transform.localScale = startSize;
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        koth_manager.PlayerEnter(other.gameObject.layer);
+        insidePlayers.Add(other.transform.root.GetComponent<PlayerController>().playerNr);
+        CheckForDomPlayer();
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
-        koth_manager.PlayerExit(other.gameObject.layer);
+        insidePlayers.Remove(other.transform.root.GetComponent<PlayerController>().playerNr);
+        CheckForDomPlayer();
+    }
+
+    void CheckForDomPlayer()
+    {
+        if (insidePlayers.Count == 1)
+        {
+            if (scoreRoutine != null)
+                StopCoroutine(scoreRoutine);
+
+            scoreRoutine = StartCoroutine(AddScorePerSecond(insidePlayers[0]));
+            rend.color = GameManager.instance.GetColor(insidePlayers[0]);
+        }
+        else if (scoreRoutine != null)   
+        {
+            StopCoroutine(scoreRoutine);
+            scoreRoutine = null;
+
+            rend.color = Color.white;
+        }
+    }
+
+    IEnumerator AddScorePerSecond(int playerNr)
+    {
+        yield return new WaitForSeconds(1);
+        GameManager.instance.AddScore(playerNr);
+
+        if (scoreRoutine != null)
+            scoreRoutine = StartCoroutine(AddScorePerSecond(playerNr));
     }
 }

@@ -32,6 +32,8 @@ public class HealthController : MonoBehaviour, IDamageable
 
     protected float maxHealth;
 
+    protected int attackerNr;
+
     protected bool dpsApplied = false;
     protected bool dpsAnim = true;
 
@@ -73,10 +75,12 @@ public class HealthController : MonoBehaviour, IDamageable
     }
 
     //IDamageable method
-    public void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, float effectTime = 0)
+    public virtual void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, int attackNr = 0, float effectTime = 0)
     {
         if (stunned)
             return;
+
+        attackerNr = attackNr;
 
         if (dmgType != DamageType.none)
         {

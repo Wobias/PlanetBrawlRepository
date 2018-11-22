@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthController_ShadowClone : MonoBehaviour, IDamageable
 {
-    public void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, float effectTime = 0)
+    public void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, int attackNr = 0, float effectTime = 0)
     {
         Destroy(gameObject);
     }

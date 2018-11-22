@@ -18,7 +18,7 @@ public class ItemController_SaturnShield : MonoBehaviour, IDamageable
         controller.SetPlanetProtection(true);
     }
 
-    public void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, float effectTime = 0)
+    public void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, int attackNr = 0, float effectTime = 0)
     {
         hitBlocks--;
 

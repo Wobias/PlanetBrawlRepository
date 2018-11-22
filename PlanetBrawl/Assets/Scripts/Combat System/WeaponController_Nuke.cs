@@ -21,7 +21,7 @@ public class WeaponController_Nuke : MonoBehaviour
     private void Update()
     {
         rb2d.velocity = transform.right * speed;
-        Aim(new Vector2(InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbStick.LeftY, playerNr - 1)));
+        Aim(new Vector2(InputSystem.ThumbstickInput(ThumbSticks.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbSticks.LeftY, playerNr - 1)));
     }
 
     public void Aim(Vector2 direction)

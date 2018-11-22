@@ -28,7 +28,7 @@ public class PlanetSelection : MonoBehaviour
     {
         if (ready)
         {
-            if (InputSystem.ButtonDown(Button.B, playerNr-1) ||
+            if (InputSystem.ButtonDown(Buttons.B, playerNr-1) ||
                 !InputSystem.PadConnected(playerNr-1))
             {
                 ready = false;
@@ -39,7 +39,7 @@ public class PlanetSelection : MonoBehaviour
             return;
         }
 
-        if (!joined && InputSystem.ButtonDown(Button.A, playerNr-1))
+        if (!joined && InputSystem.ButtonDown(Buttons.A, playerNr-1))
         {
             joined = true;
             characters[index].SetActive(true);
@@ -47,14 +47,14 @@ public class PlanetSelection : MonoBehaviour
         }
         else if (joined)
         {
-            if (InputSystem.ButtonDown(Button.A, playerNr - 1))
+            if (InputSystem.ButtonDown(Buttons.A, playerNr - 1))
             {
                 ready = true;
                 GameManager.instance.SetPlayer(index, playerNr);
                 PlanetSelectionManager.instance.Ready();
                 return;
             }
-            else if (InputSystem.ButtonDown(Button.B, playerNr - 1) ||
+            else if (InputSystem.ButtonDown(Buttons.B, playerNr - 1) ||
                 !InputSystem.PadConnected(playerNr - 1))
             {
                 joined = false;
@@ -64,7 +64,7 @@ public class PlanetSelection : MonoBehaviour
             }
 
             if (InputSystem.DPadDown(DPad.Right, playerNr - 1) ||
-            InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1) > 0 && !pressed)
+            InputSystem.ThumbstickInput(ThumbSticks.LeftX, playerNr - 1) > 0 && !pressed)
             {
                 pressed = true;
                 characters[index].SetActive(false);
@@ -76,7 +76,7 @@ public class PlanetSelection : MonoBehaviour
                 characters[index].SetActive(true);
             }
             else if (InputSystem.DPadDown(DPad.Left, playerNr - 1) ||
-                InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1) < 0 && !pressed)
+                InputSystem.ThumbstickInput(ThumbSticks.LeftX, playerNr - 1) < 0 && !pressed)
             {
                 pressed = true;
                 characters[index].SetActive(false);
@@ -88,7 +88,7 @@ public class PlanetSelection : MonoBehaviour
                 characters[index].SetActive(true);
             }
 
-            if (InputSystem.ThumbstickInput(ThumbStick.LeftX, playerNr - 1) == 0 && pressed)
+            if (InputSystem.ThumbstickInput(ThumbSticks.LeftX, playerNr - 1) == 0 && pressed)
             {
                 pressed = false;
             }

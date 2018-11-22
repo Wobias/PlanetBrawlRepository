@@ -11,9 +11,11 @@ public class GameManager : MonoBehaviour
     public Color[] playerColors;
     public GameObject[] playerPrefabs;
     public GameModes gameMode;
+    public GameObject[] modeManagers;
 
     private int[] selectedPlanets = new int[4];
     private bool[] activePlayers = new bool[4];
+    private IModeController modeController;
 
 
     private void Awake()
@@ -57,7 +59,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetLayer(Transform root, int layer)
+    public void StartGame(Transform[] playerSpawns)
+    {
+        List<GameObject> activePrefabs = new List<GameObject>();
+
+        for (int i = 0; i < activePlayers.Length; i++)
+        {
+            if (activePlayers[i])
+            {
+                activePrefabs.Add(playerPrefabs[selectedPlanets[i]]);
+            }
+        }
+
+        modeController = Instantiate(modeManagers[(int)gameMode]).GetComponent<IModeController>();
+        modeController.InitMode(playerSpawns, activePrefabs.ToArray());
+    }
+
+    public void AddScore(int playerNr)
+    {
+        modeController.AddScore(playerNr);
+    }
+
+    public static void SetLayer(Transform root, int layer)
     {
         root.gameObject.layer = layer;
         foreach (Transform child in root)

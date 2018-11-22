@@ -12,9 +12,12 @@ public class Planet_HealthController : HealthController
     private IPlanet controller;
     private Animator animator;
 
+    private Hat hat;
+
     public static HealthState healthState = HealthState.full;
 
     Transform myTransform;
+    Vector3 spawnPoint;
 
     Vector3 maxScale;
 
@@ -37,6 +40,8 @@ public class Planet_HealthController : HealthController
         myTransform = GetComponentInChildren<SpriteRenderer>().transform;
         maxScale = myTransform.localScale;
         SetScaleStates();
+        spawnPoint = transform.position;
+        hat = FindObjectOfType<Hat>();
     }
 
     void ScalePlanet()
@@ -80,7 +85,7 @@ public class Planet_HealthController : HealthController
 
     protected override void OnHealthChange(bool damage=true)
     {
-        ScalePlanet();
+        //ScalePlanet();
         animator.SetFloat("HealthPercent", hpPercent);
         if (damage)
         {
@@ -90,7 +95,7 @@ public class Planet_HealthController : HealthController
         {
             animator.SetTrigger("Heal");
         }
-        controller.SetWeaponDistance();
+        //controller.SetWeaponDistance();
     }
 
     protected override void StunObject(bool stunActive)
@@ -100,9 +105,24 @@ public class Planet_HealthController : HealthController
 
     protected override void Kill()
     {
-        //GameManager_Prototype.gameManager.RemoveFromLists(gameObject);
-        //GameManager_Prototype.gameManager.VictoryConditions();
-        base.Kill();
+        if (attackerNr != 0 && GameManager.instance.gameMode == GameModes.deathmatch ||
+            GameManager.instance.gameMode == GameModes.teamdeathmatch)
+            GameManager.instance.AddScore(attackerNr);
+
+        attackerNr = 0;
+        health = maxHealth;
+        transform.position = spawnPoint;
+        //gameObject.SetActive(false);
+    }
+
+    public override void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, int attackNr = 0, float effectTime = 0)
+    {
+        base.Hit(physicalDmg, dmgType, knockbackForce, stunTime, attackNr, effectTime);
+        
+        if (hat != null)
+        {
+            hat.ThrowHat();
+        }
     }
 
     public void Heal(float bonusHealth)

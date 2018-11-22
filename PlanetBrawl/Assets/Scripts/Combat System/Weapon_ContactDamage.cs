@@ -23,6 +23,7 @@ public class Weapon_ContactDamage : MonoBehaviour
 
     protected IDamageable target;
     protected WeaponController weapon;
+    protected int playerNr = 0;
     protected bool isWeapon = false;
 
     protected DamageType buffType = DamageType.none;
@@ -36,6 +37,10 @@ public class Weapon_ContactDamage : MonoBehaviour
 
         if (weapon != null)
             isWeapon = true;
+
+        PlayerController controller = transform.root.GetComponent<PlayerController>();
+        if (controller != null)
+            playerNr = controller.playerNr;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
@@ -57,19 +62,19 @@ public class Weapon_ContactDamage : MonoBehaviour
                 }
                 else
                 {
-                    target.Hit(0, buffType, Vector2.zero, 0, buffTime);
+                    target.Hit(0, buffType, Vector2.zero, 0, playerNr, buffTime);
                     weapon.RemoveElement();
                 }
             }
 
             if (isWeapon)
             {
-                target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
                 weapon.OnHit();
             }
             else
             {
-                target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, effectTime);
+                target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
             }
             AudioManager1.instance.Play(hitsound);
 

@@ -51,13 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326c24d4e420b1444852ca2ca42ba5ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsPlayer1: 0
-  pointsPlayer2: 0
-  pointsPlayer3: 0
-  pointsPlayer4: 0
-  winScore: 50
-  pointsPlayer1Text: {fileID: 0}
-  pointsPlayer2Text: {fileID: 0}
-  pointsPlayer3Text: {fileID: 0}
-  pointsPlayer4Text: {fileID: 0}
-  playerLayer: Player
+  hillPrefab: {fileID: 1899535100799816, guid: d641134b87f942d42be5ad40ed686a74, type: 2}
+  countdownPrefab: {fileID: 1717310351913770, guid: 9e4603add3fb3b1479cb3eba545fde58,
+    type: 2}
+  winScore: 10
+  timer: 120
