@@ -276,7 +276,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794380609915756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4962362, y: 0.77953786, z: 0}
+  m_LocalPosition: {x: 598.2565, y: 102.17113, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4724558105202496}
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNr: 4
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  mainWeapon: {fileID: 114548758831413444}
+  currentWeapon: {fileID: 114548758831413444}
   bonusWeapon: {fileID: 0}
   controlsInverted: 1
 --- !u!114 &114543343862155434
@@ -850,7 +850,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 0
-  effectDps: 0
   dmgType: 0
   knockback: 0
   stunTime: 0

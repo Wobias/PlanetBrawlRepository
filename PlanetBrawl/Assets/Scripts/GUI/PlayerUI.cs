@@ -51,10 +51,10 @@ public class PlayerUI : MonoBehaviour
     private float _p3dmg = 0f;
     private float _p4dmg = 0f;
 
-    private Planet_HealthController _p1HealthController;
-    private Planet_HealthController _p2HealthController;
-    private Planet_HealthController _p3HealthController;
-    private Planet_HealthController _p4HealthController;
+    private Player_HealthController _p1HealthController;
+    private Player_HealthController _p2HealthController;
+    private Player_HealthController _p3HealthController;
+    private Player_HealthController _p4HealthController;
 
     public List<GameObject> player1HealthBars = new List<GameObject>();
     public List<GameObject> player2HealthBars = new List<GameObject>();
@@ -144,7 +144,7 @@ public class PlayerUI : MonoBehaviour
         dmg++;
     }
 
-    private void CheckHealth(Planet_HealthController planet_HealthController, List<GameObject> hpBars, float damage, Material playerMaterial)
+    private void CheckHealth(Player_HealthController planet_HealthController, List<GameObject> hpBars, float damage, Material playerMaterial)
     {
         if (planet_HealthController.health <= 4)
         {
@@ -178,22 +178,22 @@ public class PlayerUI : MonoBehaviour
             if (playerslist[i].layer == 8)
             {
                 _player1 = playerslist[i];
-                _p1HealthController = playerslist[i].GetComponent<Planet_HealthController>();
+                _p1HealthController = playerslist[i].GetComponent<Player_HealthController>();
             }
             else if (playerslist[i].layer == 9)
             {
                 _player2 = playerslist[i];
-                _p2HealthController = playerslist[i].GetComponent<Planet_HealthController>();
+                _p2HealthController = playerslist[i].GetComponent<Player_HealthController>();
             }
             else if (playerslist[i].layer == 10)
             {
                 _player3 = playerslist[i];
-                _p3HealthController = playerslist[i].GetComponent<Planet_HealthController>();
+                _p3HealthController = playerslist[i].GetComponent<Player_HealthController>();
             }
             else if (playerslist[i].layer == 11)
             {
                 _player4 = playerslist[i];
-                _p4HealthController = playerslist[i].GetComponent<Planet_HealthController>();
+                _p4HealthController = playerslist[i].GetComponent<Player_HealthController>();
             }
         }
     }

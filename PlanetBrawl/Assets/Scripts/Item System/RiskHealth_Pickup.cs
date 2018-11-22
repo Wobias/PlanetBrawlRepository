@@ -8,12 +8,12 @@ public class RiskHealth_Pickup : MonoBehaviour
     public float damage;
     public float dmgStunTime = 0.25f;
 
-    private Planet_HealthController target;
+    private Player_HealthController target;
     bool heal;
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        target = other.transform.root.GetComponent<Planet_HealthController>();
+        target = other.transform.root.GetComponent<Player_HealthController>();
 
         //Hit the target if it is damageable
         if (target != null)

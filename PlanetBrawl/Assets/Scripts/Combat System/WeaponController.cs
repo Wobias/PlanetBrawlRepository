@@ -42,10 +42,12 @@ public class WeaponController : MonoBehaviour
         for (int i = 0; i < weaponParts.Length; i++)
         {
             weaponInitPos[i] = weaponParts[i].transform.localPosition;
+            weaponMinPos[i] = weaponInitPos[i];
             weaponColliders[i] = weaponParts[i].GetComponent<Collider2D>();
+            weaponColliders[i].enabled = false;
         }
 
-        ResetMinPos();
+        //ResetMinPos();
     }
 
     protected virtual void OnEnable()
@@ -66,8 +68,11 @@ public class WeaponController : MonoBehaviour
             targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed
-        origin.rotation = Quaternion.Slerp(origin.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if (origin)
+        {
+            //Rotates the moon(actually the origin) closer to the target rotation depending on the rotation speed
+            origin.rotation = Quaternion.Slerp(origin.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 
     public virtual bool Shoot(bool isFirePressed)

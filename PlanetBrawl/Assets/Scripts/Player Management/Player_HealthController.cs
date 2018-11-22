@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum HealthState {full, average, low, critical};
 
-public class Planet_HealthController : HealthController
+public class Player_HealthController : HealthController
 {
     //Health Variables
     #region
-    private float hpPercent = 100f;
-    private IPlanet controller;
-    private Animator animator;
+    protected float hpPercent = 100f;
+    protected IPlanet controller;
+    protected Animator animator;
 
     private Hat hat;
 
@@ -25,7 +25,7 @@ public class Planet_HealthController : HealthController
     Vector3 lowHpScale;
     Vector3 criticalHpScale;
 
-    PlanetMovement planetMovement;
+    protected PlanetMovement planetMovement;
 
     #endregion
 
@@ -100,14 +100,22 @@ public class Planet_HealthController : HealthController
 
     protected override void StunObject(bool stunActive)
     {
-        controller.Stun(stunActive);
+        if (controller != null)
+            controller.Stun(stunActive);
     }
 
     protected override void Kill()
     {
         if (attackerNr != 0 && GameManager.instance.gameMode == GameModes.deathmatch ||
             GameManager.instance.gameMode == GameModes.teamdeathmatch)
+        {
             GameManager.instance.AddScore(attackerNr);
+        }
+        else if (GameManager.instance.gameMode == GameModes.survival)
+        {
+            GameManager.instance.AddScore(GetComponent<PlayerController>().playerNr);
+            Destroy(gameObject);
+        }
 
         attackerNr = 0;
         health = maxHealth;

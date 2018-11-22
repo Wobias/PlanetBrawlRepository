@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     private GameObject currentItem;
     private int weaponLayer;
-    private Planet_HealthController health;
+    private Player_HealthController health;
     private PlanetMovement movement;
     //private WeaponController weaponCacher;
     private ISpecialAbility ability;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour, IPlanet
 
     void Awake()
     {
-        health = GetComponentInChildren<Planet_HealthController>();
+        health = GetComponentInChildren<Player_HealthController>();
         movement = GetComponent<PlanetMovement>();
         ability = GetComponent<ISpecialAbility>();
         Camera.main.GetComponent<CameraFollow>().AddPlayers(gameObject.transform);
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour, IPlanet
 
         if (currentWeapon)
         {
-            SetLayer(currentWeapon.transform, weaponLayer);
+            GameManager.SetLayer(currentWeapon.transform, weaponLayer);
         }
 
         if (controlsInverted)
@@ -56,34 +56,6 @@ public class PlayerController : MonoBehaviour, IPlanet
             currentWeapon.gameObject.SetActive(true);
             bonusWeapon = null;
         }
-
-        //    if (sprintActive)
-        //    {
-        //        currentWeapon.canAttack = false;
-        //    }
-        //    else if (!health.stunned && !health.frozen)
-        //    {
-        //        currentWeapon.canAttack = true;
-        //    }
-        //}
-
-        //Check for a Sprint
-        //if (!sprintActive && InputSystem.TriggerPressed(Trigger.Left, playerNr-1))
-        //{
-        //    sprintActive = true;
-        //    movement.isSprinting = true;
-        //    mainWeapon.canAttack = false;
-        //    if (bonusWeapon)
-        //        bonusWeapon.canAttack = false;
-        //}
-        //else if (sprintActive && InputSystem.TriggerUp(Trigger.Left, playerNr-1))
-        //{
-        //    sprintActive = false;
-        //    movement.isSprinting = false;
-        //    mainWeapon.canAttack = true;
-        //    if (bonusWeapon)
-        //        bonusWeapon.canAttack = true;
-        //}
 
         if (!stunned)
         {
@@ -129,7 +101,7 @@ public class PlayerController : MonoBehaviour, IPlanet
         }
 
         currentItem = newItem;
-        SetLayer(currentItem.transform, gameObject.layer);
+        GameManager.SetLayer(currentItem.transform, gameObject.layer);
     }
 
     public void WeaponPickUp(WeaponController newWeapon)
@@ -146,7 +118,7 @@ public class PlayerController : MonoBehaviour, IPlanet
         }
 
         bonusActive = true;
-        SetLayer(currentWeapon.transform, weaponLayer);
+        GameManager.SetLayer(currentWeapon.transform, weaponLayer);
         bonusWeapon.gameObject.SetActive(false);
         currentWeapon.gameObject.SetActive(true);
     }
@@ -163,13 +135,6 @@ public class PlayerController : MonoBehaviour, IPlanet
     //    currentWeapon?.gameObject.SetActive(true);
     //    isBonus = !isBonus;
     //}
-
-    private void SetLayer(Transform root, int layer)
-    {
-        root.gameObject.layer = layer;
-        foreach (Transform child in root)
-            SetLayer(child, layer);
-    }
 
     public void Stun(bool stunActive)
     {

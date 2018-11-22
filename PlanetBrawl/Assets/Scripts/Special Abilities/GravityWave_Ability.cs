@@ -10,13 +10,13 @@ public class GravityWave_Ability : MonoBehaviour, ISpecialAbility
     public float invincibilityTime;
     public LayerMask gravMask;
 
-    private Planet_HealthController healthController;
+    private Player_HealthController healthController;
     private bool canAttack = true;
 
 
     void Start()
     {
-        healthController = GetComponent<Planet_HealthController>();
+        healthController = GetComponent<Player_HealthController>();
     }
 
     public void Use()

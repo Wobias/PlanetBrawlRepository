@@ -50,7 +50,8 @@ public class WeaponController_Moon : WeaponController
 
         for (int i = 0; i < weaponParts.Length; i++)
         {
-            ShootFragment(weaponParts[i], weaponColliders[i], weaponMinPos[i]);
+            if (weaponMinPos[i] != null)
+                ShootFragment(weaponParts[i], weaponColliders[i], weaponMinPos[i]);
         }
 
         if (moonState == OrbitState.orbit)

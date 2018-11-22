@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
                 SetLayer(player.transform, LayerMask.NameToLayer("Player" + (i + 1)));
                 player.playerColor = playerColors[i];
                 player.playerNr = i + 1;
-                player.GetComponent<Planet_HealthController>().invincible = noDeaths;
+                player.GetComponent<Player_HealthController>().invincible = noDeaths;
             }
         }
     }

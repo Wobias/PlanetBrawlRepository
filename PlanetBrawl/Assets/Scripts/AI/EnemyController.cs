@@ -9,22 +9,25 @@ public class EnemyController : MonoBehaviour, IPlanet
     public float hitLength;
     public WeaponController currentWeapon;
     public float searchRate = 1;
+    public bool controlsInverted = false;
+
+
     private int weaponLayer;
-    private Planet_HealthController health;
+    private Player_HealthController health;
     private PlanetMovement movement;
 
     private Transform target;
     private Vector2 aimDir;
-
     private bool isFirePressed = false;
+
     private bool inputSet = false;
     private bool searching = true;
-    private bool sprintActive = false;
+    private bool stunned = false;
 
 
     void Awake()
     {
-        health = GetComponentInChildren<Planet_HealthController>();
+        health = GetComponentInChildren<Player_HealthController>();
         movement = GetComponent<PlanetMovement>();
     }
 
@@ -34,32 +37,41 @@ public class EnemyController : MonoBehaviour, IPlanet
 
         if (currentWeapon)
         {
-            SetLayer(currentWeapon.transform, weaponLayer);
+            GameManager.SetLayer(currentWeapon.transform, weaponLayer);
         }
+
+        if (controlsInverted)
+            movement.invertedMove = true;
 
         StartCoroutine(FindTarget());
     }
 
     void Update()
     {
-        if (target != null)
+        if (!stunned)
         {
-            aimDir = (target.position - transform.position).normalized;
-        }
-        else if (!searching)
-        {
-            searching = true;
-            StartCoroutine(FindTarget());
-        }
-
-        if (!inputSet)
-        {
-            isFirePressed = Physics2D.Raycast(transform.position, aimDir, range, targetMask);
-
-            if (isFirePressed)
+            if (target != null)
             {
-                inputSet = true;
-                StartCoroutine(SwitchTrigger());
+                aimDir = (target.position - transform.position).normalized;
+
+                if (controlsInverted)
+                    aimDir *= -1;
+            }
+            else if (!searching)
+            {
+                searching = true;
+                StartCoroutine(FindTarget());
+            }
+
+            if (!inputSet)
+            {
+                isFirePressed = Physics2D.Raycast(transform.position, aimDir, range, targetMask);
+
+                if (isFirePressed)
+                {
+                    inputSet = true;
+                    StartCoroutine(SwitchTrigger());
+                }
             }
         }
 
@@ -69,31 +81,24 @@ public class EnemyController : MonoBehaviour, IPlanet
 
     private void FixedUpdate()
     {
-        if (target != null && (target.position - transform.position).magnitude > range)
+        if (!movement.stunned && target != null && (target.position - transform.position).magnitude > range)
         {
-            movement.direction = aimDir;
+            
+            movement.direction = Vector2.Lerp(movement.direction, new Vector2(aimDir.x, aimDir.y), movement.inputRolloff);
         }
         else
         {
-            movement.direction = Vector2.zero;
+            movement.direction = Vector2.Lerp(movement.direction, Vector2.zero, movement.inputRolloff);
         }
-    }
-
-    private void SetLayer(Transform root, int layer)
-    {
-        root.gameObject.layer = layer;
-        foreach (Transform child in root)
-            SetLayer(child, layer);
     }
 
     public void Stun(bool stunActive)
     {
-        movement.enabled = !stunActive;
+        stunned = stunActive;
 
-        if (stunActive && sprintActive)
-            return;
+        movement.stunned = stunActive;
 
-        currentWeapon.enabled = !stunActive;
+        currentWeapon.canAttack = !stunActive;
     }
 
     public void SetPlanetProtection(bool isActive, float ionPassOnDmg = 0)
@@ -159,11 +164,11 @@ public class EnemyController : MonoBehaviour, IPlanet
 
     public void InvertAim(bool active)
     {
-        
+        controlsInverted = active;
     }
 
     public void BoostWeapon(DamageType type, float effectTime)
     {
-        currentWeapon.ApplyElement(type, effectTime);
+        return;
     }
 }

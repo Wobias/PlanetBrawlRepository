@@ -7,12 +7,12 @@ public class Medipack_Pickup : MonoBehaviour
     public float healthBonus;
     public string healSound = "healing";
 
-    protected Planet_HealthController target;
+    protected Player_HealthController target;
 
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        target = other.transform.root.GetComponent<Planet_HealthController>();
+        target = other.transform.root.GetComponent<Player_HealthController>();
 
         //Hit the target if it is damageable
         if (target != null)

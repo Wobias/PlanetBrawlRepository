@@ -10,13 +10,13 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
 
 
     private bool healed = false;
-    private Planet_HealthController healthController;
+    private Player_HealthController healthController;
     private PlayerController controller;
 
 
     void Start()
     {
-        healthController = GetComponent<Planet_HealthController>();
+        healthController = GetComponent<Player_HealthController>();
         //controller = GetComponent<PlayerController>();
     }
 
