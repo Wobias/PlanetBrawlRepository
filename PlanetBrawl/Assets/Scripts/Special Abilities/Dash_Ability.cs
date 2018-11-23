@@ -6,11 +6,12 @@ public class Dash_Ability : MonoBehaviour, ISpecialAbility
 {
     public float speed;
     public float duration;
-    public ParticleSystem specialParticles;
+    public float timeout;
 
     PlanetMovement playerMovement;
     PlayerController controller;
     bool canDash = true;
+    private bool isPressed = false;
 
 
     void Start()
@@ -21,23 +22,31 @@ public class Dash_Ability : MonoBehaviour, ISpecialAbility
 
     public void Use()
     {
-        if (canDash && playerMovement.direction != Vector2.zero)
+        if (canDash && !isPressed && playerMovement.direction != Vector2.zero)
         {
             playerMovement.ApplyTempExForce(playerMovement.direction.normalized * speed, duration);
             controller.AbilityStun(true);
             canDash = false;
-            specialParticles.Stop();
+            StartCoroutine(ResetDash());
         }
         else if (!canDash)
         {
             controller.AbilityStun(false);
         }
+
+        isPressed = true;
     }
 
     public void StopUse()
     {
         controller.AbilityStun(false);
-        canDash = true;
+        isPressed = false;
     }
 
+
+    IEnumerator ResetDash()
+    {
+        yield return new WaitForSeconds(timeout);
+        canDash = true;
+    }
 }

@@ -88,7 +88,7 @@ public class HealthController : MonoBehaviour, IDamageable
                 Stun(stunTime);
 
             if (knockbackForce != Vector2.zero)
-                movable.ApplyTempExForce(knockbackForce, stunTime);
+                movable?.ApplyTempExForce(knockbackForce, stunTime);
         }
 
         PhysicalHit(physicalDmg);
