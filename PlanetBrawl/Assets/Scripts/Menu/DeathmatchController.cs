@@ -54,12 +54,4 @@ public class DeathmatchController : MonoBehaviour, IModeController
             victoryText.transform.parent.gameObject.SetActive(false);
         }
     }
-
-    public void PauseGame(bool isPaused)
-    {
-        for (int i = 0; i < players.Count; i++)
-        {
-            players[i].SetActive(!isPaused);
-        }
-    }
 }

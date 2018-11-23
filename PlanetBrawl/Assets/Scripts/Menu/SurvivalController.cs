@@ -16,12 +16,11 @@ public class SurvivalController : MonoBehaviour, IModeController
     //private TextMeshProUGUI scoreText;
     private float timeout;
     private bool gameOver = false;
-    private bool paused = false;
 
 
     void FixedUpdate()
     {
-        if (gameOver || paused)
+        if (gameOver)
             return;
 
         score += Time.fixedDeltaTime;
@@ -78,15 +77,5 @@ public class SurvivalController : MonoBehaviour, IModeController
 
         timeout = spawnTimeout;
         Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
-    }
-
-    public void PauseGame(bool isPaused)
-    {
-        paused = isPaused;
-
-        for (int i = 0; i < players.Count; i++)
-        {
-            players[i].SetActive(!isPaused);
-        }
     }
 }

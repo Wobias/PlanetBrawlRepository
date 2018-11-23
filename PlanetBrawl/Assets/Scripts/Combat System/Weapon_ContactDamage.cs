@@ -8,6 +8,8 @@ public class Weapon_ContactDamage : MonoBehaviour
 
     public string hitsound = "punch";
 
+    public ParticleSystem onHitParticle;
+
     [SerializeField]
     public float physicalDmg;
     [SerializeField]
@@ -24,6 +26,7 @@ public class Weapon_ContactDamage : MonoBehaviour
     protected IDamageable target;
     protected WeaponController weapon;
     protected int playerNr = 0;
+    protected Color playerColor;
     protected bool isWeapon = false;
 
     protected DamageType buffType = DamageType.none;
@@ -39,8 +42,14 @@ public class Weapon_ContactDamage : MonoBehaviour
             isWeapon = true;
 
         PlayerController controller = transform.root.GetComponent<PlayerController>();
+
         if (controller != null)
+        {
             playerNr = controller.playerNr;
+            playerColor = controller.playerColor;
+            ParticleSystem.MainModule particleMainModule = onHitParticle.main;
+            particleMainModule.startColor = playerColor;
+        }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
@@ -49,7 +58,9 @@ public class Weapon_ContactDamage : MonoBehaviour
             return;
 
         GetTarget(col.collider);
-        
+
+        //InstantiateParticle(onHitParticle);
+
         //Hit the target if it is damageable
         if (target != null)
         {
@@ -71,6 +82,7 @@ public class Weapon_ContactDamage : MonoBehaviour
             {
                 target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
                 weapon.OnHit();
+                InstantiateParticle(onHitParticle);
             }
             else
             {
@@ -114,5 +126,13 @@ public class Weapon_ContactDamage : MonoBehaviour
         {
             target = other.attachedRigidbody?.GetComponent<IDamageable>();
         }
+    }
+
+    private void InstantiateParticle(ParticleSystem hitParticle)
+    {
+        Quaternion particleRotation = new Quaternion((transform.root.position.x - transform.position.x), 0f, 0f, 0f);
+        ParticleSystem particle = Instantiate(hitParticle, transform.position, (weapon.transform.parent.rotation));
+
+        Destroy(particle.gameObject, 5f);
     }
 }
