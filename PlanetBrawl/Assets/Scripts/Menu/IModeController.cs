@@ -6,4 +6,5 @@ public interface IModeController
 {
     void InitMode(Transform[] spawns, GameObject[] playerPrefabs);
     void AddScore(int playerNr);
+    void PauseGame(bool isPaused);
 }

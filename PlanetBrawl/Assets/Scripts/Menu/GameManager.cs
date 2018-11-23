@@ -93,4 +93,9 @@ public class GameManager : MonoBehaviour
         selectedPlanets = new int[4];
         activePlayers = new bool[4];
     }
+
+    public void PauseGame(bool isPaused)
+    {
+        modeController.PauseGame(isPaused);
+    }
 }

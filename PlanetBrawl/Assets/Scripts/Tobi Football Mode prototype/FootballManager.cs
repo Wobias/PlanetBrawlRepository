@@ -16,11 +16,12 @@ public class FootballManager : MonoBehaviour, IModeController
     //private TextMeshProUGUI countdown;
     //private TextMeshProUGUI scoreText;
     private bool gameOver = false;
+    private bool paused = false;
 
 
     void FixedUpdate()
     {
-        if (gameOver)
+        if (gameOver || paused)
             return;
 
         gameTime -= Time.fixedDeltaTime;
@@ -102,6 +103,16 @@ public class FootballManager : MonoBehaviour, IModeController
         if (victoryText != null)
         {
             victoryText.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+    public void PauseGame(bool isPaused)
+    {
+        paused = isPaused;
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].SetActive(!isPaused);
         }
     }
 }
