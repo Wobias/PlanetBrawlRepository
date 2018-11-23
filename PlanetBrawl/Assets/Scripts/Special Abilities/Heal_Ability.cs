@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Heal_Ability : MonoBehaviour, ISpecialAbility
 {
-    public float healthBonus = 2;
-    public ParticleSystem specialParticles;
+    public float healthBonus = 3;
+    public float healTimeout;
     public ParticleSystem healParticles;
 
 
-    private bool healed = false;
+    private bool canHeal = true;
+    private bool isPressed = false;
     private Player_HealthController healthController;
-    private PlayerController controller;
+    //private PlayerController controller;
 
 
     void Start()
@@ -22,33 +23,32 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
 
     public void Use()
     {
-        if (!healed)
+        if (canHeal && !isPressed)
         {
-            specialParticles.Stop();
             healParticles.Play();
             //controller.AbilityStun(true);
             //StartCoroutine(HealOverTime());
-            healed = true;
+            canHeal = false;
             healthController.Heal(healthBonus);
+            StartCoroutine(ResetHeal());
         }
+
+        isPressed = true;
     }
 
     public void StopUse()
     {
+        isPressed = false;
         //healParticles.Stop();
         //specialParticles.Play();
         //healed = false;
         //controller.AbilityStun(false);
     }
 
-    //IEnumerator HealOverTime()
-    //{
-    //    yield return new WaitForSeconds(1);
+    IEnumerator ResetHeal()
+    {
+        yield return new WaitForSeconds(healTimeout);
 
-    //    if (healed)
-    //    {
-    //        healthController.Heal(healthBonus);
-    //        healed = false;
-    //    }
-    //}
+        canHeal = true;
+    }
 }

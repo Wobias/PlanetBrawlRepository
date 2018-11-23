@@ -9,18 +9,19 @@ public class SurvivalController : MonoBehaviour, IModeController
     public float spawnTimeout;
 
     private float score;
-    private List<GameObject> players = new List<GameObject>();
-    private GameObject[] sortedPlayers;
+    private int playerCount = 0;
+    private GameObject[] players = new GameObject[4];
     private Transform[] playerSpawns;
     private TextMeshProUGUI victoryText;
     //private TextMeshProUGUI scoreText;
     private float timeout;
     private bool gameOver = false;
+    private bool paused = false;
 
 
     void FixedUpdate()
     {
-        if (gameOver)
+        if (gameOver || paused)
             return;
 
         score += Time.fixedDeltaTime;
@@ -36,13 +37,14 @@ public class SurvivalController : MonoBehaviour, IModeController
 
     public void AddScore(int playerNr)
     {
-        if (players.Count > 0)
+        if (playerCount > 0)
         {
-            players.Remove(sortedPlayers[playerNr-1]);
-            Debug.Log(players.Count);
+            players[playerNr - 1] = null;
+            playerCount--;
+            Debug.Log(playerCount);
         }
         
-        if (players.Count <= 0)
+        if (playerCount <= 0)
         {
             victoryText.SetText("You survived for: " + Mathf.FloorToInt(score) + "seconds");
             victoryText.transform.parent.gameObject.SetActive(true);
@@ -56,17 +58,22 @@ public class SurvivalController : MonoBehaviour, IModeController
     {
         playerSpawns = spawns;
 
-        for (int i = 0; i < playerPrefabs.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
-            newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
-            newPlayer.GetComponent<PlayerController>().playerColor = GameManager.instance.GetColor(1);
-            GameManager.SetLayer(newPlayer.transform, LayerMask.NameToLayer("Player1"));
-            players.Add(newPlayer);
-            Debug.Log(players.Count);
+            if (playerPrefabs[i] != null)
+            {
+                GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
+                newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
+                newPlayer.GetComponent<PlayerController>().playerColor = GameManager.instance.GetColor(1);
+                GameManager.SetLayer(newPlayer.transform, LayerMask.NameToLayer("Player1"));
+                players[i] = newPlayer;
+                playerCount++;
+            }
+            else
+            {
+                players[i] = null;
+            }
         }
-
-        sortedPlayers = players.ToArray();
 
         victoryText = GameObject.FindGameObjectWithTag("VictoryScreen").transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
 
@@ -77,5 +84,15 @@ public class SurvivalController : MonoBehaviour, IModeController
 
         timeout = spawnTimeout;
         Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
+    }
+
+    public void PauseGame(bool isPaused)
+    {
+        paused = isPaused;
+
+        for (int i = 0; i < playerCount; i++)
+        {
+            players[i].SetActive(!isPaused);
+        }
     }
 }

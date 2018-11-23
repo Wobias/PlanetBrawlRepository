@@ -41,16 +41,19 @@ public class TeamDeathmatchController : MonoBehaviour, IModeController
     {
         playerSpawns = spawns;
 
-        for (int i = 0; i < playerPrefabs.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
-            newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
-            players.Add(newPlayer);
+            if (playerPrefabs[i] != null)
+            {
+                GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
+                newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
+                players.Add(newPlayer);
 
-            if (team1.Count < Mathf.CeilToInt(playerPrefabs.Length / 2))
-                team1.Add(newPlayer);
-            else
-                team2.Add(newPlayer);
+                if (team1.Count < Mathf.CeilToInt(playerPrefabs.Length / 2))
+                    team1.Add(newPlayer);
+                else
+                    team2.Add(newPlayer);
+            }
         }
 
         for (int i = 0; i < team1.Count; i++)

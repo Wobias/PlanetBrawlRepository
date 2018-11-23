@@ -16,11 +16,12 @@ public class FootballManager : MonoBehaviour, IModeController
     //private TextMeshProUGUI countdown;
     //private TextMeshProUGUI scoreText;
     private bool gameOver = false;
+    private bool paused = false;
 
 
     void FixedUpdate()
     {
-        if (gameOver)
+        if (gameOver || paused)
             return;
 
         gameTime -= Time.fixedDeltaTime;
@@ -73,16 +74,19 @@ public class FootballManager : MonoBehaviour, IModeController
     {
         playerSpawns = spawns;
 
-        for (int i = 0; i < playerPrefabs.Length; i++)
+        for (int i = 0; i < 5; i++)
         {
-            GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
-            newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
-            players.Add(newPlayer);
+            if (playerPrefabs[i] != null)
+            {
+                GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
+                newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
+                players.Add(newPlayer);
 
-            if (team1.Count < Mathf.CeilToInt(playerPrefabs.Length / 2))
-                team1.Add(newPlayer);
-            else
-                team2.Add(newPlayer);
+                if (team1.Count < Mathf.CeilToInt(playerPrefabs.Length / 2))
+                    team1.Add(newPlayer);
+                else
+                    team2.Add(newPlayer);
+            }
         }
 
         for (int i = 0; i < team1.Count; i++)
@@ -104,7 +108,14 @@ public class FootballManager : MonoBehaviour, IModeController
             victoryText.transform.parent.gameObject.SetActive(false);
         }
     }
+
+    public void PauseGame(bool isPaused)
+    {
+        paused = isPaused;
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].SetActive(!isPaused);
+        }
+    }
 }
-
-
-
