@@ -3390,7 +3390,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1322029498350972, guid: c49a01067231404458ee2163106607a2, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224123875935677952, guid: c49a01067231404458ee2163106607a2,
         type: 2}
@@ -3495,6 +3495,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 18.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 223759685792868896, guid: c49a01067231404458ee2163106607a2,
+        type: 2}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223812816837793354, guid: c49a01067231404458ee2163106607a2,
+        type: 2}
+      propertyPath: m_PixelPerfect
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c49a01067231404458ee2163106607a2, type: 2}

@@ -13,6 +13,7 @@ public class PauseGameScript : MonoBehaviour
     public Button[] buttonsGame;
     public Button[] buttonsLobby;
     private int index = 0;
+    private bool pressed = false;
 
 
 
@@ -27,18 +28,22 @@ public class PauseGameScript : MonoBehaviour
         if (currentScene.name == "BetaLobby")
         {
             //UP
-            if (InputSystem.DPadDown(DPad.Down, 0) && index < buttonsLobby.Length -1)
+            if (InputSystem.DPadDown(DPad.Down, 0) && index < buttonsLobby.Length -1 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) < 0 && index < buttonsGame.Length && !pressed)
             {
-
+                pressed = true;
                 index++;
                 buttonsLobby[index].Select();
             }
             //Down
-            if (InputSystem.DPadDown(DPad.Up, 0) && index > 0)
+            if (InputSystem.DPadDown(DPad.Up, 0) && index > 0 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) > 0 && index < buttonsGame.Length && !pressed)
             {
-
+                pressed = true;
                 index--;
                 buttonsLobby[index].Select();
+            }
+            if (InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) == 0 && pressed)
+            {
+                pressed = false;
             }
         }
 
@@ -58,18 +63,22 @@ public class PauseGameScript : MonoBehaviour
         if (currentScene.name != "BetaLobby")
         {
             //UP
-            if (InputSystem.DPadDown(DPad.Down, 0) && index < buttonsGame.Length -1)
+            if (InputSystem.DPadDown(DPad.Down, 0) && index < buttonsGame.Length -1 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) < 0  && index < buttonsGame.Length && !pressed)
             {
-
+                pressed = true;
                 index++;
                 buttonsGame[index].Select();
             }
             //Down
-            if (InputSystem.DPadDown(DPad.Up, 0) && index > 0)
+            if (InputSystem.DPadDown(DPad.Up, 0) && index > 0 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) > 0 && index < buttonsGame.Length && !pressed)
             {
-
+                pressed = true;
                 index--;
                 buttonsGame[index].Select();
+            }
+            if (InputSystem.ThumbstickInput(ThumbSticks.LeftX,0) == 0 && pressed)
+            {
+                pressed = false;
             }
         }
 
