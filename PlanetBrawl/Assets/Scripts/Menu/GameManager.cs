@@ -86,4 +86,11 @@ public class GameManager : MonoBehaviour
         foreach (Transform child in root)
             SetLayer(child, layer);
     }
+
+    public void ResetGame()
+    {
+        gameMode = GameModes.deathmatch;
+        selectedPlanets = new int[4];
+        activePlayers = new bool[4];
+    }
 }
