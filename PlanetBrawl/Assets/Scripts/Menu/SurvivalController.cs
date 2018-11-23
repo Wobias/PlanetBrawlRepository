@@ -10,6 +10,7 @@ public class SurvivalController : MonoBehaviour, IModeController
 
     private float score;
     private List<GameObject> players = new List<GameObject>();
+    private GameObject[] sortedPlayers;
     private Transform[] playerSpawns;
     private TextMeshProUGUI victoryText;
     //private TextMeshProUGUI scoreText;
@@ -35,9 +36,9 @@ public class SurvivalController : MonoBehaviour, IModeController
 
     public void AddScore(int playerNr)
     {
-        if (players.Count >= playerNr)
+        if (players.Count > 0)
         {
-            players.RemoveAt(playerNr - 1);
+            players.Remove(sortedPlayers[playerNr-1]);
             Debug.Log(players.Count);
         }
         
@@ -64,6 +65,8 @@ public class SurvivalController : MonoBehaviour, IModeController
             players.Add(newPlayer);
             Debug.Log(players.Count);
         }
+
+        sortedPlayers = players.ToArray();
 
         victoryText = GameObject.FindGameObjectWithTag("VictoryScreen").transform.Find("Victory Text").GetComponent<TextMeshProUGUI>();
 
