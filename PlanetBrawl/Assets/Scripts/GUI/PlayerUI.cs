@@ -46,10 +46,10 @@ public class PlayerUI : MonoBehaviour
     private GameObject _player3;
     private GameObject _player4;
 
-    private float _p1dmg = 0f;
-    private float _p2dmg = 0f;
-    private float _p3dmg = 0f;
-    private float _p4dmg = 0f;
+    private float _p1dmg;
+    private float _p2dmg;
+    private float _p3dmg;
+    private float _p4dmg;
 
     private Player_HealthController _p1HealthController;
     private Player_HealthController _p2HealthController;
@@ -73,6 +73,11 @@ public class PlayerUI : MonoBehaviour
         hp2Material.color = colors[0];
         hp3Material.color = colors[0];
         hp4Material.color = colors[0];
+
+        _p1dmg = 0f;
+        _p2dmg = 0f;
+        _p3dmg = 0f;
+        _p4dmg = 0f;
 
         if (_player1 != null)
         {
@@ -122,20 +127,40 @@ public class PlayerUI : MonoBehaviour
     {
         if (_player1 != null)
         {
-            CheckHealth(_p1HealthController, player1HealthBars, _p1HealthController.health, hp1Material);
+            CheckHealth(_player1, _p1HealthController, player1HealthBars, _p1HealthController.health, hp1Material);
         }
+        else
+        {
+            DeactivateAllHealthBars(player1HealthBars);
+        }
+
         if (_player2 != null)
         {
-            CheckHealth(_p2HealthController, player2HealthBars, _p2HealthController.health, hp2Material);
+            CheckHealth(_player2, _p2HealthController, player2HealthBars, _p2HealthController.health, hp2Material);
         }
+        else
+        {
+            DeactivateAllHealthBars(player2HealthBars);
+        }
+
         if (_player3 != null)
         {
-            CheckHealth(_p3HealthController, player3HealthBars, _p3HealthController.health, hp3Material);
+            CheckHealth(_player3, _p3HealthController, player3HealthBars, _p3HealthController.health, hp3Material);
         }
+        else
+        {
+            DeactivateAllHealthBars(player3HealthBars);
+        }
+
         if (_player4 != null)
         {
-            CheckHealth(_p4HealthController, player4HealthBars, _p4HealthController.health, hp4Material);
+            CheckHealth(_player4, _p4HealthController, player4HealthBars, _p4HealthController.health, hp4Material);
         }
+        else
+        {
+            DeactivateAllHealthBars(player4HealthBars);
+        }
+
     }
 
     private void DeactivateHealthBars(List<GameObject> healthBars, float dmg)
@@ -144,28 +169,28 @@ public class PlayerUI : MonoBehaviour
         dmg++;
     }
 
-    private void CheckHealth(Player_HealthController planet_HealthController, List<GameObject> hpBars, float damage, Material playerMaterial)
+    private void CheckHealth(GameObject player, Player_HealthController player_HealthController, List<GameObject> hpBars, float damage, Material playerMaterial)
     {
-        if (planet_HealthController.health <= 4)
+        if (player_HealthController.health <= 4)
         {
             DeactivateHealthBars(hpBars, damage);
             playerMaterial.color = colors[1];
         }
-        if (planet_HealthController.health <= 3)
+        if (player_HealthController.health <= 3)
         {
             DeactivateHealthBars(hpBars, damage);
             playerMaterial.color = colors[2];
         }
-        if (planet_HealthController.health <= 2)
+        if (player_HealthController.health <= 2)
         {
             DeactivateHealthBars(hpBars, damage);
             playerMaterial.color = colors[3];
         }
-        if (planet_HealthController.health <= 1)
+        if (player_HealthController.health <= 1)
         {
             DeactivateHealthBars(hpBars, damage);
         }
-        if (planet_HealthController.health <= 0)
+        if (player_HealthController.health <= 0)
         {
             DeactivateHealthBars(hpBars, damage);
         }
@@ -251,6 +276,14 @@ public class PlayerUI : MonoBehaviour
         if (player.GetComponentInChildren<SpriteRenderer>().sprite == toxic)
         {
             portrait.sprite = portraitToxic;
+        }
+    }
+
+    private void DeactivateAllHealthBars(List<GameObject> hpBarList)
+    {
+        for (int i = 0; i < hpBarList.Count; i++)
+        {
+            hpBarList[i].SetActive(false);
         }
     }
 }
