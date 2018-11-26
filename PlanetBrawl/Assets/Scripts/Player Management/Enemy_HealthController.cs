@@ -14,7 +14,7 @@ public class Enemy_HealthController : Player_HealthController
         base.Hit(physicalDmg, dmgType, knockbackForce, stunTime, attackNr, effectTime);
     }
 
-    public void Heal(float bonusHealth)
+    public override void Heal(float bonusHealth)
     {
         return;
     }

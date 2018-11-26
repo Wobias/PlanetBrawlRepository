@@ -12,6 +12,7 @@ public class WeaponController : MonoBehaviour
     public bool canAttack = true;
     public float rotationSpeed = 0.1f; //A value of 1 or higher will make the rotation instant
     public bool safeInOrbit = true;
+    public bool isPowerUp = false;
 
     protected Transform origin; //Transform of the PARENT that is responsible for rotating the moon
     protected IDamageable target; //Used to create a reference of a target and hit it
@@ -49,7 +50,8 @@ public class WeaponController : MonoBehaviour
                 weaponColliders[i].enabled = false;
         }
 
-        //ResetMinPos();
+        if (isPowerUp)
+            ResetMinPos();
     }
 
     protected virtual void OnEnable()
@@ -121,7 +123,7 @@ public class WeaponController : MonoBehaviour
     {
         for (int i = 0; i < weaponParts.Length; i++)
         {
-            weaponParts[i].gameObject.GetComponent<Weapon_ContactDamage>()?.RemoveBuff();
+            weaponParts[i]?.gameObject.GetComponent<Weapon_ContactDamage>()?.RemoveBuff();
         }
     }
 

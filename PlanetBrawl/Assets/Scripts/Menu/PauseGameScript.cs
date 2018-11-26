@@ -28,20 +28,28 @@ public class PauseGameScript : MonoBehaviour
         if (currentScene.name == "BetaLobby")
         {
             //UP
-            if (InputSystem.DPadDown(DPad.Down, 0) && index < buttonsLobby.Length -1 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) < 0 && index < buttonsGame.Length && !pressed)
+            if ((InputSystem.DPadDown(DPad.Down, 0) || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) < 0) && !pressed)
             {
                 pressed = true;
                 index++;
+
+                if (index >= buttonsLobby.Length)
+                    index = 0;
+
                 buttonsLobby[index].Select();
             }
             //Down
-            if (InputSystem.DPadDown(DPad.Up, 0) && index > 0 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) > 0 && index < buttonsGame.Length && !pressed)
+            if ((InputSystem.DPadDown(DPad.Up, 0) && index > 0 || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) > 0) && !pressed)
             {
                 pressed = true;
                 index--;
+
+                if (index < 0)
+                    index = buttonsLobby.Length-1;
+
                 buttonsLobby[index].Select();
             }
-            if (InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) == 0 && pressed)
+            if (InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) == 0 && pressed)
             {
                 pressed = false;
             }
@@ -63,20 +71,28 @@ public class PauseGameScript : MonoBehaviour
         if (currentScene.name != "BetaLobby")
         {
             //UP
-            if (InputSystem.DPadDown(DPad.Down, 0) && index < buttonsGame.Length -1 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) < 0  && index < buttonsGame.Length && !pressed)
+            if ((InputSystem.DPadDown(DPad.Down, 0) || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) < 0) && !pressed)
             {
                 pressed = true;
                 index++;
+
+                if (index >= buttonsGame.Length)
+                    index = 0;
+
                 buttonsGame[index].Select();
             }
             //Down
-            if (InputSystem.DPadDown(DPad.Up, 0) && index > 0 || InputSystem.ThumbstickInput(ThumbSticks.LeftX, 0) > 0 && index < buttonsGame.Length && !pressed)
+            if ((InputSystem.DPadDown(DPad.Up, 0) && index > 0 || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) > 0) && !pressed)
             {
                 pressed = true;
                 index--;
+
+                if (index < 0)
+                    index = buttonsGame.Length-1;
+
                 buttonsGame[index].Select();
             }
-            if (InputSystem.ThumbstickInput(ThumbSticks.LeftX,0) == 0 && pressed)
+            if (InputSystem.ThumbstickInput(ThumbSticks.LeftY,0) == 0 && pressed)
             {
                 pressed = false;
             }

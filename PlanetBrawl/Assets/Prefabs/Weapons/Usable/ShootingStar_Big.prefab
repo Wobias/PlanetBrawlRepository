@@ -152,7 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsound: punch
   physicalDmg: 2
-  effectDps: 0
   dmgType: 1
   knockback: 15
   stunTime: 0.25
@@ -171,6 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAttack: 1
   rotationSpeed: 10
+  safeInOrbit: 1
+  isPowerUp: 1
   weaponParts:
   - {fileID: 50246776082622216}
   shotSpeed: 25

@@ -901,6 +901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAttack: 1
   rotationSpeed: 10
+  safeInOrbit: 1
   weaponParts:
   - {fileID: 50123070172715818}
   punchSpeed: 20
@@ -924,6 +925,7 @@ MonoBehaviour:
   poisonParticles: {fileID: 1458805149121528}
   invincible: 0
   stunned: 0
+  dropPrefab: {fileID: 0}
 --- !u!114 &114847502584679152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -938,10 +940,11 @@ MonoBehaviour:
   radius: 6
   force: 25
   forceTime: 0.25
-  invincibilityTime: 0.5
+  invincibilityTime: 1
   gravMask:
     serializedVersion: 2
     m_Bits: 34082561
+  timeout: 8
 --- !u!114 &114886567914009078
 MonoBehaviour:
   m_ObjectHideFlags: 1

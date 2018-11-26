@@ -37,8 +37,6 @@ public class BallMovement : MonoBehaviour, IMovable
         gravForce = Vector2.Lerp(gravForce, targetGravForce, forceRolloff);
 
         rb2d.velocity = externalForce + gravForce;
-
-        Debug.Log(rb2d.velocity);
     }  
     
     IEnumerator AddExForce(Vector2 force, float time)

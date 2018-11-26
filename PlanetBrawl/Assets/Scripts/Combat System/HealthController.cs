@@ -319,7 +319,7 @@ public class HealthController : MonoBehaviour, IDamageable
         frozen = active;
         iceParticles.SetActive(active);
 
-        if (active)
+        if (active && movement != null)
             movement.SpeedEffect(-iceSlowMultiplier, length);
     }
 }

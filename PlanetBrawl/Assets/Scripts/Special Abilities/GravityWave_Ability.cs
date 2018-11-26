@@ -9,9 +9,11 @@ public class GravityWave_Ability : MonoBehaviour, ISpecialAbility
     public float forceTime;
     public float invincibilityTime;
     public LayerMask gravMask;
+    public float timeout;
 
     private Player_HealthController healthController;
     private bool canAttack = true;
+    private bool pressed = false;
 
 
     void Start()
@@ -21,9 +23,10 @@ public class GravityWave_Ability : MonoBehaviour, ISpecialAbility
 
     public void Use()
     {
-        if (canAttack)
+        if (canAttack && !pressed)
         {
             canAttack = false;
+            pressed = true;
 
             healthController.Stun(invincibilityTime, false);
 
@@ -43,11 +46,19 @@ public class GravityWave_Ability : MonoBehaviour, ISpecialAbility
                     newTarget.ApplyTempExForce((transform.position - targetColliders[i].transform.position).normalized * force, forceTime);
                 }
             }
+
+            StartCoroutine(ResetAttack());
         }
     }
 
     public void StopUse()
     {
+        pressed = false;
+    }
+
+    IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(timeout);
         canAttack = true;
     }
 

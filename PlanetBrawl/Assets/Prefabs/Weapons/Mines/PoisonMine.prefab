@@ -157,6 +157,10 @@ MonoBehaviour:
   stunTime: 0.2
   effectTime: 5
   destroyOnHit: 0
+  radius: 1.5
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 528129
 --- !u!198 &198550518379717284
 ParticleSystem:
   m_ObjectHideFlags: 1

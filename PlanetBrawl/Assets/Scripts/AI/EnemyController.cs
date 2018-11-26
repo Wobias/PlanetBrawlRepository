@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour, IPlanet
     public LayerMask targetMask;
     public float hitLength;
     public WeaponController currentWeapon;
-    public float searchRate = 1;
+    public float searchRate = 2;
     public bool controlsInverted = false;
 
 
@@ -56,11 +56,6 @@ public class EnemyController : MonoBehaviour, IPlanet
 
                 if (controlsInverted)
                     aimDir *= -1;
-            }
-            else if (!searching)
-            {
-                searching = true;
-                StartCoroutine(FindTarget());
             }
 
             if (!inputSet)
@@ -156,10 +151,7 @@ public class EnemyController : MonoBehaviour, IPlanet
       
         yield return new WaitForSeconds(searchRate);
 
-        if (target == null)
-            StartCoroutine(FindTarget());
-        else
-            searching = false;
+        StartCoroutine(FindTarget());
     }
 
     public void InvertAim(bool active)

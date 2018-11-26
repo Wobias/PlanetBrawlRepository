@@ -6,13 +6,14 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
 {
     //public float cooldown;
     public GameObject minePrefab;
-    public ParticleSystem specialParticles;
+    public float timeout;
 
     private PlayerController controller;
-    private GameObject placedMine;
+    private Explosive_ContactDamage placedMine;
     private int mineLayer;
     private bool pressed = false;
     private bool placed = false;
+    private bool canPlace = true;
 
     public string toxicMineSound = "toxicMine";
 
@@ -27,27 +28,29 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
     {
         if (!pressed)
         {
-            AudioManager1.instance.Play(toxicMineSound);
             pressed = true;
-            //specialParticles.Stop();
 
             if (placed && placedMine == null)
             {
                 placed = false;
+                StartCoroutine(Cooldown());
             }
 
-            if (!placed)
+            if (!placed && canPlace)
             {
-                placedMine = Instantiate(minePrefab, transform.position, Quaternion.identity);
-                placedMine.layer = mineLayer;
+                AudioManager1.instance.Play(toxicMineSound);
+                placedMine = Instantiate(minePrefab, transform.position, Quaternion.identity).GetComponent<Explosive_ContactDamage>();
+                placedMine.gameObject.layer = mineLayer;
                 placedMine.transform.Find("Outline").GetComponent<SpriteRenderer>().color = controller.playerColor;
                 //StartCoroutine(Cooldown());
                 placed = true;
+                canPlace = false;
             }
-            else
+            else if (placed)
             {
-                Destroy(placedMine);
+                placedMine.Explode();
                 placed = false;
+                StartCoroutine(Cooldown());
             }
         }
     }
@@ -57,10 +60,9 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
         pressed = false;
     }
 
-    //IEnumerator Cooldown()
-    //{
-    //    yield return new WaitForSeconds(cooldown);
-    //    specialParticles.Play();
-    //    canAttack = true;
-    //}
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(timeout);
+        canPlace = true;
+    }
 }
