@@ -8,6 +8,7 @@ public class Fading : MonoBehaviour
     public Image panel;
     // von anderen Scripts: Fading.instance.Function
     public static Fading instance;
+    public float fadeInTime = 1;
 
     private float fadeTime;
     private bool fading = false;
@@ -16,9 +17,15 @@ public class Fading : MonoBehaviour
 	void Awake ()
     {       
         instance = this;
+        panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, 1);
 	}
-	
-	void Update ()
+
+    private void OnEnable()
+    {
+        FadeOut(fadeInTime);
+    }
+
+    void Update ()
     {
         //if (Input.GetKeyDown(KeyCode.F))
         //{
@@ -32,7 +39,7 @@ public class Fading : MonoBehaviour
 
         if (fading)
         {
-            panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, Mathf.Lerp(panel.color.a, targetFade, fadeTime * Time.deltaTime));
+            panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, Mathf.Lerp(panel.color.a, targetFade, Time.deltaTime / fadeInTime));
 
             if (panel.color.a == targetFade)
                 fading = false;
