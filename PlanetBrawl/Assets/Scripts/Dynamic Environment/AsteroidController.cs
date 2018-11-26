@@ -43,7 +43,7 @@ public class AsteroidController : MonoBehaviour, IMovable
     {
         whichItem = Random.Range(0, itemDrops.Length);
         AudioManager1.instance.Play(asteroidSound);
-        //Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
+        Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
     }
 
     public void ChooseDirection()

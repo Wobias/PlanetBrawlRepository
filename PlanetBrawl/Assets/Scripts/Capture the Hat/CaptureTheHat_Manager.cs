@@ -26,11 +26,14 @@ public class CaptureTheHat_Manager : MonoBehaviour, IModeController
 
         playerSpawns = spawns;
 
-        for (int i = 0; i < playerPrefabs.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
-            newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
-            players.Add(newPlayer);
+            if (playerPrefabs[i] != null)
+            {
+                GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
+                newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
+                players.Add(newPlayer);
+            }
         }
 
         for (int i = 0; i < players.Count; i++)

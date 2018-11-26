@@ -32,11 +32,13 @@ public class GameManager : MonoBehaviour
     {
         selectedPlanets[playerNr - 1] = index;
         activePlayers[playerNr - 1] = true;
+        Debug.Log("Player added: " + playerNr + ", " + activePlayers[playerNr - 1]);
     }
 
     public void RemovePlayer(int playerNr)
     {
         activePlayers[playerNr - 1] = false;
+        Debug.Log("Player removed: " + playerNr + ", " + !activePlayers[playerNr - 1]);
     }
 
     public Color GetColor(int playerNr)
@@ -68,6 +70,10 @@ public class GameManager : MonoBehaviour
             if (activePlayers[i])
             {
                 activePrefabs.Add(playerPrefabs[selectedPlanets[i]]);
+            }
+            else
+            {
+                activePrefabs.Add(null);
             }
         }
 
