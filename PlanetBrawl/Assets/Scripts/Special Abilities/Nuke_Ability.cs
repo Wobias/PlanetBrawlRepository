@@ -6,6 +6,7 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
 {
     public GameObject nukePrefab;
     public Transform origin;
+    public float timeout;
 
     private GameObject currentNuke;
     private PlayerController controller;
@@ -13,6 +14,7 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
     private int playerNr;
     private bool canAttack = true;
     private bool inAction = false;
+    private bool pressed = false;
 
 
     void Start()
@@ -24,7 +26,7 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
 
     public void Use()
     {
-        if (canAttack && !inAction)
+        if (canAttack && !inAction && !pressed)
         {
             canAttack = false;
             inAction = true;
@@ -33,22 +35,35 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
             currentNuke = Instantiate(nukePrefab, transform.position, origin.rotation);
             currentNuke.layer = nukeLayer;
             currentNuke.GetComponent<WeaponController_Nuke>().playerNr = playerNr;
+            currentNuke.GetComponent<WeaponController_Nuke>().playerLayer = gameObject.layer;
         }
         else if (inAction && currentNuke == null)
         {
             inAction = false;
             controller.AbilityStun(false);
+            StartCoroutine(ResetNuke());
         }
     }
 
     public void StopUse()
     {
-        canAttack = true;
-        controller.AbilityStun(false);
+        if (pressed)
+            pressed = false;
 
-        if (currentNuke != null)
+        if (inAction)
         {
-            Destroy(currentNuke);
-        }
+            inAction = false;
+            controller.AbilityStun(false);
+
+            currentNuke?.GetComponent<Explosive_ContactDamage>().Explode();
+
+            StartCoroutine(ResetNuke());
+        } 
+    }
+
+    IEnumerator ResetNuke()
+    {
+        yield return new WaitForSeconds(timeout);
+        canAttack = true;
     }
 }

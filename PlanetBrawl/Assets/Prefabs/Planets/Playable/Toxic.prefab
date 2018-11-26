@@ -842,6 +842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAttack: 1
   rotationSpeed: 10
+  safeInOrbit: 1
   weaponParts:
   - {fileID: 50873958322943676}
   punchSpeed: 20
@@ -923,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minePrefab: {fileID: 1028146333755204, guid: 6c7592f16f688f24baa69ad5c27ad3b7, type: 2}
-  specialParticles: {fileID: 0}
+  timeout: 10
   toxicMineSound: toxicMine
 --- !u!114 &114776493536227230
 MonoBehaviour:

@@ -192,7 +192,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: HealthPercent
-    m_EventTreshold: 25
+    m_EventTreshold: 26
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102905348796041778}
   m_Solo: 0
@@ -384,7 +384,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: HealthPercent
-    m_EventTreshold: 75
+    m_EventTreshold: 76
   - m_ConditionMode: 3
     m_ConditionEvent: HealthPercent
     m_EventTreshold: 50
@@ -507,7 +507,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: HealthPercent
-    m_EventTreshold: 50
+    m_EventTreshold: 51
   - m_ConditionMode: 3
     m_ConditionEvent: HealthPercent
     m_EventTreshold: 25

@@ -53,5 +53,13 @@ public class GravityPull : MonoBehaviour
             targets.Remove(oldTarget);
             targetTrans.Remove(other.transform.root);
         }
-    }    
+    }
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < targets.Count; i++)
+        {
+            targets[i].FlushGravForce();
+        }
+    }
 }

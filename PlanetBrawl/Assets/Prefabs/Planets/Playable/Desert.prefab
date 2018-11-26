@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1046590103174222
 GameObject:
   m_ObjectHideFlags: 1
@@ -433,7 +433,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315575399049300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.231476, y: -1.0665406, z: 0}
+  m_LocalPosition: {x: 16.661709, y: -0.98220634, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4067073431661942}
@@ -842,6 +842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAttack: 1
   rotationSpeed: 10
+  safeInOrbit: 1
   weaponParts:
   - {fileID: 50873958322943676}
   punchSpeed: 20
@@ -865,6 +866,7 @@ MonoBehaviour:
   poisonParticles: {fileID: 1038715056497994}
   invincible: 0
   stunned: 0
+  dropPrefab: {fileID: 0}
 --- !u!114 &114313246212808306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -945,6 +947,7 @@ MonoBehaviour:
     type: 2}
   maxDistance: 2
   minDistance: 1
+  timeout: 7
 --- !u!114 &114908611744529508
 MonoBehaviour:
   m_ObjectHideFlags: 1

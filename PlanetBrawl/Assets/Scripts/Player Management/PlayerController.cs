@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour, IPlanet
 
         bonusActive = true;
         GameManager.SetLayer(currentWeapon.transform, weaponLayer);
+        currentWeapon.isPowerUp = true;
         bonusWeapon.gameObject.SetActive(false);
         currentWeapon.gameObject.SetActive(true);
     }

@@ -882,6 +882,7 @@ MonoBehaviour:
   poisonParticles: {fileID: 1572257590694050}
   invincible: 0
   stunned: 0
+  dropPrefab: {fileID: 0}
 --- !u!114 &114373052491508496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -957,16 +958,15 @@ MonoBehaviour:
   hitsound: punch
   iceSound: iceFreeze
   radius: 5
-  cooldown: 1
+  cooldown: 10
   hitMask:
     serializedVersion: 2
     m_Bits: 528129
-  specialParticles: {fileID: 0}
   waveParticles: {fileID: 198962212041090344}
   physicalDmg: 1
   dmgType: 4
-  knockback: 1
-  stunTime: 0
+  knockback: 5
+  stunTime: 0.25
   effectTime: 2
 --- !u!114 &114911619057824068
 MonoBehaviour:
@@ -981,6 +981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAttack: 1
   rotationSpeed: 10
+  safeInOrbit: 1
   weaponParts:
   - {fileID: 50736742930729808}
   punchSpeed: 20

@@ -8,6 +8,8 @@ public class Player_HealthController : HealthController
 {
     //Health Variables
     #region
+    public GameObject dropPrefab;
+
     protected float hpPercent = 100f;
     protected IPlanet controller;
     protected Animator animator;
@@ -19,12 +21,6 @@ public class Player_HealthController : HealthController
     Transform myTransform;
     Vector3 spawnPoint;
 
-    Vector3 maxScale;
-
-    Vector3 averageHpScale;
-    Vector3 lowHpScale;
-    Vector3 criticalHpScale;
-
     protected PlanetMovement planetMovement;
 
     #endregion
@@ -33,59 +29,17 @@ public class Player_HealthController : HealthController
     protected override void Start()
     {
         base.Start();
-        //Set max health
         animator = GetComponent<Animator>();
         controller = GetComponent<IPlanet>();
         planetMovement = GetComponent<PlanetMovement>();
         myTransform = GetComponentInChildren<SpriteRenderer>().transform;
-        maxScale = myTransform.localScale;
-        SetScaleStates();
         spawnPoint = transform.position;
         hat = FindObjectOfType<Hat>();
     }
 
-    void ScalePlanet()
-    {
-        //Get current health in percent
-        hpPercent = (health * 100f) / maxHealth;
-
-        //Set Scale, Speed, Sprite in relation to current health
-        if (hpPercent > 75f)
-        {
-            myTransform.localScale = maxScale;
-            healthState = HealthState.full;
-            GetComponent<ISpeedable>().SpeedToSize(healthState);
-        }
-        else if (hpPercent <= 75f && hpPercent > 50f)
-        {
-            myTransform.localScale = averageHpScale;
-            healthState = HealthState.average;
-            GetComponent<ISpeedable>().SpeedToSize(healthState);
-        }
-        else if (hpPercent <= 50f && hpPercent > 25f)
-        {
-            myTransform.localScale = lowHpScale;
-            healthState = HealthState.low;
-            GetComponent<ISpeedable>().SpeedToSize(healthState);
-        }
-        else if(hpPercent <= 25f)
-        {
-            myTransform.localScale = criticalHpScale;
-            healthState = HealthState.critical;
-            GetComponent<ISpeedable>().SpeedToSize(healthState);
-        }
-    }
-
-    void SetScaleStates()
-    {
-        averageHpScale = maxScale * 0.9f;
-        lowHpScale = maxScale * 0.75f;
-        criticalHpScale = maxScale * 0.6f;
-    }
-
     protected override void OnHealthChange(bool damage=true)
     {
-        //ScalePlanet();
+        hpPercent = (health * 100f) / maxHealth;
         animator.SetFloat("HealthPercent", hpPercent);
         if (damage)
         {
@@ -95,7 +49,6 @@ public class Player_HealthController : HealthController
         {
             animator.SetTrigger("Heal");
         }
-        //controller.SetWeaponDistance();
     }
 
     protected override void StunObject(bool stunActive)
@@ -117,6 +70,17 @@ public class Player_HealthController : HealthController
             Destroy(gameObject);
         }
 
+        if (dropPrefab != null)
+        {
+            GameObject drop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
+
+            if (drop.GetComponent<Weapon_ContactDamage>())
+            {
+                drop.layer = LayerMask.NameToLayer("Weapon" + LayerMask.LayerToName(gameObject.layer));
+                drop.transform.Find("Outline").GetComponent<SpriteRenderer>().color = GetComponent<PlayerController>().playerColor;
+            }
+        }
+        
         attackerNr = 0;
         health = maxHealth;
         transform.position = spawnPoint;
@@ -127,13 +91,13 @@ public class Player_HealthController : HealthController
     {
         base.Hit(physicalDmg, dmgType, knockbackForce, stunTime, attackNr, effectTime);
         
-        if (hat != null)
+        if (hat != null && hat.transform.parent == transform)
         {
             hat.ThrowHat();
         }
     }
 
-    public void Heal(float bonusHealth)
+    public virtual void Heal(float bonusHealth)
     {
         health += bonusHealth;
         if (health > maxHealth)

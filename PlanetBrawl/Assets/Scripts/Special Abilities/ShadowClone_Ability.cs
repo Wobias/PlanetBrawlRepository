@@ -7,9 +7,11 @@ public class ShadowClone_Ability : MonoBehaviour, ISpecialAbility
     public GameObject clonePrefab;
     public float maxDistance;
     public float minDistance;
-    //public float splitForce;
+    public float timeout;
 
     private bool isSplit = false;
+    private bool pressed = false;
+    private bool canClone = true;
     private PlayerController controller;
 
 
@@ -20,32 +22,27 @@ public class ShadowClone_Ability : MonoBehaviour, ISpecialAbility
 
     public void Use()
     {
-        if (!isSplit)
+        if (!pressed && canClone)
         {
-            isSplit = true;
-
-            //int offsetMultiplier = Random.Range(0, 2);
-
-            //if (offsetMultiplier == 0)
-                //offsetMultiplier = -1;
-
-            //Vector3 offset = new Vector2(Random.Range(minDistance, maxDistance) * offsetMultiplier, Random.Range(minDistance, maxDistance) * offsetMultiplier);
+            pressed = true;
+            canClone = false;
             GameObject newClone = Instantiate(clonePrefab, transform.position, Quaternion.identity, transform);
-            SetLayer(newClone.transform, gameObject.layer);
+            GameManager.SetLayer(newClone.transform, gameObject.layer);
             newClone.GetComponent<PlayerController>().playerNr = controller.playerNr;
             newClone.GetComponent<PlayerController>().playerColor = controller.playerColor;
+
+            StartCoroutine(ResetClone());
         }
     }
 
     public void StopUse()
     {
-        
+        pressed = false; 
     }
 
-    private void SetLayer(Transform root, int layer)
+    IEnumerator ResetClone()
     {
-        root.gameObject.layer = layer;
-        foreach (Transform child in root)
-            SetLayer(child, layer);
+        yield return new WaitForSeconds(timeout);
+        canClone = true;
     }
 }

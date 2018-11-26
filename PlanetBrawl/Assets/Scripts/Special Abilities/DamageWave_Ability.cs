@@ -10,7 +10,6 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     public float radius;
     public float cooldown;
     public LayerMask hitMask;
-    public ParticleSystem specialParticles;
     public ParticleSystem waveParticles;
 
     [SerializeField]
@@ -47,7 +46,6 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
         if (target != null)
         {
             target.Hit(physicalDmg, dmgType, (other.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
-            AudioManager1.instance.Play(hitsound);
         }
     }
 
@@ -70,7 +68,6 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
         if (canAttack && !pressed)
         {
             AudioManager1.instance.Play(iceSound);
-            specialParticles.Stop();
             waveParticles.Play();
 
             canAttack = false;
@@ -96,7 +93,6 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     {
         yield return new WaitForSeconds(cooldown);
         canAttack = true;
-        specialParticles.Play();
     }
 
     void OnDrawGizmos()

@@ -45,9 +45,6 @@ public class Weapon_ContactDamage : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
-        if (!this.enabled)
-            return;
-
         GetTarget(col.collider);
         
         //Hit the target if it is damageable
@@ -91,7 +88,17 @@ public class Weapon_ContactDamage : MonoBehaviour
         }
 
         if (destroyOnHit)
-            Destroy(gameObject);
+        {
+            if (isWeapon && weapon.ProjectileCount > 1 || !isWeapon)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                if (weapon != null)
+                    Destroy(weapon.gameObject);
+            }
+        } 
     }
 
     public void AddBuff(DamageType buffType, float buffTime)

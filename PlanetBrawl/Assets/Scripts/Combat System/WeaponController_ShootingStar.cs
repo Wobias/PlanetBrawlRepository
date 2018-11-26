@@ -28,6 +28,8 @@ public class WeaponController_ShootingStar : WeaponController
     {
         if (isFirePressed && !fired && canAttack)
         {
+            transform.SetParent(null);
+
             for (int i = 0; i < weaponParts.Length; i++)
             {
                 ShootFragment(weaponParts[i], weaponColliders[i]);
@@ -45,6 +47,5 @@ public class WeaponController_ShootingStar : WeaponController
         frag.isKinematic = false; //Unlock the moons position
         fragCollider.enabled = true;
         frag.velocity = -(origin.position - frag.transform.position).normalized * shotSpeed;
-        frag.transform.SetParent(null);
     }
 }

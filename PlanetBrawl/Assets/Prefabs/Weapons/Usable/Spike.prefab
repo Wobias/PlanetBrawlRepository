@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799320343853256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.0295, y: -0.60377884, z: 0}
+  m_LocalPosition: {x: 5.5794263, y: -2.1878333, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4733587448016084}
@@ -149,6 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAttack: 1
   rotationSpeed: 10
+  safeInOrbit: 0
+  isPowerUp: 1
   weaponParts:
   - {fileID: 50683433755560038}
 --- !u!212 &212833041990132738
