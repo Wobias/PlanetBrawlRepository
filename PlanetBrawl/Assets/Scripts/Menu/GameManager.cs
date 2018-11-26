@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame(bool isPaused)
     {
-        modeController.PauseGame(isPaused);
+        if (modeController != null)
+            modeController.PauseGame(isPaused);
     }
 }
