@@ -30,7 +30,7 @@ public class DeathmatchController : MonoBehaviour, IModeController
         }
     }
 
-    public void InitMode(Transform[] spawns, GameObject[] playerPrefabs)
+    public void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs)
     {
         playerSpawns = spawns;
 

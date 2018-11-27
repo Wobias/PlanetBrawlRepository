@@ -9,7 +9,7 @@ public class AsteroidController : MonoBehaviour, IMovable
     public GameObject[] itemDrops;
     private int whichItem;
     private int whichDirection;
-    private Vector2 direction;
+    public Vector2 direction;
     private Rigidbody2D rb2d;
 
     public float inputRolloff = 0.1f;
@@ -65,23 +65,23 @@ public class AsteroidController : MonoBehaviour, IMovable
         //        rb.AddForce(new Vector2(-movementSpeed, -movementSpeed)); // Left down
         //        break;
         //}
-        int whichBorder = FindObjectOfType<AsteroidSpawner>().whichBorder;
-        if (whichBorder == 1)
-        {
-            direction = Vector2.right; // Right UP
-        }
-        else if(whichBorder == 2)
-        {
-            direction  = Vector2.down; // Down
-        }
-        else if (whichBorder == 3)
-        {
-            direction = new Vector2(-1,1); // Left Up
-        }
-        else if (whichBorder == 4)
-        {
-            direction = new Vector2(0, 1); //UP
-        }
+        //int whichBorder = FindObjectOfType<AsteroidSpawner>().whichBorder;
+        //if (whichBorder == 1)
+        //{
+        //    direction = Vector2.right; // Right UP
+        //}
+        //else if (whichBorder == 2)
+        //{
+        //    direction = Vector2.down; // Down
+        //}
+        //else if (whichBorder == 3)
+        //{
+        //    direction = new Vector2(-1, 1); // Left Up
+        //}
+        //else if (whichBorder == 4)
+        //{
+        //    direction = new Vector2(0, 1); //UP
+        //}
 
         targetExForce = direction * movementSpeed;
         externalForce = targetExForce;

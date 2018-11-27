@@ -20,9 +20,11 @@ public class CaptureTheHat_Manager : MonoBehaviour, IModeController
     private bool paused = false;
 
 
-    public void InitMode(Transform[] spawns, GameObject[] playerPrefabs)
+    public void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs)
     {
-        Instantiate(hatPrefab, Vector3.zero, Quaternion.identity);
+        int spawnIndex = Random.Range(0, entitySpawns.Length);
+        Hat newHat = Instantiate(hatPrefab, entitySpawns[spawnIndex].position, Quaternion.identity).GetComponent<Hat>();
+        newHat.hatSpawns = entitySpawns;
 
         playerSpawns = spawns;
 

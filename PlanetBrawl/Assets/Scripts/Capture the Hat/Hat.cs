@@ -7,12 +7,14 @@ public class Hat : MonoBehaviour
     private GameObject player;
     private Transform hatTransform;
     private Vector3 hatOnPlayerPosition;
-    private Vector3 newHatPosition;
     private bool isOnPlayer = false;
     private bool isLerping = false;
     private float distance;
     private Coroutine scoreRoutine;
-    
+    public Transform[] hatSpawns;
+
+    int spawnIndex;
+
 
     // Use this for initialization
     void Start()
@@ -24,7 +26,11 @@ public class Hat : MonoBehaviour
     {
         if (isLerping == true)
         {
-            StartCoroutine(HatPositionLerp());
+            hatTransform.position = Vector3.Lerp(hatTransform.position, hatSpawns[spawnIndex].position, 10f * Time.deltaTime);
+            if (hatTransform.position == hatSpawns[spawnIndex].position)
+            {
+                isLerping = false;
+            }
         }
     }
 
@@ -49,7 +55,7 @@ public class Hat : MonoBehaviour
         if (isOnPlayer)
         {
             gameObject.transform.parent = null;
-            newHatPosition = new Vector3(Random.Range(-20f, 20f), Random.Range(-9f, 9f), 0f);
+            spawnIndex = Random.Range(0, hatSpawns.Length);
             isLerping = true;
             if (scoreRoutine != null)
             {
@@ -64,14 +70,6 @@ public class Hat : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         isOnPlayer = false;
-        yield return null;
-    }
-
-    IEnumerator HatPositionLerp()
-    {
-        hatTransform.position = Vector3.Lerp(hatTransform.position, newHatPosition, 10f * Time.deltaTime);
-        yield return new WaitForSeconds(1f);
-        isLerping = false;
         yield return null;
     }
 

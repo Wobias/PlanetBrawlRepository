@@ -11,11 +11,9 @@ public class AsteroidSpawner : MonoBehaviour
     //public int spawnMax = 1000;
     public GameObject asteroid;
 
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
-    public int whichBorder;
+    public Transform bottomLeftSpawn;
+    public Transform topRightSpawn;
+    int whichBorder;
 
     public string asteroidSpawnSound = "asteroidSpawn";
 
@@ -35,61 +33,51 @@ public class AsteroidSpawner : MonoBehaviour
         /*Spawn asteroid after Time*/
         spawnTimer -= Time.deltaTime;
        // Debug.Log(spawnTimer);
-        if (spawnTimer < 0)
+        if (spawnTimer <= 0)
         {
-
             spawnTimer = spawnTimeout;
-        }
-
-        if (spawnTimer == spawnTimeout)
-        {
             SpawnMeteor();
         }
-
-
-
-
     }
 
     void SpawnMeteor()
     {
-        whichBorder = Random.Range(1, 4);
+        whichBorder = Random.Range(0, 4);
 
-        if(whichBorder == 1) //Left
-        {
-            minX = -16.9f;
-            maxX = -16.9f;
-            minY = -8.9f;
-            maxY = -8.9f;
-        }
-        else if(whichBorder == 2) //Top
-        {
-            minX = -16.9f;
-            maxX = 16.9f;
-            minY = 8.9f;
-            maxY = 8.9f;
-        }
-        else if (whichBorder == 3) //Right
-        {
-            minX = 16.9f;
-            maxX = 16.9f;
-            minY = -8.9f;
-            maxY = 8.9f;
+        Vector2 spawnPos = Vector2.zero;
+        Vector2 dir = Vector2.zero;
 
-        }
-        else if (whichBorder == 4) //Bottom
+        switch (whichBorder)
         {
-            minX = -16.9f;
-            maxX = 16.9f;
-            minY = -8.9f;
-            maxY = -8.9f;
+            case 0:
+                spawnPos.x = bottomLeftSpawn.position.x;
+                spawnPos.y = Random.Range(bottomLeftSpawn.position.y, topRightSpawn.position.y);
+                dir.x = 1;
+                dir.y = Random.Range(-1f, 1f);
+                break;
+            case 1:
+                spawnPos.x = topRightSpawn.position.x;
+                spawnPos.y = Random.Range(bottomLeftSpawn.position.y, topRightSpawn.position.y);
+                dir.x = -1;
+                dir.y = Random.Range(-1f, 1f);
+                break;
+            case 2:
+                spawnPos.y = bottomLeftSpawn.position.y;
+                spawnPos.x = Random.Range(bottomLeftSpawn.position.x, topRightSpawn.position.x);
+                dir.x = Random.Range(-1f, 1f);
+                dir.y = 1;
+                break;
+            case 3:
+                spawnPos.y = topRightSpawn.position.y;
+                spawnPos.x = Random.Range(bottomLeftSpawn.position.x, topRightSpawn.position.x);
+                dir.x = Random.Range(-1f, 1f);
+                dir.y = -1;
+                break;
         }
 
+        AsteroidController newAsteroid = Instantiate(asteroid, spawnPos, Quaternion.identity).GetComponent<AsteroidController>();
+        newAsteroid.direction = dir;
 
-        float posX = Random.Range(minX, maxX);
-        float posY = Random.Range(minY, maxY);
-        Vector2 spawnPosition = new Vector2(posX, posY);
-        Instantiate(asteroid, spawnPosition, Quaternion.identity);
         AudioManager1.instance.Play(asteroidSpawnSound);
 
     }
