@@ -44,7 +44,7 @@ public class PlanetSelectionManager : MonoBehaviour
     {
         if (joinedPlayers == readyPlayers && joinedPlayers != 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }
