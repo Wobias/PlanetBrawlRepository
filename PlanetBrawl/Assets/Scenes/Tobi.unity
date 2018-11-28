@@ -194,15 +194,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014a5da62b3987d4a896f02e63ebd321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  explosionforce: 500
   explosion: {fileID: 1971711103872062, guid: ba07b03be0671f1458de6176cf531961, type: 2}
   planetPartLeft: {fileID: 193946543}
   planetPartRight: {fileID: 1632654830}
   planetPartBottom: {fileID: 778363102}
-  forceLeft: {x: -10, y: 10}
-  forceRight: {x: 10, y: 10}
-  forceBottom: {x: 10, y: -10}
 --- !u!4 &85572560
 Transform:
   m_ObjectHideFlags: 0
@@ -357,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193946545}
   - component: {fileID: 193946544}
+  - component: {fileID: 193946546}
   m_Layer: 0
   m_Name: Destroy_Left
   m_TagString: Untagged
@@ -423,6 +419,26 @@ Transform:
   m_Father: {fileID: 85572560}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &193946546
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193946543}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &272330606
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +493,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &272468287 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1596242825422242, guid: ab26df5f718b6ff44b47f4a463436311,
+    type: 2}
+  m_PrefabInternal: {fileID: 426810571}
+--- !u!1 &345583928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1759920480541294, guid: acc75ba7e6af3fe4aacfe11ee762f4b3,
+    type: 2}
+  m_PrefabInternal: {fileID: 632133882}
 --- !u!1001 &368270891
 Prefab:
   m_ObjectHideFlags: 0
@@ -5311,6 +5337,10 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1588643663954382, guid: ab26df5f718b6ff44b47f4a463436311, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab26df5f718b6ff44b47f4a463436311, type: 2}
   m_IsPrefabAsset: 0
@@ -5343,11 +5373,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTimeout: 5
   asteroid: {fileID: 1191274311233048, guid: c84ca9c0290f5a94db8b8cfa6492eb3c, type: 2}
-  minX: -3.7
-  maxX: 3.7
-  minY: -7.4
-  maxY: 7.4
-  whichBorder: 0
+  bottomLeftSpawn: {fileID: 0}
+  topRightSpawn: {fileID: 0}
   asteroidSpawnSound: asteroidSpawn
 --- !u!4 &459546390
 Transform:
@@ -5569,6 +5596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 778363104}
   - component: {fileID: 778363103}
+  - component: {fileID: 778363105}
   m_Layer: 0
   m_Name: Destroy_Bottom
   m_TagString: Untagged
@@ -5635,6 +5663,26 @@ Transform:
   m_Father: {fileID: 85572560}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &778363105
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 778363102}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &834195873
 Prefab:
   m_ObjectHideFlags: 0
@@ -10458,6 +10506,10 @@ Prefab:
     - target: {fileID: 4651905167111064, guid: ba07b03be0671f1458de6176cf531961, type: 2}
       propertyPath: m_RootOrder
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971711103872062, guid: ba07b03be0671f1458de6176cf531961, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba07b03be0671f1458de6176cf531961, type: 2}
@@ -19855,10 +19907,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0c402579e90f54f8315974fe8cf63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hatPrefab: {fileID: 0}
-  countdownPrefab: {fileID: 0}
+  hatPrefab: {fileID: 345583928}
+  countdownPrefab: {fileID: 272468287}
   winScore: 20
-  timer: 0
+  timer: 10
 --- !u!4 &1429519618
 Transform:
   m_ObjectHideFlags: 0
@@ -24513,7 +24565,7 @@ GameObject:
   - component: {fileID: 1461178524}
   - component: {fileID: 1461178525}
   m_Layer: 0
-  m_Name: GameManager_Prototype
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24540,9 +24592,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461178523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c33f202d3afb3b648b23a6fd34a55009, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c0fb2dd7779c814fb886d0071f3894d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColors: []
+  playerPrefabs: []
+  gameMode: 0
+  modeManagers: []
 --- !u!1 &1492458735
 GameObject:
   m_ObjectHideFlags: 0
@@ -29248,6 +29304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxSpeed: 0.2
+  direction: {x: 0, y: 0}
 --- !u!1 &1549124093
 GameObject:
   m_ObjectHideFlags: 0
@@ -43119,6 +43176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1632654832}
   - component: {fileID: 1632654831}
+  - component: {fileID: 1632654833}
   m_Layer: 0
   m_Name: Destroy_Right
   m_TagString: Untagged
@@ -43185,6 +43243,26 @@ Transform:
   m_Father: {fileID: 85572560}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1632654833
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1632654830}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1650496683
 GameObject:
   m_ObjectHideFlags: 0
@@ -57292,6 +57370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxSpeed: 0.8
+  direction: {x: 0, y: 0}
 --- !u!1 &1861211549
 GameObject:
   m_ObjectHideFlags: 0
@@ -57558,3 +57637,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxSpeed: 0.4
+  direction: {x: 0, y: 0}
