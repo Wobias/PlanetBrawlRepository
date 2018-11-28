@@ -11,6 +11,7 @@ public class DeathmatchController : MonoBehaviour, IModeController
     private Transform[] playerSpawns;
     private int[] scores = new int[4];
     private TextMeshProUGUI victoryText;
+    private PlayerUI playerUI;
 
 
     public void AddScore(int playerNr)
@@ -22,7 +23,7 @@ public class DeathmatchController : MonoBehaviour, IModeController
             Debug.Log("Player " + playerNr + " won!");
             victoryText?.SetText("Player " + playerNr + " won!");
             victoryText?.transform.parent.gameObject.SetActive(true);
-
+            GameObject.FindGameObjectWithTag("VictoryScreen")?.GetComponent<VictoryUI>().OnVictory();
             //foreach (var player in players)
             //{
             //    player.isStatic = true;
@@ -56,5 +57,8 @@ public class DeathmatchController : MonoBehaviour, IModeController
         {
             victoryText.transform.parent.gameObject.SetActive(false);
         }
+
+        playerUI = FindObjectOfType<PlayerUI>();
+        playerUI?.InitUI(players.ToArray());
     }
 }
