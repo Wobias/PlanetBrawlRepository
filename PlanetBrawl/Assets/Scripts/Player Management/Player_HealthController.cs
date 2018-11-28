@@ -10,6 +10,8 @@ public class Player_HealthController : HealthController
     #region
     public GameObject dropPrefab;
 
+    public GameObject destroyPlanet;
+
     protected float hpPercent = 100f;
     protected IPlanet controller;
     protected Animator animator;
@@ -80,10 +82,12 @@ public class Player_HealthController : HealthController
                 drop.transform.Find("Outline").GetComponent<SpriteRenderer>().color = GetComponent<PlayerController>().playerColor;
             }
         }
+        destroyPlanet.SetActive(true);
         
         attackerNr = 0;
         health = maxHealth;
         transform.position = spawnPoint;
+
         //gameObject.SetActive(false);
     }
 

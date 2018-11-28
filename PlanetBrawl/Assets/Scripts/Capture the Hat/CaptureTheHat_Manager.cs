@@ -17,7 +17,6 @@ public class CaptureTheHat_Manager : MonoBehaviour, IModeController
     private TextMeshProUGUI countdown;
     private TextMeshProUGUI victoryText;
     private bool gameOver = false;
-    private bool paused = false;
 
 
     public void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs)
@@ -57,7 +56,7 @@ public class CaptureTheHat_Manager : MonoBehaviour, IModeController
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gameOver || paused)
+        if (gameOver)
             return;
 
         timer -= Time.fixedDeltaTime;
@@ -109,16 +108,6 @@ public class CaptureTheHat_Manager : MonoBehaviour, IModeController
         {
             victoryText.SetText(LayerMask.LayerToName(players[playerNr-1].layer) + " wears the hat!");
             victoryText.transform.parent.gameObject.SetActive(true);
-        }
-    }
-
-    public void PauseGame(bool isPaused)
-    {
-        paused = isPaused;
-
-        for (int i = 0; i < players.Count; i++)
-        {
-            players[i].SetActive(!isPaused);
         }
     }
 }
