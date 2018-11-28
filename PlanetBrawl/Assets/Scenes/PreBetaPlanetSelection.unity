@@ -3526,6 +3526,8 @@ MonoBehaviour:
   - {fileID: 411573431}
   - {fileID: 904658443}
   - {fileID: 472554799}
+  joinText: {fileID: 673941001}
+  readyText: {fileID: 535919482}
 --- !u!4 &536811608
 Transform:
   m_ObjectHideFlags: 0
@@ -3584,6 +3586,8 @@ MonoBehaviour:
   - {fileID: 428609613}
   - {fileID: 173066332}
   - {fileID: 1721164495}
+  joinText: {fileID: 757725024}
+  readyText: {fileID: 1205529890}
 --- !u!4 &546593644
 Transform:
   m_ObjectHideFlags: 0
@@ -8760,6 +8764,8 @@ MonoBehaviour:
   - {fileID: 1678968841}
   - {fileID: 1238189356}
   - {fileID: 833432726}
+  joinText: {fileID: 831282931}
+  readyText: {fileID: 893981805}
 --- !u!1 &1185767820
 GameObject:
   m_ObjectHideFlags: 0
@@ -11621,6 +11627,8 @@ MonoBehaviour:
   - {fileID: 2058343253}
   - {fileID: 580927269}
   - {fileID: 1994468118}
+  joinText: {fileID: 379457756}
+  readyText: {fileID: 752006286}
 --- !u!4 &1999680709
 Transform:
   m_ObjectHideFlags: 0
