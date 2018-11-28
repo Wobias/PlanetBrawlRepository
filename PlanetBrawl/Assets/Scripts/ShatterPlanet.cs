@@ -8,6 +8,8 @@ public class ShatterPlanet : MonoBehaviour
 
     private bool hasExploded = false;
 
+    public GameObject planet;
+
     public GameObject explosion;
 
     public GameObject planetPartLeft;
@@ -22,27 +24,33 @@ public class ShatterPlanet : MonoBehaviour
     private Vector2 directionRight;
     private Vector2 directionBottom;
 
-    private SpriteRenderer leftSprite;
-    private SpriteRenderer rightSprite;
-    private SpriteRenderer bottomSprite;
+    private Color leftColor;
+    private Color rightColor;
+    private Color bottomColor;
+
+    private Transform myTransform;
 
     private void Start()
     {
+        myTransform = GetComponent<Transform>();
+
+        planet = myTransform.root.gameObject;
+
         rbLeft = planetPartLeft.GetComponent<Rigidbody2D>();
         rbRight = planetPartRight.GetComponent<Rigidbody2D>();
         rbBottom = planetPartBottom.GetComponent<Rigidbody2D>();
 
-        if (leftSprite != null)
+        if (leftColor != null)
         {
-            leftSprite = planetPartLeft.GetComponent<SpriteRenderer>();
+            leftColor = planetPartLeft.GetComponent<SpriteRenderer>().color;
         }
-        if (rightSprite != null)
+        if (rightColor != null)
         {
-            rightSprite = planetPartRight.GetComponent<SpriteRenderer>();
+            rightColor = planetPartRight.GetComponent<SpriteRenderer>().color;
         }
-        if (bottomSprite != null)
+        if (bottomColor != null)
         {
-            bottomSprite = planetPartBottom.GetComponent<SpriteRenderer>();
+            bottomColor = planetPartBottom.GetComponent<SpriteRenderer>().color;
         }
     }
 
@@ -50,86 +58,101 @@ public class ShatterPlanet : MonoBehaviour
     {
         hasExploded = false;
         fadeOutTimer = 1f;
-        
 
         //Resetting Components
-        planetPartLeft.transform.position = transform.position;
-        planetPartLeft.transform.rotation = transform.rotation;
-        planetPartRight.transform.position = transform.position;
-        planetPartRight.transform.rotation = transform.rotation;
-        planetPartBottom.transform.position = transform.position;
-        planetPartBottom.transform.rotation = transform.rotation;
-
-        //if (leftSprite.color != null)
-        //{
-        //    leftSprite.color = new Color(1f, 1f, 1f, 1f);
-        //}
-        //rightSprite.color = new Color(1f, 1f, 1f, 1f);
-        //bottomSprite.color = new Color(1f, 1f, 1f, 1f);
+        ResetComponents(planetPartLeft, leftColor);
+        ResetComponents(planetPartRight, rightColor);
+        ResetComponents(planetPartBottom, bottomColor);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hasExploded == false)
-        {
-            StartCoroutine("Explode");
-        }
+
         if (hasExploded == true)
         {
             planetPartLeft.transform.Rotate(Vector3.back * Random.Range(80f, 150f) * Time.deltaTime, Space.Self);
             planetPartRight.transform.Rotate(Vector3.forward * Random.Range(80f, 150f) * Time.deltaTime, Space.Self);
             planetPartBottom.transform.Rotate(Vector3.forward * Random.Range(80f, 150f) * Time.deltaTime, Space.Self);
 
-            fadeOutTimer -= Time.deltaTime;
+            StartCoroutine("FadeSprite");
 
-            //if (leftSprite.color != null)
-            //{
-            //    leftSprite.color = new Color(1f, 1f, 1f, 1f);
-            //}
-            
-            //rightSprite.color = new Color(1f, 1f, 1f, fadeOutTimer);
-            //bottomSprite.color = new Color(1f, 1f, 1f, fadeOutTimer);
+        }
+
+        if (hasExploded == false)
+        {
+            StartCoroutine("Explode");
         }
     }
 
     private IEnumerator Explode()
     {
-        if (!hasExploded)
+        GameObject particle = Instantiate(explosion, transform.position, transform.rotation);
+
+        transform.parent = null;
+
+        if (planetPartLeft != null)
         {
-            Instantiate(explosion, transform.position, transform.rotation);
-            
-            if (planetPartLeft != null)
-            {
-                directionLeft.x = Random.Range(-5f, -1f);
-                directionLeft.y = Random.Range(1f, 5f);
-                rbLeft.mass = Random.Range(0.5f, 2f);
-                //rbLeft.AddForce(directionLeft * 1.5f , ForceMode2D.Impulse);
-                rbLeft.velocity = directionLeft * 1.5f;
-                Debug.Log("boom");
+            directionLeft.x = Random.Range(-5f, -1f);
+            directionLeft.y = Random.Range(1f, 5f);
+            rbLeft.mass = Random.Range(0.5f, 2f);
+            rbLeft.AddForce(directionLeft * 1.5f, ForceMode2D.Impulse);
+        }
+        if (planetPartRight != null)
+        {
+            directionRight.x = Random.Range(1f, 5f);
+            directionRight.y = Random.Range(1f, 5f);
+            rbRight.mass = Random.Range(0.5f, 2f);
+            rbRight.AddForce(directionRight * 1.5f, ForceMode2D.Impulse);
+        }
+        if (planetPartBottom != null)
+        {
+            directionBottom.x = Random.Range(-5f, 5f);
+            directionBottom.y = Random.Range(-5f, -1f);
+            rbBottom.mass = Random.Range(0.5f, 2f);
+            rbBottom.AddForce(directionBottom * 1.5f, ForceMode2D.Impulse);
+        }
+        hasExploded = true;
 
-            }
-            if (planetPartRight != null)
-            {
-                directionRight.x = Random.Range(1f, 5f);
-                directionRight.y = Random.Range(1f, 5f);
-                rbRight.mass = Random.Range(0.5f, 2f);
-                rbRight.AddForce(directionRight * 1.5f, ForceMode2D.Impulse);
-            }
-            if (planetPartBottom != null)
-            {
-                directionBottom.x = Random.Range(-5f, 5f);
-                directionBottom.y = Random.Range(-5f, -1f);
-                rbBottom.mass = Random.Range(0.5f, 2f);
-                rbBottom.AddForce(directionBottom * 1.5f, ForceMode2D.Impulse);
-            }
-            hasExploded = true;
+        yield return new WaitForSecondsRealtime(1.5f);
 
-            yield return new WaitForSecondsRealtime(1.5f);
+        myTransform.parent = planet.transform;
+        myTransform.position = planet.transform.position;
 
-            gameObject.SetActive(false);
+        ResetComponents(planetPartLeft, leftColor);
+        ResetComponents(planetPartRight, rightColor);
+        ResetComponents(planetPartBottom, bottomColor);
 
-            yield return null;
+        Destroy(particle);
+
+        gameObject.SetActive(false);
+
+        yield return null;
+    }
+
+    private void ResetComponents(GameObject planetPart, Color sprite)
+    {
+        planetPart.transform.rotation = transform.rotation;
+        planetPart.transform.position = transform.position;
+
+        if (sprite != null)
+        {
+            sprite = new Color(1f, 1f, 1f, 1f);
         }
     }
+
+    private IEnumerator FadeSprite()
+    {
+        Color fadeColor = leftColor;
+        while (fadeColor.a > 0)
+        {
+            fadeColor.a -= 0.1f ;
+            leftColor = fadeColor;
+            rightColor = fadeColor;
+            bottomColor = fadeColor;
+            Debug.Log("color fade");
+        }
+        yield return null;
+    }
 }
+
