@@ -19910,7 +19910,7 @@ MonoBehaviour:
   hatPrefab: {fileID: 345583928}
   countdownPrefab: {fileID: 272468287}
   winScore: 20
-  timer: 10
+  timer: 0
 --- !u!4 &1429519618
 Transform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using XInputDotNetPure;
 
 public class PauseGameScript : MonoBehaviour
 {
@@ -60,8 +61,10 @@ public class PauseGameScript : MonoBehaviour
         {
             pauseCanvasLobby.SetActive(true);
             EventSystem.current.SetSelectedGameObject(null);
+            index = 0;
             buttonsLobby[index].Select();
-            GameManager.instance.PauseGame(true);
+            //GameManager.instance.PauseGame(true);
+            Time.timeScale = 0.000001f;
 
 
         }
@@ -103,9 +106,14 @@ public class PauseGameScript : MonoBehaviour
         {
             pauseCanvasGame.SetActive(true);
             EventSystem.current.SetSelectedGameObject(null);
+            index = 0;
             buttonsGame[index].Select();
-            GameManager.instance.PauseGame(true);
-
+            //GameManager.instance.PauseGame(true);
+            Time.timeScale = 0.000001f;
+            GamePad.SetVibration(PlayerIndex.One, 0, 0);
+            GamePad.SetVibration(PlayerIndex.Two, 0, 0);
+            GamePad.SetVibration(PlayerIndex.Three, 0, 0);
+            GamePad.SetVibration(PlayerIndex.Four, 0, 0);
         }
 
 
@@ -138,6 +146,7 @@ public class PauseGameScript : MonoBehaviour
     public void RestartGame()
     {
         GameManager.instance.ResetGame();
+        Time.timeScale = 1;
     }
 
     public void ResumeGame()
@@ -151,7 +160,8 @@ public class PauseGameScript : MonoBehaviour
             pauseCanvasLobby.SetActive(false);
         }
         index = 0;
-        GameManager.instance.PauseGame(false);
+        //GameManager.instance.PauseGame(false);
+        Time.timeScale = 1;
     }
 
 

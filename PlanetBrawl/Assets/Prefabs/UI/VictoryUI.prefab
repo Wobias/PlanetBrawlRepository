@@ -890,6 +890,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8500d2195b84e9c49a92c74376e07959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  victoryButtons:
+  - {fileID: 114891138465960540}
+  - {fileID: 114416458506269430}
+  victoryUI: {fileID: 1788860452979184}
 --- !u!114 &114048723724291156
 MonoBehaviour:
   m_ObjectHideFlags: 1
