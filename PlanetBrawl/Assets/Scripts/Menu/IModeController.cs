@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IModeController
 {
-    void InitMode(Transform[] spawns, GameObject[] playerPrefabs);
+    void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs);
     void AddScore(int playerNr);
 }

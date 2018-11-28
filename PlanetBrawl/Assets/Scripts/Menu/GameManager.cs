@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame(Transform[] playerSpawns)
+    public void StartGame(Transform[] playerSpawns, Transform[] entitySpawns)
     {
         List<GameObject> activePrefabs = new List<GameObject>();
 
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         }
 
         modeController = Instantiate(modeManagers[(int)gameMode]).GetComponent<IModeController>();
-        modeController.InitMode(playerSpawns, activePrefabs.ToArray());
+        modeController.InitMode(playerSpawns, entitySpawns, activePrefabs.ToArray());
     }
 
     public void AddScore(int playerNr)

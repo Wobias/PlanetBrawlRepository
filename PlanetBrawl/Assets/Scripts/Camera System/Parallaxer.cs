@@ -7,19 +7,15 @@ public class Parallaxer : MonoBehaviour
     public float parallaxSpeed;
 
     private Material backgroundMaterial;
-    private Vector2 startOffset;
-    private Vector2 offset;
+    public Vector2 direction;
 
     void Start()
     {
         backgroundMaterial = GetComponent<MeshRenderer>().material;
-
-        startOffset = backgroundMaterial.mainTextureOffset;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
-        offset = new Vector2(transform.position.x * 0.01f * parallaxSpeed, transform.position.y * 0.01f * parallaxSpeed);
-        backgroundMaterial.mainTextureOffset = offset + startOffset;
+        backgroundMaterial.mainTextureOffset += direction * Time.fixedDeltaTime * parallaxSpeed;
     }
 }

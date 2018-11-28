@@ -10,10 +10,12 @@ public class HillTrigger : MonoBehaviour
 
     Vector3 startSize;
     Vector3 minSizeVector;
-    Vector2 hillPosition;
     SpriteRenderer rend;
 
     Coroutine scoreRoutine;
+
+    public Transform[] spawns;
+    int spawnIndex = 0;
 
     List<int> insidePlayers = new List<int>();
 
@@ -21,7 +23,6 @@ public class HillTrigger : MonoBehaviour
     void Start()
     {
         minSizeVector = new Vector3(minSize, minSize, minSize);
-        transform.position = new Vector2(0, 0);
         startSize = transform.localScale;
         rend = GetComponent<SpriteRenderer>();
         //rend.color = Color.green; 
@@ -46,10 +47,8 @@ public class HillTrigger : MonoBehaviour
     void SetPortal()
     {
         //Reichweite anpassen
-        hillPosition.x = Random.Range(-18f, 19f);
-        hillPosition.y = Random.Range(-8f, 9f);
-
-        transform.position = hillPosition;
+        spawnIndex = Random.Range(0, spawns.Length);
+        transform.position = spawns[spawnIndex].position;
         transform.localScale = startSize;
     }
 

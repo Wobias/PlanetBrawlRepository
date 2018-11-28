@@ -12,6 +12,7 @@ public class SurvivalController : MonoBehaviour, IModeController
     private int playerCount = 0;
     private GameObject[] players = new GameObject[4];
     private Transform[] playerSpawns;
+    private Transform[] enemySpawns;
     private TextMeshProUGUI victoryText;
     //private TextMeshProUGUI scoreText;
     private float timeout;
@@ -31,7 +32,8 @@ public class SurvivalController : MonoBehaviour, IModeController
         if (timeout <= 0)
         {
             timeout = spawnTimeout;
-            Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
+            int spawnIndex = Random.Range(0, enemySpawns.Length);
+            Instantiate(enemyPrefab, enemySpawns[spawnIndex].position, Quaternion.identity);
         }
     }
 
@@ -54,7 +56,7 @@ public class SurvivalController : MonoBehaviour, IModeController
         }
     }
 
-    public void InitMode(Transform[] spawns, GameObject[] playerPrefabs)
+    public void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs)
     {
         playerSpawns = spawns;
 
@@ -83,7 +85,10 @@ public class SurvivalController : MonoBehaviour, IModeController
         }
 
         timeout = spawnTimeout;
-        Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
+        int spawnIndex = Random.Range(0, entitySpawns.Length);
+        Instantiate(enemyPrefab, entitySpawns[spawnIndex].position, Quaternion.identity);
+
+        enemySpawns = entitySpawns;
     }
 
     public void PauseGame(bool isPaused)

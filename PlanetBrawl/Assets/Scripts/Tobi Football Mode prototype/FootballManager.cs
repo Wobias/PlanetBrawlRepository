@@ -70,7 +70,7 @@ public class FootballManager : MonoBehaviour, IModeController
         scores[scoringTeam]++;
     }
 
-    public void InitMode(Transform[] spawns, GameObject[] playerPrefabs)
+    public void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs)
     {
         playerSpawns = spawns;
 

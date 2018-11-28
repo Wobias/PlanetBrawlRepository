@@ -82,7 +82,7 @@ public class PlanetSelection : MonoBehaviour
                 characters[index].SetActive(false);
                 index--;
 
-                if (index <= 0)
+                if (index < 0)
                     index = characters.Length - 1;
 
                 characters[index].SetActive(true);

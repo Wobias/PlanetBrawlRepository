@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/InGame/TitleScreen.unity
+    guid: a10cd6a6047c4604d8a481f818e5ea71
+  - enabled: 1
     path: Assets/Scenes/PreBetaPlanetSelection.unity
     guid: 7602859b7b304b24384b23f7e6496767
   - enabled: 1

@@ -20,9 +20,11 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
     private bool gameOver = false;
 
 
-    public void InitMode(Transform[] spawns, GameObject[] playerPrefabs)
+    public void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs)
     {
-        Instantiate(hillPrefab, Vector3.zero, Quaternion.identity);
+        int spawnIndex = Random.Range(0, entitySpawns.Length);
+        HillTrigger hill = Instantiate(hillPrefab, entitySpawns[spawnIndex].position, Quaternion.identity).GetComponent<HillTrigger>();
+        hill.spawns = entitySpawns;
 
         playerSpawns = spawns;
 
