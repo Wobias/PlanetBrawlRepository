@@ -1466,6 +1466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxSpeed: 0.6
+  direction: {x: 0, y: 0}
 --- !u!23 &378564896
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1559,18 +1560,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 459546388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f57cdc955f799fb4499293a4fcbe7af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTimeout: 4
+  itemChance: 20
   asteroid: {fileID: 1191274311233048, guid: c84ca9c0290f5a94db8b8cfa6492eb3c, type: 2}
-  minX: -3.7
-  maxX: 3.7
-  minY: -7.4
-  maxY: 7.4
-  whichBorder: 0
+  itemAsteroid: {fileID: 0}
+  bottomLeftSpawn: {fileID: 0}
+  topRightSpawn: {fileID: 0}
   asteroidSpawnSound: asteroidSpawn
 --- !u!4 &459546390
 Transform:
@@ -1601,6 +1601,7 @@ MonoBehaviour:
   - {fileID: 911830567}
   - {fileID: 387667910}
   - {fileID: 117834945}
+  entitySpawns: []
 --- !u!1001 &597357042
 Prefab:
   m_ObjectHideFlags: 0
@@ -1638,7 +1639,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4226521963498216, guid: 80b4fbf16d702b74fb89fe7a30651bc7, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114404434704045928, guid: 80b4fbf16d702b74fb89fe7a30651bc7,
         type: 2}
@@ -1685,7 +1686,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4642897177076644, guid: ecdb383df6bc1b94abf6889b6c39c62b, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1416446639868288, guid: ecdb383df6bc1b94abf6889b6c39c62b, type: 2}
       propertyPath: m_Name
@@ -2176,7 +2177,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4845974931731802, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54e8db991ebae5243ba1dc37a2586a06, type: 2}
@@ -2266,6 +2267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxSpeed: 0.2
+  direction: {x: 0, y: 0}
 --- !u!1 &1820733354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,6 +2353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxSpeed: 0.8
+  direction: {x: 0, y: 0}
 --- !u!1 &1900720368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,3 +2513,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxSpeed: 0.4
+  direction: {x: 0, y: 0}
