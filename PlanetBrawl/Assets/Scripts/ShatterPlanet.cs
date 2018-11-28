@@ -28,18 +28,29 @@ public class ShatterPlanet : MonoBehaviour
 
     private void Start()
     {
-        leftSprite = planetPartLeft.GetComponent<SpriteRenderer>();
-        rightSprite = planetPartRight.GetComponent<SpriteRenderer>();
-        bottomSprite = planetPartBottom.GetComponent<SpriteRenderer>();
+        rbLeft = planetPartLeft.GetComponent<Rigidbody2D>();
+        rbRight = planetPartRight.GetComponent<Rigidbody2D>();
+        rbBottom = planetPartBottom.GetComponent<Rigidbody2D>();
+
+        if (leftSprite != null)
+        {
+            leftSprite = planetPartLeft.GetComponent<SpriteRenderer>();
+        }
+        if (rightSprite != null)
+        {
+            rightSprite = planetPartRight.GetComponent<SpriteRenderer>();
+        }
+        if (bottomSprite != null)
+        {
+            bottomSprite = planetPartBottom.GetComponent<SpriteRenderer>();
+        }
     }
 
     void OnEnable()
     {
         hasExploded = false;
-        fadeOutTimer = 1.2f;
-        rbLeft = planetPartLeft.GetComponent<Rigidbody2D>();
-        rbRight = planetPartRight.GetComponent<Rigidbody2D>();
-        rbBottom = planetPartBottom.GetComponent<Rigidbody2D>();
+        fadeOutTimer = 1f;
+        
 
         //Resetting Components
         planetPartLeft.transform.position = transform.position;
@@ -49,9 +60,12 @@ public class ShatterPlanet : MonoBehaviour
         planetPartBottom.transform.position = transform.position;
         planetPartBottom.transform.rotation = transform.rotation;
 
-        leftSprite.color = new Color(1f, 1f, 1f, 1f);
-        rightSprite.color = new Color(1f, 1f, 1f, 1f);
-        bottomSprite.color = new Color(1f, 1f, 1f, 1f);
+        //if (leftSprite.color != null)
+        //{
+        //    leftSprite.color = new Color(1f, 1f, 1f, 1f);
+        //}
+        //rightSprite.color = new Color(1f, 1f, 1f, 1f);
+        //bottomSprite.color = new Color(1f, 1f, 1f, 1f);
     }
 
     // Update is called once per frame
@@ -68,9 +82,14 @@ public class ShatterPlanet : MonoBehaviour
             planetPartBottom.transform.Rotate(Vector3.forward * Random.Range(80f, 150f) * Time.deltaTime, Space.Self);
 
             fadeOutTimer -= Time.deltaTime;
-            leftSprite.color = new Color(1f, 1f, 1f, fadeOutTimer);
-            rightSprite.color = new Color(1f, 1f, 1f, fadeOutTimer);
-            bottomSprite.color = new Color(1f, 1f, 1f, fadeOutTimer);
+
+            //if (leftSprite.color != null)
+            //{
+            //    leftSprite.color = new Color(1f, 1f, 1f, 1f);
+            //}
+            
+            //rightSprite.color = new Color(1f, 1f, 1f, fadeOutTimer);
+            //bottomSprite.color = new Color(1f, 1f, 1f, fadeOutTimer);
         }
     }
 
@@ -79,13 +98,15 @@ public class ShatterPlanet : MonoBehaviour
         if (!hasExploded)
         {
             Instantiate(explosion, transform.position, transform.rotation);
-
+            
             if (planetPartLeft != null)
             {
                 directionLeft.x = Random.Range(-5f, -1f);
                 directionLeft.y = Random.Range(1f, 5f);
                 rbLeft.mass = Random.Range(0.5f, 2f);
-                rbLeft.AddForce(directionLeft * 1.5f , ForceMode2D.Impulse);
+                //rbLeft.AddForce(directionLeft * 1.5f , ForceMode2D.Impulse);
+                rbLeft.velocity = directionLeft * 1.5f;
+                Debug.Log("boom");
 
             }
             if (planetPartRight != null)

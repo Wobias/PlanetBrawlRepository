@@ -48,7 +48,7 @@ public class Weapon_ContactDamage : MonoBehaviour
             playerNr = controller.playerNr;
             playerColor = controller.playerColor;
             ParticleSystem.MainModule particleMainModule = onHitParticle.main;
-            particleMainModule.startColor = playerColor;
+            //particleMainModule.startColor = playerColor;
         }
     }
 
