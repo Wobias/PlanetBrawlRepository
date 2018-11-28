@@ -7,9 +7,11 @@ public class AsteroidSpawner : MonoBehaviour
 
     public float spawnTimeout = 5;
     private float spawnTimer = 5;
+    public float itemChance = 20;
     //public int spawnMin = 0;
     //public int spawnMax = 1000;
     public GameObject asteroid;
+    public GameObject itemAsteroid;
 
     public Transform bottomLeftSpawn;
     public Transform topRightSpawn;
@@ -75,7 +77,15 @@ public class AsteroidSpawner : MonoBehaviour
                 break;
         }
 
-        AsteroidController newAsteroid = Instantiate(asteroid, spawnPos, Quaternion.identity).GetComponent<AsteroidController>();
+        bool isItem = Random.Range(0f, 100f) <= itemChance;
+
+        AsteroidController newAsteroid;
+        
+        if (!isItem)
+            newAsteroid = Instantiate(asteroid, spawnPos, Quaternion.identity).GetComponent<AsteroidController>();
+        else
+            newAsteroid = Instantiate(itemAsteroid, spawnPos, Quaternion.identity).GetComponent<AsteroidController>();
+
         newAsteroid.direction = dir;
 
         AudioManager1.instance.Play(asteroidSpawnSound);

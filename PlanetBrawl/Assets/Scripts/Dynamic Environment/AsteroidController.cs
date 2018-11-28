@@ -6,9 +6,11 @@ public class AsteroidController : MonoBehaviour, IMovable
 {
     public float rotateSpeed = 50f;
     public float movementSpeed = 10f;
+    public float lifetime = 10f;
     public GameObject[] itemDrops;
     private int whichItem;
     private int whichDirection;
+    [HideInInspector]
     public Vector2 direction;
     private Rigidbody2D rb2d;
 
@@ -27,6 +29,7 @@ public class AsteroidController : MonoBehaviour, IMovable
     {
         rb2d = GetComponent<Rigidbody2D>();
         ChooseDirection();
+        Destroy(gameObject, lifetime);
     }
 
     void FixedUpdate()
@@ -41,9 +44,13 @@ public class AsteroidController : MonoBehaviour, IMovable
     //Destroy Method
     public void Destroy()
     {
-        whichItem = Random.Range(0, itemDrops.Length);
         AudioManager1.instance.Play(asteroidSound);
-        Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
+
+        if (itemDrops.Length > 0)
+        {
+            whichItem = Random.Range(0, itemDrops.Length);
+            Instantiate(itemDrops[whichItem], transform.position, Quaternion.identity);
+        }
     }
 
     public void ChooseDirection()

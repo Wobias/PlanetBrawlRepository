@@ -42,7 +42,7 @@ public class Player_HealthController : HealthController
     protected override void OnHealthChange(bool damage=true)
     {
         hpPercent = (health * 100f) / maxHealth;
-        animator.SetFloat("HealthPercent", hpPercent);
+        animator?.SetFloat("HealthPercent", hpPercent);
         if (damage)
         {
             animator.SetTrigger("Hit");

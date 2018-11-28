@@ -11,7 +11,12 @@ public class GoalController : MonoBehaviour
     Vector3 spawnPoint = Vector3.zero;
     BallMovement ballMovement;
 
-    bool canScore = true;   
+    bool canScore = true;
+
+    private void Start()
+    {
+        GetComponent<SpriteRenderer>().color = GameManager.instance.playerColors[team - 1];
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

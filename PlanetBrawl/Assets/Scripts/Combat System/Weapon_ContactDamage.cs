@@ -79,7 +79,7 @@ public class Weapon_ContactDamage : MonoBehaviour
             {
                 target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
                 weapon.OnHit();
-                InstantiateParticle(onHitParticle);
+                //InstantiateParticle(onHitParticle);
             }
             else
             {
@@ -135,11 +135,11 @@ public class Weapon_ContactDamage : MonoBehaviour
         }
     }
 
-    private void InstantiateParticle(ParticleSystem hitParticle)
-    {
-        Quaternion particleRotation = new Quaternion((transform.root.position.x - transform.position.x), 0f, 0f, 0f);
-        ParticleSystem particle = Instantiate(hitParticle, transform.position, (weapon.transform.parent.rotation));
+    //private void InstantiateParticle(ParticleSystem hitParticle)
+    //{
+    //    Quaternion particleRotation = new Quaternion((transform.root.position.x - transform.position.x), 0f, 0f, 0f);
+    //    ParticleSystem particle = Instantiate(hitParticle, transform.position, (weapon.transform.parent.rotation));
 
-        Destroy(particle.gameObject, 5f);
-    }
+    //    Destroy(particle.gameObject, 5f);
+    //}
 }

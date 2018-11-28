@@ -36,6 +36,7 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
             currentNuke.layer = nukeLayer;
             currentNuke.GetComponent<WeaponController_Nuke>().playerNr = playerNr;
             currentNuke.GetComponent<WeaponController_Nuke>().playerLayer = gameObject.layer;
+            currentNuke.transform.Find("Outline").GetComponent<SpriteRenderer>().color = controller.playerColor;
         }
         else if (inAction && currentNuke == null)
         {

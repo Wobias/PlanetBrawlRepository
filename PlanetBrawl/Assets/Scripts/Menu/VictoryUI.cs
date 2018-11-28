@@ -14,16 +14,20 @@ public class VictoryUI : MonoBehaviour
     public GameObject victoryUI;
 
 
+    public void OnVictory()
+    {
+        GamePad.SetVibration(PlayerIndex.One, 0, 0);
+        GamePad.SetVibration(PlayerIndex.Two, 0, 0);
+        GamePad.SetVibration(PlayerIndex.Three, 0, 0);
+        GamePad.SetVibration(PlayerIndex.Four, 0, 0);
+        Time.timeScale = 0.000001f;
+    }
+
     private void Update()
     {
         //UP
         if (victoryUI.activeSelf)
         {
-            Time.timeScale = 0.000001f;
-            GamePad.SetVibration(PlayerIndex.One, 0, 0);
-            GamePad.SetVibration(PlayerIndex.Two, 0, 0);
-            GamePad.SetVibration(PlayerIndex.Three, 0, 0);
-            GamePad.SetVibration(PlayerIndex.Four, 0, 0);
             if ((InputSystem.DPadDown(DPad.Down, 0) || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) < 0) && !pressed)
             {
                 pressed = true;
@@ -69,11 +73,9 @@ public class VictoryUI : MonoBehaviour
 
     public void GoToMenu()
     {
-        GameManager.instance.ResetGame();
         Time.timeScale = 1;
+        GameManager.instance.ResetGame();
         SceneManager.LoadScene(0);
-        
-
     }
 
     public void StartFreeForAll()

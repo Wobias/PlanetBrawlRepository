@@ -64,9 +64,9 @@ public class PlayerUI : MonoBehaviour
     private List<GameObject> players = new List<GameObject>();
 
     // Use this for initialization
-    void Start()
+    public void InitUI(GameObject[] newPlayers)
     {
-        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        players.AddRange(newPlayers);
         SortPlayers(players);
         ActivateHealthBars();
         hp1Material.color = colors[0];
