@@ -8,15 +8,14 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
     public float healTimeout;
     public ParticleSystem healParticles;
 
-
     private bool canHeal = true;
     private bool isPressed = false;
     private Player_HealthController healthController;
     //private PlayerController controller;
 
-
     void Start()
     {
+
         healthController = GetComponent<Player_HealthController>();
         //controller = GetComponent<PlayerController>();
     }

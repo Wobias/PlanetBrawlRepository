@@ -38,7 +38,12 @@ public class Player_HealthController : HealthController
     {
         base.Start();
         playerUI = FindObjectOfType<PlayerUI>();
-        playerNumber = GetComponent<PlayerController>().playerNr;
+
+        if (GetComponent<PlayerController>() != null)
+        {
+            playerNumber = GetComponent<PlayerController>().playerNr;
+        }
+        
 
         animator = GetComponent<Animator>();
         controller = GetComponent<IPlanet>();
