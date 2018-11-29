@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 58466148675741862}
   - component: {fileID: 50656531125384640}
   - component: {fileID: 114062278302292140}
+  - component: {fileID: 95131329671243642}
   m_Layer: 14
   m_Name: FireMine
   m_TagString: Untagged
@@ -66,8 +67,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596431678728548}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.214714, y: -2.2384803, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 11.531936, y: -4.9424963, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0.5}
   m_Children:
   - {fileID: 4344071431455434}
   m_Father: {fileID: 0}
@@ -107,7 +108,25 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.4
+--- !u!95 &95131329671243642
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596431678728548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a96a14977892e14fbd525fcad5b8821, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114062278302292140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsound: punch
+  onHitParticle: {fileID: 0}
   physicalDmg: 1
   dmgType: 3
   knockback: 5
@@ -165,7 +185,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300002, guid: bd06f0397101d2f4abdebf060ae5566b, type: 3}
+  m_Sprite: {fileID: 21300004, guid: bd06f0397101d2f4abdebf060ae5566b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -211,8 +231,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: 56af02ba8a4f6214fab3fad0d14409ec, type: 3}
-  m_Color: {r: 1, g: 0.32131007, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 94dddb0f86862c74fb9d87cbcbf2c24a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

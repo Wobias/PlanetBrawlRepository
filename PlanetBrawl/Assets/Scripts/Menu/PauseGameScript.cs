@@ -26,7 +26,7 @@ public class PauseGameScript : MonoBehaviour
     void Update()
     {
         //Beta Lobby Pause
-        if (currentScene.name == "Lobby")
+        if (currentScene.name == "Lobby" && pauseCanvasLobby.activeSelf)
         {
             //UP
             if ((InputSystem.DPadDown(DPad.Down, 0) || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) < 0) && !pressed)
@@ -67,6 +67,10 @@ public class PauseGameScript : MonoBehaviour
             Time.timeScale = 0.000001f;
 
 
+        }
+        if(currentScene.name == "Lobby" && pauseCanvasLobby.activeSelf == false)
+        {
+            Time.timeScale = 1;
         }
 
 

@@ -5,13 +5,14 @@ public class Door : MonoBehaviour
     public GameModes[] supportedModes;
 
     private Collider2D doorCollider;
-    private MeshRenderer meshRenderer;
+    private Animator anim;
 
 
     private void Start()
     {
         doorCollider = GetComponent<Collider2D>();
-        meshRenderer = GetComponent<MeshRenderer>();
+        anim = GetComponent<Animator>();
+        SetState(GameModes.deathmatch);
     }
 
     public void SetState(GameModes newMode)
@@ -30,12 +31,12 @@ public class Door : MonoBehaviour
         if (newOpen)
         {
             doorCollider.enabled = false;
-            meshRenderer.enabled = false;
+            anim.SetBool("Open", true);
         }
         else
         {
             doorCollider.enabled = true;
-            meshRenderer.enabled = true;
+            anim.SetBool("Open", false);
         }
     }
 }

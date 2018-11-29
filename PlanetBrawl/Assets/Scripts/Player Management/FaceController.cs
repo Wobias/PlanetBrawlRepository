@@ -25,11 +25,11 @@ public class FaceController : MonoBehaviour
         #region
 
         //Get the Aiming Direction
-        direction = new Vector2(UnityEngine.Input.GetAxis("AimHor" + playerNr), UnityEngine.Input.GetAxis("AimVer" + playerNr));
+        direction = new Vector2(InputSystem.ThumbstickInput(ThumbSticks.RightX, playerNr-1), InputSystem.ThumbstickInput(ThumbSticks.RightY, playerNr - 1));
 
         if (direction == Vector2.zero)
         {
-            direction = new Vector2(UnityEngine.Input.GetAxis("Horizontal" + playerNr), UnityEngine.Input.GetAxis("Vertical" + playerNr));
+            direction = new Vector2(InputSystem.ThumbstickInput(ThumbSticks.LeftX, playerNr - 1), InputSystem.ThumbstickInput(ThumbSticks.LeftY, playerNr - 1));
         }
 
         face.localPosition = Vector2.Lerp(face.localPosition, direction * maxDistance, lookSpeed);
