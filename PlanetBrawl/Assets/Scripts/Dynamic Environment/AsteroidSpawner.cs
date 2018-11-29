@@ -20,6 +20,11 @@ public class AsteroidSpawner : MonoBehaviour
     public string asteroidSpawnSound = "asteroidSpawn";
 
 
+    private void Start()
+    {
+        spawnTimer = spawnTimeout;
+    }
+
     void Update()
     {
         /* Spawn asteroid with a random chance */
