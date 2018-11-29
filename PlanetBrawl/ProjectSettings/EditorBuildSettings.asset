@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/InGame/TitleScreen.unity
     guid: a10cd6a6047c4604d8a481f818e5ea71
   - enabled: 1
-    path: Assets/Scenes/PreBetaPlanetSelection.unity
+    path: Assets/Scenes/InGame/PlayerSelection.unity
     guid: 7602859b7b304b24384b23f7e6496767
   - enabled: 1
-    path: Assets/Scenes/InGame/BetaLobby.unity
+    path: Assets/Scenes/InGame/Lobby.unity
     guid: 0d70cb40ec7d08c49b86889d934a29d2
   - enabled: 1
     path: Assets/Scenes/InGame/Maps/TheBarrier.unity
