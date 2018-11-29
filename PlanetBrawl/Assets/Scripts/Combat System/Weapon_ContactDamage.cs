@@ -135,18 +135,13 @@ public class Weapon_ContactDamage : MonoBehaviour
 
     private void InstantiateParticle(ParticleSystem hitParticle)
     {
-
-        ParticleSystem.MainModule particleMainModule = hitParticle.main;
-
         if (transform.root.gameObject.GetComponent<PlayerController>() != null)
         {
-            particleMainModule.startColor = playerColor;
-            Debug.Log("player color");
+            hitParticle.startColor = playerColor;
         }
         else
         {
-            particleMainModule.startColor = Color.white;
-            Debug.Log("enemy color");
+            hitParticle.startColor = Color.white;
         }
 
         Vector2 direction = new Vector2(transform.root.position.x - transform.position.x, transform.root.position.y - transform.position.y);
