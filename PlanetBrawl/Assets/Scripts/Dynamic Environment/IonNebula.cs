@@ -2,40 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IonNebula : MonoBehaviour
+public class IonNebula : Weapon_ContactDamage
 {
-    public float dps = 20;
-
-    private IDamageable target;
-
-
-    void OnTriggerEnter2D(Collider2D other)
+    protected override void OnCollisionEnter2D(Collision2D col)
     {
-        target = other.GetComponent<IDamageable>();
+        GetTarget(col.collider);
 
-        if (target == null)
-        {
-            target = other.attachedRigidbody?.GetComponent<IDamageable>();
-        }
+        //InstantiateParticle(onHitParticle);
 
+        //Hit the target if it is damageable
         if (target != null)
         {
-            target.IonDamage(dps);
+            if (gotBuff)
+            {
+                if (buffType == DamageType.physical)
+                {
+                    physicalDmg *= 2;
+                    knockback *= 2;
+                }
+                else
+                {
+                    target.Hit(0, buffType, Vector2.zero, 0, playerNr, buffTime);
+                    weapon.RemoveElement();
+                }
+            }
+
+            if (isWeapon)
+            {
+                target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
+                weapon.OnHit();
+                //InstantiateParticle(onHitParticle);
+            }
+            else
+            {
+                target.Hit(physicalDmg, dmgType, -transform.position.normalized * knockback, stunTime, playerNr, effectTime);
+            }
+            AudioManager1.instance.Play(hitsound);
+
+            if (gotBuff && buffType == DamageType.physical)
+            {
+                physicalDmg /= 2;
+                knockback /= 2;
+                weapon.RemoveElement();
+            }
         }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        target = other.GetComponent<IDamageable>();
-
-        if (target == null)
+        else if (isWeapon)
         {
-            target = other.attachedRigidbody?.GetComponent<IDamageable>();
+            weapon.OnHit();
         }
 
-        if (target != null)
+        if (destroyOnHit)
         {
-            target.StopIon();
+            if (isWeapon && weapon.ProjectileCount > 1 || !isWeapon)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                if (weapon != null)
+                    Destroy(weapon.gameObject);
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ public class GoalController : MonoBehaviour
 
     Vector3 spawnPoint = Vector3.zero;
     BallMovement ballMovement;
+    IDamageable target;
 
     bool canScore = true;
 
@@ -37,15 +38,34 @@ public class GoalController : MonoBehaviour
             ballMovement.ResetSpeed();
 
             StartCoroutine(SpawnDelay(other.transform));
+            return;
         }
 
+        GetTarget(other);
+
+        if (target != null)
+        {
+            Debug.Log("Gottem");
+            target.Hit(100, DamageType.physical, Vector2.zero, 0.25f);
+        }
     }
+
     IEnumerator SpawnDelay(Transform ball)
     {
         yield return new WaitForSeconds(2f);
         ball.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         ball.gameObject.GetComponent<TrailRenderer>().enabled = true;
         canScore = true;
-    }       
+    }
+
+    protected void GetTarget(Collider2D other)
+    {
+        target = null;
+        target = other.GetComponent<IDamageable>();
+        if (target == null)
+        {
+            target = other.attachedRigidbody?.GetComponent<IDamageable>();
+        }
+    }
 }
 
