@@ -82,6 +82,7 @@ public class Player_HealthController : HealthController
                 drop.transform.Find("Outline").GetComponent<SpriteRenderer>().color = GetComponent<PlayerController>().playerColor;
             }
         }
+
         destroyPlanet.SetActive(true);
         
         attackerNr = 0;
@@ -121,5 +122,14 @@ public class Player_HealthController : HealthController
     {
         base.SetFire(active);
         planetMovement.SetBrakes(!active);
+    }
+
+    private IEnumerator ResetHealthAndPosition()
+    {
+        attackerNr = 0;
+        health = maxHealth;
+        transform.position = spawnPoint;
+
+        yield return null;
     }
 }
