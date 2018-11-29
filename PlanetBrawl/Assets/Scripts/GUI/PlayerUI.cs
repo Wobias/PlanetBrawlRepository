@@ -61,6 +61,11 @@ public class PlayerUI : MonoBehaviour
     public List<GameObject> player3HealthBars = new List<GameObject>();
     public List<GameObject> player4HealthBars = new List<GameObject>();
 
+    public List<GameObject> p1KillCountUI = new List<GameObject>();
+    public List<GameObject> p2KillCountUI = new List<GameObject>();
+    public List<GameObject> p3KillCountUI = new List<GameObject>();
+    public List<GameObject> p4KillCountUI = new List<GameObject>();
+
     private List<GameObject> players = new List<GameObject>();
 
     // Use this for initialization
@@ -113,8 +118,6 @@ public class PlayerUI : MonoBehaviour
         {
             p4UI.SetActive(false);
         }
-
-
     }
 
     // Update is called once per frame
@@ -137,6 +140,8 @@ public class PlayerUI : MonoBehaviour
             CheckHealth(_p4HealthController, player4HealthBars, _p4HealthController.health, hp4Material);
         }
     }
+
+    
 
     private void DeactivateHealthBars(List<GameObject> healthBars, float dmg)
     {

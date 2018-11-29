@@ -89,7 +89,7 @@ public class ShatterPlanet : MonoBehaviour
     {
         GameObject particle = Instantiate(explosion, transform.position, transform.rotation);
 
-        transform.parent = null;
+        //transform.parent = null;
 
         if (planetPartLeft != null)
         {

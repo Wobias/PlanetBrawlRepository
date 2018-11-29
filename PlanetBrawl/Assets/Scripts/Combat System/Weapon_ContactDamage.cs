@@ -33,6 +33,8 @@ public class Weapon_ContactDamage : MonoBehaviour
     protected float buffTime = 0;
     protected bool gotBuff = false;
 
+    protected Quaternion particleRotation;
+
 
     protected virtual void Start()
     {
@@ -47,16 +49,12 @@ public class Weapon_ContactDamage : MonoBehaviour
         {
             playerNr = controller.playerNr;
             playerColor = controller.playerColor;
-            ParticleSystem.MainModule particleMainModule = onHitParticle.main;
-            //particleMainModule.startColor = playerColor;
         }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
         GetTarget(col.collider);
-
-        //InstantiateParticle(onHitParticle);
 
         //Hit the target if it is damageable
         if (target != null)
@@ -79,7 +77,7 @@ public class Weapon_ContactDamage : MonoBehaviour
             {
                 target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
                 weapon.OnHit();
-                //InstantiateParticle(onHitParticle);
+                InstantiateParticle(onHitParticle);
             }
             else
             {
@@ -94,7 +92,7 @@ public class Weapon_ContactDamage : MonoBehaviour
                 weapon.RemoveElement();
             }
         }
-        else if(isWeapon)
+        else if (isWeapon)
         {
             weapon.OnHit();
         }
@@ -110,7 +108,7 @@ public class Weapon_ContactDamage : MonoBehaviour
                 if (weapon != null)
                     Destroy(weapon.gameObject);
             }
-        } 
+        }
     }
 
     public void AddBuff(DamageType buffType, float buffTime)
@@ -135,11 +133,30 @@ public class Weapon_ContactDamage : MonoBehaviour
         }
     }
 
-    //private void InstantiateParticle(ParticleSystem hitParticle)
-    //{
-    //    Quaternion particleRotation = new Quaternion((transform.root.position.x - transform.position.x), 0f, 0f, 0f);
-    //    ParticleSystem particle = Instantiate(hitParticle, transform.position, (weapon.transform.parent.rotation));
+    private void InstantiateParticle(ParticleSystem hitParticle)
+    {
 
-    //    Destroy(particle.gameObject, 5f);
-    //}
+        ParticleSystem.MainModule particleMainModule = hitParticle.main;
+
+        if (transform.root.gameObject.GetComponent<PlayerController>() != null)
+        {
+            particleMainModule.startColor = playerColor;
+            Debug.Log("player color");
+        }
+        else
+        {
+            particleMainModule.startColor = Color.white;
+            Debug.Log("enemy color");
+        }
+
+        Vector2 direction = new Vector2(transform.root.position.x - transform.position.x, transform.root.position.y - transform.position.y);
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        particleRotation = Quaternion.AngleAxis(angle, Vector3.back);
+
+        ParticleSystem particle = Instantiate(hitParticle, transform.position, particleRotation);
+
+        Destroy(particle.gameObject, 5f);
+    }
 }

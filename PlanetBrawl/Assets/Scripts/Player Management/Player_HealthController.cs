@@ -12,6 +12,9 @@ public class Player_HealthController : HealthController
 
     public GameObject destroyPlanet;
 
+    private GameObject planetChild;
+    private GameObject weaponOrbit;
+
     protected float hpPercent = 100f;
     protected IPlanet controller;
     protected Animator animator;
@@ -37,6 +40,8 @@ public class Player_HealthController : HealthController
         myTransform = GetComponentInChildren<SpriteRenderer>().transform;
         spawnPoint = transform.position;
         hat = FindObjectOfType<Hat>();
+        planetChild = transform.GetChild(0).gameObject;
+        weaponOrbit = transform.GetChild(1).gameObject;
     }
 
     protected override void OnHealthChange(bool damage=true)
@@ -87,13 +92,15 @@ public class Player_HealthController : HealthController
             }
         }
 
-        destroyPlanet.SetActive(true);
-        
-        attackerNr = 0;
-        health = maxHealth;
-        transform.position = spawnPoint;
+        destroyPlanet.transform.parent = null;
 
-        //gameObject.SetActive(false);
+        destroyPlanet.SetActive(true);
+
+        planetChild.SetActive(false);
+        weaponOrbit.SetActive(false);
+
+        StartCoroutine("ResetHealthAndPosition");
+        
     }
 
     public override void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, int attackNr = 0, float effectTime = 0)
@@ -130,10 +137,15 @@ public class Player_HealthController : HealthController
 
     private IEnumerator ResetHealthAndPosition()
     {
+        yield return new WaitForSecondsRealtime(1.5f);
         attackerNr = 0;
         health = maxHealth;
         transform.position = spawnPoint;
+        destroyPlanet.transform.position = transform.position;
+        destroyPlanet.transform.parent = transform;
 
+        planetChild.SetActive(true);
+        weaponOrbit.SetActive(true);
         yield return null;
     }
 }
