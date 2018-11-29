@@ -26,7 +26,7 @@ public class PauseGameScript : MonoBehaviour
     void Update()
     {
         //Beta Lobby Pause
-        if (currentScene.name == "BetaLobby")
+        if (currentScene.name == "Lobby")
         {
             //UP
             if ((InputSystem.DPadDown(DPad.Down, 0) || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) < 0) && !pressed)
@@ -57,7 +57,7 @@ public class PauseGameScript : MonoBehaviour
         }
 
         //Press Start in Beta Lobby to open Pause Menu
-        if (InputSystem.ButtonDown(Buttons.Start, 0) && currentScene.name == "BetaLobby")
+        if (InputSystem.ButtonDown(Buttons.Start, 0) && currentScene.name == "Lobby")
         {
             pauseCanvasLobby.SetActive(true);
             EventSystem.current.SetSelectedGameObject(null);
@@ -71,7 +71,7 @@ public class PauseGameScript : MonoBehaviour
 
 
 
-        if (currentScene.name != "BetaLobby")
+        if (currentScene.name != "Lobby")
         {
             //UP
             if ((InputSystem.DPadDown(DPad.Down, 0) || InputSystem.ThumbstickInput(ThumbSticks.LeftY, 0) < 0) && !pressed)
@@ -102,7 +102,7 @@ public class PauseGameScript : MonoBehaviour
         }
 
         //Press Start while Ingame
-        if (InputSystem.ButtonDown(Buttons.Start, 0) && currentScene.name != "BetaLobby")
+        if (InputSystem.ButtonDown(Buttons.Start, 0) && currentScene.name != "Lobby")
         {
             pauseCanvasGame.SetActive(true);
             EventSystem.current.SetSelectedGameObject(null);

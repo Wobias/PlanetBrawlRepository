@@ -15,18 +15,18 @@ EditorBuildSettings:
     path: Assets/Scenes/InGame/BetaLobby.unity
     guid: 0d70cb40ec7d08c49b86889d934a29d2
   - enabled: 1
-    path: Assets/Scenes/InGame/Maps/CelestialBoxingRing.unity
+    path: Assets/Scenes/InGame/Maps/TheBarrier.unity
     guid: 3e9468cd41578224fa97ad801fb399e8
   - enabled: 1
-    path: Assets/Scenes/InGame/Maps/IonNebula.unity
-    guid: 2d6c7e07280511b459575f45c91b05ca
-  - enabled: 1
-    path: Assets/Scenes/InGame/Maps/AsteroidStorm.unity
-    guid: 791d5e6e65081bf4ab99709d5f4abac5
-  - enabled: 1
-    path: Assets/Scenes/InGame/Maps/TheBarrier.unity
-    guid: 29d65b39d5f7c534398f8d46813257a4
+    path: Assets/Scenes/InGame/Maps/CelestialBoxingRing.unity
+    guid: 8c05f71295c8d0d41ae204f42793f6f4
   - enabled: 1
     path: Assets/Scenes/InGame/Maps/BlackholeFootball.unity
-    guid: 1decfa54c0dff3649a636f6edb4ce848
+    guid: 35d7cadad3f1dc549ba26627e4238e68
+  - enabled: 1
+    path: Assets/Scenes/InGame/Maps/IonNebula.unity
+    guid: 4c070e7e94e553c409af2b357e92a635
+  - enabled: 1
+    path: Assets/Scenes/InGame/Maps/AsteroidStorm.unity
+    guid: d729b76dfd83da4488b6315c826b4394
   m_configObjects: {}
