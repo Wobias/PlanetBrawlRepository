@@ -18,6 +18,8 @@ public class DeathmatchController : MonoBehaviour, IModeController
     {
         scores[playerNr - 1]++;
 
+        playerUI.SetKillCount(playerNr -1, scores[playerNr - 1]);
+
         if (scores[playerNr-1] >= winScore)
         {
             Debug.Log("Player " + playerNr + " won!");

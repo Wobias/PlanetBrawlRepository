@@ -73,11 +73,33 @@ public class PlayerUI : MonoBehaviour
     {
         players.AddRange(newPlayers);
         SortPlayers(players);
-        ActivateHealthBars();
+
+        if (_player1 != null)
+        {
+            ActivateHealthBars(0);
+        }
+        if (_player2 != null)
+        {
+            ActivateHealthBars(1);
+        }
+        if (_player3 != null)
+        {
+            ActivateHealthBars(2);
+        }
+        if (_player4 != null)
+        {
+            ActivateHealthBars(3);
+        }
+
         hp1Material.color = colors[0];
         hp2Material.color = colors[0];
         hp3Material.color = colors[0];
         hp4Material.color = colors[0];
+
+        DeactivateKillCount(p1KillCountUI);
+        DeactivateKillCount(p2KillCountUI);
+        DeactivateKillCount(p3KillCountUI);
+        DeactivateKillCount(p4KillCountUI);
 
         if (_player1 != null)
         {
@@ -141,38 +163,89 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    
-
-    private void DeactivateHealthBars(List<GameObject> healthBars, float dmg)
+    public void SetKillCount(int playerNumber, int killCount)
     {
-        healthBars[Mathf.RoundToInt(dmg)].SetActive(false);
-        dmg++;
+        switch (playerNumber)
+        {
+            case 0:
+                ActivateKillCount(killCount, p1KillCountUI);
+                break;
+            case 1:
+                ActivateKillCount(killCount, p2KillCountUI);
+                break;
+            case 2:
+                ActivateKillCount(killCount, p3KillCountUI);
+                break;
+            case 3:
+                ActivateKillCount(killCount, p4KillCountUI);
+                break;
+            default:
+                break;
+        }
     }
 
-    private void CheckHealth(Player_HealthController planet_HealthController, List<GameObject> hpBars, float damage, Material playerMaterial)
+    private void ActivateKillCount(int kc, List<GameObject> kcSymbols)
+    {
+        if (kc <= 0)
+        {
+            for (int i = 0; i < kcSymbols.Count; i++)
+            {
+                kcSymbols[i].SetActive(false);
+            }
+        }
+        else if (kc <= 1)
+        {
+            kcSymbols[0].SetActive(true);
+        }
+        else if (kc <= 2)
+        {
+            kcSymbols[1].SetActive(true);
+        }
+        else if (kc <= 3)
+        {
+            kcSymbols[2].SetActive(true);
+        }
+    }
+
+    private void DeactivateKillCount(List<GameObject> kCSymbols)
+    {
+        for (int i = 0; i < kCSymbols.Count; i++)
+        {
+            kCSymbols[i].SetActive(false);
+        }
+
+    }
+
+    private void DeactivateHealthBars(List<GameObject> healthBars, float hP)
+    {
+        healthBars[Mathf.RoundToInt(hP)].SetActive(false);
+        hP++;
+    }
+
+    private void CheckHealth(Player_HealthController planet_HealthController, List<GameObject> hpBars, float playerHealth, Material playerMaterial)
     {
         if (planet_HealthController.health <= 4)
         {
-            DeactivateHealthBars(hpBars, damage);
+            DeactivateHealthBars(hpBars, playerHealth);
             playerMaterial.color = colors[1];
         }
         if (planet_HealthController.health <= 3)
         {
-            DeactivateHealthBars(hpBars, damage);
+            DeactivateHealthBars(hpBars, playerHealth);
             playerMaterial.color = colors[2];
         }
         if (planet_HealthController.health <= 2)
         {
-            DeactivateHealthBars(hpBars, damage);
+            DeactivateHealthBars(hpBars, playerHealth);
             playerMaterial.color = colors[3];
         }
         if (planet_HealthController.health <= 1)
         {
-            DeactivateHealthBars(hpBars, damage);
+            DeactivateHealthBars(hpBars, playerHealth);
         }
         if (planet_HealthController.health <= 0)
         {
-            DeactivateHealthBars(hpBars, damage);
+            DeactivateHealthBars(hpBars, playerHealth);
         }
     }
 
@@ -203,23 +276,40 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    private void ActivateHealthBars()
+    public void ActivateHealthBars(int playerNumber)
     {
-        for (int i = 0; i < player1HealthBars.Count; i++)
+        switch (playerNumber)
         {
-            player1HealthBars[i].SetActive(true);
-        }
-        for (int i = 0; i < player2HealthBars.Count; i++)
-        {
-            player2HealthBars[i].SetActive(true);
-        }
-        for (int i = 0; i < player3HealthBars.Count; i++)
-        {
-            player3HealthBars[i].SetActive(true);
-        }
-        for (int i = 0; i < player4HealthBars.Count; i++)
-        {
-            player4HealthBars[i].SetActive(true);
+            case 0:
+                for (int i = 0; i < player1HealthBars.Count; i++)
+                {
+                    player1HealthBars[i].SetActive(true);
+                    hp1Material.color = colors[0];
+                }
+                break;
+            case 1:
+                for (int i = 0; i < player2HealthBars.Count; i++)
+                {
+                    player2HealthBars[i].SetActive(true);
+                    hp2Material.color = colors[0];
+                }
+                break;
+            case 2:
+                for (int i = 0; i < player3HealthBars.Count; i++)
+                {
+                    player3HealthBars[i].SetActive(true);
+                    hp3Material.color = colors[0];
+                }
+                break;
+            case 3:
+                for (int i = 0; i < player4HealthBars.Count; i++)
+                {
+                    player4HealthBars[i].SetActive(true);
+                    hp4Material.color = colors[0];
+                }
+                break;
+            default:
+                break;
         }
     }
 

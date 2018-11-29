@@ -28,12 +28,18 @@ public class Player_HealthController : HealthController
 
     protected PlanetMovement planetMovement;
 
+    private PlayerUI playerUI;
+    private int playerNumber;
+
     #endregion
 
 
     protected override void Start()
     {
         base.Start();
+        playerUI = FindObjectOfType<PlayerUI>();
+        playerNumber = GetComponent<PlayerController>().playerNr;
+
         animator = GetComponent<Animator>();
         controller = GetComponent<IPlanet>();
         planetMovement = GetComponent<PlanetMovement>();
@@ -141,6 +147,7 @@ public class Player_HealthController : HealthController
         attackerNr = 0;
         health = maxHealth;
         transform.position = spawnPoint;
+        playerUI.ActivateHealthBars(playerNumber - 1);
         destroyPlanet.transform.position = transform.position;
         destroyPlanet.transform.parent = transform;
 

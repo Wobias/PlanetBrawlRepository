@@ -3861,6 +3861,22 @@ MonoBehaviour:
   - {fileID: 1901326927291996}
   - {fileID: 1527643476948522}
   - {fileID: 1697875769231656}
+  p1KillCountUI:
+  - {fileID: 1952696769541442}
+  - {fileID: 1994832376299368}
+  - {fileID: 1232975020473636}
+  p2KillCountUI:
+  - {fileID: 1476870300654184}
+  - {fileID: 1028464907677000}
+  - {fileID: 1242722932548556}
+  p3KillCountUI:
+  - {fileID: 1265855597077382}
+  - {fileID: 1212713546452606}
+  - {fileID: 1064658550291700}
+  p4KillCountUI:
+  - {fileID: 1145830976442682}
+  - {fileID: 1270514101928842}
+  - {fileID: 1101594802115160}
 --- !u!114 &114866579697573088
 MonoBehaviour:
   m_ObjectHideFlags: 1
