@@ -102,23 +102,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1418323433115914
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4441012043005576}
-  - component: {fileID: 58832249368040684}
-  - component: {fileID: 114936328501316660}
-  m_Layer: 23
-  m_Name: GravPull
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1461667642183338
 GameObject:
   m_ObjectHideFlags: 1
@@ -408,7 +391,7 @@ Transform:
   m_Children:
   - {fileID: 4592839812120172}
   m_Father: {fileID: 4852080690376248}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4347849598192502
 Transform:
@@ -435,19 +418,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4764718666257154}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4441012043005576
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1418323433115914}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4852080690376248}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4445292898469710
 Transform:
@@ -488,7 +458,7 @@ Transform:
   m_Children:
   - {fileID: 4719112658688558}
   m_Father: {fileID: 4852080690376248}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4583516570974240
 Transform:
@@ -558,7 +528,6 @@ Transform:
   m_Children:
   - {fileID: 4135660434741084}
   - {fileID: 4446497952974406}
-  - {fileID: 4441012043005576}
   - {fileID: 4947787967968898}
   - {fileID: 4449832688991026}
   - {fileID: 4952184903498622}
@@ -604,7 +573,7 @@ Transform:
   m_Children:
   - {fileID: 4919664837338874}
   m_Father: {fileID: 4852080690376248}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4948191860960584
 Transform:
@@ -613,7 +582,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404772579806080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.8927875, y: -0.74673885, z: 0}
+  m_LocalPosition: {x: 21.442656, y: -2.9260194, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4852080690376248}
@@ -633,7 +602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4852080690376248}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50137890685983026
 Rigidbody2D:
@@ -765,21 +734,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!58 &58832249368040684
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1418323433115914}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 4
 --- !u!95 &95379661018962866
 Animator:
   serializedVersion: 3
@@ -1040,7 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
-  speed: 600
+  speed: 500
   speedBonus: 50
   effectMultiplier: 1
   inputRolloff: 0.1
@@ -1191,19 +1145,6 @@ MonoBehaviour:
   punchSpeed: 20
   retractSpeed: 25
   maxDistance: 3
---- !u!114 &114936328501316660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1418323433115914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b5e5f71eba5044eb91188a1a9cae8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravity: 1.5
-  gravLayer: GravEffector
 --- !u!198 &198350590965558456
 ParticleSystem:
   m_ObjectHideFlags: 1

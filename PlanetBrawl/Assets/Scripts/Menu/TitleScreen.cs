@@ -12,7 +12,14 @@ public class TitleScreen : MonoBehaviour
             InputSystem.ButtonDown(Buttons.Start, 2) ||
             InputSystem.ButtonDown(Buttons.Start, 3))
         {
-            SceneManager.LoadScene(1);
+            StartCoroutine(LoadSelection());
         }
 	}
+
+    IEnumerator LoadSelection()
+    {
+        Fading.instance.FadeIn(0.1f);
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(1);
+    }
 }

@@ -305,19 +305,22 @@ public class HealthController : MonoBehaviour, IDamageable
     protected virtual void SetPoison(bool active)
     {
         poisoned = active;
-        poisonParticles.SetActive(active);
+        if (poisonParticles != null)
+            poisonParticles.SetActive(active);
     }
 
     protected virtual void SetFire(bool active)
     {
         burning = active;
-        fireParticles.SetActive(active);
+        if (fireParticles != null)
+            fireParticles.SetActive(active);
     }
 
     protected virtual void SetIce(bool active, float length=0)
     {
         frozen = active;
-        iceParticles.SetActive(active);
+        if (iceParticles != null)
+            iceParticles.SetActive(active);
 
         if (active && movement != null)
             movement.SpeedEffect(-iceSlowMultiplier, length);

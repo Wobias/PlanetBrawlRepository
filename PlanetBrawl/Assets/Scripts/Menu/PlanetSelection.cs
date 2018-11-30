@@ -7,6 +7,7 @@ public class PlanetSelection : MonoBehaviour
     public int playerNr = 1;
     public GameObject[] characters;
     public GameObject joinText;
+    public GameObject readyButton;
     public GameObject readyText;
 
     private Color playerColor;
@@ -37,6 +38,7 @@ public class PlanetSelection : MonoBehaviour
                 GameManager.instance.RemovePlayer(playerNr);
                 PlanetSelectionManager.instance.Unready();
                 readyText.SetActive(false);
+                readyButton.SetActive(true);
             }
 
             return;
@@ -48,6 +50,7 @@ public class PlanetSelection : MonoBehaviour
             characters[index].SetActive(true);
             PlanetSelectionManager.instance.JoinGame();
             joinText.SetActive(false);
+            readyButton.SetActive(true);
         }
         else if (joined)
         {
@@ -56,6 +59,7 @@ public class PlanetSelection : MonoBehaviour
                 ready = true;
                 GameManager.instance.SetPlayer(index, playerNr);
                 PlanetSelectionManager.instance.Ready();
+                readyButton.SetActive(false);
                 readyText.SetActive(true);
                 return;
             }
@@ -65,6 +69,7 @@ public class PlanetSelection : MonoBehaviour
                 joined = false;
                 PlanetSelectionManager.instance.LeaveGame();
                 characters[index].SetActive(false);
+                readyButton.SetActive(false);
                 joinText.SetActive(true);
                 return;
             }

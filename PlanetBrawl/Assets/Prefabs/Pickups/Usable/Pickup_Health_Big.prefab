@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212929102757458272}
   - component: {fileID: 58095547482042012}
   - component: {fileID: 114446662437187334}
+  - component: {fileID: 114026363581847516}
   m_Layer: 12
   m_Name: Pickup_Health_Big
   m_TagString: Untagged
@@ -57,6 +58,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
+--- !u!114 &114026363581847516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941771394216504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58904f347aa58e5409972480838fc832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
 --- !u!114 &114446662437187334
 MonoBehaviour:
   m_ObjectHideFlags: 1

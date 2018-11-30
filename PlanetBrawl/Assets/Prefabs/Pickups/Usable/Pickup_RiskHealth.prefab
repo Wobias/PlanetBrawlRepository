@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212929102757458272}
   - component: {fileID: 58095547482042012}
   - component: {fileID: 114697870170445204}
+  - component: {fileID: 114712504799161020}
   m_Layer: 12
   m_Name: Pickup_RiskHealth
   m_TagString: Untagged
@@ -74,6 +75,18 @@ MonoBehaviour:
   dmgStunTime: 0.25
   healthSprite: {fileID: 21300000, guid: 63627fc2eaba6294a8a9238150f8c89e, type: 3}
   dmgSprite: {fileID: 21300002, guid: 63627fc2eaba6294a8a9238150f8c89e, type: 3}
+--- !u!114 &114712504799161020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941771394216504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58904f347aa58e5409972480838fc832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
 --- !u!212 &212929102757458272
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -51,4 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58261bd8a35c9584c8b6fbdecf24910a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTime: 60
+  gameTime: 120
+  countdownPrefab: {fileID: 1012048294064356, guid: 0041d8aa387bb0f47b918944bf731c9d,
+    type: 2}
+  scorePrefab: {fileID: 1012048294064356, guid: 8894403b2d1b9744fb9c14367ef2b5c4,
+    type: 2}

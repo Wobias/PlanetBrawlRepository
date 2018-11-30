@@ -6,11 +6,13 @@ using TMPro;
 public class DeathmatchController : MonoBehaviour, IModeController
 {
     public int winScore = 3;
+    public GameObject scorePrefab;
 
     private List<GameObject> players = new List<GameObject>();
     private Transform[] playerSpawns;
     private int[] scores = new int[4];
     private TextMeshProUGUI victoryText;
+    private TextMeshProUGUI scoreText;
     private PlayerUI playerUI;
 
 
@@ -18,7 +20,19 @@ public class DeathmatchController : MonoBehaviour, IModeController
     {
         scores[playerNr - 1]++;
 
-        playerUI.SetKillCount(playerNr -1, scores[playerNr - 1]);
+        //playerUI.SetKillCount(playerNr -1, scores[playerNr - 1]);
+
+        scoreText.text = "";
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            scoreText.text += scores[i];
+
+            if (i < players.Count - 1)
+            {
+                scoreText.text += " - ";
+            }
+        }
 
         if (scores[playerNr-1] >= winScore)
         {
@@ -37,6 +51,8 @@ public class DeathmatchController : MonoBehaviour, IModeController
     {
         playerSpawns = spawns;
 
+        GameObject[] allPlayers = new GameObject[4];
+
         for (int i = 0; i < 4; i++)
         {
             if (playerPrefabs[i] != null)
@@ -44,6 +60,11 @@ public class DeathmatchController : MonoBehaviour, IModeController
                 GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
                 newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
                 players.Add(newPlayer);
+                allPlayers[i] = newPlayer;
+            }
+            else
+            {
+                allPlayers[i] = null;
             }
         }
 
@@ -60,7 +81,21 @@ public class DeathmatchController : MonoBehaviour, IModeController
             victoryText.transform.parent.gameObject.SetActive(false);
         }
 
+        scoreText = Instantiate(scorePrefab, victoryText.transform.root).GetComponent<TextMeshProUGUI>();
+
+        scoreText.text = "";
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            scoreText.text += "0";
+
+            if (i < players.Count - 1)
+            {
+                scoreText.text += " - ";
+            }
+        }
+
         playerUI = FindObjectOfType<PlayerUI>();
-        playerUI?.InitUI(players.ToArray());
+        playerUI?.InitUI(allPlayers);
     }
 }

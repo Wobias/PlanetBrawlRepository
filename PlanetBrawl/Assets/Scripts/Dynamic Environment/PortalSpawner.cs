@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class PortalSpawner : MonoBehaviour
 {
-    public float maxPosX = 18;
-    public float maxPosY = 8;
-
-    public static PortalSpawner portalSpawner;
+    public Transform[] spawnPoints;
 
     public GameObject portalOne;
     public GameObject portalTwo;
 
-    public float portalTimer = 5f;
-    private float portalResetTimer = 10f;
+    public float respawnTime = 5f;
+    public float activeTime = 10f;
+
+    private float portalTimer;
+    private float portalResetTimer;
 
     public bool portalIsOpen = false;
 
-    private Vector2 portalOnePosition;
 
     private void Start()
     {
-        portalSpawner = this;
-
         portalOne.SetActive(false);
         portalTwo.SetActive(false);
     }
@@ -30,12 +27,13 @@ public class PortalSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        portalTimer -= Time.deltaTime;
+        if (portalTimer > 0)
+            portalTimer -= Time.deltaTime;
 
         if (portalTimer <= 0f && portalIsOpen == false)
         {
             SetPortal();
-            portalTimer = Random.Range(3f, 10f);
+            portalResetTimer = activeTime;
         }
 
         if (portalIsOpen == true)
@@ -44,38 +42,32 @@ public class PortalSpawner : MonoBehaviour
 
             if (portalResetTimer <= 0f)
             {
-                portalIsOpen = false;
-                portalResetTimer = Random.Range(5f, 15f);
+                DisablePortals();
             }
         }
     }
 
+    public void DisablePortals()
+    {
+        portalIsOpen = false;
+        portalOne.SetActive(false);
+        portalTwo.SetActive(false);
+        portalTimer = respawnTime;
+    }
+
     private void SetPortal()
     {
-        portalOnePosition.x = Random.Range(-18f, 19f);
-        portalOnePosition.y = Random.Range(-8f, 9f);
+        Vector2 portal1Pos = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+        Vector2 portal2Pos;
 
-        if (portalOnePosition.x >= maxPosX)
+        do
         {
-            portalOnePosition.x = maxPosX;
+            portal2Pos = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         }
-        if (portalOnePosition.x <= -maxPosX)
-        {
-            portalOnePosition.x = -maxPosX;
-        }
+        while (portal2Pos == portal1Pos);
 
-        if (portalOnePosition.y >= maxPosY)
-        {
-            portalOnePosition.y = maxPosY;
-        }
-        if (portalOnePosition.y <= -maxPosY)
-        {
-            portalOnePosition.y = -maxPosY;
-        }
-
-
-        portalOne.transform.position = portalOnePosition;
-        portalTwo.transform.position = portalOnePosition * -1;
+        portalOne.transform.position = portal1Pos;
+        portalTwo.transform.position = portal2Pos;
 
         portalOne.SetActive(true);
         portalTwo.SetActive(true);

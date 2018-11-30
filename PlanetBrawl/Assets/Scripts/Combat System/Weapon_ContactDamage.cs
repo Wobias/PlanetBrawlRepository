@@ -77,7 +77,8 @@ public class Weapon_ContactDamage : MonoBehaviour
             {
                 target.Hit(physicalDmg, dmgType, (col.transform.position - transform.position).normalized * knockback, stunTime, playerNr, effectTime);
                 weapon.OnHit();
-                InstantiateParticle(onHitParticle);
+                if (onHitParticle != null)
+                    InstantiateParticle(onHitParticle);
             }
             else
             {

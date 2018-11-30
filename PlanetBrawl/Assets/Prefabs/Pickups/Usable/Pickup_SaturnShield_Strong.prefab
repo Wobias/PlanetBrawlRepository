@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212570655320794392}
   - component: {fileID: 114021433162032562}
   - component: {fileID: 58732900964756612}
+  - component: {fileID: 114241503641697128}
   m_Layer: 12
   m_Name: Pickup_SaturnShield_Strong
   m_TagString: Untagged
@@ -70,6 +71,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 1237217291760860, guid: f7b45cf50d7ea274aae154c0e67f440b, type: 2}
   itemType: 1
+--- !u!114 &114241503641697128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1359780370652822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58904f347aa58e5409972480838fc832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
 --- !u!212 &212570655320794392
 SpriteRenderer:
   m_ObjectHideFlags: 1

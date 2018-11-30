@@ -10,6 +10,7 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
 
     private PlayerController controller;
     private Explosive_ContactDamage placedMine;
+    private PlayerUI playerUI;
     private int mineLayer;
     private bool pressed = false;
     private bool placed = false;
@@ -22,6 +23,7 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
     {
         mineLayer = LayerMask.NameToLayer("Weapon" + LayerMask.LayerToName(gameObject.layer));
         controller = GetComponent<PlayerController>();
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     public void Use()
@@ -33,7 +35,7 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
             if (placed && placedMine == null)
             {
                 placed = false;
-                StartCoroutine(Cooldown());
+                playerUI?.AbilityCooldown(timeout, controller.playerNr);
             }
 
             if (!placed && canPlace)
@@ -50,7 +52,7 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
             {
                 placedMine.Explode();
                 placed = false;
-                StartCoroutine(Cooldown());
+                playerUI?.AbilityCooldown(timeout, controller.playerNr);
             }
         }
     }
@@ -60,9 +62,8 @@ public class MinePlacer_Ability : MonoBehaviour, ISpecialAbility
         pressed = false;
     }
 
-    IEnumerator Cooldown()
+    public void ResetAbility()
     {
-        yield return new WaitForSeconds(timeout);
         canPlace = true;
     }
 }

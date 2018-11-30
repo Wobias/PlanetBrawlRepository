@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222261852371651512}
   - component: {fileID: 114643209243317252}
   - component: {fileID: 212070098518691992}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P1Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 224691299399512212}
   - component: {fileID: 222045206913903684}
   - component: {fileID: 114173971113153582}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Victory Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224749547687114874}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Player2UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 224735959863340960}
   - component: {fileID: 222730744664156626}
   - component: {fileID: 114358068748473622}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P2_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224770038370395114}
   - component: {fileID: 114416086419447220}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P2_Ability_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 224269433732978328}
   - component: {fileID: 222264114185669302}
   - component: {fileID: 114182143016068114}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 224267473541450950}
   - component: {fileID: 222482484500404452}
   - component: {fileID: 114664997159137266}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P3_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 224113505433311998}
   - component: {fileID: 223481449366813958}
   - component: {fileID: 114990522259031174}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: VictoryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224051158502981524}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Player1UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 224953546997717578}
   - component: {fileID: 222741055549196656}
   - component: {fileID: 114117301416511302}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P4_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224917079652746472}
   - component: {fileID: 114088995205724324}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P1_Ability_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 224944215077650218}
   - component: {fileID: 222716048852430886}
   - component: {fileID: 114248963626500150}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlayerNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 224701011445168366}
   - component: {fileID: 222839032335804890}
   - component: {fileID: 114138052274048902}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P4_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 224819497374220914}
   - component: {fileID: 222882230676090852}
   - component: {fileID: 114202964615898188}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlayerNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224429094748666666}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 222662783148077484}
   - component: {fileID: 114895975777213300}
   - component: {fileID: 114779365357130684}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 224747033286545268}
   - component: {fileID: 222603190993725240}
   - component: {fileID: 114252371340190838}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P3_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 224734334734690356}
   - component: {fileID: 222501174221565058}
   - component: {fileID: 114689938244095162}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P4Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 224481423814424790}
   - component: {fileID: 222043794167605758}
   - component: {fileID: 114001251935354680}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 224688088138947750}
   - component: {fileID: 222348512831369068}
   - component: {fileID: 114560131737247732}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 224678234248236898}
   - component: {fileID: 222487832047352706}
   - component: {fileID: 114603996297150784}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P1_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,8 +372,25 @@ GameObject:
   - component: {fileID: 224361879621110524}
   - component: {fileID: 222778059966099732}
   - component: {fileID: 114592006403631224}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P2_Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1244339159598156
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224939511555986856}
+  - component: {fileID: 222104726540937016}
+  - component: {fileID: 114129997400876116}
+  m_Layer: 5
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,7 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224890665374911384}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P4KillCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +421,7 @@ GameObject:
   - component: {fileID: 224431246947864510}
   - component: {fileID: 222404892522928164}
   - component: {fileID: 114237125959803172}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P3_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +438,7 @@ GameObject:
   - component: {fileID: 224245803108718008}
   - component: {fileID: 222097076224047162}
   - component: {fileID: 114481752471334718}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P4_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +455,7 @@ GameObject:
   - component: {fileID: 224871531687034292}
   - component: {fileID: 222124418072224748}
   - component: {fileID: 114384338852656972}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P1UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224514489913724756}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P1KillCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224853925735503360}
   - component: {fileID: 114826514803790258}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P3_Ability_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +503,7 @@ GameObject:
   - component: {fileID: 224941353653392486}
   - component: {fileID: 222061349404708008}
   - component: {fileID: 114475983188534288}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +520,7 @@ GameObject:
   - component: {fileID: 224620475980827788}
   - component: {fileID: 222022432278226324}
   - component: {fileID: 114526288199269432}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +537,7 @@ GameObject:
   - component: {fileID: 224029292045050314}
   - component: {fileID: 222034029666314630}
   - component: {fileID: 114935465526147546}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +554,7 @@ GameObject:
   - component: {fileID: 224344455807735490}
   - component: {fileID: 222770748803863044}
   - component: {fileID: 114598219443924378}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P3UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +571,7 @@ GameObject:
   - component: {fileID: 224312035263460064}
   - component: {fileID: 222996953081385058}
   - component: {fileID: 114608219402121876}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P2Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +588,7 @@ GameObject:
   - component: {fileID: 224368697741131600}
   - component: {fileID: 222857671892064122}
   - component: {fileID: 114761609050720358}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P2Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +605,7 @@ GameObject:
   - component: {fileID: 224053447817460600}
   - component: {fileID: 222129295551286274}
   - component: {fileID: 114755782856738696}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +622,7 @@ GameObject:
   - component: {fileID: 224129687508234364}
   - component: {fileID: 222735043286270544}
   - component: {fileID: 114869750095702732}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P2_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +639,7 @@ GameObject:
   - component: {fileID: 224415945816303334}
   - component: {fileID: 222674052059603188}
   - component: {fileID: 114096759672612946}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlayerNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +656,7 @@ GameObject:
   - component: {fileID: 224048047578328876}
   - component: {fileID: 222477799868597484}
   - component: {fileID: 114048723724291156}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +673,7 @@ GameObject:
   - component: {fileID: 224120752022417668}
   - component: {fileID: 222593523749026196}
   - component: {fileID: 114094525030858902}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P4Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +690,7 @@ GameObject:
   - component: {fileID: 224136291982921808}
   - component: {fileID: 222387241851584528}
   - component: {fileID: 114665149970305470}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +707,7 @@ GameObject:
   - component: {fileID: 224875412748107518}
   - component: {fileID: 222484053605413104}
   - component: {fileID: 114220988374956044}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +722,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224363061481480498}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P2KillCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +739,7 @@ GameObject:
   - component: {fileID: 224806392183179604}
   - component: {fileID: 222392758935011268}
   - component: {fileID: 114048978559144224}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P1Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +756,7 @@ GameObject:
   - component: {fileID: 224388528603770958}
   - component: {fileID: 222221842463431708}
   - component: {fileID: 114007894743266098}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P3Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224350472916966356}
   - component: {fileID: 114908920145363860}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P4_Ability_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +789,7 @@ GameObject:
   - component: {fileID: 224737694495281604}
   - component: {fileID: 222312728946494336}
   - component: {fileID: 114557334688881246}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P3Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224993999164059556}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Player3UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +819,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224927085239003666}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P3KillCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224873282309048864}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +851,7 @@ GameObject:
   - component: {fileID: 224002613536635766}
   - component: {fileID: 222083094905570660}
   - component: {fileID: 114307185264149152}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -851,7 +868,7 @@ GameObject:
   - component: {fileID: 224231531068747616}
   - component: {fileID: 222352727565112070}
   - component: {fileID: 114513289242523334}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlayerNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +885,7 @@ GameObject:
   - component: {fileID: 224608712967198928}
   - component: {fileID: 222291883601880622}
   - component: {fileID: 114820138069720774}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +902,7 @@ GameObject:
   - component: {fileID: 224463797868032256}
   - component: {fileID: 222728170726779764}
   - component: {fileID: 114444141582800972}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +920,7 @@ GameObject:
   - component: {fileID: 222244281248947912}
   - component: {fileID: 114448311994698004}
   - component: {fileID: 114891138465960540}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224605049599059938}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Player4UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +952,7 @@ GameObject:
   - component: {fileID: 224530533504034340}
   - component: {fileID: 222365503829827870}
   - component: {fileID: 114201757044425564}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -952,7 +969,7 @@ GameObject:
   - component: {fileID: 224262139363469170}
   - component: {fileID: 222103237588015346}
   - component: {fileID: 114887325784494600}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -969,7 +986,7 @@ GameObject:
   - component: {fileID: 224503763550866064}
   - component: {fileID: 222040997581305914}
   - component: {fileID: 114810354656529096}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -986,7 +1003,7 @@ GameObject:
   - component: {fileID: 224833429718287912}
   - component: {fileID: 222637151116005148}
   - component: {fileID: 114434283435400930}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1003,7 +1020,7 @@ GameObject:
   - component: {fileID: 224536216799824734}
   - component: {fileID: 222374352941855640}
   - component: {fileID: 114213763750675822}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP4 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,7 +1036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224063252066901540}
   - component: {fileID: 114035153004181578}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: VictoryUIMenu
   m_TagString: VictoryScreen
   m_Icon: {fileID: 0}
@@ -1036,7 +1053,7 @@ GameObject:
   - component: {fileID: 224904297306392048}
   - component: {fileID: 222248992495225778}
   - component: {fileID: 114972755666350754}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1053,7 +1070,7 @@ GameObject:
   - component: {fileID: 224603901943143122}
   - component: {fileID: 222650107638295932}
   - component: {fileID: 114359315163764834}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1087,7 @@ GameObject:
   - component: {fileID: 224152621673943808}
   - component: {fileID: 222180374343357866}
   - component: {fileID: 114750579289726024}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1104,7 @@ GameObject:
   - component: {fileID: 224890946275707326}
   - component: {fileID: 222893892127231896}
   - component: {fileID: 114219452254065546}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1102,7 +1119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224354616503189324}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1119,7 +1136,7 @@ GameObject:
   - component: {fileID: 224680088084244440}
   - component: {fileID: 222171140840558642}
   - component: {fileID: 114173931619232818}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1136,7 +1153,7 @@ GameObject:
   - component: {fileID: 224560005301509114}
   - component: {fileID: 222245041025711094}
   - component: {fileID: 114918388898593556}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1153,7 +1170,7 @@ GameObject:
   - component: {fileID: 224783873079305132}
   - component: {fileID: 222158734843400466}
   - component: {fileID: 114115479915624572}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1170,7 +1187,7 @@ GameObject:
   - component: {fileID: 224307652159949384}
   - component: {fileID: 222785628270696354}
   - component: {fileID: 114704088194883366}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,7 +1204,7 @@ GameObject:
   - component: {fileID: 224978731893189894}
   - component: {fileID: 222711349591699902}
   - component: {fileID: 114291025424277778}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P4UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1204,7 +1221,7 @@ GameObject:
   - component: {fileID: 224623867347366576}
   - component: {fileID: 222547037936254524}
   - component: {fileID: 114825227764742784}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1221,7 +1238,7 @@ GameObject:
   - component: {fileID: 224111006969442532}
   - component: {fileID: 222387311571612650}
   - component: {fileID: 114986983144114506}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,7 +1256,7 @@ GameObject:
   - component: {fileID: 222529839113216656}
   - component: {fileID: 114756288848163534}
   - component: {fileID: 114416458506269430}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1255,7 +1272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224690933459791902}
   - component: {fileID: 114828379791762160}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1289,7 @@ GameObject:
   - component: {fileID: 224304889126219724}
   - component: {fileID: 222687553369630150}
   - component: {fileID: 114535417313027640}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: P2UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1289,7 +1306,7 @@ GameObject:
   - component: {fileID: 224267290796262450}
   - component: {fileID: 222280439218446426}
   - component: {fileID: 114435443226024494}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1323,7 @@ GameObject:
   - component: {fileID: 224038932327951554}
   - component: {fileID: 222195408950653924}
   - component: {fileID: 114866579697573088}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P1_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,7 +1338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224123586442927724}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1338,7 +1355,7 @@ GameObject:
   - component: {fileID: 224742136470649308}
   - component: {fileID: 222587511892149732}
   - component: {fileID: 114342548786977048}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HPBarP4 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1355,7 +1372,7 @@ GameObject:
   - component: {fileID: 224473497697476810}
   - component: {fileID: 222267246792277262}
   - component: {fileID: 114173470269216964}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KC_P1_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1605,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1809,6 +1826,33 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &114129997400876116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244339159598156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.56078434}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2603,7 +2647,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2779,7 +2823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13733262, g: 0.9811321, b: 0.0786757, a: 1}
+  m_Color: {r: 0.764151, g: 0.70232534, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3464,7 +3508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.98039216, g: 0.27864727, b: 0.07843135, a: 1}
+  m_Color: {r: 0.7647059, g: 0.7058824, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3617,7 +3661,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3732,10 +3776,11 @@ MonoBehaviour:
   - {fileID: 1145830976442682}
   - {fileID: 1270514101928842}
   - {fileID: 1101594802115160}
-  p1AbilitySlider: {fileID: 0}
-  p2AbilitySlider: {fileID: 0}
-  p3AbilitySlider: {fileID: 0}
-  p4AbilitySlider: {fileID: 0}
+  abilitySliders:
+  - {fileID: 114088995205724324}
+  - {fileID: 114416086419447220}
+  - {fileID: 114826514803790258}
+  - {fileID: 114908920145363860}
 --- !u!114 &114866579697573088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3913,7 +3958,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4176,6 +4221,13 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1697875769231656}
+  m_CullTransparentMesh: 0
+--- !u!222 &222104726540937016
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244339159598156}
   m_CullTransparentMesh: 0
 --- !u!222 &222124418072224748
 CanvasRenderer:
@@ -4692,16 +4744,17 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 224939511555986856}
+  - {fileID: 224691299399512212}
   - {fileID: 224570721685146262}
   - {fileID: 224635143283937276}
-  - {fileID: 224691299399512212}
   m_Father: {fileID: 224113505433311998}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224111006969442532
 RectTransform:
@@ -5369,7 +5422,7 @@ RectTransform:
   m_Children:
   - {fileID: 224307652159949384}
   m_Father: {fileID: 224063252066901540}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5484,7 +5537,7 @@ RectTransform:
   m_Children:
   - {fileID: 224048047578328876}
   m_Father: {fileID: 224063252066901540}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5575,15 +5628,15 @@ RectTransform:
   m_GameObject: {fileID: 1007180154909970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 224063252066901540}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 148.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224701011445168366
 RectTransform:
@@ -6004,6 +6057,24 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -585.8767, y: -16.014528}
   m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224939511555986856
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244339159598156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224063252066901540}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224941353653392486
 RectTransform:

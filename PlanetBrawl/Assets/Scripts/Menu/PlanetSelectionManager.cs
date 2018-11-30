@@ -44,7 +44,22 @@ public class PlanetSelectionManager : MonoBehaviour
     {
         if (joinedPlayers == readyPlayers && joinedPlayers != 0)
         {
+            StartCoroutine(LoadLobby());
+        }
+    }
+
+    IEnumerator LoadLobby()
+    {
+        Fading.instance.FadeIn(0.1f);
+        yield return new WaitForSeconds(0.5f);
+
+        if (joinedPlayers == readyPlayers && joinedPlayers != 0)
+        {
             SceneManager.LoadScene(2);
+        }
+        else
+        {
+            Fading.instance.FadeOut(0.1f);
         }
     }
 }

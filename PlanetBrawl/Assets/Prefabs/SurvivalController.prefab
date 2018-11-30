@@ -53,4 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1008146210390042, guid: 47a91094b99bb3a42ac9e86ce0228dba,
     type: 2}
-  spawnTimeout: 6
+  spawnTimeout: 3
+  scorePrefab: {fileID: 1012048294064356, guid: 8894403b2d1b9744fb9c14367ef2b5c4,
+    type: 2}

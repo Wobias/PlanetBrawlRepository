@@ -30,6 +30,7 @@ public class Player_HealthController : HealthController
 
     private PlayerUI playerUI;
     private int playerNumber;
+    private bool destroyQueued = false;
 
     #endregion
 
@@ -89,7 +90,7 @@ public class Player_HealthController : HealthController
         else if (GameManager.instance.gameMode == GameModes.survival)
         {
             GameManager.instance.AddScore(GetComponent<PlayerController>().playerNr);
-            Destroy(gameObject);
+            destroyQueued = true;
         }
 
         if (dropPrefab != null)
@@ -110,8 +111,7 @@ public class Player_HealthController : HealthController
         planetChild.SetActive(false);
         weaponOrbit.SetActive(false);
 
-        StartCoroutine("ResetHealthAndPosition");
-        
+        StartCoroutine(ResetHealthAndPosition());
     }
 
     public override void Hit(float physicalDmg, DamageType dmgType, Vector2 knockbackForce, float stunTime, int attackNr = 0, float effectTime = 0)
@@ -149,8 +149,16 @@ public class Player_HealthController : HealthController
     private IEnumerator ResetHealthAndPosition()
     {
         yield return new WaitForSecondsRealtime(1.5f);
+
+        if (destroyQueued)
+        {
+            Destroy(gameObject);
+            yield return null;
+        }
+
         attackerNr = 0;
         health = maxHealth;
+        OnHealthChange(false);
         transform.position = spawnPoint;
         playerUI.ActivateHealthBars(playerNumber - 1);
         destroyPlanet.transform.position = transform.position;
@@ -158,6 +166,5 @@ public class Player_HealthController : HealthController
 
         planetChild.SetActive(true);
         weaponOrbit.SetActive(true);
-        yield return null;
     }
 }

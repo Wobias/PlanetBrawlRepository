@@ -10,6 +10,7 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
 
     private GameObject currentNuke;
     private PlayerController controller;
+    private PlayerUI playerUI;
     private int nukeLayer;
     private int playerNr;
     private bool canAttack = true;
@@ -21,7 +22,8 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
     {
         controller = GetComponent<PlayerController>();
         nukeLayer = LayerMask.NameToLayer("Weapon" + LayerMask.LayerToName(gameObject.layer));
-        playerNr = GetComponent<PlayerController>().playerNr;
+        playerNr = controller.playerNr;
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     public void Use()
@@ -42,7 +44,7 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
         {
             inAction = false;
             controller.AbilityStun(false);
-            StartCoroutine(ResetNuke());
+            playerUI?.AbilityCooldown(timeout, playerNr);
         }
     }
 
@@ -58,13 +60,12 @@ public class Nuke_Ability : MonoBehaviour, ISpecialAbility
 
             currentNuke?.GetComponent<Explosive_ContactDamage>().Explode();
 
-            StartCoroutine(ResetNuke());
+            playerUI?.AbilityCooldown(timeout, playerNr);
         } 
     }
 
-    IEnumerator ResetNuke()
+    public void ResetAbility()
     {
-        yield return new WaitForSeconds(timeout);
         canAttack = true;
     }
 }

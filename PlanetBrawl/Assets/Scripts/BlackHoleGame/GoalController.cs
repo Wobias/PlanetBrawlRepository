@@ -26,13 +26,14 @@ public class GoalController : MonoBehaviour
         if (ballMovement != null && canScore)
         {
             if (team == 1)
-                GameManager.instance.AddScore(2);
-            else
                 GameManager.instance.AddScore(1);
+            else
+                GameManager.instance.AddScore(0);
 
             canScore = false;
 
             other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            other.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
             other.gameObject.GetComponent<TrailRenderer>().enabled = false;
             other.transform.position = spawnPoint;
             ballMovement.ResetSpeed();
@@ -52,8 +53,9 @@ public class GoalController : MonoBehaviour
 
     IEnumerator SpawnDelay(Transform ball)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         ball.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        ball.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         ball.gameObject.GetComponent<TrailRenderer>().enabled = true;
         canScore = true;
     }

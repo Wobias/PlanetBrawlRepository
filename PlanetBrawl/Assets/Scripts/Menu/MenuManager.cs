@@ -9,6 +9,6 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.SpawnPlayers(playerSpawns, true);
+        FindObjectOfType<PlayerUI>().InitUI(GameManager.instance.SpawnPlayers(playerSpawns, true));
     }
 }

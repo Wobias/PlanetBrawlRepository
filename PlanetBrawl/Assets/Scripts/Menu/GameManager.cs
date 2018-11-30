@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerPrefabs;
     public GameModes gameMode;
     public GameObject[] modeManagers;
+    public int playerCount = 0;
 
     private int[] selectedPlanets = new int[4];
     private bool[] activePlayers = new bool[4];
@@ -30,15 +31,25 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayer(int index, int playerNr)
     {
+        if (!activePlayers[playerNr-1])
+        {
+            playerCount++;
+            Debug.Log("Player added");
+        }   
+
         selectedPlanets[playerNr - 1] = index;
         activePlayers[playerNr - 1] = true;
-        Debug.Log("Player added: " + playerNr + ", " + activePlayers[playerNr - 1]);
     }
 
     public void RemovePlayer(int playerNr)
     {
+        if (activePlayers[playerNr - 1])
+        {
+            playerCount--;
+            Debug.Log("Player removed");
+        } 
+
         activePlayers[playerNr - 1] = false;
-        Debug.Log("Player removed: " + playerNr + ", " + !activePlayers[playerNr - 1]);
     }
 
     public Color GetColor(int playerNr)
@@ -46,8 +57,10 @@ public class GameManager : MonoBehaviour
         return playerColors[playerNr - 1];
     }
 
-    public void SpawnPlayers(Transform[] spawnPositions, bool noDeaths=false)
+    public GameObject[] SpawnPlayers(Transform[] spawnPositions, bool noDeaths=false)
     {
+        GameObject[] players = new GameObject[4];
+
         for (int i = 0; i < activePlayers.Length; i++)
         {
             if (activePlayers[i])
@@ -57,8 +70,16 @@ public class GameManager : MonoBehaviour
                 player.playerColor = playerColors[i];
                 player.playerNr = i + 1;
                 player.GetComponent<Player_HealthController>().invincible = noDeaths;
+
+                players[i] = player.gameObject;
+            }
+            else
+            {
+                players[i] = null;
             }
         }
+
+        return players;
     }
 
     public void StartGame(Transform[] playerSpawns, Transform[] entitySpawns)

@@ -12,12 +12,14 @@ public class Dash_Ability : MonoBehaviour, ISpecialAbility
     PlayerController controller;
     bool canDash = true;
     private bool isPressed = false;
+    private PlayerUI playerUI;
 
 
     void Start()
     {
         playerMovement = GetComponent<PlanetMovement>();
         controller = GetComponent<PlayerController>();
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     public void Use()
@@ -27,7 +29,7 @@ public class Dash_Ability : MonoBehaviour, ISpecialAbility
             playerMovement.ApplyTempExForce(playerMovement.direction.normalized * speed, duration);
             controller.AbilityStun(true);
             canDash = false;
-            StartCoroutine(ResetDash());
+            playerUI?.AbilityCooldown(timeout, controller.playerNr);
         }
         else if (!canDash)
         {
@@ -43,10 +45,8 @@ public class Dash_Ability : MonoBehaviour, ISpecialAbility
         isPressed = false;
     }
 
-
-    IEnumerator ResetDash()
+    public void ResetAbility()
     {
-        yield return new WaitForSeconds(timeout);
         canDash = true;
     }
 }

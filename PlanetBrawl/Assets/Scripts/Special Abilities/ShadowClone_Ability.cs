@@ -13,11 +13,13 @@ public class ShadowClone_Ability : MonoBehaviour, ISpecialAbility
     private bool pressed = false;
     private bool canClone = true;
     private PlayerController controller;
+    private PlayerUI playerUI;
 
 
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     public void Use()
@@ -31,7 +33,7 @@ public class ShadowClone_Ability : MonoBehaviour, ISpecialAbility
             newClone.GetComponent<PlayerController>().playerNr = controller.playerNr;
             newClone.GetComponent<PlayerController>().playerColor = controller.playerColor;
 
-            StartCoroutine(ResetClone());
+            playerUI?.AbilityCooldown(timeout, controller.playerNr);
         }
     }
 
@@ -40,9 +42,8 @@ public class ShadowClone_Ability : MonoBehaviour, ISpecialAbility
         pressed = false; 
     }
 
-    IEnumerator ResetClone()
+    public void ResetAbility()
     {
-        yield return new WaitForSeconds(timeout);
         canClone = true;
     }
 }

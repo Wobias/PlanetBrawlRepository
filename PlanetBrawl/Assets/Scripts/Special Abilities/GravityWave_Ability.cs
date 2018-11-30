@@ -14,11 +14,15 @@ public class GravityWave_Ability : MonoBehaviour, ISpecialAbility
     private Player_HealthController healthController;
     private bool canAttack = true;
     private bool pressed = false;
+    private PlayerUI playerUI;
+    private int playerNr;
 
 
     void Start()
     {
+        playerNr = GetComponent<PlayerController>().playerNr;
         healthController = GetComponent<Player_HealthController>();
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     public void Use()
@@ -47,7 +51,7 @@ public class GravityWave_Ability : MonoBehaviour, ISpecialAbility
                 }
             }
 
-            StartCoroutine(ResetAttack());
+            playerUI?.AbilityCooldown(timeout, playerNr);
         }
     }
 
@@ -56,15 +60,14 @@ public class GravityWave_Ability : MonoBehaviour, ISpecialAbility
         pressed = false;
     }
 
-    IEnumerator ResetAttack()
-    {
-        yield return new WaitForSeconds(timeout);
-        canAttack = true;
-    }
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    public void ResetAbility()
+    {
+        canAttack = true;
     }
 }

@@ -29,6 +29,7 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
     private int playerNr = 0;
 
     private IDamageable target;
+    private PlayerUI playerUI;
 
 
     void Start()
@@ -36,6 +37,8 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
         playerNr = GetComponent<PlayerController>().playerNr;
 
         hitMask = hitMask & ~(1 << gameObject.layer);
+
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     void HitCollider(Collider2D other)
@@ -80,7 +83,7 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
                 HitCollider(hits[i]);
             }
 
-            StartCoroutine(Cooldown());
+            playerUI?.AbilityCooldown(cooldown, playerNr);
         }
     }
 
@@ -89,15 +92,14 @@ public class DamageWave_Ability : MonoBehaviour, ISpecialAbility
         pressed = false;
     }
 
-    IEnumerator Cooldown()
-    {
-        yield return new WaitForSeconds(cooldown);
-        canAttack = true;
-    }
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    public void ResetAbility()
+    {
+        canAttack = true;
     }
 }

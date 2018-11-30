@@ -12,12 +12,15 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
     private bool isPressed = false;
     private Player_HealthController healthController;
     //private PlayerController controller;
+    private int playerNr;
+    private PlayerUI playerUI;
 
     void Start()
     {
 
         healthController = GetComponent<Player_HealthController>();
-        //controller = GetComponent<PlayerController>();
+        playerNr = GetComponent<PlayerController>().playerNr;
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     public void Use()
@@ -29,7 +32,7 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
             //StartCoroutine(HealOverTime());
             canHeal = false;
             healthController.Heal(healthBonus);
-            StartCoroutine(ResetHeal());
+            playerUI?.AbilityCooldown(healTimeout, playerNr);
         }
 
         isPressed = true;
@@ -44,10 +47,8 @@ public class Heal_Ability : MonoBehaviour, ISpecialAbility
         //controller.AbilityStun(false);
     }
 
-    IEnumerator ResetHeal()
+    public void ResetAbility()
     {
-        yield return new WaitForSeconds(healTimeout);
-
         canHeal = true;
     }
 }

@@ -7,6 +7,7 @@ public class SurvivalController : MonoBehaviour, IModeController
 {
     public GameObject enemyPrefab;
     public float spawnTimeout;
+    public GameObject scorePrefab;
 
     private float score;
     private int playerCount = 0;
@@ -14,10 +15,11 @@ public class SurvivalController : MonoBehaviour, IModeController
     private Transform[] playerSpawns;
     private Transform[] enemySpawns;
     private TextMeshProUGUI victoryText;
-    //private TextMeshProUGUI scoreText;
+    private TextMeshProUGUI scoreText;
     private float timeout;
     private bool gameOver = false;
     private bool paused = false;
+    private PlayerUI playerUI;
 
 
     void FixedUpdate()
@@ -26,6 +28,7 @@ public class SurvivalController : MonoBehaviour, IModeController
             return;
 
         score += Time.fixedDeltaTime;
+        scoreText.text = Mathf.FloorToInt(score).ToString();
 
         timeout -= Time.fixedDeltaTime;
 
@@ -48,7 +51,8 @@ public class SurvivalController : MonoBehaviour, IModeController
         
         if (playerCount <= 0)
         {
-            victoryText.SetText("You survived for: " + Mathf.FloorToInt(score) + "seconds");
+            scoreText.gameObject.SetActive(false);
+            victoryText.SetText("You survived for: " + Mathf.FloorToInt(score) + " seconds");
             victoryText.transform.parent.gameObject.SetActive(true);
             //countdown.gameObject.SetActive(false);
 
@@ -84,11 +88,16 @@ public class SurvivalController : MonoBehaviour, IModeController
             victoryText.transform.parent.gameObject.SetActive(false);
         }
 
+        scoreText = Instantiate(scorePrefab, victoryText.transform.root).GetComponent<TextMeshProUGUI>();
+
         timeout = spawnTimeout;
         int spawnIndex = Random.Range(0, entitySpawns.Length);
         Instantiate(enemyPrefab, entitySpawns[spawnIndex].position, Quaternion.identity);
 
         enemySpawns = entitySpawns;
+
+        playerUI = FindObjectOfType<PlayerUI>();
+        playerUI?.InitUI(players);
     }
 
     public void PauseGame(bool isPaused)

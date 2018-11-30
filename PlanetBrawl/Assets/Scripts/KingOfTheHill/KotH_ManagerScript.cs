@@ -9,13 +9,14 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
 {
     public GameObject hillPrefab;
     public GameObject countdownPrefab;
-    public int winScore = 20;
+    public GameObject scorePrefab;
     public float timer;
 
     private Transform[] playerSpawns;
     private List<GameObject> players = new List<GameObject>();
     private int[] scores = new int[4];
     private TextMeshProUGUI countdown;
+    private TextMeshProUGUI scoreText;
     private TextMeshProUGUI victoryText;
     private bool gameOver = false;
 
@@ -28,6 +29,8 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
 
         playerSpawns = spawns;
 
+        GameObject[] allPlayers = new GameObject[4];
+
         for (int i = 0; i < 4; i++)
         {
             if (playerPrefabs[i] != null)
@@ -35,6 +38,11 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
                 GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
                 newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
                 players.Add(newPlayer);
+                allPlayers[i] = newPlayer;
+            }
+            else
+            {
+                allPlayers[i] = null;
             }
         }
 
@@ -51,7 +59,23 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
             victoryText.transform.parent.gameObject.SetActive(false);
         }
 
-        countdown = Instantiate(countdownPrefab, FindObjectOfType<Canvas>().transform).GetComponent<TextMeshProUGUI>();
+        countdown = Instantiate(countdownPrefab, victoryText.transform.root).GetComponent<TextMeshProUGUI>();
+        scoreText = Instantiate(scorePrefab, victoryText.transform.root).GetComponent<TextMeshProUGUI>();
+
+        scoreText.text = "";
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            scoreText.text += "0";
+
+            if (i < players.Count - 1)
+            {
+                scoreText.text += " - ";
+            }
+        }
+
+        PlayerUI playerUI = FindObjectOfType<PlayerUI>();
+        playerUI?.InitUI(allPlayers);
     }
 
     // Update is called once per frame
@@ -67,7 +91,7 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
         {
             int bestScore = 0;
             int winner = 0;
-            countdown.SetText("");
+            countdown.gameObject.SetActive(false);
             for (int i = 0; i < players.Count; i++)
             {
                 if (scores[i] > bestScore)
@@ -95,7 +119,6 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
             }
 
             victoryText.transform.parent.gameObject.SetActive(true);
-            countdown.gameObject.SetActive(false);
 
             gameOver = true;
         }
@@ -105,10 +128,16 @@ public class KotH_ManagerScript : MonoBehaviour, IModeController
     {
         scores[playerNr - 1]++;
 
-        if (scores[playerNr - 1] >= winScore)
+        scoreText.text = "";
+
+        for (int i = 0; i < players.Count; i++)
         {
-            victoryText.SetText(LayerMask.LayerToName(players[playerNr - 1].layer) + " is king of the Hill!");
-            victoryText.transform.parent.gameObject.SetActive(true);
+            scoreText.text += scores[i];
+
+            if (i < players.Count - 1)
+            {
+                scoreText.text += " - ";
+            }
         }
     }
 }

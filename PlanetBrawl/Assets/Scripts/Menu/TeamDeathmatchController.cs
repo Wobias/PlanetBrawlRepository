@@ -6,6 +6,7 @@ using TMPro;
 public class TeamDeathmatchController : MonoBehaviour, IModeController
 {
     public int winScore = 3;
+    public GameObject scorePrefab;
 
     private List<GameObject> players = new List<GameObject>();
     private List<GameObject> team1 = new List<GameObject>();
@@ -13,6 +14,7 @@ public class TeamDeathmatchController : MonoBehaviour, IModeController
     private Transform[] playerSpawns;
     private int[] scores = new int[2];
     private TextMeshProUGUI victoryText;
+    private TextMeshProUGUI scoreText;
 
 
     public void AddScore(int playerNr)
@@ -23,6 +25,8 @@ public class TeamDeathmatchController : MonoBehaviour, IModeController
             scoringTeam = 1;
 
         scores[scoringTeam]++;
+
+        scoreText.text = scores[0] + " - " + scores[1];
 
         if (scores[scoringTeam] >= winScore)
         {
@@ -41,6 +45,16 @@ public class TeamDeathmatchController : MonoBehaviour, IModeController
     {
         playerSpawns = spawns;
 
+        int playerCount = 0;
+
+        for (int i = 0; i < playerPrefabs.Length; i++)
+        {
+            if (playerPrefabs[i] != null)
+                playerCount++;
+        }
+
+        GameObject[] allPlayers = new GameObject[4];
+
         for (int i = 0; i < 4; i++)
         {
             if (playerPrefabs[i] != null)
@@ -48,11 +62,16 @@ public class TeamDeathmatchController : MonoBehaviour, IModeController
                 GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
                 newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
                 players.Add(newPlayer);
+                allPlayers[i] = newPlayer;
 
-                if (team1.Count < Mathf.CeilToInt(playerPrefabs.Length / 2))
+                if (team1.Count < Mathf.CeilToInt(playerCount / 2))
                     team1.Add(newPlayer);
                 else
                     team2.Add(newPlayer);
+            }
+            else
+            {
+                allPlayers[i] = null;
             }
         }
 
@@ -74,5 +93,12 @@ public class TeamDeathmatchController : MonoBehaviour, IModeController
         {
             victoryText.transform.parent.gameObject.SetActive(false);
         }
+
+        scoreText = Instantiate(scorePrefab, victoryText.transform.root).GetComponent<TextMeshProUGUI>();
+
+        scoreText.text = "0 - 0";
+
+        PlayerUI playerUI = FindObjectOfType<PlayerUI>();
+        playerUI?.InitUI(allPlayers);
     }
 }

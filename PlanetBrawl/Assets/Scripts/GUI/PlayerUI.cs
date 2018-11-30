@@ -50,6 +50,8 @@ public class PlayerUI : MonoBehaviour
     private float _p3dmg = 0f;
     private float _p4dmg = 0f;
 
+    private float[] abilityTimers = new float[4];
+
     private Player_HealthController _p1HealthController;
     private Player_HealthController _p2HealthController;
     private Player_HealthController _p3HealthController;
@@ -65,10 +67,7 @@ public class PlayerUI : MonoBehaviour
     public List<GameObject> p3KillCountUI = new List<GameObject>();
     public List<GameObject> p4KillCountUI = new List<GameObject>();
 
-    public Slider p1AbilitySlider;
-    public Slider p2AbilitySlider;
-    public Slider p3AbilitySlider;
-    public Slider p4AbilitySlider;
+    public Slider[] abilitySliders;
 
     private List<GameObject> players = new List<GameObject>();
 
@@ -110,11 +109,6 @@ public class PlayerUI : MonoBehaviour
         {
             p4UI.SetActive(false);
         }
-
-        p1AbilitySlider.value = p1AbilitySlider.maxValue;
-        p2AbilitySlider.value = p2AbilitySlider.maxValue;
-        p3AbilitySlider.value = p3AbilitySlider.maxValue;
-        p4AbilitySlider.value = p4AbilitySlider.maxValue;
 
         hp1Material.color = colors[0];
         hp2Material.color = colors[0];
@@ -168,7 +162,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_player1 != null)
         {
@@ -185,6 +179,21 @@ public class PlayerUI : MonoBehaviour
         if (_player4 != null)
         {
             CheckHealth(_p4HealthController, player4HealthBars, _p4HealthController.health, hp4Material);
+        }
+
+        for (int i = 0; i < abilityTimers.Length; i++)
+        {
+            if (abilityTimers[i] > 0)
+            {
+                abilityTimers[i] -= Time.fixedDeltaTime;
+                abilitySliders[i].value += Time.fixedDeltaTime;
+
+                if (abilityTimers[i] <= 0)
+                {
+                    abilitySliders[i].value = abilitySliders[i].maxValue;
+                    players[i].GetComponent<ISpecialAbility>().ResetAbility();
+                }
+            }
         }
     }
 
@@ -243,8 +252,10 @@ public class PlayerUI : MonoBehaviour
 
     private void DeactivateHealthBars(List<GameObject> healthBars, float hP)
     {
-        healthBars[Mathf.RoundToInt(hP)].SetActive(false);
-        hP++;
+        for (int i = 0; i < healthBars.Count; i++)
+        {
+            healthBars[i].SetActive(false);
+        }
     }
 
     private void CheckHealth(Player_HealthController planet_HealthController, List<GameObject> hpBars, float playerHealth, Material playerMaterial)
@@ -301,24 +312,24 @@ public class PlayerUI : MonoBehaviour
 
     private void SortPlayers(List<GameObject> playerList)
     {
+        _player1 = playerList[0];
         if (playerList[0] != null)
         {
-            _player1 = playerList[0];
             _p1HealthController = playerList[0].GetComponent<Player_HealthController>();
         }
+        _player2 = playerList[1];
         if (playerList[1] != null)
         {
-            _player2 = playerList[1];
             _p2HealthController = playerList[1].GetComponent<Player_HealthController>();
         }
+        _player3 = playerList[2];
         if (playerList[2] != null)
         {
-            _player3 = playerList[2];
             _p3HealthController = playerList[2].GetComponent<Player_HealthController>();
         }
+        _player4 = playerList[3];
         if (playerList[3] != null)
         {
-            _player4 = playerList[3];
             _p4HealthController = playerList[3].GetComponent<Player_HealthController>();
         }
     }
@@ -328,31 +339,31 @@ public class PlayerUI : MonoBehaviour
         switch (playerNumber)
         {
             case 0:
+                hp1Material.color = colors[0];
                 for (int i = 0; i < player1HealthBars.Count; i++)
                 {
                     player1HealthBars[i].SetActive(true);
-                    hp1Material.color = colors[0];
                 }
                 break;
             case 1:
+                hp2Material.color = colors[0];
                 for (int i = 0; i < player2HealthBars.Count; i++)
                 {
                     player2HealthBars[i].SetActive(true);
-                    hp2Material.color = colors[0];
                 }
                 break;
             case 2:
+                hp3Material.color = colors[0];
                 for (int i = 0; i < player3HealthBars.Count; i++)
                 {
                     player3HealthBars[i].SetActive(true);
-                    hp3Material.color = colors[0];
                 }
                 break;
             case 3:
+                hp4Material.color = colors[0];
                 for (int i = 0; i < player4HealthBars.Count; i++)
                 {
                     player4HealthBars[i].SetActive(true);
-                    hp4Material.color = colors[0];
                 }
                 break;
             default:
@@ -363,79 +374,14 @@ public class PlayerUI : MonoBehaviour
     //Select Portrait
     private void SelectFaceSprite(GameObject player, Image portrait)
     {
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == city)
-        {
-            portrait.sprite = portraitCity;
-        }
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == desert)
-        {
-            portrait.sprite = portraitDesert;
-        }
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == earth)
-        {
-            portrait.sprite = portraitEarth;
-        }
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == gas)
-        {
-            portrait.sprite = portraitGas;
-        }
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == ice)
-        {
-            portrait.sprite = portraitIce;
-        }
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == lava)
-        {
-            portrait.sprite = portraitLava;
-        }
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == ocean)
-        {
-            portrait.sprite = portraitOcean;
-        }
-        if (player.GetComponentInChildren<SpriteRenderer>().sprite == toxic)
-        {
-            portrait.sprite = portraitToxic;
-        }
+        portrait.sprite = player.GetComponentInChildren<SpriteRenderer>().sprite;
     }
 
-    public void AbilityCooldown(float coolDown, int playNumber)
+    public void AbilityCooldown(float cooldown, int playNumber)
     {
-        switch (playNumber)
-        {
-            case 1:
-                AbilitySlider(coolDown, p1AbilitySlider);
-                break;
-            case 2:
-                AbilitySlider(coolDown, p2AbilitySlider);
-                break;
-            case 3:
-                AbilitySlider(coolDown, p3AbilitySlider);
-                break;
-            case 4:
-                AbilitySlider(coolDown, p4AbilitySlider);
-                break;
-            default:
-                break;
-        }
-
-    }
-
-    public void AbilitySlider(float abilityTimer, Slider abilitySlider)
-    {
-        abilitySlider.minValue = 0f;
-        abilitySlider.maxValue = abilityTimer;
-        abilitySlider.value = abilitySlider.minValue;
-
-        float coolDownTimer = abilitySlider.minValue; ;
-
-        while (coolDownTimer <= abilityTimer)
-        {
-            coolDownTimer += Time.deltaTime;
-            abilitySlider.value = coolDownTimer;
-        }
-        if (coolDownTimer >= abilityTimer)
-        {
-            coolDownTimer = abilitySlider.maxValue;
-            abilitySlider.value = coolDownTimer;
-        }
+        abilitySliders[playNumber - 1].minValue = 0;
+        abilitySliders[playNumber - 1].maxValue = cooldown;
+        abilitySliders[playNumber - 1].value = 0;
+        abilityTimers[playNumber - 1] = cooldown;
     }
 }

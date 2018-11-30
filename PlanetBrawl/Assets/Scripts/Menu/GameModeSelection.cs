@@ -6,6 +6,7 @@ using TMPro;
 public class GameModeSelection : MonoBehaviour
 {
     public string[] modeNames;
+    public int[] modeMinPlayers;
     public Sprite[] modeSprites;
     public Door[] lobbyDoors;
     public TextMeshProUGUI gmText;
@@ -17,6 +18,18 @@ public class GameModeSelection : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        bool doorsOpen = true;
+
+        if (GameManager.instance.playerCount < modeMinPlayers[selection])
+        {
+            doorsOpen = false;
+        }
+
+        for (int i = 0; i < lobbyDoors.Length; i++)
+        {
+            lobbyDoors[i].SetState((GameModes)selection, doorsOpen);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -30,9 +43,16 @@ public class GameModeSelection : MonoBehaviour
         GameManager.instance.gameMode = (GameModes)selection;
         gmText.text = modeNames[selection];
 
+        bool doorsOpen = true;
+
+        if (GameManager.instance.playerCount < modeMinPlayers[selection])
+        {
+            doorsOpen = false;
+        }
+
         for (int i = 0; i < lobbyDoors.Length; i++)
         {
-            lobbyDoors[i].SetState((GameModes)selection);
+            lobbyDoors[i].SetState((GameModes)selection, doorsOpen);
         }
     }
 }

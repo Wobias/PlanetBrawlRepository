@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212929102757458272}
   - component: {fileID: 58095547482042012}
   - component: {fileID: 114446662437187334}
+  - component: {fileID: 114679171239014290}
   m_Layer: 12
   m_Name: Pickup_Health_Small
   m_TagString: Untagged
@@ -70,6 +71,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBonus: 1
   healSound: healing
+--- !u!114 &114679171239014290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941771394216504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58904f347aa58e5409972480838fc832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
 --- !u!212 &212929102757458272
 SpriteRenderer:
   m_ObjectHideFlags: 1

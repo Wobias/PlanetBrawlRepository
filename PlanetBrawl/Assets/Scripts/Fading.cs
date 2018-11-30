@@ -13,6 +13,7 @@ public class Fading : MonoBehaviour
     private float fadeTime;
     private bool fading = false;
     private float targetFade;
+    private float oldAlpha;
 
 	void Awake ()
     {       
@@ -39,10 +40,16 @@ public class Fading : MonoBehaviour
 
         if (fading)
         {
-            panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, Mathf.Lerp(panel.color.a, targetFade, Time.deltaTime / fadeInTime));
+            panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, Mathf.Lerp(panel.color.a, targetFade, Time.deltaTime / fadeTime));
 
-            if (panel.color.a == targetFade)
+            if (panel.color.a == oldAlpha)
+            {
+                panel.color = new Color(panel.color.r, panel.color.g, panel.color.b, targetFade);
                 fading = false;
+                Debug.Log("End of Fade");
+            }
+
+            oldAlpha = panel.color.a;
         }
 	}
 

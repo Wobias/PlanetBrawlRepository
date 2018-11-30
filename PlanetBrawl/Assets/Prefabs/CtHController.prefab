@@ -52,7 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hatPrefab: {fileID: 1759920480541294, guid: acc75ba7e6af3fe4aacfe11ee762f4b3, type: 2}
-  countdownPrefab: {fileID: 1717310351913770, guid: 9e4603add3fb3b1479cb3eba545fde58,
+  countdownPrefab: {fileID: 1012048294064356, guid: 0041d8aa387bb0f47b918944bf731c9d,
     type: 2}
-  winScore: 20
-  timer: 30
+  scorePrefab: {fileID: 1012048294064356, guid: 8894403b2d1b9744fb9c14367ef2b5c4,
+    type: 2}
+  timer: 120

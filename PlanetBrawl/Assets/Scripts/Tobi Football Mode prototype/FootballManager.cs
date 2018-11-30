@@ -7,14 +7,17 @@ public class FootballManager : MonoBehaviour, IModeController
 {
     public float gameTime;
 
+    public GameObject countdownPrefab;
+    public GameObject scorePrefab;
+
     private List<GameObject> players = new List<GameObject>();
     private List<GameObject> team1 = new List<GameObject>();
     private List<GameObject> team2 = new List<GameObject>();
     private Transform[] playerSpawns;
     private int[] scores = new int[2];
     private TextMeshProUGUI victoryText;
-    //private TextMeshProUGUI countdown;
-    //private TextMeshProUGUI scoreText;
+    private TextMeshProUGUI countdown;
+    private TextMeshProUGUI scoreText;
     private bool gameOver = false;
     private bool paused = false;
 
@@ -25,12 +28,13 @@ public class FootballManager : MonoBehaviour, IModeController
             return;
 
         gameTime -= Time.fixedDeltaTime;
+        countdown.text = Mathf.CeilToInt(gameTime).ToString();
 
         if (gameTime <= 0)
         {
             int bestScore = 0;
             int winner = 0;
-            //countdown.SetText("");
+            countdown.gameObject.SetActive(false);
             for (int i = 0; i < scores.Length; i++)
             {
                 if (scores[i] > bestScore)
@@ -54,7 +58,6 @@ public class FootballManager : MonoBehaviour, IModeController
             }
 
             victoryText.transform.parent.gameObject.SetActive(true);
-            //countdown.gameObject.SetActive(false);
 
             gameOver = true;
         }
@@ -62,17 +65,16 @@ public class FootballManager : MonoBehaviour, IModeController
 
     public void AddScore(int playerNr)
     {
-        int scoringTeam = 0;
+        scores[playerNr]++;
 
-        if (team2.Contains(players[playerNr - 1]))
-            scoringTeam = 1;
-
-        scores[scoringTeam]++;
+        scoreText.text = scores[0] + " - " + scores[1];
     }
 
     public void InitMode(Transform[] spawns, Transform[] entitySpawns, GameObject[] playerPrefabs)
     {
         playerSpawns = spawns;
+
+        GameObject[] allPlayers = new GameObject[4];
 
         for (int i = 0; i < 4; i++)
         {
@@ -81,6 +83,11 @@ public class FootballManager : MonoBehaviour, IModeController
                 GameObject newPlayer = Instantiate(playerPrefabs[i], playerSpawns[i].position, Quaternion.identity);
                 newPlayer.GetComponent<PlayerController>().playerNr = i + 1;
                 players.Add(newPlayer);
+                allPlayers[i] = newPlayer;
+            }
+            else
+            {
+                allPlayers[i] = null;
             }
         }
 
@@ -110,6 +117,12 @@ public class FootballManager : MonoBehaviour, IModeController
         {
             victoryText.transform.parent.gameObject.SetActive(false);
         }
+
+        countdown = Instantiate(countdownPrefab, victoryText.transform.root).GetComponent<TextMeshProUGUI>();
+        scoreText = Instantiate(scorePrefab, victoryText.transform.root).GetComponent<TextMeshProUGUI>();
+
+        PlayerUI playerUI = FindObjectOfType<PlayerUI>();
+        playerUI?.InitUI(allPlayers);
     }
 
     public void PauseGame(bool isPaused)

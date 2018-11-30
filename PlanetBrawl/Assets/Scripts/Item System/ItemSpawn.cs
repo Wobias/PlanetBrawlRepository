@@ -6,10 +6,6 @@ public class ItemSpawn : MonoBehaviour
 {
     public GameObject item;
 	
-	void Update ()
-    {
-		
-	}
     void OnCollisionEnter2D(Collision2D coll)
     {
         GameObject otherObject = coll.gameObject;

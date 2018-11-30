@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212020240578036112}
   - component: {fileID: 114492297506969692}
   - component: {fileID: 61954762668207218}
+  - component: {fileID: 114899594583777936}
   m_Layer: 12
   m_Name: Pickup_Poison
   m_TagString: Untagged
@@ -80,6 +81,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectTime: 2
   elementType: 2
+--- !u!114 &114899594583777936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662186782763984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58904f347aa58e5409972480838fc832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
 --- !u!212 &212020240578036112
 SpriteRenderer:
   m_ObjectHideFlags: 1

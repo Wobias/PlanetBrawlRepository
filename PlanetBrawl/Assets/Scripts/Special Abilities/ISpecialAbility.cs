@@ -6,4 +6,5 @@ public interface ISpecialAbility
 {
     void Use();
     void StopUse();
+    void ResetAbility();
 }
